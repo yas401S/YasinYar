@@ -9,36 +9,45 @@
 @media(min-width:700px){.app{padding-top:22px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.feature{min-height:100px}.hero{padding:27px}.hero h2{font-size:27px}}
 @media(max-width:380px){.app{padding-left:9px;padding-right:9px}.hero{padding:17px}.stats{gap:5px}.stat{padding:8px 3px}.stat strong{font-size:17px}.options{grid-template-columns:1fr}}
 
-.menu-panel{position:fixed;z-index:30;top:66px;right:10px;left:10px;max-width:440px;margin:auto;padding:12px;background:#101e34f5;border:1px solid #526987;border-radius:18px;box-shadow:0 18px 50px #0009;backdrop-filter:blur(18px)}
-.menu-panel .menu-title{display:flex;justify-content:space-between;align-items:center;margin:0 2px 9px;color:var(--gold2);font-size:13px}
-.menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
-.menu-grid button{display:flex;align-items:center;gap:9px;text-align:right;background:#1a2d49;border:1px solid #344d6d;border-radius:12px;padding:9px;font-size:12px}
-.menu-grid button span{font-size:18px;width:25px;text-align:center}
-.menu-grid button:active{background:#30496b;transform:scale(.98)}
-.menu-trigger{font-size:18px;min-width:40px}
-.app{max-width:900px;padding:8px 10px 82px}
-.top{padding:5px 1px 10px}
-.logo{width:41px;height:41px;border-radius:13px;font-size:22px}
-.brand h1{font-size:18px}
-.hero{padding:16px;border-radius:19px}
-.hero h2{font-size:20px}
-.hero p{font-size:12px;margin-bottom:10px}
-.section-head{margin:15px 2px 8px}
-.section-head h3{font-size:15px}
-.stats{gap:7px;margin-top:10px}
-.stat{padding:8px}
-.stat strong{font-size:17px}
-.card{padding:11px;border-radius:14px}
-.feature{min-height:72px;gap:9px}
-.feature .emoji{width:36px;height:36px;flex-basis:36px;font-size:19px}
-.feature b{font-size:12px}
+.menu-panel{position:fixed;z-index:30;top:60px;right:9px;left:9px;max-width:410px;max-height:calc(100dvh - 82px);overflow-y:auto;margin:auto;padding:13px;background:linear-gradient(155deg,#172d4bfa,#0b172bf7 78%);border:1px solid #6682a8;border-radius:20px;box-shadow:0 22px 65px #000b,0 0 0 1px #ffffff08 inset;backdrop-filter:blur(22px);animation:menuPop .18s ease-out}
+@keyframes menuPop{from{opacity:0;transform:translateY(-8px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+.menu-panel .menu-title{display:flex;justify-content:space-between;align-items:center;margin:0 1px 12px;padding:2px 2px 10px;color:var(--gold2);font-size:14px;border-bottom:1px solid #ffffff18}
+.menu-panel .menu-title b{display:flex;align-items:center;gap:8px}
+.menu-panel .menu-title b:before{content:'✦';display:grid;place-items:center;width:29px;height:29px;border-radius:10px;background:linear-gradient(145deg,#ffe4a8,#c58d3b);color:#17243b}
+.menu-panel .menu-title .btn{padding:5px 9px;border-radius:9px;font-size:10px}
+.menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.menu-grid button{position:relative;display:flex;align-items:center;gap:9px;min-height:53px;text-align:right;background:linear-gradient(135deg,#203a5c,#152843);border:1px solid #3d587a;border-radius:14px;padding:8px 10px;font-size:11px;box-shadow:0 3px 10px #0002;transition:transform .16s,border-color .16s,background .16s}
+.menu-grid button span{display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;border-radius:11px;background:#ffffff10;border:1px solid #ffffff12;font-size:17px}
+.menu-grid button:active{background:#304d72;border-color:var(--gold);transform:scale(.975)}
+.menu-trigger{font-size:18px;min-width:40px;background:linear-gradient(145deg,#1d3555,#10213a)}
+.app{max-width:860px;padding:6px 9px 76px;font-size:14px}
+.top{padding:4px 1px 8px}
+.logo{width:38px;height:38px;border-radius:12px;font-size:20px}
+.brand{gap:9px}.brand h1{font-size:17px}.brand small{font-size:10px}
+.hero{padding:14px;border-radius:17px}
+.hero h2{font-size:19px}
+.hero p{font-size:11px;margin-bottom:8px}
+.hero .hero-btn{padding:8px 12px;font-size:12px}
+.section-head{margin:13px 2px 7px}
+.section-head h3{font-size:14px}
+.stats{gap:6px;margin-top:9px}
+.stat{padding:7px;border-radius:12px}
+.stat strong{font-size:16px}
+.stat span{font-size:9px}
+.grid{gap:8px}
+.card{padding:9px;border-radius:13px}
+.feature{min-height:65px;gap:8px}
+.feature .emoji{width:33px;height:33px;flex-basis:33px;border-radius:10px;font-size:17px}
+.feature b{font-size:11px}
 .feature small{font-size:9px}
-.panel{padding:12px;border-radius:15px;margin-top:10px}
-.bottom-nav{padding:5px 8px calc(5px + env(safe-area-inset-bottom));background:#0b1528f5}
-.bottom-inner{max-width:560px;gap:5px}
-.bottom-nav button{font-size:9px;padding:4px 2px}
-.bottom-nav button span{font-size:17px}
-@media(max-width:380px){.app{padding-left:8px;padding-right:8px}.brand small{font-size:9px}.top-actions{gap:4px}.iconbtn{padding:7px 9px}.hero{padding:14px}.feature{min-height:66px}}
+.panel{padding:10px;border-radius:13px;margin-top:9px}
+.field,select,input,textarea{padding:8px;border-radius:9px;font-size:12px}
+.btn{padding:7px 10px;border-radius:9px;font-size:12px}
+.bottom-nav{padding:4px 7px calc(4px + env(safe-area-inset-bottom));background:#0b1528f7}
+.bottom-inner{max-width:530px;gap:4px}
+.bottom-nav button{font-size:8px;padding:3px 2px}
+.bottom-nav button span{font-size:16px}
+@media(max-width:380px){.app{padding-left:7px;padding-right:7px}.brand small{font-size:9px}.top-actions{gap:4px}.iconbtn{padding:6px 8px}.hero{padding:12px}.feature{min-height:61px}.menu-grid{gap:6px}.menu-grid button{min-height:49px;padding:7px;font-size:10px}.menu-grid button span{flex-basis:29px;width:29px;height:29px}}
 </style></head>
 <body>
 <div class="app">
