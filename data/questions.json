@@ -6,19 +6,13 @@
   "question_types": ["multiple_choice", "short_answer", "true_false", "fill_blank", "problem_solving", "conceptual"],
   "difficulty_levels": ["easy", "medium", "advanced"],
   "questions": [
-    {
-      "id": "YY-G6-MATH-001",
-      "grade": 6,
-      "subject": "ریاضی",
-      "lesson": "کسرها",
-      "type": "multiple_choice",
-      "difficulty": "easy",
-      "question": "حاصل ۱/۲ + ۱/۴ کدام است؟",
-      "options": ["۱/۶", "۲/۶", "۳/۴", "۱/۸"],
-      "correct_answer": "۳/۴",
-      "explanation_steps": ["مخرج مشترک ۴ انتخاب می‌کنیم.", "۱/۲ برابر ۲/۴ است.", "۲/۴ + ۱/۴ = ۳/۴."],
-      "learning_tip": "برای جمع کسرها ابتدا مخرج‌ها را یکسان کن.",
-      "source": {"kind": "original_practice", "verified": false}
-    }
+    {"id":"YY-G6-MATH-001","grade":6,"subject":"ریاضی","lesson":"کسرها","type":"multiple_choice","difficulty":"easy","question":"حاصل ۱/۲ + ۱/۴ کدام است؟","options":["۱/۶","۲/۶","۳/۴","۱/۸"],"correct_answer":"۳/۴","explanation_steps":["مخرج مشترک ۴ انتخاب می‌کنیم.","۱/۲ برابر ۲/۴ است.","۲/۴ + ۱/۴ = ۳/۴."],"learning_tip":"برای جمع کسرها ابتدا مخرج‌ها را یکسان کن.","source":{"kind":"original_practice","verified":false}},
+    {"id":"YY-G6-MATH-002","grade":6,"subject":"ریاضی","lesson":"کسرها","type":"multiple_choice","difficulty":"easy","question":"کدام کسر بزرگ‌تر است؟","options":["۱/۳","۱/۲","۱/۴","۱/۵"],"correct_answer":"۱/۲","explanation_steps":["وقتی صورت کسرها برابر ۱ است، هرچه مخرج کوچک‌تر باشد کسر بزرگ‌تر است.","پس ۱/۲ از بقیه بزرگ‌تر است."],"learning_tip":"کسرهای واحد را با توجه به مخرج مقایسه کن.","source":{"kind":"original_practice","verified":false}},
+    {"id":"YY-G6-MATH-003","grade":6,"subject":"ریاضی","lesson":"کسرها","type":"multiple_choice","difficulty":"easy","question":"حاصل ۳/۴ − ۱/۴ چند است؟","options":["۱/۲","۲/۸","۴/۸","۱"],"correct_answer":"۱/۲","explanation_steps":["مخرج‌ها برابرند؛ صورت‌ها را کم می‌کنیم.","۳/۴ − ۱/۴ = ۲/۴ = ۱/۲."],"learning_tip":"در تفریق کسرهای هم‌مخرج، مخرج ثابت می‌ماند.","source":{"kind":"original_practice","verified":false}},
+    {"id":"YY-G6-MATH-004","grade":6,"subject":"ریاضی","lesson":"کسرها","type":"multiple_choice","difficulty":"easy","question":"کدام عدد با ۲/۴ برابر است؟","options":["۱/۳","۳/۴","۱/۲","۲/۳"],"correct_answer":"۱/۲","explanation_steps":["صورت و مخرج ۲/۴ را بر ۲ تقسیم می‌کنیم.","۲/۴ = ۱/۲."],"learning_tip":"برای ساده‌کردن کسر، صورت و مخرج را بر یک عدد مشترک تقسیم کن.","source":{"kind":"original_practice","verified":false}},
+    {"id":"YY-G6-MATH-005","grade":6,"subject":"ریاضی","lesson":"عددهای اعشاری","type":"multiple_choice","difficulty":"easy","question":"حاصل ۲٫۵ + ۱٫۲ چند است؟","options":["۳٫۵","۳٫۷","۲٫۷","۴٫۲"],"correct_answer":"۳٫۷","explanation_steps":["ممیزها را زیر هم قرار می‌دهیم.","دهم‌ها: ۵ + ۲ = ۷ دهم.","عددهای صحیح: ۲ + ۱ = ۳؛ پاسخ ۳٫۷ است."],"learning_tip":"در جمع اعشاری، ممیزها باید زیر هم باشند.","source":{"kind":"original_practice","verified":false}},
+    {"id":"YY-G6-MATH-006","grade":6,"subject":"ریاضی","lesson":"عددهای اعشاری","type":"multiple_choice","difficulty":"easy","question":"کدام عدد کوچک‌تر است؟","options":["۰٫۸","۰٫۵","۰٫۹","۱٫۰"],"correct_answer":"۰٫۵","explanation_steps":["همه عددها را تا یک رقم اعشار می‌خوانیم.","۵ دهم از ۸ دهم و ۹ دهم کوچک‌تر است."],"learning_tip":"ارزش رقم‌های اعشاری را از چپ به راست مقایسه کن.","source":{"kind":"original_practice","verified":false}},
+    {"id":"YY-G6-MATH-007","grade":6,"subject":"ریاضی","lesson":"عددهای اعشاری","type":"multiple_choice","difficulty":"easy","question":"حاصل ۴٫۰ − ۱٫۵ چند است؟","options":["۲٫۵","۳٫۵","۲٫۰","۱٫۵"],"correct_answer":"۲٫۵","explanation_steps":["۴٫۰ را به صورت ۳٫۱۰ در نظر می‌گیریم.","۳٫۱۰ − ۱٫۵۰ = ۲٫۵۰.","پاسخ ۲٫۵ است."],"learning_tip":"برای تفریق اعشاری می‌توان صفر انتهای عدد اضافه کرد.","source":{"kind":"original_practice","verified":false}},
+    {"id":"YY-G6-MATH-008","grade":6,"subject":"ریاضی","lesson":"عددهای اعشاری","type":"multiple_choice","difficulty":"easy","question":"عدد ۰٫۳ برابر چند دهم است؟","options":["۳ دهم","۳ صدم","۳۰ دهم","۱ دهم"],"correct_answer":"۳ دهم","explanation_steps":["رقم اول بعد از ممیز، رقم دهم‌هاست.","پس ۰٫۳ یعنی سه دهم."],"learning_tip":"اولین رقم بعد از ممیز، دهم را نشان می‌دهد.","source":{"kind":"original_practice","verified":false}}
   ]
 }
