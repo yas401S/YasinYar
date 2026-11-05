@@ -28,6 +28,7 @@ public class MainActivity extends Activity {
     private TextToSpeech textToSpeech;
     private boolean ttsReady = false;
     private boolean ttsPaused = false;
+    private float speechRate = 0.92f;
     private ArrayList<String> speechParts = new ArrayList<>();
     private int speechIndex = 0;
 
@@ -110,6 +111,14 @@ public class MainActivity extends Activity {
         }
 
         @JavascriptInterface
+        public void setRate(float rate) {
+            runOnUiThread(() -> {
+                speechRate = Math.max(0.65f, Math.min(1.25f, rate));
+                if (textToSpeech != null && ttsReady) textToSpeech.setSpeechRate(speechRate);
+            });
+        }
+
+        @JavascriptInterface
         public boolean isReady() { return ttsReady; }
     }
 
@@ -148,7 +157,7 @@ public class MainActivity extends Activity {
                 ttsReady = language != TextToSpeech.LANG_MISSING_DATA &&
                            language != TextToSpeech.LANG_NOT_SUPPORTED;
                 if (ttsReady) {
-                    textToSpeech.setSpeechRate(0.88f);
+                    textToSpeech.setSpeechRate(speechRate);
                     textToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
                         @Override public void onStart(String id) {}
                         @Override public void onDone(String id) {
