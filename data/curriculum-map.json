@@ -70,7 +70,10 @@
               "lessons": 2,
               "status": "official_index_verified"
             }
-          ]
+          ],
+          "authored_lessons": 10,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "note": "۱۰ بسته مهارت‌آموزی تألیفی شامل آمادگی دست، خط‌ورزی، نشانه‌نویسی، هجانویسی، واژه‌نویسی، رونویسی، املا، کامل‌کردن جمله، جمله‌سازی و بازبینی به برنامه متصل شده‌اند؛ تمرین‌های رسمی باید با صفحات همان چاپ تطبیق شوند."
         },
         {
           "title": "ریاضی اول دبستان",
@@ -247,6 +250,17 @@
           "examples": 14,
           "exercises": 21,
           "quiz_questions": 14
+        },
+        {
+          "subject": "نگارش",
+          "topic": "مهارت‌های پایه نوشتن",
+          "title": "۱۰ بسته آموزشی نگارش پایه اول",
+          "status": "draft_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 10,
+          "examples": 20,
+          "exercises": 60,
+          "quiz_questions": 20
         }
       ],
       "authored_package_count": 3,
