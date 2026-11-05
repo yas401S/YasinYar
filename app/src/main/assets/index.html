@@ -282,6 +282,22 @@ const multiSubjectSeed=[{"grade":1,"subject":"فارسی","q":"کدام واژه
 qs.forEach(q=>{if(!q.subject)q.subject='ریاضی'});
 multiSubjectSeed.forEach(x=>qs.push({grade:x.grade,subject:x.subject,topic:x.topic,q:x.q,o:x.o,a:x.a,s:x.s,tip:x.tip,difficulty:'آسان'}));
 function lessonBand(g){return g<=3?1:g<=6?2:3}
+function normalizeLessonAnswer(value){
+ return String(value||'').trim().replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[\\s،,؛;]/g,'').replace(/٫/g,'.').replace(/÷/g,'/');
+}
+function checkLessonAnswer(input){
+ const expected=normalizeLessonAnswer(input.dataset.answer);
+ const actual=normalizeLessonAnswer(input.value);
+ const feedback=input.parentElement.querySelector('.quiz-feedback');
+ if(!actual){feedback.textContent='پاسخ را بنویس.';feedback.className='quiz-feedback badtxt';return;}
+ if(actual===expected){feedback.textContent='آفرین! پاسخ درست است.';feedback.className='quiz-feedback goodtxt';}
+ else{feedback.textContent='هنوز درست نیست؛ دوباره فکر کن و از راه‌حل تمرین کمک بگیر.';feedback.className='quiz-feedback badtxt';}
+}
+function renderLessonMiniQuiz(lesson){
+ const items=(lesson.exercises||[]).slice(0,5);
+ if(!items.length)return '';
+ return '<section class="panel" style="border:1px solid var(--gold)"><h4>📝 آزمونک پایان درس</h4><p class="muted">پاسخ هر سؤال را وارد کن و همان‌جا بررسی کن. ارقام فارسی و انگلیسی پذیرفته می‌شوند.</p>'+items.map((x,i)=>'<div class="question"><b>سؤال '+fa(i+1)+' · '+esc(x.level)+'</b><p>'+esc(x.q)+'</p><div class="row"><input type="text" data-answer="'+esc(x.answer)+'" placeholder="پاسخ شما" aria-label="پاسخ سؤال '+(i+1)+'"><button class="btn primary" type="button" onclick="checkLessonAnswer(this.previousElementSibling)">بررسی</button></div><p class="quiz-feedback muted"></p><details><summary>دیدن پاسخ تشریحی</summary><p class="goodtxt"><b>پاسخ: '+esc(x.answer)+'</b></p><p>'+esc(x.explain)+'</p></details></div>').join('')+'</section>';
+}
 function renderCuratedLesson(g,subject,topic){
  const pack=window.YASINYAR_CURRICULUM&&window.YASINYAR_CURRICULUM[g]&&window.YASINYAR_CURRICULUM[g][subject];
  if(!pack)return '';
@@ -290,7 +306,7 @@ function renderCuratedLesson(g,subject,topic){
  const block=(title,items)=>'<section class="panel"><h4>'+title+'</h4>'+items.map(x=>'<div class="step">'+esc(x)+'</div>').join('')+'</section>';
  const examples=lesson.examples.map((x,i)=>'<div class="question"><b>مثال '+fa(i+1)+' · '+esc(x.title)+'</b><p>'+esc(x.problem)+'</p>'+x.steps.map((z,n)=>'<div class="step">'+fa(n+1)+' · '+esc(z)+'</div>').join('')+'<p class="goodtxt"><b>نتیجه: '+esc(x.answer)+'</b></p></div>').join('');
  const exercises=lesson.exercises.map((x,i)=>'<details class="question"><summary><b>تمرین '+fa(i+1)+' · '+esc(x.level)+'</b><p>'+esc(x.q)+'</p></summary><p class="goodtxt"><b>پاسخ: '+esc(x.answer)+'</b></p><p>'+esc(x.explain)+'</p></details>').join('');
- return '<div class="panel" style="border-color:var(--green)"><span class="pill">بسته آموزشی تألیفی · نسخه ۱</span><h3>'+esc(lesson.title)+'</h3><p class="muted">وضعیت منبع: آموزش مفهومی تألیفی؛ هنوز با فصل‌بندی چاپ ۱۴۰۵–۱۴۰۶ تطبیق نشده است.</p>'+block('🎯 هدف‌های یادگیری',lesson.goals)+block('🧩 پیش‌نیازها',lesson.prerequisites)+'<h4>📘 آموزش مفهومی</h4>'+lesson.explanation.map((x,i)=>'<div class="listitem"><b>'+esc(x.head)+'</b><p>'+esc(x.body)+'</p></div>').join('')+'<h4>🧮 مثال‌های حل‌شده</h4>'+examples+block('⚠️ اشتباه‌های رایج',lesson.mistakes)+block('🔑 نکته‌های کلیدی',lesson.keyPoints)+'<h4>✏️ خودآزمایی (برای دیدن پاسخ، تمرین را باز کن)</h4>'+exercises+'<p class="muted">این بسته برای آموزش مفهومی نوشته شده و جایگزین کتاب رسمی نیست. تمرین‌ها تألیفی‌اند.</p></div>';
+ return '<div class="panel" style="border-color:var(--green)"><span class="pill">بسته آموزشی تألیفی · نسخه ۱</span><h3>'+esc(lesson.title)+'</h3><p class="muted">وضعیت منبع: آموزش مفهومی تألیفی؛ هنوز با فصل‌بندی چاپ ۱۴۰۵–۱۴۰۶ تطبیق نشده است.</p>'+block('🎯 هدف‌های یادگیری',lesson.goals)+block('🧩 پیش‌نیازها',lesson.prerequisites)+'<h4>📘 آموزش مفهومی</h4>'+lesson.explanation.map((x,i)=>'<div class="listitem"><b>'+esc(x.head)+'</b><p>'+esc(x.body)+'</p></div>').join('')+'<h4>🧮 مثال‌های حل‌شده</h4>'+examples+block('⚠️ اشتباه‌های رایج',lesson.mistakes)+block('🔑 نکته‌های کلیدی',lesson.keyPoints)+'<h4>✏️ خودآزمایی (برای دیدن پاسخ، تمرین را باز کن)</h4>'+exercises+renderLessonMiniQuiz(lesson)+'<p class="muted">این بسته برای آموزش مفهومی نوشته شده و جایگزین کتاب رسمی نیست. تمرین‌ها تألیفی‌اند.</p></div>';
 }
 function shortMemoryAnswer(q){const steps=Array.isArray(q.s)?q.s.filter(Boolean):[];const tip=String(q.tip||'').trim();if(tip)return tip;if(steps.length>1)return steps[0]+'؛ نتیجه: '+steps[steps.length-1];return steps[0]||'پاسخ را با یک مثال کوتاه تمرین کن.';}
 function renderAnswerRecall(q){const answer=Array.isArray(q.o)?q.o[q.a]:q.answer||'';const steps=Array.isArray(q.s)?q.s:[];return '<div class="notice" style="margin-top:8px"><b>🧠 خلاصهٔ حفظی:</b> '+escapeHtml(shortMemoryAnswer(q))+'<p class="goodtxt" style="margin:5px 0 0"><b>جواب نهایی: '+escapeHtml(answer)+'</b></p></div>'+(steps.length?'<details class="question" style="margin-top:7px"><summary>دیدن توضیح کامل و مرحله‌به‌مرحله</summary>'+steps.map((x,n)=>'<div class="step">'+fa(n+1)+' · '+escapeHtml(x)+'</div>').join('')+'</details>':'');}
