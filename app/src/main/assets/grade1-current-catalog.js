@@ -63,7 +63,7 @@ function pack(title,kind,focus,index){
   ],
   memoryAnswer:'موضوع را بفهم، یک نمونه پیدا کن، با دلیل پاسخ بده و نتیجه را بررسی کن.',
   status:'draft_original_content',
-  sourceNote:'عنوان از فهرست کتاب پایه اول ۱۴۰۵–۱۴۰۶؛ آموزش و تمرین این بسته تألیفی است و پاسخ فعالیت عین کتاب نیست.'
+  sourceNote:'عنوان از فهرست کتاب پایه اول ۱۴۰۵–۱۴۰۶؛ آموزش و تمرین این بسته تألیفی است و پاسخ فعالیت عین کتاب نیست.',catalogYear:'۱۴۰۵–۱۴۰۶'
  };
 }
 const reading=[
@@ -91,6 +91,8 @@ const move=root['1']['تربیت بدنی']||(root['1']['تربیت بدنی']={
 moveTitles.forEach((t,i)=>{move[t]=pack(t,'movement',null,i);});
 const world=root['1']['جهان پیرامون']||{};
 Object.values(world).forEach(lesson=>{
+ lesson.catalogYear='۱۴۰۵–۱۴۰۶';
+ lesson.sourceNote='عنوان از فهرست چاپ ۱۴۰۵–۱۴۰۶؛ آموزش و تمرین تألیفی است و پاسخ فعالیت عین کتاب نیست.';
  const ex=lesson.exercises||[];
  if(ex.length===3){
   ex.push({level:'متوسط',q:'یک نمونه دیگر از موضوع درس را در محیط اطراف پیدا کن.',answer:'یک نمونه واقعی و مرتبط از خانه، مدرسه یا طبیعت.',explain:'مشاهده نمونه‌های بیشتر، مفهوم را روشن‌تر می‌کند.'});
@@ -101,7 +103,7 @@ window.YASINYAR_GRADE1_CURRENT_CATALOG={
  year:'۱۴۰۵–۱۴۰۶',
  sourceIndex:'https://www.daneshchi.ir/tag/کتاب-های-اول-دبستان/',
  books:{
-  reading:{title:'فارسی می‌خوانم',lessons:readingUnique.length,subject:'فارسی',source:'https://www.daneshchi.ir/readfarsi-1/'},
+  reading:{title:'فارسی می‌خوانم',lessons:40,additionalReadingUnits:readingUnique.length,subject:'فارسی',source:'https://www.daneshchi.ir/readfarsi-1/'},
   writing:{title:'فارسی می‌نویسم',lessons:37,subject:'نگارش فارسی',source:'https://www.daneshchi.ir/writefarsi-1/'},
   math:{title:'ریاضی دوست‌داشتنی',lessons:11,subject:'ریاضی',source:'https://www.daneshchi.ir/lovelymath-1/'},
   world:{title:'جهان پیرامون',lessons:Object.keys(world).length,subject:'جهان پیرامون',source:'https://www.daneshchi.ir/jahaan-piramoon-1/'},
