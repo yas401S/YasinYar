@@ -1030,10 +1030,394 @@
         "kind": "original_practice",
         "verified": false
       }
+    },
+    {
+      "id": "YY-G1-FA-001",
+      "grade": 1,
+      "subject": "فارسی",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "کدام واژه نام یک رنگ است؟",
+      "options": [
+        "دویدن",
+        "آبی",
+        "خوردن",
+        "خوابیدن"
+      ],
+      "correct_answer": "آبی",
+      "explanation_steps": [
+        "آبی نام یک رنگ است.",
+        "سه گزینه دیگر فعل یا حالت‌اند."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G5-FA-002",
+      "grade": 5,
+      "subject": "فارسی",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "در جمله «پرنده پرواز کرد»، فعل کدام است؟",
+      "options": [
+        "پرنده",
+        "پرواز کرد",
+        "در",
+        "آسمان"
+      ],
+      "correct_answer": "پرواز کرد",
+      "explanation_steps": [
+        "فعل انجام کار را نشان می‌دهد.",
+        "پرواز کرد کاری است که انجام شده است."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G9-FA-003",
+      "grade": 9,
+      "subject": "فارسی",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "کدام گزینه جمله کامل است؟",
+      "options": [
+        "کتاب آبی روی میز",
+        "دانش‌آموزان مطالعه کردند.",
+        "در کنار پنجره",
+        "هوای بسیار خنک"
+      ],
+      "correct_answer": "دانش‌آموزان مطالعه کردند.",
+      "explanation_steps": [
+        "گزینه دوم پیام کامل دارد.",
+        "نهاد و فعل دارد."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G1-SCI-004",
+      "grade": 1,
+      "subject": "علوم",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "کدام جانور معمولاً در آب زندگی می‌کند؟",
+      "options": [
+        "گربه",
+        "ماهی",
+        "گنجشک",
+        "اسب"
+      ],
+      "correct_answer": "ماهی",
+      "explanation_steps": [
+        "ماهی برای زندگی در آب سازگار شده است.",
+        "بقیه گزینه‌ها آبزی نیستند."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G5-SCI-005",
+      "grade": 5,
+      "subject": "علوم",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "کدام مورد منبع طبیعی نور است؟",
+      "options": [
+        "چراغ‌قوه",
+        "شمع",
+        "خورشید",
+        "لامپ"
+      ],
+      "correct_answer": "خورشید",
+      "explanation_steps": [
+        "خورشید منبع طبیعی نور است.",
+        "سه گزینه دیگر ابزار یا منبع ساخته انسان‌اند."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G9-SCI-006",
+      "grade": 9,
+      "subject": "علوم",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "واحد اندازه‌گیری جریان الکتریکی چیست؟",
+      "options": [
+        "ولت",
+        "آمپر",
+        "اهم",
+        "وات"
+      ],
+      "correct_answer": "آمپر",
+      "explanation_steps": [
+        "جریان الکتریکی با آمپر اندازه‌گیری می‌شود.",
+        "ولت و اهم واحد کمیت‌های دیگری هستند."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G1-SOC-007",
+      "grade": 1,
+      "subject": "مطالعات اجتماعی",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "کدام رفتار به همکاری در کلاس کمک می‌کند؟",
+      "options": [
+        "قطع حرف دیگران",
+        "کمک به هم‌کلاسی",
+        "به‌هم‌ریختن وسایل",
+        "بی‌توجهی به نوبت"
+      ],
+      "correct_answer": "کمک به هم‌کلاسی",
+      "explanation_steps": [
+        "کمک به هم‌کلاسی نمونه همکاری است.",
+        "همکاری برای رسیدن به هدف مشترک انجام می‌شود."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G5-SOC-008",
+      "grade": 5,
+      "subject": "مطالعات اجتماعی",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "برای نشان دادن مکان‌ها و مسیرها از چه چیزی استفاده می‌کنیم؟",
+      "options": [
+        "نقشه",
+        "داستان",
+        "تقویم",
+        "جدول ضرب"
+      ],
+      "correct_answer": "نقشه",
+      "explanation_steps": [
+        "نقشه مکان‌ها و موقعیت آن‌ها را نشان می‌دهد.",
+        "مسیرها را می‌توان روی نقشه پیدا کرد."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G9-SOC-009",
+      "grade": 9,
+      "subject": "مطالعات اجتماعی",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "قانون در جامعه چه نقشی دارد؟",
+      "options": [
+        "افزایش بی‌نظمی",
+        "حفظ نظم و تعیین حقوق و مسئولیت‌ها",
+        "حذف همکاری",
+        "محدود کردن همه فعالیت‌ها"
+      ],
+      "correct_answer": "حفظ نظم و تعیین حقوق و مسئولیت‌ها",
+      "explanation_steps": [
+        "قانون چارچوب رفتار اجتماعی را مشخص می‌کند.",
+        "به حفظ نظم و روشن شدن مسئولیت‌ها کمک می‌کند."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G1-REL-010",
+      "grade": 1,
+      "subject": "قرآن و هدیه‌های آسمان",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "کدام رفتار نمونه مهربانی است؟",
+      "options": [
+        "آزار دیگران",
+        "کمک به دوست",
+        "تمسخر هم‌کلاسی",
+        "گرفتن وسایل دیگران"
+      ],
+      "correct_answer": "کمک به دوست",
+      "explanation_steps": [
+        "کمک به دوست رفتار مهربانانه است.",
+        "مهربانی با احترام و یاری همراه است."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G5-REL-011",
+      "grade": 5,
+      "subject": "قرآن و هدیه‌های آسمان",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "کدام رفتار نشانه شکرگزاری است؟",
+      "options": [
+        "اسراف کردن",
+        "قدردانی از نعمت‌ها",
+        "دور ریختن غذا",
+        "بی‌احترامی"
+      ],
+      "correct_answer": "قدردانی از نعمت‌ها",
+      "explanation_steps": [
+        "قدردانی از نعمت‌ها نمونه شکرگزاری است.",
+        "پرهیز از اسراف نیز رفتار سپاس‌گزارانه‌ای است."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G9-REL-012",
+      "grade": 9,
+      "subject": "قرآن و هدیه‌های آسمان",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "کدام گزینه نمونه مسئولیت اجتماعی است؟",
+      "options": [
+        "بی‌تفاوتی",
+        "رعایت حق دیگران و کمک به نیازمندان",
+        "آسیب به اموال عمومی",
+        "پخش شایعه"
+      ],
+      "correct_answer": "رعایت حق دیگران و کمک به نیازمندان",
+      "explanation_steps": [
+        "رعایت حق دیگران به جامعه سود می‌رساند.",
+        "مسئولیت اجتماعی یعنی نسبت به دیگران بی‌تفاوت نباشیم."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G7-AR-013",
+      "grade": 7,
+      "subject": "عربی",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "معنی واژه «کتاب» در عربی چیست؟",
+      "options": [
+        "قلم",
+        "کتاب",
+        "مدرسه",
+        "در"
+      ],
+      "correct_answer": "کتاب",
+      "explanation_steps": [
+        "«کتاب» در عربی به معنی کتاب است.",
+        "این واژه در فارسی نیز همین معنا را دارد."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G9-AR-014",
+      "grade": 9,
+      "subject": "عربی",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "معنی «أنا طالبٌ» کدام است؟",
+      "options": [
+        "تو دانش‌آموزی",
+        "من دانش‌آموزم",
+        "او معلم است",
+        "ما دانش‌آموزیم"
+      ],
+      "correct_answer": "من دانش‌آموزم",
+      "explanation_steps": [
+        "«أنا» یعنی من.",
+        "«طالب» یعنی دانش‌آموز."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G7-EN-015",
+      "grade": 7,
+      "subject": "زبان انگلیسی",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "معنی واژه Hello چیست؟",
+      "options": [
+        "خداحافظ",
+        "سلام",
+        "لطفاً",
+        "متشکرم"
+      ],
+      "correct_answer": "سلام",
+      "explanation_steps": [
+        "Hello برای سلام کردن به کار می‌رود.",
+        "معمولاً در آغاز گفت‌وگو می‌آید."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G9-EN-016",
+      "grade": 9,
+      "subject": "زبان انگلیسی",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "معنی جمله I am a student چیست؟",
+      "options": [
+        "من معلم هستم",
+        "من دانش‌آموز هستم",
+        "او دانش‌آموز است",
+        "تو دانش‌آموز هستی"
+      ],
+      "correct_answer": "من دانش‌آموز هستم",
+      "explanation_steps": [
+        "I یعنی من.",
+        "am با I می‌آید و student یعنی دانش‌آموز."
+      ],
+      "learning_tip": "نکته را با یک مثال دیگر تمرین کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
     }
   ],
   "coverage": {
-    "phase": "multi_grade_math_seed",
+    "phase": "multi_subject_seed",
     "grades_with_questions": [
       1,
       2,
@@ -1045,6 +1429,15 @@
       8,
       9
     ],
-    "note": "سؤال‌های جدید تألیفی و اولیه‌اند؛ محتوای رسمی کتاب درسی محسوب نمی‌شوند و باید پیش از انتشار آموزشی بازبینی شوند."
+    "subjects_with_questions": [
+      "ریاضی",
+      "فارسی",
+      "علوم",
+      "مطالعات اجتماعی",
+      "قرآن و هدیه‌های آسمان",
+      "عربی",
+      "زبان انگلیسی"
+    ],
+    "note": "سؤال‌های چنددرسی جدید تألیفی و مقدماتی‌اند و با نسخه رسمی کتاب درسی تطبیق داده نشده‌اند."
   }
 }
