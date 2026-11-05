@@ -6,46 +6,68 @@
 <meta name="theme-color" content="#101b35">
 <title>یاسین‌یار | همراه یادگیری</title>
 <style>
-:root{--bg:#0b1327;--panel:#14213d;--gold:#f4c96b;--txt:#f5f7fb;--muted:#aebbd1;--green:#55d6a2}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#101d39,#080e1d);color:var(--txt);font-family:Tahoma,Arial,sans-serif;line-height:1.8}
-.wrap{max-width:850px;margin:auto;padding:18px}.hero{padding:22px;border:1px solid #34486b;border-radius:22px;background:linear-gradient(130deg,#1d3156,#14213d)}
-h1{margin:0;color:var(--gold);font-size:27px}.sub{color:var(--muted);margin:4px 0 0}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}
-.tile,.panel{background:var(--panel);border:1px solid #2b3c5d;border-radius:16px;padding:15px}.tile{cursor:pointer;text-align:right;color:var(--txt);font:inherit}
-.tile b{display:block;color:var(--gold);font-size:17px}.tile span{color:var(--muted);font-size:13px}.panel{margin-top:14px}
-h2{font-size:19px;margin:0 0 10px}.row{display:flex;gap:9px;flex-wrap:wrap}
-select,input,button{font:inherit;border-radius:10px;border:1px solid #405477;padding:10px;background:#0d1830;color:var(--txt)}
-button.primary{background:var(--gold);color:#18233a;border:0;font-weight:bold}button:active{transform:scale(.98)}
-.muted{color:var(--muted);font-size:13px}.question{padding:12px;background:#0e1a32;border-radius:12px;margin:10px 0}
-.answer{color:var(--green);font-weight:bold}.step{border-right:3px solid var(--gold);padding:4px 10px;margin:7px 0}.hidden{display:none}
-@media(max-width:520px){.grid{grid-template-columns:1fr 1fr}.wrap{padding:12px}}
+:root{--bg:#091326;--panel:#14213d;--panel2:#0d1930;--gold:#f4c96b;--txt:#f5f7fb;--muted:#afbdd4;--green:#55d6a2;--red:#ff8585;--line:#304363}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(155deg,#101d39,#080e1d);color:var(--txt);font-family:Tahoma,Arial,sans-serif;line-height:1.85}.wrap{max-width:900px;margin:auto;padding:14px}.hero{padding:20px;border:1px solid #34486b;border-radius:20px;background:linear-gradient(130deg,#1d3156,#14213d)}h1{margin:0;color:var(--gold);font-size:27px}.sub,.muted{color:var(--muted)}.sub{margin:4px 0}.muted{font-size:13px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}.tile,.panel,.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:14px}.tile{cursor:pointer;text-align:right;color:var(--txt);font:inherit;min-height:88px}.tile b{display:block;color:var(--gold);font-size:16px}.tile span{color:var(--muted);font-size:12px}.panel{margin-top:13px}.hidden{display:none!important}h2{font-size:19px;margin:0 0 10px;color:var(--gold)}h3{font-size:16px;margin:8px 0}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}select,input,button{font:inherit;border-radius:10px;border:1px solid #405477;padding:10px;background:#0d1830;color:var(--txt);max-width:100%}select{flex:1;min-width:120px}button{cursor:pointer}button.primary{background:var(--gold);color:#18233a;border:0;font-weight:bold}button.secondary{background:#1c3153}button:disabled{opacity:.45;cursor:not-allowed}.nav{display:flex;gap:7px;overflow:auto;padding:8px 0}.nav button{white-space:nowrap;font-size:13px}.question{padding:13px;background:var(--panel2);border:1px solid #263b5d;border-radius:12px;margin:11px 0}.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}.options button{text-align:right}.options button.chosen{border-color:var(--gold);background:#263957}.answer{color:var(--green);font-weight:bold}.wrong{color:var(--red);font-weight:bold}.step{border-right:3px solid var(--gold);padding:4px 10px;margin:7px 0}.tag{display:inline-block;border:1px solid #536987;border-radius:30px;padding:2px 9px;font-size:11px;color:var(--muted);margin-left:5px}.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{text-align:center;background:#0d1930;border-radius:12px;padding:12px}.stat strong{display:block;color:var(--gold);font-size:22px}.lesson{background:#0d1930;padding:12px;border-radius:12px;margin:8px 0}.progressbar{height:9px;background:#263752;border-radius:9px;overflow:hidden}.progressbar span{display:block;height:100%;background:var(--green);width:0}footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}@media(max-width:520px){.wrap{padding:10px}.grid{gap:8px}.tile{padding:11px}.statgrid{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
-<body>
-<main class="wrap">
-<header class="hero"><h1>یاسین‌یار</h1><p class="sub">همراه یادگیری پایه‌های اول تا نهم</p><p class="muted">درس را انتخاب کن، تمرین کن و قدم‌به‌قدم یاد بگیر.</p></header>
-<section class="grid">
-<button class="tile" onclick="show('library')"><b>📚 کتابخانه درس‌ها</b><span>انتخاب پایه و درس</span></button>
-<button class="tile" onclick="show('practice')"><b>✏️ تمرین و پرسش</b><span>سؤال‌های آموزشی</span></button>
-<button class="tile" onclick="show('exam')"><b>📝 آزمون کوتاه</b><span>سنجش یادگیری</span></button>
-<button class="tile" onclick="show('progress')"><b>📈 پیشرفت من</b><span>مرور پاسخ‌ها</span></button>
+<body><main class="wrap">
+<header class="hero"><h1>یاسین‌یار</h1><p class="sub">همراه یادگیری پایه‌های اول تا نهم</p><p class="muted">یک بخش را انتخاب کن؛ تمرین‌ها و نتیجه‌ها روی همین دستگاه ذخیره می‌شوند.</p></header>
+<nav class="nav">
+<button class="secondary" onclick="go('home')">خانه</button><button class="secondary" onclick="go('library')">کتابخانه</button><button class="secondary" onclick="go('practice')">تمرین</button><button class="secondary" onclick="go('exam')">آزمون</button><button class="secondary" onclick="go('progress')">پیشرفت</button>
+</nav>
+<section id="home" class="page">
+<div class="grid">
+<button class="tile" onclick="go('library')"><b>📚 کتابخانه درس‌ها</b><span>پایه و درس را انتخاب کن و درس‌نما را ببین.</span></button>
+<button class="tile" onclick="go('practice')"><b>✏️ تمرین و پرسش</b><span>سؤال حل کن و پاسخ تشریحی را ببین.</span></button>
+<button class="tile" onclick="go('exam')"><b>📝 آزمون کوتاه</b><span>آزمون پنج‌سؤالی و نتیجه فوری.</span></button>
+<button class="tile" onclick="go('progress')"><b>📈 پیشرفت من</b><span>تعداد پاسخ‌ها و درصد موفقیت.</span></button>
+</div>
+<div class="panel"><h2>شروع سریع</h2><p>برای شروع، تمرین ریاضی ششم از مبحث کسرها و عددهای اعشاری آماده است.</p><div class="row"><button class="primary" onclick="go('practice')">شروع تمرین</button><button onclick="go('exam')">شروع آزمون</button></div><p class="muted">توجه: بانک سؤال فعلی نمونه و تألیفی است؛ هنوز بانک کامل همه کتاب‌ها اضافه نشده است.</p></div>
 </section>
-<section id="library" class="panel"><h2>انتخاب پایه و درس</h2><div class="row"><select id="grade" onchange="updateSubjects()"></select><select id="subject"></select><button class="primary" onclick="loadLesson()">نمایش درس</button></div><p id="lessonInfo" class="muted">پایه و درس را انتخاب کن. فهرست درس‌ها در نسخه‌های بعدی با کتاب‌های رسمی هر سال تکمیل می‌شود.</p></section>
-<section id="practice" class="panel"><h2>بانک تمرین نمونه</h2><p class="muted">نمونه‌های زیر تألیفی‌اند و سؤال رسمی کتاب درسی محسوب نمی‌شوند.</p><div id="questionArea"></div></section>
-<section id="exam" class="panel hidden"><h2>آزمون کوتاه</h2><p>برای شروع، یک سؤال نمونه را در بخش تمرین پاسخ بده. آزمون‌ساز کامل در گام بعدی اضافه می‌شود.</p></section>
-<section id="progress" class="panel hidden"><h2>پیشرفت من</h2><p id="progressText">هنوز پاسخی ثبت نشده است.</p></section>
-<footer class="muted" style="text-align:center;padding:20px">نسخه آغازین یاسین‌یار · محتوای نمونه و قابل توسعه</footer>
+<section id="library" class="page hidden">
+<div class="panel"><h2>کتابخانه درس‌ها</h2><p class="muted">پایه و درس را انتخاب کن. برای بخش‌هایی که هنوز محتوای اختصاصی ندارند، وضعیت آماده‌سازی نمایش داده می‌شود.</p>
+<div class="row"><select id="libGrade"></select><select id="libSubject"></select><button class="primary" onclick="showLesson()">نمایش درس</button></div><div id="lessonOutput" class="lesson">ابتدا پایه و درس را انتخاب کن.</div></div>
+</section>
+<section id="practice" class="page hidden">
+<div class="panel"><h2>تمرین و پرسش</h2><div class="row"><select id="practiceTopic" onchange="startPractice()"> <option value="all">همه تمرین‌های آماده</option><option value="fractions">کسرها</option><option value="decimal">عددهای اعشاری</option></select><button class="secondary" onclick="startPractice()">سؤال بعدی</button></div><div id="practiceArea"></div></div>
+</section>
+<section id="exam" class="page hidden">
+<div class="panel"><h2>آزمون کوتاه</h2><p class="muted">آزمون از سؤال‌های موجود در بانک نمونه ساخته می‌شود. هر بار پنج سؤال تصادفی انتخاب می‌شود.</p><div class="row"><button class="primary" onclick="beginExam()">شروع آزمون جدید</button></div><div id="examArea" class="lesson">برای شروع آزمون، دکمه بالا را بزن.</div></div>
+</section>
+<section id="progress" class="page hidden">
+<div class="panel"><h2>گزارش پیشرفت</h2><div class="statgrid"><div class="stat"><strong id="totalStat">۰</strong><span class="muted">پاسخ ثبت‌شده</span></div><div class="stat"><strong id="correctStat">۰</strong><span class="muted">پاسخ درست</span></div><div class="stat"><strong id="percentStat">۰٪</strong><span class="muted">درصد موفقیت</span></div></div><h3>میزان موفقیت</h3><div class="progressbar"><span id="progressFill"></span></div><p id="progressMessage" class="muted">هنوز پاسخی ثبت نشده است. از بخش تمرین شروع کن.</p><button onclick="resetProgress()">پاک کردن آمار این دستگاه</button></div>
+</section>
+<footer>یاسین‌یار · نسخه آموزشی در حال توسعه · محتوای نمونه تألیفی است</footer>
 </main>
 <script>
 const subjects={1:['فارسی','ریاضی','علوم','قرآن و هدیه‌های آسمان'],2:['فارسی','ریاضی','علوم','قرآن و هدیه‌های آسمان'],3:['فارسی','ریاضی','علوم','مطالعات اجتماعی'],4:['فارسی','ریاضی','علوم','مطالعات اجتماعی'],5:['فارسی','ریاضی','علوم','مطالعات اجتماعی'],6:['فارسی','ریاضی','علوم','مطالعات اجتماعی'],7:['فارسی','ریاضی','علوم','مطالعات اجتماعی','عربی','زبان انگلیسی'],8:['فارسی','ریاضی','علوم','مطالعات اجتماعی','عربی','زبان انگلیسی'],9:['فارسی','ریاضی','علوم','مطالعات اجتماعی','عربی','زبان انگلیسی']};
-const sample={id:'YY-G6-MATH-001',grade:6,subject:'ریاضی',lesson:'کسرها',type:'multiple_choice',difficulty:'easy',question:'حاصل ۱/۲ + ۱/۴ کدام است؟',options:['۱/۶','۲/۶','۳/۴','۱/۸'],correct_answer:'۳/۴',explanation_steps:['مخرج مشترک ۴ انتخاب می‌کنیم.','۱/۲ برابر ۲/۴ است.','۲/۴ + ۱/۴ = ۳/۴.'],learning_tip:'برای جمع کسرها ابتدا مخرج‌ها را یکسان کن.',source:{kind:'original_practice',verified:false}};
-const g=document.getElementById('grade');for(let i=1;i<=9;i++){let o=document.createElement('option');o.value=i;o.textContent='پایه '+['اول','دوم','سوم','چهارم','پنجم','ششم','هفتم','هشتم','نهم'][i-1];g.append(o)}
-function updateSubjects(){let s=document.getElementById('subject');s.innerHTML='';(subjects[g.value]||[]).forEach(x=>{let o=document.createElement('option');o.textContent=x;s.append(o)})}updateSubjects();
-function show(id){document.querySelectorAll('.panel').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
-function loadLesson(){document.getElementById('lessonInfo').textContent='درس '+document.getElementById('subject').value+' از پایه '+g.value+' انتخاب شد. محتوای کامل این درس هنوز به بانک رسمی/تألیفی افزوده نشده است.'}
-function renderQuestion(){let q=document.getElementById('questionArea');q.innerHTML='<div class="question"><b>'+sample.question+'</b><div class="row" style="margin-top:10px">'+sample.options.map((x,i)=>'<button onclick="check('+i+')">'+x+'</button>').join('')+'</div><div id="feedback"></div></div>'}
-function check(i){let f=document.getElementById('feedback');if(i===2){f.innerHTML='<p class="answer">آفرین! پاسخ درست است.</p>'+sample.explanation_steps.map((x,n)=>'<div class="step">مرحله '+(n+1)+': '+x+'</div>').join('')+'<p class="muted">نکته: '+sample.learning_tip+'</p>';localStorage.setItem('yyAnswered','1');document.getElementById('progressText').textContent='یک سؤال نمونه را درست پاسخ داده‌ای.'}else{f.innerHTML='<p>هنوز درست نیست؛ دوباره فکر کن و مخرج مشترک بگیر.</p>'}}
-renderQuestion();if(localStorage.getItem('yyAnswered'))document.getElementById('progressText').textContent='یک سؤال نمونه را درست پاسخ داده‌ای.';
-</script>
-</body>
-</html>
+const grades=['اول','دوم','سوم','چهارم','پنجم','ششم','هفتم','هشتم','نهم'];
+const questions=[
+{id:1,topic:'fractions',title:'کسرها',q:'حاصل ۱/۲ + ۱/۴ کدام است؟',opts:['۱/۶','۲/۶','۳/۴','۱/۸'],a:2,steps:['مخرج مشترک ۴ انتخاب می‌کنیم.','۱/۲ برابر ۲/۴ است.','۲/۴ + ۱/۴ = ۳/۴.'],tip:'برای جمع کسرها ابتدا مخرج‌ها را یکسان کن.'},
+{id:2,topic:'fractions',title:'کسرها',q:'کدام کسر بزرگ‌تر است؟',opts:['۱/۳','۱/۲','۱/۴','۱/۵'],a:1,steps:['وقتی صورت کسرها برابر ۱ است، هرچه مخرج کوچک‌تر باشد کسر بزرگ‌تر است.','پس ۱/۲ از بقیه بزرگ‌تر است.'],tip:'کسرهای واحد را با توجه به مخرج مقایسه کن.'},
+{id:3,topic:'fractions',title:'کسرها',q:'حاصل ۳/۴ − ۱/۴ چند است؟',opts:['۱/۲','۲/۸','۴/۸','۱'],a:0,steps:['مخرج‌ها برابرند؛ صورت‌ها را کم می‌کنیم.','۳/۴ − ۱/۴ = ۲/۴ = ۱/۲.'],tip:'در تفریق کسرهای هم‌مخرج، مخرج ثابت می‌ماند.'},
+{id:4,topic:'fractions',title:'کسرها',q:'کدام عدد با ۲/۴ برابر است؟',opts:['۱/۳','۳/۴','۱/۲','۲/۳'],a:2,steps:['صورت و مخرج ۲/۴ را بر ۲ تقسیم می‌کنیم.','۲/۴ = ۱/۲.'],tip:'برای ساده‌کردن کسر، صورت و مخرج را بر یک عدد مشترک تقسیم کن.'},
+{id:5,topic:'decimal',title:'عددهای اعشاری',q:'حاصل ۲٫۵ + ۱٫۲ چند است؟',opts:['۳٫۵','۳٫۷','۲٫۷','۴٫۲'],a:1,steps:['ممیزها را زیر هم قرار می‌دهیم.','دهم‌ها: ۵ + ۲ = ۷ دهم.','عددهای صحیح: ۲ + ۱ = ۳؛ پاسخ ۳٫۷ است.'],tip:'در جمع اعشاری، ممیزها باید زیر هم باشند.'},
+{id:6,topic:'decimal',title:'عددهای اعشاری',q:'کدام عدد کوچک‌تر است؟',opts:['۰٫۸','۰٫۵','۰٫۹','۱٫۰'],a:1,steps:['همه عددها را تا یک رقم اعشار می‌خوانیم.','۵ دهم از ۸ دهم و ۹ دهم کوچک‌تر است.'],tip:'ارزش رقم‌های اعشاری را از چپ به راست مقایسه کن.'},
+{id:7,topic:'decimal',title:'عددهای اعشاری',q:'حاصل ۴٫۰ − ۱٫۵ چند است؟',opts:['۲٫۵','۳٫۵','۲٫۰','۱٫۵'],a:0,steps:['۴٫۰ را به صورت ۳٫۱۰ در نظر می‌گیریم.','۳٫۱۰ − ۱٫۵۰ = ۲٫۵۰.','پاسخ ۲٫۵ است.'],tip:'برای تفریق اعشاری می‌توان صفر انتهای عدد اضافه کرد.'},
+{id:8,topic:'decimal',title:'عددهای اعشاری',q:'عدد ۰٫۳ برابر چند دهم است؟',opts:['۳ دهم','۳ صدم','۳۰ دهم','۱ دهم'],a:0,steps:['رقم اول بعد از ممیز، رقم دهم‌هاست.','پس ۰٫۳ یعنی سه دهم.'],tip:'اولین رقم بعد از ممیز، دهم را نشان می‌دهد.'}
+];
+let currentPractice=null,examList=[],examIndex=0,examCorrect=0;
+function fa(n){return Number(n).toLocaleString('fa-IR')}
+function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='progress')renderProgress();if(id==='practice'&&!currentPractice)startPractice();document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
+function fillGrades(){['libGrade'].forEach(id=>{let el=document.getElementById(id);grades.forEach((name,i)=>{let o=document.createElement('option');o.value=i+1;o.textContent='پایه '+name;el.append(o)})});updateLibSubjects()}
+function updateLibSubjects(){let grade=Number(document.getElementById('libGrade').value||6),el=document.getElementById('libSubject');el.innerHTML='';(subjects[grade]||[]).forEach(s=>{let o=document.createElement('option');o.value=s;o.textContent=s;el.append(o)})}
+document.getElementById('libGrade').addEventListener('change',updateLibSubjects);
+function showLesson(){let gr=Number(document.getElementById('libGrade').value),sub=document.getElementById('libSubject').value,out=document.getElementById('lessonOutput');if(gr===6&&sub==='ریاضی'){out.innerHTML='<h3>ریاضی پایه ششم</h3><p>مبحث‌های نمونه آماده:</p><ul><li>کسرها: جمع، تفریق و مقایسه</li><li>عددهای اعشاری: جمع و تفریق</li></ul><p class="muted">این درس‌نما فعلاً خلاصه آموزشی نمونه است؛ متن کامل کتاب و همه فصل‌ها هنوز اضافه نشده‌اند.</p><button class="primary" onclick="go(\'practice\')">رفتن به تمرین‌های این درس</button>'}else{out.innerHTML='<h3>'+sub+' · پایه '+grades[gr-1]+'</h3><p>بخش کتابخانه برای این درس فعال است، اما محتوای اختصاصی و تمرین‌های آن هنوز به بانک برنامه افزوده نشده است.</p><p class="muted">در حال حاضر محتوای نمونه قابل استفاده: ریاضی پایه ششم، کسرها و عددهای اعشاری.</p>'}}
+function filtered(){let t=document.getElementById('practiceTopic').value;return questions.filter(q=>t==='all'||q.topic===t)}
+function startPractice(){let list=filtered();if(!list.length)return;currentPractice=list[Math.floor(Math.random()*list.length)];renderPractice()}
+function renderPractice(){let q=currentPractice,area=document.getElementById('practiceArea');area.innerHTML='<div class="question"><span class="tag">ریاضی ششم</span><span class="tag">'+q.title+'</span><span class="tag">تمرین تألیفی</span><h3>'+q.q+'</h3><div class="options">'+q.opts.map((x,i)=>'<button onclick="answerPractice('+i+')" id="opt'+i+'">'+x+'</button>').join('')+'</div><div id="practiceFeedback"></div></div>'}
+function saveResult(ok,kind){let s=JSON.parse(localStorage.getItem('yyStats')||'{"total":0,"correct":0,"practice":0,"exam":0}');s.total++;if(ok)s.correct++;s[kind]=(s[kind]||0)+1;localStorage.setItem('yyStats',JSON.stringify(s))}
+function answerPractice(i){let q=currentPractice,fb=document.getElementById('practiceFeedback');if(fb.dataset.done)return;fb.dataset.done='1';let ok=i===q.a;saveResult(ok,'practice');document.querySelectorAll('#practiceArea .options button').forEach(b=>b.disabled=true);fb.innerHTML=(ok?'<p class="answer">آفرین! پاسخ درست است.</p>':'<p class="wrong">این پاسخ درست نیست. پاسخ صحیح: '+q.opts[q.a]+'</p>')+q.steps.map((s,n)=>'<div class="step">مرحله '+fa(n+1)+': '+s+'</div>').join('')+'<p class="muted">نکته آموزشی: '+q.tip+'</p><button class="primary" onclick="startPractice()">سؤال بعدی</button>'}
+function beginExam(){examList=[...questions].sort(()=>Math.random()-.5).slice(0,5);examIndex=0;examCorrect=0;renderExamQuestion()}
+function renderExamQuestion(){let a=document.getElementById('examArea');if(examIndex>=examList.length){a.innerHTML='<h3>آزمون تمام شد</h3><p class="answer">نتیجه: '+fa(examCorrect)+' از '+fa(examList.length)+'</p><p>درصد موفقیت: '+fa(Math.round(examCorrect/examList.length*100))+'٪</p><button class="primary" onclick="beginExam()">آزمون دوباره</button>';return}let q=examList[examIndex];a.innerHTML='<p class="muted">سؤال '+fa(examIndex+1)+' از '+fa(examList.length)+'</p><div class="progressbar"><span style="width:'+((examIndex)/examList.length*100)+'%"></span></div><h3>'+q.q+'</h3><div class="options">'+q.opts.map((x,i)=>'<button onclick="answerExam('+i+')">'+x+'</button>').join('')+'</div><div id="examFeedback"></div>'}
+function answerExam(i){let q=examList[examIndex],ok=i===q.a;if(ok)examCorrect++;saveResult(ok,'exam');let f=document.getElementById('examFeedback');document.querySelectorAll('#examArea .options button').forEach(b=>b.disabled=true);f.innerHTML='<p class="'+(ok?'answer':'wrong')+'">'+(ok?'پاسخ درست بود.':'پاسخ صحیح: '+q.opts[q.a])+'</p><button class="primary" onclick="examIndex++;renderExamQuestion()">ادامه</button>'}
+function renderProgress(){let s=JSON.parse(localStorage.getItem('yyStats')||'{"total":0,"correct":0}'),p=s.total?Math.round(s.correct/s.total*100):0;document.getElementById('totalStat').textContent=fa(s.total);document.getElementById('correctStat').textContent=fa(s.correct);document.getElementById('percentStat').textContent=fa(p)+'٪';document.getElementById('progressFill').style.width=p+'%';document.getElementById('progressMessage').textContent=s.total?'تمرین‌ها: '+fa(s.practice||0)+' · پاسخ‌های آزمون: '+fa(s.exam||0)+' · هرچه بیشتر تمرین کنی، گزارش دقیق‌تر می‌شود.':'هنوز پاسخی ثبت نشده است. از بخش تمرین یا آزمون شروع کن.'}
+function resetProgress(){if(confirm('آمار ذخیره‌شده روی این دستگاه پاک شود؟')){localStorage.removeItem('yyStats');renderProgress()}}
+fillGrades();showLesson();startPractice();
+</script></body></html>
