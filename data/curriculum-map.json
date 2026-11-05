@@ -22,147 +22,164 @@
           "subject": "فارسی",
           "curriculum_year": "۱۴۰۵–۱۴۰۶",
           "source_url": "https://www.daneshchi.ir/farsi-1/",
-          "official_source": "https://chap.sch.ir/",
-          "source_verified": "صفحه منبع نسخه ۱۴۰۵–۱۴۰۶ ساختار سه‌بخشی را تأیید می‌کند: نگاره‌ها، آموزش نشانه‌ها ۱ (درس‌های ۱ تا ۱۵)، آموزش نشانه‌ها ۲ (درس‌های ۱۶ تا ۲۲). عنوان‌های جزئی و پاسخ تمرین‌ها باید با خود PDF صفحه‌به‌صفحه تطبیق داده شوند.",
-          "status": "official_structure_verified_page_review_in_progress",
+          "pdf_url": "https://dl.daneshchi.ir/file/chap-school/Farsi-1_Daneshchi.iR.pdf",
+          "status": "pdf_linked_page_review_pending",
           "sections": [
             {
               "title": "نگاره‌ها",
-              "lessons": [
-                "نگاره ۱: به خانه ما خوش آمدی",
-                "نگاره ۲: بچه‌ها، آماده!",
-                "نگاره ۳: یک و دو و سه، راه مدرسه",
-                "نگاره ۴: به مدرسه رسیدیم",
-                "نگاره ۵: از کلاس ما چه خبر؟",
-                "نگاره ۶: بازی، بازی، تماشا",
-                "نگاره ۷: به‌به چه روستایی!",
-                "نگاره ۸: چه دنیای قشنگی!",
-                "نگاره ۹: در مسجد محله",
-                "نگاره ۱۰: نوروز در خانه ما"
-              ],
-              "status": "official_titles_verified"
-            },
-            {
-              "title": "آموزش نشانه‌ها ۱",
-              "lessons": [
-                "درس 1",
-                "درس 2",
-                "درس 3",
-                "درس 4",
-                "درس 5",
-                "درس 6",
-                "درس 7",
-                "درس 8",
-                "درس 9",
-                "درس 10",
-                "درس 11",
-                "درس 12",
-                "درس 13",
-                "درس 14",
-                "درس 15"
-              ],
-              "status": "official_count_verified_titles_pending",
-              "note": "عنوان و نشانه هر درس تا بررسی صفحات PDF ثبت نمی‌شود."
-            },
-            {
-              "title": "آموزش نشانه‌ها ۲",
-              "lessons": [
-                "درس 16",
-                "درس 17",
-                "درس 18",
-                "درس 19",
-                "درس 20",
-                "درس 21",
-                "درس 22"
-              ],
-              "status": "official_count_verified_titles_pending",
-              "note": "عنوان و نشانه هر درس تا بررسی صفحات PDF ثبت نمی‌شود."
-            }
-          ],
-          "note": "فهرست ساختاری از صفحه منبع نسخه ۱۴۰۵–۱۴۰۶ بررسی شده است. محتوای قبلی ۲۲ درس تألیفی و موقت است و نباید پاسخ رسمی کتاب تلقی شود؛ تطبیق عنوان‌ها، نشانه‌ها و تمرین‌ها با PDF صفحه‌به‌صفحه ادامه دارد."
-        },
-        {
-          "title": "نگارش فارسی اول دبستان",
-          "subject": "نگارش فارسی",
-          "curriculum_year": "۱۴۰۵–۱۴۰۶",
-          "source_url": "https://www.daneshchi.ir/negaresh-1/",
-          "official_source": "https://chap.sch.ir/",
-          "source_verified": "فهرست منتشرشده شامل نگاره‌ها ۱ تا ۱۰، آموزش نشانه‌ها ۱ درس‌های ۱ تا ۱۵ و آموزش نشانه‌ها ۲ درس‌های ۱۶ تا ۲۲ است. حل صفحه‌به‌صفحه هنوز باید با تصویر هر صفحه تطبیق داده شود.",
-          "status": "official_structure_verified_page_solutions_in_progress",
-          "sections": [
-            {
-              "title": "نگاره‌ها",
-              "lessons": [
-                "نگاره 1",
-                "نگاره 2",
-                "نگاره 3",
-                "نگاره 4",
-                "نگاره 5",
-                "نگاره 6",
-                "نگاره 7",
-                "نگاره 8",
-                "نگاره 9",
-                "نگاره 10"
-              ],
-              "printed_pages": "۱ تا ۲۰",
+              "lessons": 10,
               "status": "official_index_verified"
             },
             {
-              "title": "آموزش نشانه‌ها (۱)",
-              "lessons": [
-                "درس 1",
-                "درس 2",
-                "درس 3",
-                "درس 4",
-                "درس 5",
-                "درس 6",
-                "درس 7",
-                "درس 8",
-                "درس 9",
-                "درس 10",
-                "درس 11",
-                "درس 12",
-                "درس 13",
-                "درس 14",
-                "درس 15"
-              ],
-              "printed_pages": "۲۵ تا ۹۹",
+              "title": "آموزش نشانه‌ها ۱",
+              "lessons": 15,
+              "status": "official_count_verified"
+            },
+            {
+              "title": "آموزش نشانه‌ها ۲",
+              "lessons": 7,
+              "status": "official_count_verified"
+            }
+          ]
+        },
+        {
+          "title": "نگارش فارسی اول دبستان",
+          "subject": "نگارش",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "source_url": "https://www.daneshchi.ir/negaresh-1/",
+          "pdf_url": "https://dl.daneshchi.ir/file/chap-school/Negaresh-1_Daneshchi.iR.pdf",
+          "status": "pdf_linked_144_pages_index_verified_page_solutions_pending",
+          "sections": [
+            {
+              "title": "نگاره‌ها",
+              "lessons": 10,
+              "status": "official_index_verified"
+            },
+            {
+              "title": "آموزش نشانه‌ها ۱",
+              "lessons": 15,
+              "status": "official_index_verified"
+            },
+            {
+              "title": "آموزش نشانه‌ها ۲",
+              "lessons": 7,
               "status": "official_index_verified"
             },
             {
               "title": "تمرین‌های دوره‌ای",
-              "lessons": [
-                "مرور و تمرین‌های دوره‌ای بخش اول"
-              ],
-              "status": "official_index_listed"
-            },
-            {
-              "title": "آموزش نشانه‌ها (۲)",
-              "lessons": [
-                "درس 16",
-                "درس 17",
-                "درس 18",
-                "درس 19",
-                "درس 20",
-                "درس 21",
-                "درس 22"
-              ],
-              "printed_pages": "۱۰۳ تا ۱۳۱",
+              "lessons": 2,
               "status": "official_index_verified"
+            }
+          ]
+        },
+        {
+          "title": "ریاضی اول دبستان",
+          "subject": "ریاضی",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "source_url": "https://www.daneshchi.ir/riazi-1/",
+          "pdf_url": "https://dl.daneshchi.ir/file/chap-school/Riazi-1_Daneshchi.iR.pdf",
+          "status": "pdf_linked_page_review_pending"
+        },
+        {
+          "title": "جهان پیرامون اول دبستان",
+          "subject": "جهان پیرامون",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "source_url": "https://www.daneshchi.ir/jahaan-piramoon-1/",
+          "pdf_url": "https://dl.daneshchi.ir/file/chap-school/JahaanPiramon-1_Daneshchi.iR.pdf",
+          "status": "pdf_linked_7_chapters_18_lessons_index_verified",
+          "sections": [
+            {
+              "title": "کشف می‌کنیم",
+              "lessons": [
+                "با حواسم کشف می‌کنم",
+                "می‌پرسم و پیدا می‌کنم"
+              ]
             },
             {
-              "title": "تمرین‌های دوره‌ای پایانی",
+              "title": "گوناگونی‌ها را پیدا می‌کنیم",
               "lessons": [
-                "مرور و تمرین‌های دوره‌ای بخش دوم"
-              ],
-              "status": "official_index_listed"
+                "محله‌ی ما",
+                "گیاهان و جانوران اطراف ما"
+              ]
+            },
+            {
+              "title": "محافظت می‌کنیم",
+              "lessons": [
+                "مواظب باش",
+                "سالم باش شاداب باش"
+              ]
+            },
+            {
+              "title": "به هم وابسته‌ایم",
+              "lessons": [
+                "خانواده و دوستان من",
+                "گیاهان و جانوران در زندگی ما",
+                "دنیای جانوران"
+              ]
+            },
+            {
+              "title": "استفاده می‌کنیم",
+              "lessons": [
+                "دوست خوب زمین باش",
+                "درست استفاده کنیم، دوباره استفاده کنیم",
+                "دنیای گرم و سرد ما",
+                "آزمایش کنیم و یاد بگیریم"
+              ]
+            },
+            {
+              "title": "جست‌وجو کنیم و بسازیم",
+              "lessons": [
+                "با هم کاوش کنیم",
+                "با هم بسازیم"
+              ]
+            },
+            {
+              "title": "تغییر می‌کنیم",
+              "lessons": [
+                "من بزرگ می‌شوم",
+                "تغییرها را پیدا کن",
+                "یک سال رنگارنگ"
+              ]
             }
-          ],
-          "note": "ساختار کتاب بر اساس فهرست نسخه ۱۴۰۵–۱۴۰۶ تنظیم شد. پاسخ صفحه‌ها فقط پس از بررسی خود صفحه ثبت می‌شود؛ محتوای کامل PDF در مخزن کپی نمی‌شود."
+          ]
+        },
+        {
+          "title": "آموزش قرآن بخش اول (اجرای آزمایشی)",
+          "subject": "آموزش قرآن",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "source_url": "https://www.daneshchi.ir/quran-az-1/",
+          "pdf_url": "https://dl.daneshchi.ir/file/chap-school/Quran-Az-1_Daneshchi.iR.pdf",
+          "status": "pdf_linked_4_chapters_outline_verified",
+          "sections": [
+            {
+              "title": "مهربانی‌های خدای من",
+              "lessons": 6
+            },
+            {
+              "title": "پیام‌های خدای مهربان من",
+              "lessons": 5
+            },
+            {
+              "title": "سوره‌هایی از کتاب خدای مهربان من",
+              "lessons": [
+                "سوره حمد",
+                "سوره توحید"
+              ]
+            },
+            {
+              "title": "گفت‌وگوی من با خدای مهربان",
+              "lessons": [
+                "به همین سادگی",
+                "آمادگی برای حرف زدن با خدا",
+                "تمرین وضو",
+                "نماز"
+              ]
+            }
+          ]
         }
       ],
-      "status": "draft_needs_official_alignment",
-      "note": "فارسی اول: ساختار رسمی بخش‌ها تأیید شده؛ عنوان‌ها و پاسخ‌های درس‌ها در حال تطبیق با PDF هستند. نگارش فارسی نیز پروژه‌ای جداگانه است.",
+      "status": "grade1_book_shelf_linked_content_completion_in_progress",
+      "note": "کتابخانه پایه اول ساخته شده است. پیوند PDF و فهرست کتاب‌های جهان پیرامون، قرآن، نگارش و سایر منابع اضافه شده؛ حل صفحه‌به‌صفحه و فعالیت‌ها باید پس از استخراج و بررسی هر صفحه انجام شود.",
       "authored_packages": [
         {
           "subject": "ریاضی",
@@ -172,7 +189,16 @@
           "official_match": false
         }
       ],
-      "authored_package_count": 1
+      "authored_package_count": 1,
+      "curriculum_domains": [
+        "آموزش قرآن",
+        "فارسی",
+        "ریاضی",
+        "تربیت بدنی",
+        "هنر و خلاقیت",
+        "جهان پیرامون"
+      ],
+      "domain_note": "شش حوزه برنامه درسی در راهنمای اولیا آمده است؛ پنج کتاب/بسته PDF فعلاً لینک شده‌اند. تربیت بدنی و هنر و خلاقیت به‌صورت بسته فعالیت تکمیلی آماده می‌شوند؛ PDF مستقل آن‌ها هنوز تأیید نشده است."
     },
     {
       "grade": 2,
