@@ -8,7 +8,6 @@ const sandbox = {
 };
 const files = [
   'curriculum-content.js',
-  'grade1-math-expansion.js',
   'grade1-world-study.js',
   'grade1-arts-pe.js',
   'grade1-farsi-expansion.js',
@@ -68,6 +67,8 @@ for (const [subject, officialCount, authoredCount] of expected) {
 }
 const index = fs.readFileSync(path.join(root, 'app/src/main/assets/index.html'), 'utf8');
 if (!index.includes('<script src="grade1-current-catalog.js"></script>')) errors.push('Current catalog script is not loaded by the app');
+if (!index.includes("1:['فارسی','نگارش فارسی','ریاضی','جهان پیرامون','قرآن و هدیه‌های آسمان','هنر و خلاقیت','تربیت بدنی']")) errors.push('Grade 1 subject selector does not match the current book set');
+if (index.includes('<script src="grade1-math-expansion.js"></script>')) errors.push('Legacy 175-page math draft must not be loaded as the current book');
 if (!index.includes('const curatedKeys=curatedPack?Object.keys(curatedPack):[];')) errors.push('Lesson selector does not read the curated curriculum pack');
 const bookshelf = fs.readFileSync(path.join(root, 'app/src/main/assets/grade1-bookshelf.js'), 'utf8');
 for (const id of ['read','write','math','world','quran','art','move']) if (!bookshelf.includes("id:'" + id + "'")) errors.push('Bookshelf missing current book: ' + id);
