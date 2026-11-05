@@ -119,7 +119,7 @@ input,select,textarea{border-radius:11px}
 @media(max-width:420px){.achievement-grid{grid-template-columns:1fr}.top{padding-left:2px;padding-right:2px}.brand h1{font-size:19px}.hero{border-radius:19px}.weekly-days{gap:4px}.weekly-day{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.page.active{animation:none}html{scroll-behavior:auto}}
 
-</style><script src="curriculum-content.js"></script>
+</style><script src="curriculum-content.js"></script><script src="grade1-farsi-expansion.js"></script>
 </head>
 <body>
 <div class="app">
@@ -221,7 +221,7 @@ function initGrades(){['gradeSelect','profileGrade'].forEach(id=>{gradeNames.for
 function updateSubjects(){let g=+$('gradeSelect').value;$('subjectSelect').innerHTML='';(subjects[g]||[]).forEach(s=>{let o=document.createElement('option');o.textContent=s;$('subjectSelect').append(o)})}
 const lessonPlans={
 'فارسی':{
-1:['نگاره ۱: به خانه ما خوش آمدی','نگاره‌های ۲ تا ۱۰: گفت‌وگو و واژه‌آموزی','آموزش نشانه‌ها ۱ و ۲: خواندن و نوشتن'],
+1:["نگاره ۱: به خانه ما خوش آمدی","نگاره ۲: بچه‌ها، آماده!","نگاره ۳: یک و دو و سه، راه مدرسه","نگاره ۴: به مدرسه رسیدیم","نگاره ۵: از کلاس ما چه خبر؟","نگاره ۶: بازی، بازی، تماشا","نگاره ۷: به‌به چه روستایی!","نگاره ۸: چه دنیای قشنگى!","نگاره ۹: در مسجد محله","نگاره ۱۰: نوروز در خانه ما","آموزش نشانه‌ها ۱ و ۲: خواندن و نوشتن"],
 2:['خواندن روان و درست‌نویسی','واژه‌های هم‌معنی و مخالف','جمله‌سازی و درک داستان'],
 3:['اجزای جمله و نشانه‌گذاری','درک متن و واژه‌آموزی','نوشتن بند کوتاه'],
 4:['گسترش واژگان و املا','شخصیت و پیام داستان','بندبندی و نگارش'],
