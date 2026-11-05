@@ -194,9 +194,9 @@
               ]
             }
           ],
-          "authored_lessons": 7,
+          "authored_lessons": 18,
           "authored_status": "draft_original_content_needs_official_page_review",
-          "note": "۷ بسته آموزشی تألیفی برای مهربانی‌ها، پیام‌ها، سوره حمد، سوره توحید، دعا، وضو و نماز به برنامه متصل شده‌اند؛ تمرین‌های رسمی هنوز با PDF صفحه‌به‌صفحه مقابله نشده‌اند."
+          "note": "۷ بسته اصلی و ۱۱ ریزدرس مستقل تألیفی (در مجموع ۱۸ واحد آموزشی) به برنامه متصل‌اند؛ محتوا هنوز با PDF رسمی صفحه‌به‌صفحه مقابله نشده و پاسخ فعالیت‌های رسمی محسوب نمی‌شود."
         }
       ],
       "status": "grade1_book_shelf_linked_content_completion_in_progress",
@@ -249,13 +249,13 @@
         {
           "subject": "قرآن و هدیه‌های آسمان",
           "topic": "آموزش مفهومی پایه اول",
-          "title": "۷ بسته آموزشی تألیفی قرآن",
+          "title": "۱۸ واحد آموزشی تألیفی قرآن پایه اول",
           "status": "draft_needs_official_page_review",
           "official_match": false,
-          "lesson_count": 7,
-          "examples": 14,
-          "exercises": 21,
-          "quiz_questions": 14
+          "lesson_count": 18,
+          "examples": 36,
+          "exercises": 54,
+          "quiz_questions": 36
         },
         {
           "subject": "نگارش",
