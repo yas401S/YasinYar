@@ -23,7 +23,7 @@ export default {
     let body;
     try {
       const raw = await request.text();
-      if (raw.length > 12000) return json({ error: "متن سؤال بیش از اندازه طولانی است." }, 413);
+      if (raw.length > 9000000) return json({ error: "حجم درخواست زیاد است؛ عکس را کوچک‌تر انتخاب کن." }, 413);
       body = JSON.parse(raw);
     } catch {
       return json({ error: "داده ارسالی معتبر نیست." }, 400);
@@ -93,10 +93,12 @@ export default {
     }
 
     const question = String(body.question || "").trim();
+    const imageData = typeof body.imageData === "string" ? body.imageData : "";
     const grade = Math.max(1, Math.min(9, Number(body.grade) || 6));
     const subject = String(body.subject || "سایر").slice(0, 40);
-    if (question.length < 3) return json({ error: "متن سؤال خیلی کوتاه است." }, 400);
+    if (!imageData && question.length < 3) return json({ error: "عکس یا متن سؤال را ارسال کن." }, 400);
     if (question.length > 8000) return json({ error: "متن سؤال بیش از حد طولانی است." }, 413);
+    if (imageData && (!/^data:image\/(jpeg|png|webp);base64,/.test(imageData) || imageData.length > 8500000)) return json({ error: "قالب یا حجم عکس معتبر نیست." }, 400);
 
     const instructions = [
       "تو معلم خصوصی مهربان و دقیق برای دانش‌آموزان فارسی‌زبان پایه‌های اول تا نهم هستی.",
@@ -120,8 +122,8 @@ export default {
         body: JSON.stringify({
           model: env.OPENAI_MODEL || "gpt-5.4-mini",
           instructions,
-          input: question,
-          max_output_tokens: 1400,
+          input: imageData ? [{ role: "user", content: [{ type: "input_text", text: "این تصویر برگه تمرین یا صفحه کتاب دانش‌آموز است. همه سؤال‌های قابل مشاهده را از بالا به پایین و به ترتیب شماره شناسایی کن. کسرها را با صورت و مخرج دقیق، تقسیم‌های ستونی، توان‌ها، رادیکال‌ها، علامت‌ها، جدول‌ها و شکل‌ها با دقت بخوان. هیچ سؤال را جا نینداز. اگر بخشی ناخواناست، همان شماره را مشخص کن و حدس نزن. سپس هر سؤال را جداگانه با عنوان سؤال ۱، سؤال ۲ و ... مرحله‌به‌مرحله و متناسب با پایه حل کن؛ محاسبات را کنترل کن و جواب نهایی را واضح بنویس. پایه " + grade + "، درس " + subject + ". " + (question ? "متن کمکی دانش‌آموز: " + question : "") }, { type: "input_image", image_url: imageData }] }] : question,
+          max_output_tokens: 3000,
           store: false
         })
       });
