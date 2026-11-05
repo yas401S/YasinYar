@@ -16,7 +16,8 @@ const files = [
   'grade1-negarsh-expansion.js',
   'grade1-current-catalog.js',
   'grade2-current-catalog.js',
-  'grade2-other-books.js'
+  'grade2-other-books.js',
+  'grade3-current-catalog.js'
 ];
 for (const file of files) {
   const full = path.join(root, 'app/src/main/assets', file);
@@ -100,6 +101,28 @@ for (const [subject, count] of expectedGrade2) {
 if (!index.includes('<script src="grade2-current-catalog.js"></script>')) errors.push('Grade 2 math catalog script is not loaded');
 if (!index.includes('<script src="grade2-other-books.js"></script>')) errors.push('Grade 2 other books script is not loaded');
 if (!index.includes("2:['فارسی می‌نویسم','ریاضی','جهان پیرامون','من و دوستم خدا']")) errors.push('Grade 2 subject selector does not match the current book set');
+
+
+const grade3Catalog = sandbox.window.YASINYAR_GRADE3_CURRENT_CATALOG;
+if (!grade3Catalog || grade3Catalog.year !== '۱۴۰۵–۱۴۰۶') errors.push('Current grade 3 catalog metadata is missing');
+const expectedGrade3 = [['ریاضی',40],['علوم',14],['فارسی',17],['نگارش فارسی',17],['آموزش قرآن',3],['هدیه‌های آسمان',20],['مطالعات اجتماعی',23]];
+let grade3LessonCount = 0;
+let grade3ExerciseCount = 0;
+for (const [subject, count] of expectedGrade3) {
+  const entries = Object.entries((packs['3'] && packs['3'][subject]) || {});
+  if (entries.length !== count) errors.push('Grade 3 ' + subject + ': expected ' + count + ' packs, found ' + entries.length);
+  for (const [topic, lesson] of entries) {
+    grade3LessonCount++;
+    for (const key of ['title','goals','prerequisites','explanation','examples','mistakes','keyPoints','exercises','quiz','sourceNote']) if (!(key in lesson)) errors.push('Grade 3 ' + subject + '/' + topic + ': missing ' + key);
+    if (!Array.isArray(lesson.examples) || lesson.examples.length < 2) errors.push('Grade 3 ' + subject + '/' + topic + ': needs 2 worked examples');
+    if (!Array.isArray(lesson.exercises) || lesson.exercises.length < 5) errors.push('Grade 3 ' + subject + '/' + topic + ': needs 5 exercises');
+    if (!Array.isArray(lesson.quiz) || lesson.quiz.length < 2) errors.push('Grade 3 ' + subject + '/' + topic + ': needs 2 quiz questions');
+    for (const ex of lesson.exercises || []) { grade3ExerciseCount++; for (const key of ['level','q','answer','explain']) if (!ex[key]) errors.push('Grade 3 ' + subject + '/' + topic + ': exercise missing ' + key); }
+    for (const ex of lesson.examples || []) for (const key of ['title','problem','steps','answer']) if (!ex[key]) errors.push('Grade 3 ' + subject + '/' + topic + ': example missing ' + key);
+  }
+}
+if (!index.includes('<script src="grade3-current-catalog.js"></script>')) errors.push('Grade 3 curriculum script is not loaded');
+if (!index.includes("3:['فارسی','نگارش فارسی','ریاضی','علوم','آموزش قرآن','هدیه‌های آسمان','مطالعات اجتماعی']")) errors.push('Grade 3 subject selector does not match the current book set');
 
 const bookshelf = fs.readFileSync(path.join(root, 'app/src/main/assets/grade1-bookshelf.js'), 'utf8');
 for (const id of ['read','write','math','world','quran','art','move']) if (!bookshelf.includes("id:'" + id + "'")) errors.push('Bookshelf missing current book: ' + id);
