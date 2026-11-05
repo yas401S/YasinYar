@@ -191,10 +191,9 @@ function renderPageLesson(page){
  }else host.textContent=lesson.explanation.map(x=>x.head+'؛ '+x.body).join('\n');
 }
 function mount(){
- if(window.__YASINYAR_MATH_PAGES_MOUNTED)return;
+ if(document.getElementById('grade1MathPagesPanel'))return;
  const root=document.getElementById('lessonContent');
  if(!root)return;
- window.__YASINYAR_MATH_PAGES_MOUNTED=true;
  const box=document.createElement('section');box.className='panel';box.id='grade1MathPagesPanel';
  box.innerHTML='<div class="section-head"><h3>🎒 کلاس ریاضی اول؛ درس به درس</h3><small>۱۷۵ صفحه آموزشی</small></div><p class="muted">صفحه کتاب را انتخاب کن تا آموزش کودکانه، مثال و تمرین همان صفحه را ببینی.</p><label for="grade1MathPageSelect">انتخاب صفحه کتاب</label><select id="grade1MathPageSelect" style="width:100%;margin:8px 0"></select><div id="grade1MathPageContent"></div>';
  const sel=box.querySelector('#grade1MathPageSelect');
