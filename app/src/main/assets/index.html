@@ -56,6 +56,31 @@
 .voice-dock button.primary{background:linear-gradient(135deg,#ffe0a0,#d8a64e);color:#17233a;border:0;font-weight:bold}
 .voice-dock button:disabled{opacity:.45}
 body{padding-bottom:82px}
+
+/* Professional polish: clarity, accessibility and touch feedback */
+:root{--gold:#f4cb78;--border:#344b6b;--surface:#12233d}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+button,.btn,.feature{touch-action:manipulation;transition:transform .16s ease,filter .16s ease,border-color .16s ease,background .16s ease}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.page.active{animation:pageEnter .22s ease both}
+@keyframes pageEnter{from{opacity:.55;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.hero{background:radial-gradient(circle at 8% 5%,#ffffff12,transparent 35%),linear-gradient(120deg,#24466f,#152943 72%)}
+.card,.panel,.stat{box-shadow:0 5px 18px #00000012}
+.section-head h3{letter-spacing:-.2px}
+.field:focus,select:focus,input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px #f2c66d18}
+.btn.primary{box-shadow:0 5px 14px #d9a84a22}
+.feature:hover,.menu-grid button:hover{border-color:#718db4;filter:brightness(1.08)}
+.bottom-nav button{min-height:43px}
+.voice-dock{bottom:calc(8px + env(safe-area-inset-bottom));padding:9px 10px;gap:7px;border-radius:16px;background:linear-gradient(130deg,#1b3456f5,#0b192ff5);backdrop-filter:blur(16px)}
+.voice-dock .voice-status{font-size:11px;min-width:100px}
+.voice-dock button{min-height:36px;padding:6px 9px;font-size:11px}
+.voice-dock select{flex:0 0 auto;width:auto;min-width:76px;padding:6px 7px;font-size:11px}
+.daily-focus{background:linear-gradient(125deg,#1a3455,#102039);border:1px solid #486487;border-radius:16px;padding:13px;margin-top:12px}
+.daily-focus .bar{height:9px;background:#0b1729}
+.daily-focus .bar span{background:linear-gradient(90deg,#56d6a5,#f2cf79)}
+.daily-focus .focus-meta{display:flex;justify-content:space-between;gap:8px;color:#c3d1e5;font-size:11px;margin-bottom:7px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@media(max-width:420px){.voice-dock{left:7px;right:7px;padding:7px}.voice-dock .voice-status{flex-basis:100%;text-align:center}.voice-dock button{flex:1}}
 </style></head>
 <body>
 <div class="app">
@@ -81,7 +106,7 @@ body{padding-bottom:82px}
 <button class="card feature" onclick="openPage('notes')"><span class="emoji">📒</span><span><b>دفتر یادداشت</b><small>نکته‌های شخصی</small></span></button>
 <button class="card feature" onclick="openPage('progress')"><span class="emoji">🏆</span><span><b>کارنامه من</b><small>آمار و نقاط قابل تقویت</small></span></button>
 </div>
-<div class="section-head"><h3>ادامه مسیر درسی</h3><small>نمونه‌های فعال</small></div><div class="panel" id="homeCourses"></div><div class="section-head"><h3>📊 وضعیت هوشمند یادگیری</h3><small>بر اساس پاسخ‌های ثبت‌شده</small></div><div class="panel" id="homeSmartSummary"></div>
+<div class="section-head"><h3>ادامه مسیر درسی</h3><small>نمونه‌های فعال</small></div><div class="panel" id="homeCourses"></div><div class="section-head"><h3>📊 وضعیت هوشمند یادگیری</h3><small>بر اساس پاسخ‌های ثبت‌شده</small></div><div class="panel" id="homeSmartSummary"></div><div class="section-head"><h3>🎯 هدف مطالعه امروز</h3><small>قدم کوچک، پیشرفت بزرگ</small></div><div class="daily-focus" id="homeDailyFocus"></div>
 <div class="notice" style="margin-top:12px">🔒 اطلاعات یادداشت‌ها، آمار و برنامه روی همین دستگاه ذخیره می‌شود. برای همگام‌سازی بین دستگاه‌ها هنوز حساب کاربری و سرور لازم است.</div>
 </section>
 <section id="page-library" class="page"><div class="section-head"><h3>📚 کتابخانه درس‌ها</h3><small>پایه اول تا نهم</small></div><div class="panel"><p class="muted">پایه و درس را انتخاب کن تا محتوای موجود نمایش داده شود.</p><div class="row"><select id="gradeSelect"></select><select id="subjectSelect"></select><button class="btn primary" onclick="loadLesson()">نمایش</button></div><div id="lessonContent" class="card" style="margin-top:12px">برای دیدن درس، پایه و موضوع را انتخاب کن.</div></div><div class="panel"><h3>فهرست محتوای آماده</h3><div id="lessonList"></div></div></section>
@@ -97,7 +122,7 @@ body{padding-bottom:82px}
   <span class="voice-status" id="voiceStatus">🎧 معلم فارسی آماده‌سازی می‌شود…</span>
   <button class="primary" id="voiceReadBtn" onclick="voiceReadPage()">🔊 خواندن صفحه</button>
   <button id="voicePauseBtn" onclick="voicePauseResume()" disabled>⏸ مکث</button>
-  <button id="voiceStopBtn" onclick="voiceStop()" disabled>⏹ توقف</button>
+  <button id="voiceStopBtn" onclick="voiceStop()" disabled>⏹ توقف</button><select id="voiceRate" aria-label="سرعت خواندن" onchange="voiceSetRate(this.value)"><option value="0.8">آهسته</option><option value="0.92" selected>عادی</option><option value="1.08">تندتر</option></select>
 </div>
 د.</p></div></section>
 <div class="footer">یاسین‌یار · کتاب‌های رسمی از پایگاه ناشر · درس‌نامه و تمرین تألیفی</div>
@@ -274,7 +299,8 @@ function examAnswer(i){let q=examArr[examAt],ok=i===q.a;if(ok)examRight++;record
 let flashAt=0,flashBack=false;
 function drawFlash(){$('flashCard').innerHTML='<div><span class="pill">کارت '+fa(flashAt+1)+' از '+fa(flashData.length)+'</span><p>'+ (flashBack?'<strong>'+flashData[flashAt][1]+'</strong>':'<strong>'+flashData[flashAt][0]+'</strong>')+'</p><small class="muted">'+(flashBack?'برای دیدن پرسش کارت بعدی را بزن':'برای دیدن پاسخ روی کارت بزن')+'</small></div>'}
 function flipFlash(){flashBack=!flashBack;drawFlash()}function nextFlash(){flashAt=(flashAt+1)%flashData.length;flashBack=false;drawFlash()}function prevFlash(){flashAt=(flashAt+flashData.length-1)%flashData.length;flashBack=false;drawFlash()}
-function renderHome(){let s=get('stats',{total:0,right:0}),p=get('profile',{name:'',grade:6}),g=Number(p.grade)||6;$('greeting').textContent='سلام '+(p.name||'قهرمان یادگیری')+'!';$('homeDone').textContent=fa(s.total);$('homeCorrect').textContent=fa(s.right);$('homeStreak').textContent=fa(get('streak',0));$('homeCourses').innerHTML='<div class="course"><span class="course-icon">➗</span><div class="course-info"><b>ریاضی '+gradeNames[g-1]+' · کسرها</b><div class="muted">تمرین و پاسخ مرحله‌ای</div><div class="bar"><span style="width:'+Math.min(100,(s.practice||0)*10)+'%"></span></div></div><button class="btn" onclick="openPracticeTopic('+g+',\'fractions\')">ادامه</button></div><div class="course"><span class="course-icon">🔢</span><div class="course-info"><b>عددهای اعشاری</b><div class="muted">تمرین‌های پایه</div><div class="bar"><span style="width:'+Math.min(100,(s.practice||0)*8)+'%"></span></div></div><button class="btn" onclick="openPracticeTopic('+g+',\'decimal\')">ادامه</button></div>';renderSmartDashboard()}
+function renderHome(){let s=get('stats',{total:0,right:0}),p=get('profile',{name:'',grade:6}),g=Number(p.grade)||6;$('greeting').textContent='سلام '+(p.name||'قهرمان یادگیری')+'!';$('homeDone').textContent=fa(s.total);$('homeCorrect').textContent=fa(s.right);$('homeStreak').textContent=fa(get('streak',0));$('homeCourses').innerHTML='<div class="course"><span class="course-icon">➗</span><div class="course-info"><b>ریاضی '+gradeNames[g-1]+' · کسرها</b><div class="muted">تمرین و پاسخ مرحله‌ای</div><div class="bar"><span style="width:'+Math.min(100,(s.practice||0)*10)+'%"></span></div></div><button class="btn" onclick="openPracticeTopic('+g+',\'fractions\')">ادامه</button></div><div class="course"><span class="course-icon">🔢</span><div class="course-info"><b>عددهای اعشاری</b><div class="muted">تمرین‌های پایه</div><div class="bar"><span style="width:'+Math.min(100,(s.practice||0)*8)+'%"></span></div></div><button class="btn" onclick="openPracticeTopic('+g+',\'decimal\')">ادامه</button></div>';renderSmartDashboard();renderDailyFocus()}
+function renderDailyFocus(){const d=get('daily_'+todayKey(),{goal:30,minutes:0,tasks:[]}),goal=Math.max(1,Number(d.goal)||30),minutes=Math.max(0,Number(d.minutes)||0),pct=Math.min(100,Math.round(minutes/goal*100)),tasks=Array.isArray(d.tasks)?d.tasks:[],done=tasks.filter(t=>t.done).length;const el=$('homeDailyFocus');if(!el)return;el.innerHTML='<div class="focus-meta"><b>زمان مطالعه امروز</b><span>'+fa(minutes)+' از '+fa(goal)+' دقیقه</span></div><div class="bar"><span style="width:'+pct+'%"></span></div><div class="row" style="justify-content:space-between;margin-top:9px"><span class="muted">'+(pct>=100?'آفرین! هدف امروز کامل شد 🎉':'برای رسیدن به هدفت ادامه بده.')+(tasks.length?' · '+fa(done)+' از '+fa(tasks.length)+' کار انجام‌شده':'')+'</span><button class="btn primary" onclick="openPage(\'planner\')">مدیریت برنامه ←</button></div>'}
 function renderSubjectProgress(targetId){const data=get('subjectStats',{}),rows=Object.entries(data).filter(([,v])=>v&&v.total>0).sort((a,b)=>(a[1].right/a[1].total)-(b[1].right/b[1].total));$(targetId).innerHTML=rows.length?rows.map(([name,v])=>{const pct=Math.round(v.right/v.total*100);return '<div class="listitem"><div class="row" style="justify-content:space-between"><b>'+escapeHtml(name)+'</b><span class="muted">'+fa(v.right)+' از '+fa(v.total)+' · '+fa(pct)+'٪</span></div><div class="bar"><span style="width:'+pct+'%"></span></div></div>'}).join(''):'<div class="empty">پس از انجام چند تمرین، عملکرد هر درس اینجا نمایش داده می‌شود.</div>'}
 function renderWrongAnswers(){const list=get('wrongAnswers',[]);$('wrongAnswersList').innerHTML=list.length?list.map((q,i)=>'<div class="listitem"><div class="row" style="justify-content:space-between"><b>'+escapeHtml(q.subject)+' · پایه '+gradeNames[(q.grade||6)-1]+'</b><span class="pill">'+(q.resolved?'یادگرفته‌شده':'نیازمند مرور')+'</span></div><p>'+escapeHtml(q.q)+'</p><p class="muted">پاسخ انتخابی: '+escapeHtml(q.o[q.selectedIndex]??'ثبت نشده')+' · پاسخ درست: <b class="goodtxt">'+escapeHtml(q.o[q.a]??'')+'</b> · تعداد خطا: '+fa(q.attempts||1)+'</p><div class="row"><button class="btn primary" onclick="reviewWrong('+i+')">تمرین دوباره</button>'+(q.resolved?'':'<button class="btn" onclick="markWrongResolved('+i+')">علامت‌گذاری به‌عنوان یادگرفته‌شده</button>')+'</div></div>').join(''):'<div class="empty">هنوز پاسخ اشتباهی ثبت نشده است. بعد از اولین اشتباه، این دفتر به‌صورت خودکار پر می‌شود.</div>'}
 function markWrongResolved(i){let a=get('wrongAnswers',[]);if(!a[i])return;a[i].resolved=true;a[i].lastCorrectAt=new Date().toISOString();put('wrongAnswers',a);renderProgress()}
@@ -316,6 +342,7 @@ window.onYasinVoiceEvent=function(event,message){
  else if(event==='done'||event==='stopped'){yasinVoicePaused=false;voiceSetStatus(message);voiceSetButtons('idle')}
  else if(event==='unavailable'||event==='error'){voiceSetStatus(message);voiceSetButtons('idle')}
 };
+function voiceSetRate(value){const rate=Math.max(.65,Math.min(1.25,Number(value)||.92));if(window.YasinVoice&&typeof YasinVoice.setRate==='function')YasinVoice.setRate(rate);else if('speechSynthesis' in window&&window.speechSynthesis.speaking){voiceSetStatus('سرعت جدید از خواندن بعدی اعمال می‌شود.')}}
 function voiceSpeakText(text){
  const clean=String(text||'').replace(/\\s+/g,' ').trim();
  if(!clean){voiceSetStatus('متنی برای خواندن پیدا نشد.');return}
