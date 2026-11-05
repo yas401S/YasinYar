@@ -301,6 +301,256 @@
       "grade": 2,
       "books": [
         {
+          "title": "ریاضی دوم دبستان",
+          "subject": "ریاضی",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/riazi-2/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 8,
+          "authored_lessons": 8,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "فهرست درس‌های کتاب",
+              "lessons": 8,
+              "lesson_titles": [
+                "عدد و رقم",
+                "جمع و تفریق اعداد دو رقمی",
+                "اشکال هندسی",
+                "عددهای سه رقمی",
+                "اندازه‌گیری",
+                "جمع و تفریق اعداد سه رقمی",
+                "کسر و احتمال",
+                "آمار و نمودار"
+              ]
+            }
+          ],
+          "note": "عنوان‌ها از فهرست دانشچی برای سال ۱۴۰۵–۱۴۰۶ ثبت شده‌اند؛ درس‌نامه و تمرین برنامه تألیفی است و پاسخ صفحه‌ای هنوز با PDF رسمی مقابله نشده است."
+        },
+        {
+          "title": "علوم تجربی دوم دبستان",
+          "subject": "علوم",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/oloom-2/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 14,
+          "authored_lessons": 14,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "فهرست درس‌های کتاب",
+              "lessons": 14,
+              "lesson_titles": [
+                "زنگ علوم (گردش در باغ)",
+                "هوای سالم، آب سالم",
+                "زندگی ما و گردش زمین ۱",
+                "زندگی ما و گردش زمین ۲",
+                "پیام رمز را پیدا کن ۱",
+                "پیام رمز را پیدا کن ۲",
+                "اگر تمام شود…",
+                "بسازیم و لذت ببریم",
+                "سرگذشت دانه",
+                "درون آشیانه‌ها",
+                "من رشد می‌کنم",
+                "برای جشن آماده شویم",
+                "بعد از جشن",
+                "از گذشته تا آینده (نان)"
+              ]
+            }
+          ],
+          "note": "عنوان‌ها از فهرست دانشچی برای سال ۱۴۰۵–۱۴۰۶ ثبت شده‌اند؛ درس‌نامه و تمرین برنامه تألیفی است و پاسخ صفحه‌ای هنوز با PDF رسمی مقابله نشده است."
+        },
+        {
+          "title": "فارسی دوم دبستان",
+          "subject": "فارسی",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/farsi-2/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 17,
+          "authored_lessons": 17,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "فهرست درس‌های کتاب",
+              "lessons": 17,
+              "lesson_titles": [
+                "کتابخانه‌ی کلاس ما",
+                "مسجد محله‌ی ما",
+                "خرس کوچولو",
+                "مدرسه‌ی خرگوش‌ها",
+                "چوپان درستکار",
+                "کوشا و نوشا",
+                "دوستان ما",
+                "از همه مهربان‌تر",
+                "زیارت",
+                "هنرمند",
+                "درس آزاد",
+                "فردوسی",
+                "ایران زیبا",
+                "پرچم",
+                "نوروز",
+                "پرواز قطره",
+                "مثل دانشمندان"
+              ]
+            }
+          ],
+          "note": "عنوان‌ها از فهرست دانشچی برای سال ۱۴۰۵–۱۴۰۶ ثبت شده‌اند؛ درس‌نامه و تمرین برنامه تألیفی است و پاسخ صفحه‌ای هنوز با PDF رسمی مقابله نشده است."
+        },
+        {
+          "title": "نگارش فارسی دوم دبستان",
+          "subject": "نگارش فارسی",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/negaresh-2/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 17,
+          "authored_lessons": 17,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "فهرست درس‌های کتاب",
+              "lessons": 17,
+              "lesson_titles": [
+                "کتابخانه‌ی کلاس ما",
+                "مسجد محله‌ی ما",
+                "خرس کوچولو",
+                "مدرسه‌ی خرگوش‌ها",
+                "چوپان درستکار",
+                "کوشا و نوشا",
+                "دوستان ما",
+                "از همه مهربان‌تر",
+                "زیارت",
+                "هنرمند",
+                "درس آزاد",
+                "فردوسی",
+                "ایران زیبا",
+                "پرچم",
+                "نوروز",
+                "پرواز قطره",
+                "مثل دانشمندان"
+              ]
+            }
+          ],
+          "note": "عنوان‌ها از فهرست دانشچی برای سال ۱۴۰۵–۱۴۰۶ ثبت شده‌اند؛ درس‌نامه و تمرین برنامه تألیفی است و پاسخ صفحه‌ای هنوز با PDF رسمی مقابله نشده است."
+        },
+        {
+          "title": "آموزش قرآن دوم دبستان",
+          "subject": "آموزش قرآن",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/quran-2/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 14,
+          "authored_lessons": 14,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "فهرست درس‌های کتاب",
+              "lessons": 14,
+              "lesson_titles": [
+                "الف کوچک و سکون",
+                "تشدید و اتصالات",
+                "سوره حمد و حرف ک",
+                "سوره ناس و نشانه ه",
+                "سوره فلق و تنوین‌ها",
+                "سوره توحید",
+                "سوره نصر و فتح مکه",
+                "سوره کوثر",
+                "سوره عصر",
+                "سوره فیل و ماعون",
+                "سوره کافرون",
+                "سوره شرح",
+                "سوره تین",
+                "سوره قدر"
+              ]
+            }
+          ],
+          "note": "عنوان‌ها از فهرست دانشچی برای سال ۱۴۰۵–۱۴۰۶ ثبت شده‌اند؛ درس‌نامه و تمرین برنامه تألیفی است و پاسخ صفحه‌ای هنوز با PDF رسمی مقابله نشده است."
+        },
+        {
+          "title": "هدیه‌های آسمان دوم دبستان",
+          "subject": "هدیه‌های آسمان",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/hediyeh-aseman-2/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 20,
+          "authored_lessons": 20,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "فهرست درس‌های کتاب",
+              "lessons": 20,
+              "lesson_titles": [
+                "هدیه‌های خدا",
+                "پرندگان چه می‌گویند؟",
+                "خاطره‌ی ماه",
+                "مهربان‌تر از مادر",
+                "می‌خواهم وضو بگیرم",
+                "پیامبران خدا",
+                "مهمان کوچک",
+                "جشن میلاد",
+                "اهل بیت پیامبر",
+                "خانواده‌ی بخشنده",
+                "نماز بخوانیم",
+                "پدر مهربان",
+                "بهترین دوست",
+                "دعای باران",
+                "بچه‌ها سلام!",
+                "کیسه‌ی سنجاب کوچولو",
+                "وقت نماز",
+                "خاطره‌ی نانوشته",
+                "جشن بزرگ",
+                "در کنار سفره"
+              ]
+            }
+          ],
+          "note": "عنوان‌ها از فهرست دانشچی برای سال ۱۴۰۵–۱۴۰۶ ثبت شده‌اند؛ درس‌نامه و تمرین برنامه تألیفی است و پاسخ صفحه‌ای هنوز با PDF رسمی مقابله نشده است."
+        },
+        {
+          "title": "ریاضی دوست‌داشتنی (اجرای آزمایشی)",
+          "subject": "ریاضی دوست‌داشتنی",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/lovely-math-2/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 13,
+          "authored_lessons": 13,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "۱۳ درس",
+              "lessons": 13,
+              "lesson_titles": [
+                "رقم و جدول ارزش مکانی",
+                "جمع تا ۲۰ و تفریق‌های مرتبط",
+                "مکان‌یابی",
+                "مقایسه و مرتب کردن عددهای دو رقمی",
+                "حل مسئله",
+                "بیان زمان با دقیقه",
+                "جمع و تفریق عددهای دو رقمی با عددهای یک رقمی",
+                "شمارش چند تا چند تا",
+                "اندازه‌گیری با واحد سانتی‌متر",
+                "جمع و تفریق عددهای دو رقمی بدون نیاز به انتقال یا قرض گرفتن",
+                "اجزا و ویژگی‌های شکل‌های هندسی",
+                "عددهای سه‌رقمی",
+                "جمع و تفریق عددهای دو رقمی با نیاز به انتقال یا قرض گرفتن"
+              ]
+            }
+          ],
+          "note": "فهرست ۱۳ درس از منبع فهرست عمومی سال ۱۴۰۵–۱۴۰۶؛ درس‌نامه‌ها، مثال‌ها و تمرین‌های برنامه تألیفی هستند."
+        },
+        {
           "title": "جهان پیرامون (اجرای آزمایشی)",
           "subject": "جهان پیرامون",
           "curriculum_year": "۱۴۰۵–۱۴۰۶",
@@ -368,40 +618,6 @@
             }
           ],
           "note": "عنوان فصل‌ها و درس‌ها از فهرست چاپ ۱۴۰۵–۱۴۰۶ رونویسی شده‌اند؛ بسته‌های آموزشی تألیفی‌اند و پاسخ فعالیت‌های صفحه‌ای هنوز با PDF رسمی مقابله نشده است."
-        },
-        {
-          "title": "ریاضی دوست‌داشتنی (اجرای آزمایشی)",
-          "subject": "ریاضی",
-          "curriculum_year": "۱۴۰۵–۱۴۰۶",
-          "official_source": "https://chap.oerp.ir/",
-          "catalog_source": "https://www.daneshchi.ir/lovely-math-2/",
-          "status": "catalog_index_transcribed_pdf_page_review_pending",
-          "official_lesson_count": 13,
-          "authored_lessons": 13,
-          "authored_status": "draft_original_content_needs_official_page_review",
-          "official_pdf_page_match": false,
-          "sections": [
-            {
-              "title": "۱۳ درس",
-              "lessons": 13,
-              "lesson_titles": [
-                "رقم و جدول ارزش مکانی",
-                "جمع تا ۲۰ و تفریق‌های مرتبط",
-                "مکان‌یابی",
-                "مقایسه و مرتب کردن عددهای دو رقمی",
-                "حل مسئله",
-                "بیان زمان با دقیقه",
-                "جمع و تفریق عددهای دو رقمی با عددهای یک رقمی",
-                "شمارش چند تا چند تا",
-                "اندازه‌گیری با واحد سانتی‌متر",
-                "جمع و تفریق عددهای دو رقمی بدون نیاز به انتقال یا قرض گرفتن",
-                "اجزا و ویژگی‌های شکل‌های هندسی",
-                "عددهای سه‌رقمی",
-                "جمع و تفریق عددهای دو رقمی با نیاز به انتقال یا قرض گرفتن"
-              ]
-            }
-          ],
-          "note": "فهرست ۱۳ درس از منبع فهرست عمومی سال ۱۴۰۵–۱۴۰۶؛ درس‌نامه‌ها، مثال‌ها و تمرین‌های برنامه تألیفی هستند."
         },
         {
           "title": "فارسی می‌نویسم (اجرای آزمایشی)",
@@ -481,8 +697,8 @@
           "note": "عنوان پنج بخش و ده داستان از فهرست عمومی سال ۱۴۰۵–۱۴۰۶ ثبت شده‌اند؛ بسته‌های گفت‌وگو و تمرین تألیفی هستند و پاسخ رسمی صفحه‌ای محسوب نمی‌شوند."
         }
       ],
-      "status": "current_1405_1406_catalog_mapped_content_draft_pdf_review_pending",
-      "note": "چهار کتاب/بسته جاری پایه دوم و تعداد درس‌های آن‌ها از فهرست‌های عمومی چاپ ۱۴۰۵–۱۴۰۶ ثبت شده است. ۵۲ بسته آموزشی تألیفی آماده شده‌اند؛ PDF رسمی و پاسخ فعالیت‌های صفحه‌ای هنوز باید تطبیق داده شوند.",
+      "status": "ten_books_catalog_mapped_authored_content_draft_pdf_review_pending",
+      "note": "ده عنوان پایه دوم شامل شش کتاب رسمی و چهار کتاب اجرای آزمایشی/تکمیلی ثبت شده‌اند. بسته‌های آموزشی تألیفی‌اند و پاسخ فعالیت‌های صفحه‌ای هنوز باید با PDF رسمی مقابله شوند.",
       "authored_packages": [
         {
           "subject": "ریاضی",
