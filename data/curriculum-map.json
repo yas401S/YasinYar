@@ -3,8 +3,8 @@
   "curriculum_year": "۱۴۰۵–۱۴۰۶",
   "language": "fa",
   "official_source": "https://chap.oerp.ir/",
-  "source_status": "new_1405_1406_grade1_catalog_refresh_required",
-  "notice": "نسخه‌های جدید کتاب‌های پایه اول و دوم در پایگاه رسمی بارگذاری شده‌اند؛ عنوان‌ها و PDFهای قبلی تا تطبیق با فهرست تازه، قطعی تلقی نشوند.",
+  "source_status": "current_1405_1406_grade1_catalog_transcribed_pdf_page_review_pending",
+  "notice": "فهرست پایه اول با کتاب‌های چاپ ۱۴۰۵–۱۴۰۶ به‌روزرسانی شده است. عنوان‌ها و تعداد درس‌ها از صفحات فهرست کتاب‌ها استخراج شده‌اند؛ PDF رسمی برای تطبیق صفحه‌به‌صفحه هنوز بررسی نشده است.",
   "completion_rule": "یک فصل فقط وقتی complete است که درس‌نامه، مثال حل‌شده، تمرین سطح‌بندی‌شده، آزمون، پاسخ کوتاه حفظی، پاسخ تشریحی و بازبینی علمی داشته باشد.",
   "status_values": [
     "missing",
@@ -18,160 +18,132 @@
       "grade": 1,
       "books": [
         {
-          "title": "فارسی اول دبستان",
+          "title": "فارسی می‌خوانم",
           "subject": "فارسی",
           "curriculum_year": "۱۴۰۵–۱۴۰۶",
-          "source_url": "https://www.daneshchi.ir/farsi-1/",
-          "pdf_url": "https://dl.daneshchi.ir/file/chap-school/Farsi-1_Daneshchi.iR.pdf",
-          "status": "pdf_linked_page_review_pending",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/readfarsi-1/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
           "sections": [
             {
-              "title": "نگاره‌ها",
-              "lessons": 10,
-              "status": "official_index_verified"
+              "title": "پیش‌درآمد و باهم‌خوانی",
+              "status": "titles_transcribed"
             },
             {
-              "title": "آموزش نشانه‌ها ۱",
-              "lessons": 15,
-              "status": "official_count_verified"
+              "title": "نشانه‌های ۱",
+              "status": "titles_transcribed"
             },
             {
-              "title": "آموزش نشانه‌ها ۲",
-              "lessons": 7,
-              "status": "official_count_verified"
+              "title": "نشانه‌های ۲",
+              "status": "titles_transcribed"
             }
           ],
-          "authored_lessons": 32,
+          "official_lesson_count": 40,
+          "authored_lessons": 55,
           "authored_status": "draft_original_content_needs_official_page_review",
-          "note": "بسته‌های تألیفی نگاره‌ها و آموزش نشانه‌ها به برنامه متصل‌اند؛ تمرین‌های تکمیلی عمومی‌اند و تا تطبیق با چاپ رسمی، پاسخ فعالیت‌های عین کتاب محسوب نمی‌شوند.",
-          "official_catalog_check": "required_against_current_1405_1406_catalog"
+          "official_pdf_page_match": false,
+          "note": "فهرست چاپ ۱۴۰۵–۱۴۰۶ شامل ۴۰ درس شماره‌دار است؛ واحدهای باهم‌خوانی نیز به‌عنوان موضوع مکمل در برنامه آمده‌اند. بسته‌های آموزشی تألیفی‌اند و پاسخ رسمی فعالیت‌ها هنوز با PDF مقابله نشده است.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending"
         },
         {
-          "title": "نگارش فارسی اول دبستان",
-          "subject": "نگارش",
+          "title": "فارسی می‌نویسم",
+          "subject": "نگارش فارسی",
           "curriculum_year": "۱۴۰۵–۱۴۰۶",
-          "source_url": "https://www.daneshchi.ir/negaresh-1/",
-          "pdf_url": "https://dl.daneshchi.ir/file/chap-school/Negaresh-1_Daneshchi.iR.pdf",
-          "status": "pdf_linked_144_pages_index_verified_page_solutions_pending",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/writefarsi-1/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
           "sections": [
             {
-              "title": "نگاره‌ها",
-              "lessons": 10,
-              "status": "official_index_verified"
+              "title": "نقشه‌ی گنج"
             },
             {
-              "title": "آموزش نشانه‌ها ۱",
-              "lessons": 15,
-              "status": "official_index_verified"
+              "title": "نشانه‌های ۱"
             },
             {
-              "title": "آموزش نشانه‌ها ۲",
-              "lessons": 7,
-              "status": "official_index_verified"
+              "title": "ادامه‌ی نشانه‌های ۱"
             },
             {
-              "title": "تمرین‌های دوره‌ای",
-              "lessons": 2,
-              "status": "official_index_verified"
+              "title": "نشانه‌های ۲"
             }
           ],
-          "authored_lessons": 10,
+          "official_lesson_count": 37,
+          "authored_lessons": 37,
           "authored_status": "draft_original_content_needs_official_page_review",
-          "note": "۱۰ بسته مهارت‌آموزی تألیفی شامل آمادگی دست، خط‌ورزی، نشانه‌نویسی، هجانویسی، واژه‌نویسی، رونویسی، املا، کامل‌کردن جمله، جمله‌سازی و بازبینی به برنامه متصل شده‌اند؛ تمرین‌های رسمی باید با صفحات همان چاپ تطبیق شوند.",
-          "official_catalog_check": "required_against_current_1405_1406_catalog"
+          "official_pdf_page_match": false,
+          "note": "فهرست چاپ جاری ۳۷ درس دارد؛ در فهرست عمومی فقط چهار عنوان آغازین و بخش‌های نشانه‌ای مشخص‌اند. بسته‌های تمرینی تکمیلی با عنوان‌گذاری شماره‌ای ساخته شده‌اند، نه عنوان رسمی حدسی.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending"
         },
         {
-          "title": "ریاضی اول دبستان",
+          "title": "ریاضی دوست‌داشتنی (اجرای آزمایشی)",
           "subject": "ریاضی",
           "curriculum_year": "۱۴۰۵–۱۴۰۶",
-          "source_url": "https://www.daneshchi.ir/riazi-1/",
-          "pdf_url": "https://dl.daneshchi.ir/file/chap-school/Riazi-1_Daneshchi.iR.pdf",
-          "status": "175_page_lessons_authored_needs_official_activity_review",
-          "page_lesson_count": 175,
-          "page_lesson_structure": {
-            "themes": 25,
-            "pages_per_theme": 7,
-            "examples_per_page": 2,
-            "exercises_per_page": 3,
-            "quiz_questions_per_page": 2,
-            "official_activity_answers": "not_yet_page_verified"
-          },
-          "official_catalog_check": "required_against_current_1405_1406_catalog"
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/lovelymath-1/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "sections": [
+            {
+              "title": "درس اول تا درس یازدهم",
+              "status": "count_verified_titles_not_text_indexed"
+            }
+          ],
+          "official_lesson_count": 11,
+          "authored_lessons": 11,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "note": "فهرست چاپ جاری ۱۱ درس را اعلام می‌کند اما عنوان جزئی درس‌ها در متن فهرست در دسترس نیست؛ ۱۱ بسته آموزشی مکمل بر اساس مهارت‌های پایه ساخته شده و تطبیق موضوعی با صفحات PDF باقی است.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending"
         },
         {
-          "title": "جهان پیرامون اول دبستان",
+          "title": "جهان پیرامون",
           "subject": "جهان پیرامون",
           "curriculum_year": "۱۴۰۵–۱۴۰۶",
-          "source_url": "https://www.daneshchi.ir/jahaan-piramoon-1/",
-          "pdf_url": "https://dl.daneshchi.ir/file/chap-school/JahaanPiramon-1_Daneshchi.iR.pdf",
-          "status": "pdf_linked_7_chapters_18_lessons_index_verified",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/jahaan-piramoon-1/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
           "sections": [
             {
               "title": "کشف می‌کنیم",
-              "lessons": [
-                "با حواسم کشف می‌کنم",
-                "می‌پرسم و پیدا می‌کنم"
-              ]
+              "lessons": 2
             },
             {
               "title": "گوناگونی‌ها را پیدا می‌کنیم",
-              "lessons": [
-                "محله‌ی ما",
-                "گیاهان و جانوران اطراف ما"
-              ]
+              "lessons": 2
             },
             {
               "title": "محافظت می‌کنیم",
-              "lessons": [
-                "مواظب باش",
-                "سالم باش شاداب باش"
-              ]
+              "lessons": 2
             },
             {
               "title": "به هم وابسته‌ایم",
-              "lessons": [
-                "خانواده و دوستان من",
-                "گیاهان و جانوران در زندگی ما",
-                "دنیای جانوران"
-              ]
+              "lessons": 3
             },
             {
               "title": "استفاده می‌کنیم",
-              "lessons": [
-                "دوست خوب زمین باش",
-                "درست استفاده کنیم، دوباره استفاده کنیم",
-                "دنیای گرم و سرد ما",
-                "آزمایش کنیم و یاد بگیریم"
-              ]
+              "lessons": 4
             },
             {
               "title": "جست‌وجو کنیم و بسازیم",
-              "lessons": [
-                "با هم کاوش کنیم",
-                "با هم بسازیم"
-              ]
+              "lessons": 2
             },
             {
               "title": "تغییر می‌کنیم",
-              "lessons": [
-                "من بزرگ می‌شوم",
-                "تغییرها را پیدا کن",
-                "یک سال رنگارنگ"
-              ]
+              "lessons": 3
             }
           ],
+          "official_lesson_count": 18,
           "authored_lessons": 18,
           "authored_status": "draft_original_content_needs_official_page_review",
-          "note": "برای هر ۱۸ درس بسته تألیفی شامل آموزش مفهومی، دو مثال کاربردی، تمرین آسان/متوسط/چالشی با پاسخ تشریحی و آزمونک آماده است؛ هنوز پاسخ فعالیت‌های رسمی با PDF صفحه‌به‌صفحه تطبیق نشده است.",
-          "official_catalog_check": "required_against_current_1405_1406_catalog"
+          "official_pdf_page_match": false,
+          "note": "فهرست چاپ جاری ۷ فصل و ۱۸ درس را مشخص می‌کند؛ بسته‌های مفهومی موجود با این عناوین هم‌نام شده‌اند، اما پاسخ فعالیت‌های صفحه‌ای هنوز نیازمند مقابله با PDF است.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending"
         },
         {
           "title": "آموزش قرآن بخش اول (اجرای آزمایشی)",
           "subject": "آموزش قرآن",
           "curriculum_year": "۱۴۰۵–۱۴۰۶",
-          "source_url": "https://www.daneshchi.ir/quran-az-1/",
-          "pdf_url": "https://dl.daneshchi.ir/file/chap-school/Quran-Az-1_Daneshchi.iR.pdf",
-          "status": "pdf_linked_4_chapters_outline_verified",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/quran-az-1/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
           "sections": [
             {
               "title": "مهربانی‌های خدای من",
@@ -183,140 +155,137 @@
             },
             {
               "title": "سوره‌هایی از کتاب خدای مهربان من",
-              "lessons": [
-                "سوره حمد",
-                "سوره توحید"
-              ]
+              "lessons": 9
             },
             {
               "title": "گفت‌وگوی من با خدای مهربان",
-              "lessons": [
-                "به همین سادگی",
-                "آمادگی برای حرف زدن با خدا",
-                "تمرین وضو",
-                "نماز"
-              ]
+              "lessons": 3
             }
           ],
-          "authored_lessons": 18,
+          "official_lesson_count": 23,
+          "authored_lessons": 23,
           "authored_status": "draft_original_content_needs_official_page_review",
-          "note": "۷ بسته اصلی و ۱۱ ریزدرس مستقل تألیفی (در مجموع ۱۸ واحد آموزشی) به برنامه متصل‌اند؛ محتوا هنوز با PDF رسمی صفحه‌به‌صفحه مقابله نشده و پاسخ فعالیت‌های رسمی محسوب نمی‌شود.",
-          "official_catalog_check": "required_against_current_1405_1406_catalog"
+          "official_pdf_page_match": false,
+          "note": "فهرست چاپ جاری ۴ فصل و ۲۳ درس/واحد شماره‌دار را نشان می‌دهد؛ درس‌نامه‌های تألیفی به عناوین مستقل تقسیم شده‌اند. متن و صوت تلاوت باید از منبع معتبر دنبال شود.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending"
+        },
+        {
+          "title": "کتاب کار هنر و خلاقیت",
+          "subject": "هنر و خلاقیت",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/honar-kh-1/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "sections": [
+            {
+              "title": "درس اول تا درس هفدهم",
+              "status": "titles_transcribed_from_index"
+            }
+          ],
+          "official_lesson_count": 17,
+          "authored_lessons": 17,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "note": "فهرست چاپ جاری ۱۷ عنوان هنری دارد؛ برای هر عنوان فعالیت تألیفی و ایمن آماده شده است. پاسخ یا محصول هنری یگانه و رسمی برای فعالیت‌های خلاقانه فرض نمی‌شود.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending"
+        },
+        {
+          "title": "کتاب کار حرکت و بازی",
+          "subject": "تربیت بدنی",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/move-game-1/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "sections": [
+            {
+              "title": "درس اول تا درس دوازدهم",
+              "status": "titles_transcribed_from_index"
+            }
+          ],
+          "official_lesson_count": 12,
+          "authored_lessons": 12,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "note": "فهرست چاپ جاری ۱۲ عنوان حرکتی دارد؛ بسته‌های تمرین باید با فضای امن، نظارت بزرگ‌تر و توانایی کودک اجرا شوند.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending"
         }
       ],
-      "status": "grade1_book_shelf_linked_content_completion_in_progress",
-      "note": "برای ریاضی پایه اول، ۲۵ تم و ۱۷۵ صفحه آموزشی تألیفی در برنامه ثبت و به کتابخانه متصل شده است؛ برای جلوگیری از معرفی پاسخ حدسی به‌عنوان پاسخ رسمی، تمرین‌های عین کتاب فقط پس از مقابله با همان صفحه تأیید می‌شوند. بسته‌های فارسی، نگارش، جهان پیرامون و قرآن نیز در برنامه قرار دارند. بسته‌های مکمل تألیفی هنر (۳ فعالیت) و تربیت‌بدنی (۳ فعالیت) نیز به انتخاب‌گر درس وصل شده‌اند؛ تکمیل نهایی همچنان نیازمند تطبیق با فهرست رسمی جدید ۱۴۰۵–۱۴۰۶ است.",
+      "status": "current_1405_1406_catalog_mapped_content_draft_pdf_review_pending",
+      "note": "فهرست پایه اول به هفت کتاب/بسته جاری اصلاح شد. تعداد و عنوان‌های قابل مشاهده از فهرست چاپ ۱۴۰۵–۱۴۰۶ ثبت شده‌اند؛ محتوای تولیدی یاسین‌یار تألیفی است و هنوز هیچ پاسخ صفحه‌ای به‌عنوان پاسخ رسمی تأیید نشده است.",
       "authored_packages": [
         {
-          "subject": "ریاضی",
-          "topic": "شمارش و مقایسه عددها",
-          "title": "شمارش و مقایسه عددها — درس‌نامه و تمرین کامل تألیفی",
-          "status": "authored_needs_review",
+          "subject": "فارسی",
+          "topic": "فارسی می‌خوانم",
+          "title": "۴۰ درس شماره‌دار + واحدهای باهم‌خوانی",
+          "status": "draft_original_content_needs_official_page_review",
           "official_match": false,
-          "lesson_count": 1,
-          "examples": 3,
-          "exercises": 9,
-          "quiz": "از پنج تمرین نخست بسته"
+          "lesson_count": 55,
+          "official_lesson_count": 40,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
+        },
+        {
+          "subject": "نگارش فارسی",
+          "topic": "فارسی می‌نویسم",
+          "title": "۳۷ واحد تمرین نوشتن",
+          "status": "draft_original_content_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 37,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
         },
         {
           "subject": "ریاضی",
-          "topic": "جمع و تفریق تصویری",
-          "title": "جمع و تفریق تصویری — درس‌نامه و تمرین کامل تألیفی",
-          "status": "authored_needs_review",
+          "topic": "ریاضی دوست‌داشتنی",
+          "title": "۱۱ واحد آموزشی مکمل",
+          "status": "draft_original_content_needs_official_page_review",
           "official_match": false,
-          "lesson_count": 1,
-          "examples": 3,
-          "exercises": 9,
-          "quiz": "از پنج تمرین نخست بسته"
-        },
-        {
-          "subject": "ریاضی",
-          "topic": "شکل‌ها و الگوها",
-          "title": "شکل‌های هندسی و الگوهای ساده — درس‌نامه و تمرین کامل تألیفی",
-          "status": "authored_needs_review",
-          "official_match": false,
-          "lesson_count": 1,
-          "examples": 3,
-          "exercises": 9,
-          "quiz": "از پنج تمرین نخست بسته"
-        },
-        {
-          "subject": "ریاضی",
-          "topic": "آموزش صفحه‌به‌صفحه ۱ تا ۱۷۵",
-          "title": "۱۷۵ درس آموزشی صفحه‌محور در ۲۵ تم",
-          "status": "authored_needs_official_activity_review",
-          "official_match": false,
-          "lesson_count": 175,
-          "examples": 350,
-          "exercises": 525,
-          "quiz_questions": 350
-        },
-        {
-          "subject": "قرآن و هدیه‌های آسمان",
-          "topic": "آموزش مفهومی پایه اول",
-          "title": "۱۸ واحد آموزشی تألیفی قرآن پایه اول",
-          "status": "draft_needs_official_page_review",
-          "official_match": false,
-          "lesson_count": 18,
-          "examples": 36,
-          "exercises": 54,
-          "quiz_questions": 36
-        },
-        {
-          "subject": "نگارش",
-          "topic": "مهارت‌های پایه نوشتن",
-          "title": "۱۰ بسته آموزشی نگارش پایه اول",
-          "status": "draft_needs_official_page_review",
-          "official_match": false,
-          "lesson_count": 10,
-          "examples": 20,
-          "exercises": 60,
-          "quiz_questions": 20
+          "lesson_count": 11,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
         },
         {
           "subject": "جهان پیرامون",
           "topic": "۷ فصل و ۱۸ درس",
-          "title": "بسته آموزشی تألیفی جهان پیرامون پایه اول",
-          "status": "draft_needs_official_page_review",
+          "title": "۱۸ درس جهان پیرامون",
+          "status": "draft_original_content_needs_official_page_review",
           "official_match": false,
           "lesson_count": 18,
-          "examples": 36,
-          "exercises": 54,
-          "quiz_questions": 54
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
         },
         {
-          "subject": "فارسی",
-          "topic": "نگاره‌ها و آموزش نشانه‌ها",
-          "title": "بسته‌های آموزشی و تمرینی فارسی اول",
-          "status": "draft_needs_official_page_review",
+          "subject": "قرآن و هدیه‌های آسمان",
+          "topic": "آموزش قرآن بخش اول",
+          "title": "۲۳ درس/واحد قرآن",
+          "status": "draft_original_content_needs_official_page_review",
           "official_match": false,
-          "lesson_count": 32,
-          "practice_status": "supplementary_authored"
+          "lesson_count": 23,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
         },
         {
           "subject": "هنر و خلاقیت",
-          "topic": "فعالیت‌های هنری ایمن",
-          "title": "۳ بسته فعالیت هنری پایه اول",
-          "status": "draft_needs_official_program_review",
+          "topic": "کتاب کار هنر و خلاقیت",
+          "title": "۱۷ فعالیت و درس هنری",
+          "status": "draft_original_content_needs_official_page_review",
           "official_match": false,
-          "lesson_count": 3,
-          "examples": 6,
-          "exercises": 9,
-          "quiz_questions": 6
+          "lesson_count": 17,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
         },
         {
           "subject": "تربیت بدنی",
-          "topic": "مهارت‌های حرکتی پایه",
-          "title": "۳ بسته فعالیت حرکتی ایمن پایه اول",
-          "status": "draft_needs_official_program_review",
+          "topic": "کتاب کار حرکت و بازی",
+          "title": "۱۲ فعالیت حرکتی و بازی",
+          "status": "draft_original_content_needs_official_page_review",
           "official_match": false,
-          "lesson_count": 3,
-          "examples": 6,
-          "exercises": 9,
-          "quiz_questions": 6
+          "lesson_count": 12,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
         }
       ],
-      "authored_package_count": 10,
+      "authored_package_count": 7,
       "curriculum_domains": [
         "آموزش قرآن",
         "فارسی و سواد خواندن",
