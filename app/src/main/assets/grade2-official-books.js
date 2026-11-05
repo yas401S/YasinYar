@@ -21,5 +21,15 @@ function makePack(book,title,index){
  return {title,goals:['موضوع درس را با زبان ساده توضیح دهد.','نکته‌های اصلی را شناسایی کند.','آموخته را در تمرین یا زندگی روزمره به کار ببرد.'],prerequisites:['خواندن دقیق عنوان و دستور فعالیت','آمادگی برای توضیح دادن پاسخ'],explanation:[{head:'۱. آشنایی با درس',body:intro},{head:'۲. تمرین هدایت‌شده',body:'نکته‌های مهم را پیدا کن و تمرین‌ها را با دقت انجام بده.'},{head:'۳. جمع‌بندی',body:'در پایان، آموخته را با زبان خودت توضیح بده و پاسخ را بازبینی کن.'}],examples,mistakes:['پاسخ دادن بدون خواندن کامل پرسش.','بیان پاسخ بدون دلیل یا نمونه.','بازبینی نکردن تمرین.'],keyPoints:[intro,'برای پاسخ خود دلیل یا نمونه بیاور.','در پایان پاسخ را بررسی کن.'],exercises,quiz:[{q:'برای یادگیری «'+title+'» کدام روش بهتر است؟',options:['خواندن دقیق و تمرین مرحله‌ای','حدس زدن پاسخ','رد شدن از فعالیت'],answer:0,explain:'خواندن دقیق و تمرین باعث فهم بهتر می‌شود.'},{q:'پس از پایان تمرین چه کار می‌کنیم؟',options:['پاسخ را بازبینی می‌کنیم','بدون بررسی رها می‌کنیم','فقط جواب را حفظ می‌کنیم'],answer:0,explain:'بازبینی به پیدا کردن اشتباه کمک می‌کند.'}],memoryAnswer:'درس را دقیق بخوان، نکته اصلی را پیدا کن، تمرین کن و پاسخ را بررسی کن.',status:'draft_original_content_needs_official_page_review',sourceNote:'عنوان از فهرست کتاب پایه دوم ۱۴۰۵–۱۴۰۶ دانشچی؛ بسته آموزشی و تمرین‌ها تألیفی‌اند و پاسخ رسمی صفحه‌ای نیستند.',catalogYear:'۱۴۰۵–۱۴۰۶'};
 }
 for(const b of books){const target=root['2'][b.subject]||(root['2'][b.subject]={});for(let i=0;i<b.titles.length;i++)target[b.titles[i]]=makePack(b,b.titles[i],i);}
+if(window.YASINYAR_GRADE2_CURRENT_CATALOG){
+ const c=window.YASINYAR_GRADE2_CURRENT_CATALOG;
+ c.books.officialMath={title:'ریاضی دوم دبستان',lessons:8,subject:'ریاضی',source:'https://www.daneshchi.ir/riazi-2/'};
+ c.books.science={title:'علوم تجربی دوم دبستان',lessons:14,subject:'علوم',source:'https://www.daneshchi.ir/oloom-2/'};
+ c.books.farsi={title:'فارسی دوم دبستان',lessons:17,subject:'فارسی',source:'https://www.daneshchi.ir/farsi-2/'};
+ c.books.negarsh={title:'نگارش فارسی دوم دبستان',lessons:17,subject:'نگارش فارسی',source:'https://www.daneshchi.ir/negaresh-2/'};
+ c.books.quran={title:'آموزش قرآن دوم دبستان',lessons:14,subject:'آموزش قرآن',source:'https://www.daneshchi.ir/quran-2/'};
+ c.books.heydiyeh={title:'هدیه‌های آسمان دوم دبستان',lessons:20,subject:'هدیه‌های آسمان',source:'https://www.daneshchi.ir/hediyeh-aseman-2/'};
+ c.authoredLessonPacks=Object.values(root['2']).reduce((n,p)=>n+Object.keys(p).length,0);
+}
 window.YASINYAR_GRADE2_OFFICIAL_BOOKS=books.map(b=>({subject:b.subject,lessons:b.titles.length,source:b.url,titles:b.titles}));
 })();
