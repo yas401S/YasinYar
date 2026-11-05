@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "app": "YasinYar",
+  "language": "fa",
+  "grades": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  "question_types": ["multiple_choice", "short_answer", "true_false", "fill_blank", "problem_solving", "conceptual"],
+  "difficulty_levels": ["easy", "medium", "advanced"],
+  "questions": [
+    {
+      "id": "YY-G6-MATH-001",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "کسرها",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "حاصل ۱/۲ + ۱/۴ کدام است؟",
+      "options": ["۱/۶", "۲/۶", "۳/۴", "۱/۸"],
+      "correct_answer": "۳/۴",
+      "explanation_steps": ["مخرج مشترک ۴ انتخاب می‌کنیم.", "۱/۲ برابر ۲/۴ است.", "۲/۴ + ۱/۴ = ۳/۴."],
+      "learning_tip": "برای جمع کسرها ابتدا مخرج‌ها را یکسان کن.",
+      "source": {"kind": "original_practice", "verified": false}
+    }
+  ]
+}
