@@ -7,6 +7,8 @@ const sandbox = { window: {} };
 vm.runInNewContext(source, sandbox, { timeout: 3000 });
 const extension = fs.readFileSync(path.join(root, 'app/src/main/assets/grade1-farsi-expansion.js'), 'utf8');
 vm.runInNewContext(extension, sandbox, { timeout: 5000 });
+const writing = fs.readFileSync(path.join(root, 'app/src/main/assets/grade1-negarsh-expansion.js'), 'utf8');
+vm.runInNewContext(writing, sandbox, { timeout: 5000 });
 const packs = sandbox.window.YASINYAR_CURRICULUM;
 if (!packs || typeof packs !== 'object') throw new Error('YASINYAR_CURRICULUM is missing');
 const map = JSON.parse(fs.readFileSync(path.join(root, 'data/curriculum-map.json'), 'utf8'));
