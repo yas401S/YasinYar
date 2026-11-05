@@ -3,8 +3,8 @@
   "curriculum_year": "۱۴۰۵–۱۴۰۶",
   "language": "fa",
   "official_source": "https://chap.oerp.ir/",
-  "source_status": "grade1_grade2_1405_1406_catalog_mapped_grade2_content_draft_pdf_review_pending",
-  "notice": "فهرست و بسته‌های آموزشی پایه اول و دوم بر اساس منابع فهرست چاپ ۱۴۰۵–۱۴۰۶ ثبت شده‌اند. محتوای آموزشی تألیفی است؛ تطبیق پاسخ‌های صفحه‌ای با PDF رسمی برای هر دو پایه همچنان لازم است.",
+  "source_status": "grade1_grade2_grade3_1405_1406_catalog_mapped_grade2_grade3_content_draft_pdf_review_pending",
+  "notice": "فهرست و بسته‌های آموزشی پایه‌های اول تا سوم بر اساس منابع فهرست چاپ ۱۴۰۵–۱۴۰۶ ثبت شده‌اند. محتوای آموزشی تألیفی است؛ تطبیق پاسخ‌های صفحه‌ای با PDF رسمی برای هر پایه همچنان لازم است.",
   "completion_rule": "یک فصل فقط وقتی complete است که درس‌نامه، مثال حل‌شده، تمرین سطح‌بندی‌شده، آزمون، پاسخ کوتاه حفظی، پاسخ تشریحی و بازبینی علمی داشته باشد.",
   "status_values": [
     "missing",
@@ -529,19 +529,406 @@
     },
     {
       "grade": 3,
-      "books": [],
-      "status": "official_catalog_pending",
-      "note": "فهرست کتاب‌های این پایه از نسخه رسمی ۱۴۰۵–۱۴۰۶ هنوز در پروژه رونویسی و تطبیق نشده است. تا پیش از ثبت فهرست رسمی، عنوان فصل یا کتاب حدس زده نمی‌شود.",
+      "books": [
+        {
+          "title": "ریاضی سوم دبستان",
+          "subject": "ریاضی",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/riazi-3/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 40,
+          "authored_lessons": 40,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "الگوها",
+              "lessons": 5,
+              "lesson_titles": [
+                "حل مسئله: الگویابی",
+                "شمارش چندتاچندتا",
+                "ماشین‌های ورودی ـ خروجی",
+                "ساعت در بعدازظهر",
+                "الگوهای متقارن"
+              ]
+            },
+            {
+              "title": "عددهای چهاررقمی",
+              "lessons": 5,
+              "lesson_titles": [
+                "حل مسئله: الگوسازی",
+                "معرفی عدد هزار",
+                "ارزش مکانی",
+                "ارزش پول",
+                "تقریب اعداد"
+              ]
+            },
+            {
+              "title": "عددهای کسری",
+              "lessons": 5,
+              "lesson_titles": [
+                "حل مسئله: رسم شکل",
+                "کسر",
+                "کاربرد کسر در اندازه‌گیری",
+                "تساوی کسرها",
+                "مقایسه کسرها"
+              ]
+            },
+            {
+              "title": "ضرب و تقسیم",
+              "lessons": 5,
+              "lesson_titles": [
+                "حل مسئله: روش‌های نمادین",
+                "ضرب",
+                "ضرب عددهای یک‌رقمی",
+                "خاصیت‌های ضرب",
+                "تقسیم"
+              ]
+            },
+            {
+              "title": "محیط و مساحت",
+              "lessons": 5,
+              "lesson_titles": [
+                "حل مسئله: زیرمسئله",
+                "خط، نیم‌خط و پاره‌خط",
+                "محیط",
+                "اندازه سطح",
+                "واحد اندازه‌گیری سطح"
+              ]
+            },
+            {
+              "title": "جمع و تفریق",
+              "lessons": 5,
+              "lesson_titles": [
+                "حل مسئله: حل مسئله ساده‌تر",
+                "مقایسه عددها",
+                "جمع و تفریق",
+                "جمع در جدول ارزش مکانی",
+                "تفریق در جدول ارزش مکانی"
+              ]
+            },
+            {
+              "title": "آمار و احتمال",
+              "lessons": 5,
+              "lesson_titles": [
+                "حل مسئله: حدس و آزمایش",
+                "جدول داده‌ها",
+                "احتمال",
+                "نمودار دایره‌ای",
+                "انتخاب نمودار"
+              ]
+            },
+            {
+              "title": "ضرب عددها",
+              "lessons": 5,
+              "lesson_titles": [
+                "حل مسئله: حذف حالت‌های نامطلوب",
+                "ضرب در عدد ۱۰",
+                "ضرب عددهای یک‌رقمی در چندرقمی",
+                "محاسبه ضرب",
+                "تقسیم با باقیمانده"
+              ]
+            }
+          ],
+          "note": "فهرست هشت فصل و ۴۰ محور از نمایه چاپ ۱۴۰۵–۱۴۰۶ ثبت شده است؛ آموزش و تمرین تألیفی‌اند."
+        },
+        {
+          "title": "علوم تجربی سوم دبستان",
+          "subject": "علوم",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/oloom-3/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 14,
+          "authored_lessons": 14,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "۱۴ درس",
+              "lessons": 14,
+              "lesson_titles": [
+                "زنگ علوم",
+                "خوراکی‌ها",
+                "اندازه‌گیری مواد",
+                "مواد اطراف ما",
+                "آب ماده‌ی باارزش",
+                "زندگی ما و آب",
+                "نور و مشاهده‌ی اجسام",
+                "جست‌وجو کنیم و بسازیم",
+                "نیرو، همه‌جا ۱",
+                "نیرو، همه‌جا ۲",
+                "بکارید و ببینید",
+                "هر کدام جای خود ۱",
+                "هر کدام جای خود ۲",
+                "از گذشته تا آینده"
+              ]
+            }
+          ],
+          "note": "عنوان ۱۴ درس از نمایه چاپ جاری ثبت شده است؛ پاسخ فعالیت‌های صفحه‌ای هنوز تطبیق نشده است."
+        },
+        {
+          "title": "فارسی سوم دبستان",
+          "subject": "فارسی",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/farsi-3/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 17,
+          "authored_lessons": 17,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "هفت فصل فارسی",
+              "lessons": 17,
+              "lesson_titles": [
+                "محله‌ی ما",
+                "زنگ ورزش",
+                "آسمان آبی، طبیعت پاک",
+                "آواز گنجشک",
+                "بلدرچین و برزگر",
+                "فداکاران",
+                "کار نیک",
+                "پیراهن بهشتی",
+                "بوی نرگس",
+                "یار مهربان",
+                "نویسنده‌ی بزرگ",
+                "ایران عزیز",
+                "درس آزاد",
+                "ایران آباد",
+                "دریا",
+                "اگر جنگل نباشد",
+                "چشم‌های آسمان"
+              ]
+            }
+          ],
+          "note": "فهرست ۱۷ درس و عنوان‌های آن از نمایه چاپ جاری ثبت شده‌اند؛ پاسخ رسمی صفحه‌ای تأیید نشده است."
+        },
+        {
+          "title": "نگارش فارسی سوم دبستان",
+          "subject": "نگارش فارسی",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/negaresh-3/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 17,
+          "authored_lessons": 17,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "هفت فصل نگارش",
+              "lessons": 17,
+              "lesson_titles": [
+                "محله‌ی ما",
+                "زنگ ورزش",
+                "آسمان آبی، طبیعت پاک",
+                "آواز گنجشک",
+                "بلدرچین و برزگر",
+                "فداکاران",
+                "کار نیک",
+                "پیراهن بهشتی",
+                "بوی نرگس",
+                "یار مهربان",
+                "نویسنده‌ی بزرگ",
+                "ایران عزیز",
+                "درس آزاد",
+                "ایران آباد",
+                "دریا",
+                "اگر جنگل نباشد",
+                "چشم‌های آسمان"
+              ]
+            }
+          ],
+          "note": "عنوان‌های نگارش با فهرست فارسی هماهنگ‌اند؛ تمرین‌ها تألیفی و پاسخ صفحه‌ای نیازمند تطبیق است."
+        },
+        {
+          "title": "آموزش قرآن سوم دبستان",
+          "subject": "آموزش قرآن",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/quran-3/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 3,
+          "authored_lessons": 3,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "آموزش روخوانی قرآن کریم"
+            },
+            {
+              "title": "آموزش نماز"
+            },
+            {
+              "title": "انس با قرآن کریم"
+            }
+          ],
+          "note": "سه بخش اصلی کتاب ثبت شده‌اند؛ متن آیات و تلفظ باید فقط از منبع معتبر پیگیری شود."
+        },
+        {
+          "title": "هدیه‌های آسمان سوم دبستان",
+          "subject": "هدیه‌های آسمان",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/hediyeh-aseman-3/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 20,
+          "authored_lessons": 20,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "۲۰ درس",
+              "lessons": 20,
+              "lesson_titles": [
+                "آستین‌های خالی",
+                "غروب یک روز بهاری",
+                "همیشه با من",
+                "در کاخ نمرود",
+                "روز دهم",
+                "بانوی قهرمان",
+                "بوی بهشت",
+                "جشن تکلیف",
+                "گفت‌وگو با خدا",
+                "ماه مهمانی خدا",
+                "عید مسلمانان",
+                "سخن آسمانی",
+                "انتخاب پروانه",
+                "ام‌ابیها",
+                "همسفر ناشناس",
+                "داناترین مردم",
+                "خواب شیرین",
+                "آینه‌ی سخنگو",
+                "گندم از گندم بروید",
+                "باغ همیشه بهار"
+              ]
+            }
+          ],
+          "note": "فهرست ۲۰ درس از نمایه چاپ جاری ثبت شده است؛ بسته‌های گفت‌وگو و تمرین تألیفی‌اند."
+        },
+        {
+          "title": "مطالعات اجتماعی سوم دبستان",
+          "subject": "مطالعات اجتماعی",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/motaleat-3/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 23,
+          "authored_lessons": 23,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "هفت فصل",
+              "lessons": 23,
+              "lesson_titles": [
+                "من به دنیا آمدم",
+                "من بزرگتر شده‌ام",
+                "آیا ما مثل هم هستیم؟",
+                "اعضای خانواده",
+                "خانواده‌ام را دوست دارم",
+                "تغییر در خانواده",
+                "از بزرگترها قدردانی کنیم",
+                "چرا با هم همکاری می‌کنیم؟",
+                "مقررات خانه‌ی ما",
+                "نیازهای خانواده چگونه تأمین می‌شود؟",
+                "منابع",
+                "درست مصرف کنیم",
+                "بازیافت",
+                "خانه‌ام را دوست دارم",
+                "خانه‌ها با هم تفاوت دارند",
+                "خانه‌ی شما چه شکلی است؟",
+                "از خانه محافظت کنیم",
+                "مدرسه‌ی دوست‌داشتنی ما",
+                "مکان‌های مدرسه را بشناسیم",
+                "خانه‌ی شما کجاست؟",
+                "جهت‌های اصلی",
+                "پست",
+                "ایمنی در کوچه و خیابان"
+              ]
+            }
+          ],
+          "note": "فهرست ۲۳ درس در هفت فصل از نمایه چاپ جاری ثبت شده است؛ پاسخ فعالیت‌های صفحه‌ای هنوز بررسی نشده است."
+        }
+      ],
+      "status": "current_1405_1406_catalog_mapped_content_draft_pdf_review_pending",
+      "note": "هفت کتاب پایه سوم و ۱۳۴ بسته آموزشی تألیفی بر اساس فهرست‌های چاپ ۱۴۰۵–۱۴۰۶ ثبت شده‌اند؛ تطبیق صفحه‌به‌صفحه با PDF رسمی و تأیید پاسخ‌های کتاب هنوز باقی است.",
       "authored_packages": [
         {
           "subject": "ریاضی",
-          "topic": "ضرب و تقسیم",
-          "title": "معنای ضرب و تقسیم",
-          "status": "authored_needs_review",
-          "official_match": false
+          "topic": "ریاضی سوم دبستان",
+          "title": "40 درس/بخش ریاضی سوم دبستان",
+          "status": "draft_original_content_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 40,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
+        },
+        {
+          "subject": "علوم",
+          "topic": "علوم تجربی سوم دبستان",
+          "title": "14 درس/بخش علوم تجربی سوم دبستان",
+          "status": "draft_original_content_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 14,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
+        },
+        {
+          "subject": "فارسی",
+          "topic": "فارسی سوم دبستان",
+          "title": "17 درس/بخش فارسی سوم دبستان",
+          "status": "draft_original_content_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 17,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
+        },
+        {
+          "subject": "نگارش فارسی",
+          "topic": "نگارش فارسی سوم دبستان",
+          "title": "17 درس/بخش نگارش فارسی سوم دبستان",
+          "status": "draft_original_content_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 17,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
+        },
+        {
+          "subject": "آموزش قرآن",
+          "topic": "آموزش قرآن سوم دبستان",
+          "title": "3 درس/بخش آموزش قرآن سوم دبستان",
+          "status": "draft_original_content_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 3,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
+        },
+        {
+          "subject": "هدیه‌های آسمان",
+          "topic": "هدیه‌های آسمان سوم دبستان",
+          "title": "20 درس/بخش هدیه‌های آسمان سوم دبستان",
+          "status": "draft_original_content_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 20,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
+        },
+        {
+          "subject": "مطالعات اجتماعی",
+          "topic": "مطالعات اجتماعی سوم دبستان",
+          "title": "23 درس/بخش مطالعات اجتماعی سوم دبستان",
+          "status": "draft_original_content_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 23,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
         }
       ],
-      "authored_package_count": 1,
+      "authored_package_count": 7,
       "catalog_source": "https://chap.oerp.ir/"
     },
     {
