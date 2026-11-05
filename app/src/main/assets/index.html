@@ -55,6 +55,7 @@
 .voice-dock button{border:1px solid #52698b;border-radius:12px;padding:7px 11px;background:#243c60;color:#fff;font-size:13px}
 .voice-dock button.primary{background:linear-gradient(135deg,#ffe0a0,#d8a64e);color:#17233a;border:0;font-weight:bold}
 .voice-dock button:disabled{opacity:.45}
+.voice-dock button.listening{background:#8c3344;border-color:#ff9aaa;box-shadow:0 0 0 3px #ff6b8125;animation:micPulse 1.2s infinite}@keyframes micPulse{50%{box-shadow:0 0 0 7px #ff6b8110}}
 body{padding-bottom:82px}
 
 /* Professional polish: clarity, accessibility and touch feedback */
@@ -179,6 +180,7 @@ input,select,textarea{border-radius:11px}
 <div class="voice-dock" id="voiceDock" dir="rtl">
   <span class="voice-status" id="voiceStatus">🎧 معلم فارسی آماده‌سازی می‌شود…</span>
   <button class="primary" id="voiceReadBtn" onclick="voiceReadPage()">🔊 خواندن صفحه</button>
+  <button id="voiceMicBtn" onclick="voiceStartListening()">🎤 گفتن سؤال</button>
   <button id="voicePauseBtn" onclick="voicePauseResume()" disabled>⏸ مکث</button>
   <button id="voiceStopBtn" onclick="voiceStop()" disabled>⏹ توقف</button><select id="voiceRate" aria-label="سرعت خواندن" onchange="voiceSetRate(this.value)"><option value="0.8">آهسته</option><option value="0.92" selected>عادی</option><option value="1.08">تندتر</option></select>
 </div>
@@ -546,4 +548,44 @@ function voiceStop(){
  if('speechSynthesis' in window)window.speechSynthesis.cancel();
  yasinVoicePaused=false;voiceSetStatus('پخش متوقف شد.');voiceSetButtons('idle');
 }
+let yasinRecognition=null,yasinListening=false;
+function voiceStartListening(){
+ const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SpeechRecognition){voiceSetStatus('تشخیص گفتار فارسی در این مرورگر پشتیبانی نمی‌شود؛ از Chrome به‌روز استفاده کن.');return;}
+ if(yasinListening){try{yasinRecognition.stop()}catch(e){}return;}
+ try{
+  yasinRecognition=new SpeechRecognition();
+  yasinRecognition.lang='fa-IR';
+  yasinRecognition.continuous=false;
+  yasinRecognition.interimResults=false;
+  yasinRecognition.maxAlternatives=1;
+  yasinListening=true;
+  const mic=document.getElementById('voiceMicBtn');
+  if(mic){mic.textContent='⏹ پایان گفتار';mic.classList.add('listening');}
+  voiceSetStatus('گوش می‌دهم؛ سؤال را واضح بیان کن…');
+  yasinRecognition.onresult=function(event){
+   const transcript=Array.from(event.results||[]).map(x=>x[0]&&x[0].transcript||'').join(' ').trim();
+   if(!transcript)return;
+   const field=document.getElementById('ocrText');
+   if(field){field.value=(field.value.trim()?field.value.trim()+'\n':'')+transcript;}
+   voiceSetStatus('سؤال شنیده شد؛ وارد بخش حل سؤال شد. حالا «حل تشریحی هوشمند» را بزن.');
+   if(typeof openPage==='function')openPage('camera');
+   if(field)field.scrollIntoView({behavior:'smooth',block:'center'});
+  };
+  yasinRecognition.onerror=function(event){
+   const msg=event.error==='not-allowed'?'اجازه میکروفون داده نشد؛ مجوز میکروفون مرورگر را فعال کن.':event.error==='no-speech'?'صدایی دریافت نشد؛ دوباره تلاش کن.':'تشخیص صدا ناموفق بود؛ دوباره امتحان کن.';
+   voiceSetStatus(msg);
+  };
+  yasinRecognition.onend=function(){
+   yasinListening=false;
+   const mic=document.getElementById('voiceMicBtn');
+   if(mic){mic.textContent='🎤 گفتن سؤال';mic.classList.remove('listening');}
+  };
+  yasinRecognition.start();
+ }catch(e){yasinListening=false;voiceSetStatus('شروع میکروفون ناموفق بود؛ صفحه را با HTTPS و مرورگر Chrome باز کن.');}
+}
+(function initYasinVoice(){
+ const mic=window.SpeechRecognition||window.webkitSpeechRecognition;
+ voiceSetStatus(('speechSynthesis' in window?'خواندن فارسی آماده است. ':'خواندن صدا در این مرورگر پشتیبانی نمی‌شود. ')+(mic?'برای پرسیدن، دکمه میکروفون را بزن.':'برای گفتار ورودی از Chrome به‌روز استفاده کن.'));
+})();
 </script></body></html>
