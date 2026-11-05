@@ -39,7 +39,7 @@
             }
           ],
           "official_lesson_count": 40,
-          "authored_lessons": 55,
+          "authored_lessons": 54,
           "authored_status": "draft_original_content_needs_official_page_review",
           "official_pdf_page_match": false,
           "note": "فهرست چاپ ۱۴۰۵–۱۴۰۶ شامل ۴۰ درس شماره‌دار است؛ واحدهای باهم‌خوانی نیز به‌عنوان موضوع مکمل در برنامه آمده‌اند. بسته‌های آموزشی تألیفی‌اند و پاسخ رسمی فعالیت‌ها هنوز با PDF مقابله نشده است.",
@@ -220,7 +220,7 @@
           "title": "۴۰ درس شماره‌دار + واحدهای باهم‌خوانی",
           "status": "draft_original_content_needs_official_page_review",
           "official_match": false,
-          "lesson_count": 55,
+          "lesson_count": 54,
           "official_lesson_count": 40,
           "examples_per_lesson": 2,
           "exercises_per_lesson": 5
