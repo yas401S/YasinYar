@@ -76,7 +76,7 @@ if (!index.includes('const curatedKeys=curatedPack?Object.keys(curatedPack):[];'
 
 const grade2Catalog = sandbox.window.YASINYAR_GRADE2_CURRENT_CATALOG;
 if (!grade2Catalog || grade2Catalog.year !== '۱۴۰۵–۱۴۰۶') errors.push('Current grade 2 catalog metadata is missing');
-const expectedGrade2 = [['ریاضی',13],['جهان پیرامون',18],['فارسی می‌نویسم',11],['من و دوستم خدا',10]];
+const expectedGrade2 = [['ریاضی دوست‌داشتنی',13],['جهان پیرامون',18],['فارسی می‌نویسم',11],['من و دوستم خدا',10],['ریاضی',8],['علوم',14],['فارسی',17],['نگارش فارسی',17],['آموزش قرآن',14],['هدیه‌های آسمان',20]];
 let grade2LessonCount = 0;
 let grade2ExerciseCount = 0;
 for (const [subject, count] of expectedGrade2) {
@@ -100,7 +100,8 @@ for (const [subject, count] of expectedGrade2) {
 }
 if (!index.includes('<script src="grade2-current-catalog.js"></script>')) errors.push('Grade 2 math catalog script is not loaded');
 if (!index.includes('<script src="grade2-other-books.js"></script>')) errors.push('Grade 2 other books script is not loaded');
-if (!index.includes("2:['فارسی می‌نویسم','ریاضی','جهان پیرامون','من و دوستم خدا']")) errors.push('Grade 2 subject selector does not match the current book set');
+if (!index.includes('<script src="grade2-official-books.js"></script>')) errors.push('Grade 2 official books script is not loaded');
+if (!index.includes("2:['ریاضی','علوم','فارسی','نگارش فارسی','آموزش قرآن','هدیه‌های آسمان','ریاضی دوست‌داشتنی','جهان پیرامون','فارسی می‌نویسم','من و دوستم خدا']")) errors.push('Grade 2 subject selector does not match the ten-book set');
 
 
 const grade3Catalog = sandbox.window.YASINYAR_GRADE3_CURRENT_CATALOG;
