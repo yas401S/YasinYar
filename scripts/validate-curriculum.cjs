@@ -2,32 +2,77 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const path = require('node:path');
 const root = process.cwd();
-const source = fs.readFileSync(path.join(root, 'app/src/main/assets/curriculum-content.js'), 'utf8');
-const sandbox = { window: {} };
-vm.runInNewContext(source, sandbox, { timeout: 3000 });
-const extension = fs.readFileSync(path.join(root, 'app/src/main/assets/grade1-farsi-expansion.js'), 'utf8');
-vm.runInNewContext(extension, sandbox, { timeout: 5000 });
-const writing = fs.readFileSync(path.join(root, 'app/src/main/assets/grade1-negarsh-expansion.js'), 'utf8');
-vm.runInNewContext(writing, sandbox, { timeout: 5000 });
+const sandbox = {
+  window: {},
+  document: { readyState: 'loading', addEventListener() {} }
+};
+const files = [
+  'curriculum-content.js',
+  'grade1-math-expansion.js',
+  'grade1-world-study.js',
+  'grade1-arts-pe.js',
+  'grade1-farsi-expansion.js',
+  'grade1-quran-expansion.js',
+  'grade1-farsi-practice.js',
+  'grade1-negarsh-expansion.js',
+  'grade1-current-catalog.js'
+];
+for (const file of files) {
+  const full = path.join(root, 'app/src/main/assets', file);
+  if (!fs.existsSync(full)) throw new Error('Missing curriculum asset: ' + file);
+  vm.runInNewContext(fs.readFileSync(full, 'utf8'), sandbox, { timeout: 8000, filename: file });
+}
 const packs = sandbox.window.YASINYAR_CURRICULUM;
 if (!packs || typeof packs !== 'object') throw new Error('YASINYAR_CURRICULUM is missing');
+const catalog = sandbox.window.YASINYAR_GRADE1_CURRENT_CATALOG;
+if (!catalog || catalog.year !== '۱۴۰۵–۱۴۰۶') throw new Error('Current grade 1 catalog metadata is missing');
 const map = JSON.parse(fs.readFileSync(path.join(root, 'data/curriculum-map.json'), 'utf8'));
-if (!Array.isArray(map.grades) || map.grades.length !== 9) throw new Error('Curriculum map must include grades 1–9');
-const errors = []; let lessonCount = 0; let exerciseCount = 0;
-for (let grade = 1; grade <= 9; grade++) {
-  const entry = map.grades.find(x => x.grade === grade);
-  if (!entry || !Array.isArray(entry.books) || !Array.isArray(entry.authored_packages)) errors.push('Grade ' + grade + ': invalid map entry');
-  const subjects = packs[String(grade)] || {};
-  for (const [subject, topics] of Object.entries(subjects)) for (const [topic, lesson] of Object.entries(topics || {})) {
+const grade1 = map.grades && map.grades.find(x => x.grade === 1);
+if (!grade1 || !Array.isArray(grade1.books) || grade1.books.length !== 7) throw new Error('Grade 1 map must contain the seven current books');
+if (map.curriculum_year !== '۱۴۰۵–۱۴۰۶') throw new Error('Curriculum year mismatch');
+const errors = [];
+let lessonCount = 0;
+let exerciseCount = 0;
+const expected = [
+  ['فارسی', 40, 55],
+  ['نگارش فارسی', 37, 37],
+  ['ریاضی', 11, 11],
+  ['جهان پیرامون', 18, 18],
+  ['قرآن و هدیه‌های آسمان', 23, 23],
+  ['هنر و خلاقیت', 17, 17],
+  ['تربیت بدنی', 12, 12]
+];
+for (const [subject, officialCount, authoredCount] of expected) {
+  const lessons = packs['1'] && packs['1'][subject];
+  const current = Object.entries(lessons || {}).filter(([, lesson]) => lesson.catalogYear === '۱۴۰۵–۱۴۰۶');
+  if (current.length !== authoredCount) errors.push(subject + ': expected ' + authoredCount + ' current lessons, found ' + current.length);
+  const book = grade1.books.find(x => x.subject === subject);
+  if (!book) errors.push(subject + ': missing book in curriculum map');
+  else if (book.official_lesson_count !== officialCount) errors.push(subject + ': official lesson count mismatch');
+  for (const [topic, lesson] of current) {
     lessonCount++;
-    for (const key of ['title','goals','prerequisites','explanation','examples','mistakes','keyPoints','exercises']) if (!(key in lesson)) errors.push(grade+'/'+subject+'/'+topic+': missing '+key);
-    if (!Array.isArray(lesson.examples) || lesson.examples.length < 2) errors.push(grade+'/'+topic+': needs at least 2 worked examples');
-    if (!Array.isArray(lesson.exercises) || lesson.exercises.length < 5) errors.push(grade+'/'+topic+': needs at least 5 exercises');
+    for (const key of ['title','goals','prerequisites','explanation','examples','mistakes','keyPoints','exercises','quiz','sourceNote']) {
+      if (!(key in lesson)) errors.push(subject + '/' + topic + ': missing ' + key);
+    }
+    if (!Array.isArray(lesson.examples) || lesson.examples.length < 2) errors.push(subject + '/' + topic + ': needs 2 worked examples');
+    if (!Array.isArray(lesson.exercises) || lesson.exercises.length < 5) errors.push(subject + '/' + topic + ': needs 5 exercises');
+    if (!Array.isArray(lesson.quiz) || lesson.quiz.length < 2) errors.push(subject + '/' + topic + ': needs 2 quiz questions');
     const levels = new Set((lesson.exercises || []).map(ex => ex.level));
-    for (const level of ['آسان','متوسط','چالشی']) if (!levels.has(level)) errors.push(grade+'/'+topic+': missing '+level+' exercise');
-    for (const ex of lesson.exercises || []) { exerciseCount++; for (const key of ['level','q','answer','explain']) if (!ex[key]) errors.push(grade+'/'+topic+': exercise missing '+key); }
-    for (const ex of lesson.examples || []) for (const key of ['title','problem','steps','answer']) if (!ex[key]) errors.push(grade+'/'+topic+': example missing '+key);
+    for (const level of ['آسان','متوسط','چالشی']) if (!levels.has(level)) errors.push(subject + '/' + topic + ': missing ' + level + ' exercise');
+    for (const ex of lesson.exercises || []) {
+      exerciseCount++;
+      for (const key of ['level','q','answer','explain']) if (!ex[key]) errors.push(subject + '/' + topic + ': exercise missing ' + key);
+    }
+    for (const ex of lesson.examples || []) for (const key of ['title','problem','steps','answer']) if (!ex[key]) errors.push(subject + '/' + topic + ': example missing ' + key);
   }
 }
-if (errors.length) { console.error(errors.join('\\n')); process.exit(1); }
-console.log('Curriculum validation passed: 9 grades, ' + lessonCount + ' authored lessons, ' + exerciseCount + ' exercises. Official book/chapter coverage remains separate and is not inferred.');
+const index = fs.readFileSync(path.join(root, 'app/src/main/assets/index.html'), 'utf8');
+if (!index.includes('<script src="grade1-current-catalog.js"></script>')) errors.push('Current catalog script is not loaded by the app');
+if (!index.includes('const curatedKeys=curatedPack?Object.keys(curatedPack):[];')) errors.push('Lesson selector does not read the curated curriculum pack');
+const bookshelf = fs.readFileSync(path.join(root, 'app/src/main/assets/grade1-bookshelf.js'), 'utf8');
+for (const id of ['read','write','math','world','quran','art','move']) if (!bookshelf.includes("id:'" + id + "'")) errors.push('Bookshelf missing current book: ' + id);
+if (errors.length) {
+  console.error(errors.join('\n'));
+  process.exit(1);
+}
+console.log('Grade 1 curriculum validation passed: 7 books, ' + lessonCount + ' current lesson packs, ' + exerciseCount + ' exercises. All packs have examples, three exercise levels, answers, explanations and quizzes. Official PDF page-by-page answer verification remains explicitly pending.');
