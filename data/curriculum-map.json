@@ -78,7 +78,16 @@
           "curriculum_year": "۱۴۰۵–۱۴۰۶",
           "source_url": "https://www.daneshchi.ir/riazi-1/",
           "pdf_url": "https://dl.daneshchi.ir/file/chap-school/Riazi-1_Daneshchi.iR.pdf",
-          "status": "pdf_linked_page_review_pending"
+          "status": "175_page_lessons_authored_needs_official_activity_review",
+          "page_lesson_count": 175,
+          "page_lesson_structure": {
+            "themes": 25,
+            "pages_per_theme": 7,
+            "examples_per_page": 2,
+            "exercises_per_page": 3,
+            "quiz_questions_per_page": 2,
+            "official_activity_answers": "not_yet_page_verified"
+          }
         },
         {
           "title": "جهان پیرامون اول دبستان",
@@ -179,7 +188,7 @@
         }
       ],
       "status": "grade1_book_shelf_linked_content_completion_in_progress",
-      "note": "برای ریاضی پایه اول سه محور آموزشی تألیفی با مثال، تمرین سطح‌بندی‌شده و پاسخ تشریحی در برنامه بارگذاری شده‌اند؛ تطبیق با PDF رسمی ۱۴۰۵–۱۴۰۶ و بازبینی صفحه‌به‌صفحه همچنان لازم است. سایر کتاب‌ها نیز در حال تکمیل‌اند.",
+      "note": "برای ریاضی پایه اول، ۲۵ تم و ۱۷۵ صفحه آموزشی تألیفی در برنامه ثبت و به کتابخانه متصل شده است؛ برای جلوگیری از معرفی پاسخ حدسی به‌عنوان پاسخ رسمی، تمرین‌های عین کتاب فقط پس از مقابله با همان صفحه تأیید می‌شوند. بسته‌های فارسی، نگارش، جهان پیرامون و قرآن نیز در برنامه قرار دارند.",
       "authored_packages": [
         {
           "subject": "ریاضی",
@@ -213,6 +222,17 @@
           "examples": 3,
           "exercises": 9,
           "quiz": "از پنج تمرین نخست بسته"
+        },
+        {
+          "subject": "ریاضی",
+          "topic": "آموزش صفحه‌به‌صفحه ۱ تا ۱۷۵",
+          "title": "۱۷۵ درس آموزشی صفحه‌محور در ۲۵ تم",
+          "status": "authored_needs_official_activity_review",
+          "official_match": false,
+          "lesson_count": 175,
+          "examples": 350,
+          "exercises": 525,
+          "quiz_questions": 350
         }
       ],
       "authored_package_count": 3,
