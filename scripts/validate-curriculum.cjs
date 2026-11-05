@@ -17,7 +17,7 @@ for (let grade = 1; grade <= 9; grade++) {
   for (const [subject, topics] of Object.entries(subjects)) for (const [topic, lesson] of Object.entries(topics || {})) {
     lessonCount++;
     for (const key of ['title','goals','prerequisites','explanation','examples','mistakes','keyPoints','exercises']) if (!(key in lesson)) errors.push(grade+'/'+subject+'/'+topic+': missing '+key);
-    if (!Array.isArray(lesson.examples) || lesson.examples.length < 1) errors.push(grade+'/'+topic+': needs a worked example');
+    if (!Array.isArray(lesson.examples) || lesson.examples.length < 2) errors.push(grade+'/'+topic+': needs at least 2 worked examples');
     if (!Array.isArray(lesson.exercises) || lesson.exercises.length < 5) errors.push(grade+'/'+topic+': needs at least 5 exercises');
     const levels = new Set((lesson.exercises || []).map(ex => ex.level));
     for (const level of ['آسان','متوسط','چالشی']) if (!levels.has(level)) errors.push(grade+'/'+topic+': missing '+level+' exercise');
