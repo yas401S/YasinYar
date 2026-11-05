@@ -33,7 +33,7 @@ const errors = [];
 let lessonCount = 0;
 let exerciseCount = 0;
 const expected = [
-  ['فارسی', 40, 55],
+  ['فارسی', 40, 54],
   ['نگارش فارسی', 37, 37],
   ['ریاضی', 11, 11],
   ['جهان پیرامون', 18, 18],
