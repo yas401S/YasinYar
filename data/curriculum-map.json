@@ -153,7 +153,10 @@
                 "یک سال رنگارنگ"
               ]
             }
-          ]
+          ],
+          "authored_lessons": 18,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "note": "برای هر ۱۸ درس بسته تألیفی شامل آموزش مفهومی، دو مثال کاربردی، تمرین آسان/متوسط/چالشی با پاسخ تشریحی و آزمونک آماده است؛ هنوز پاسخ فعالیت‌های رسمی با PDF صفحه‌به‌صفحه تطبیق نشده است."
         },
         {
           "title": "آموزش قرآن بخش اول (اجرای آزمایشی)",
@@ -261,6 +264,17 @@
           "examples": 20,
           "exercises": 60,
           "quiz_questions": 20
+        },
+        {
+          "subject": "جهان پیرامون",
+          "topic": "۷ فصل و ۱۸ درس",
+          "title": "بسته آموزشی تألیفی جهان پیرامون پایه اول",
+          "status": "draft_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 18,
+          "examples": 36,
+          "exercises": 54,
+          "quiz_questions": 54
         }
       ],
       "authored_package_count": 3,
