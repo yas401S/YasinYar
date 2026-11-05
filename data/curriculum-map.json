@@ -18,55 +18,160 @@
       "grade": 1,
       "books": [],
       "status": "missing",
-      "note": "فهرست کتاب‌ها و فصل‌ها باید از PDF رسمی همان پایه استخراج و بازبینی شود."
+      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "authored_packages": [
+        {
+          "subject": "ریاضی",
+          "topic": "شمارش و مقایسه عددها",
+          "title": "شمارش، شناخت عدد و مقایسه",
+          "status": "authored_needs_review",
+          "official_match": false
+        }
+      ],
+      "authored_package_count": 1
     },
     {
       "grade": 2,
       "books": [],
       "status": "missing",
-      "note": "فهرست کتاب‌ها و فصل‌ها باید از PDF رسمی همان پایه استخراج و بازبینی شود."
+      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "authored_packages": [
+        {
+          "subject": "ریاضی",
+          "topic": "عددها و ارزش مکانی",
+          "title": "عددها و ارزش مکانی",
+          "status": "authored_needs_review",
+          "official_match": false
+        }
+      ],
+      "authored_package_count": 1
     },
     {
       "grade": 3,
       "books": [],
       "status": "missing",
-      "note": "فهرست کتاب‌ها و فصل‌ها باید از PDF رسمی همان پایه استخراج و بازبینی شود."
+      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "authored_packages": [
+        {
+          "subject": "ریاضی",
+          "topic": "ضرب و تقسیم",
+          "title": "معنای ضرب و تقسیم",
+          "status": "authored_needs_review",
+          "official_match": false
+        }
+      ],
+      "authored_package_count": 1
     },
     {
       "grade": 4,
       "books": [],
       "status": "missing",
-      "note": "فهرست کتاب‌ها و فصل‌ها باید از PDF رسمی همان پایه استخراج و بازبینی شود."
+      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "authored_packages": [
+        {
+          "subject": "ریاضی",
+          "topic": "عددهای بزرگ و عملیات",
+          "title": "عددهای بزرگ و محاسبه دقیق",
+          "status": "authored_needs_review",
+          "official_match": false
+        }
+      ],
+      "authored_package_count": 1
     },
     {
       "grade": 5,
       "books": [],
       "status": "missing",
-      "note": "فهرست کتاب‌ها و فصل‌ها باید از PDF رسمی همان پایه استخراج و بازبینی شود."
+      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "authored_packages": [
+        {
+          "subject": "ریاضی",
+          "topic": "عددنویسی و عملیات",
+          "title": "عددنویسی و چهار عمل اصلی",
+          "status": "authored_needs_review",
+          "official_match": false
+        }
+      ],
+      "authored_package_count": 1
     },
     {
       "grade": 6,
       "books": [],
       "status": "missing",
-      "note": "فهرست کتاب‌ها و فصل‌ها باید از PDF رسمی همان پایه استخراج و بازبینی شود."
+      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "authored_packages": [
+        {
+          "subject": "ریاضی",
+          "topic": "کسرها و عددهای اعشاری",
+          "title": "کسرها و عددهای اعشاری",
+          "status": "authored_needs_review",
+          "official_match": false
+        }
+      ],
+      "authored_package_count": 1
     },
     {
       "grade": 7,
       "books": [],
       "status": "missing",
-      "note": "فهرست کتاب‌ها و فصل‌ها باید از PDF رسمی همان پایه استخراج و بازبینی شود."
+      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "authored_packages": [
+        {
+          "subject": "ریاضی",
+          "topic": "عددهای صحیح و گویا",
+          "title": "عددهای صحیح و مقایسه روی محور",
+          "status": "authored_needs_review",
+          "official_match": false
+        }
+      ],
+      "authored_package_count": 1
     },
     {
       "grade": 8,
       "books": [],
       "status": "missing",
-      "note": "فهرست کتاب‌ها و فصل‌ها باید از PDF رسمی همان پایه استخراج و بازبینی شود."
+      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "authored_packages": [
+        {
+          "subject": "ریاضی",
+          "topic": "عددهای گویا و توان",
+          "title": "عددهای گویا و مفهوم توان",
+          "status": "authored_needs_review",
+          "official_match": false
+        }
+      ],
+      "authored_package_count": 1
     },
     {
       "grade": 9,
       "books": [],
       "status": "missing",
-      "note": "فهرست کتاب‌ها و فصل‌ها باید از PDF رسمی همان پایه استخراج و بازبینی شود."
+      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "authored_packages": [
+        {
+          "subject": "ریاضی",
+          "topic": "مجموعه‌ها و عددهای حقیقی",
+          "title": "مجموعه‌ها و دسته‌بندی عددها",
+          "status": "authored_needs_review",
+          "official_match": false
+        }
+      ],
+      "authored_package_count": 1
     }
-  ]
+  ],
+  "coverage_policy": {
+    "official_catalog": "فقط از PDF رسمی سال تحصیلی جاری ثبت شود.",
+    "authored_content": "محتوای تألیفی با وضعیت authored_needs_review ثبت شود.",
+    "complete_requires": [
+      "official_chapter_match",
+      "lesson_explanation",
+      "at_least_two_examples",
+      "easy_medium_hard_exercises",
+      "quiz",
+      "short_memory_answers",
+      "full_explanations",
+      "academic_review"
+    ],
+    "never_infer_chapter_titles": true
+  }
 }
