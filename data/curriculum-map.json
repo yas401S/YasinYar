@@ -2,9 +2,9 @@
   "schema_version": "1.0",
   "curriculum_year": "۱۴۰۵–۱۴۰۶",
   "language": "fa",
-  "official_source": "https://chap.sch.ir/",
-  "source_status": "official_catalog_not_yet_imported",
-  "notice": "فهرست کتاب‌ها و فصل‌ها تا زمان دریافت و بررسی PDF رسمی در این فایل ثبت نشده است؛ عنوان یا تعداد فصل حدس زده نشود.",
+  "official_source": "https://chap.oerp.ir/",
+  "source_status": "new_1405_1406_grade1_catalog_refresh_required",
+  "notice": "نسخه‌های جدید کتاب‌های پایه اول و دوم در پایگاه رسمی بارگذاری شده‌اند؛ عنوان‌ها و PDFهای قبلی تا تطبیق با فهرست تازه، قطعی تلقی نشوند.",
   "completion_rule": "یک فصل فقط وقتی complete است که درس‌نامه، مثال حل‌شده، تمرین سطح‌بندی‌شده، آزمون، پاسخ کوتاه حفظی، پاسخ تشریحی و بازبینی علمی داشته باشد.",
   "status_values": [
     "missing",
@@ -43,7 +43,8 @@
           ],
           "authored_lessons": 32,
           "authored_status": "draft_original_content_needs_official_page_review",
-          "note": "بسته‌های تألیفی نگاره‌ها و آموزش نشانه‌ها به برنامه متصل‌اند؛ تمرین‌های تکمیلی عمومی‌اند و تا تطبیق با چاپ رسمی، پاسخ فعالیت‌های عین کتاب محسوب نمی‌شوند."
+          "note": "بسته‌های تألیفی نگاره‌ها و آموزش نشانه‌ها به برنامه متصل‌اند؛ تمرین‌های تکمیلی عمومی‌اند و تا تطبیق با چاپ رسمی، پاسخ فعالیت‌های عین کتاب محسوب نمی‌شوند.",
+          "official_catalog_check": "required_against_current_1405_1406_catalog"
         },
         {
           "title": "نگارش فارسی اول دبستان",
@@ -76,7 +77,8 @@
           ],
           "authored_lessons": 10,
           "authored_status": "draft_original_content_needs_official_page_review",
-          "note": "۱۰ بسته مهارت‌آموزی تألیفی شامل آمادگی دست، خط‌ورزی، نشانه‌نویسی، هجانویسی، واژه‌نویسی، رونویسی، املا، کامل‌کردن جمله، جمله‌سازی و بازبینی به برنامه متصل شده‌اند؛ تمرین‌های رسمی باید با صفحات همان چاپ تطبیق شوند."
+          "note": "۱۰ بسته مهارت‌آموزی تألیفی شامل آمادگی دست، خط‌ورزی، نشانه‌نویسی، هجانویسی، واژه‌نویسی، رونویسی، املا، کامل‌کردن جمله، جمله‌سازی و بازبینی به برنامه متصل شده‌اند؛ تمرین‌های رسمی باید با صفحات همان چاپ تطبیق شوند.",
+          "official_catalog_check": "required_against_current_1405_1406_catalog"
         },
         {
           "title": "ریاضی اول دبستان",
@@ -93,7 +95,8 @@
             "exercises_per_page": 3,
             "quiz_questions_per_page": 2,
             "official_activity_answers": "not_yet_page_verified"
-          }
+          },
+          "official_catalog_check": "required_against_current_1405_1406_catalog"
         },
         {
           "title": "جهان پیرامون اول دبستان",
@@ -159,7 +162,8 @@
           ],
           "authored_lessons": 18,
           "authored_status": "draft_original_content_needs_official_page_review",
-          "note": "برای هر ۱۸ درس بسته تألیفی شامل آموزش مفهومی، دو مثال کاربردی، تمرین آسان/متوسط/چالشی با پاسخ تشریحی و آزمونک آماده است؛ هنوز پاسخ فعالیت‌های رسمی با PDF صفحه‌به‌صفحه تطبیق نشده است."
+          "note": "برای هر ۱۸ درس بسته تألیفی شامل آموزش مفهومی، دو مثال کاربردی، تمرین آسان/متوسط/چالشی با پاسخ تشریحی و آزمونک آماده است؛ هنوز پاسخ فعالیت‌های رسمی با PDF صفحه‌به‌صفحه تطبیق نشده است.",
+          "official_catalog_check": "required_against_current_1405_1406_catalog"
         },
         {
           "title": "آموزش قرآن بخش اول (اجرای آزمایشی)",
@@ -196,11 +200,12 @@
           ],
           "authored_lessons": 18,
           "authored_status": "draft_original_content_needs_official_page_review",
-          "note": "۷ بسته اصلی و ۱۱ ریزدرس مستقل تألیفی (در مجموع ۱۸ واحد آموزشی) به برنامه متصل‌اند؛ محتوا هنوز با PDF رسمی صفحه‌به‌صفحه مقابله نشده و پاسخ فعالیت‌های رسمی محسوب نمی‌شود."
+          "note": "۷ بسته اصلی و ۱۱ ریزدرس مستقل تألیفی (در مجموع ۱۸ واحد آموزشی) به برنامه متصل‌اند؛ محتوا هنوز با PDF رسمی صفحه‌به‌صفحه مقابله نشده و پاسخ فعالیت‌های رسمی محسوب نمی‌شود.",
+          "official_catalog_check": "required_against_current_1405_1406_catalog"
         }
       ],
       "status": "grade1_book_shelf_linked_content_completion_in_progress",
-      "note": "برای ریاضی پایه اول، ۲۵ تم و ۱۷۵ صفحه آموزشی تألیفی در برنامه ثبت و به کتابخانه متصل شده است؛ برای جلوگیری از معرفی پاسخ حدسی به‌عنوان پاسخ رسمی، تمرین‌های عین کتاب فقط پس از مقابله با همان صفحه تأیید می‌شوند. بسته‌های فارسی، نگارش، جهان پیرامون و قرآن نیز در برنامه قرار دارند.",
+      "note": "برای ریاضی پایه اول، ۲۵ تم و ۱۷۵ صفحه آموزشی تألیفی در برنامه ثبت و به کتابخانه متصل شده است؛ برای جلوگیری از معرفی پاسخ حدسی به‌عنوان پاسخ رسمی، تمرین‌های عین کتاب فقط پس از مقابله با همان صفحه تأیید می‌شوند. بسته‌های فارسی، نگارش، جهان پیرامون و قرآن نیز در برنامه قرار دارند. بسته‌های مکمل تألیفی هنر (۳ فعالیت) و تربیت‌بدنی (۳ فعالیت) نیز به انتخاب‌گر درس وصل شده‌اند؛ تکمیل نهایی همچنان نیازمند تطبیق با فهرست رسمی جدید ۱۴۰۵–۱۴۰۶ است.",
       "authored_packages": [
         {
           "subject": "ریاضی",
@@ -287,12 +292,34 @@
           "official_match": false,
           "lesson_count": 32,
           "practice_status": "supplementary_authored"
+        },
+        {
+          "subject": "هنر و خلاقیت",
+          "topic": "فعالیت‌های هنری ایمن",
+          "title": "۳ بسته فعالیت هنری پایه اول",
+          "status": "draft_needs_official_program_review",
+          "official_match": false,
+          "lesson_count": 3,
+          "examples": 6,
+          "exercises": 9,
+          "quiz_questions": 6
+        },
+        {
+          "subject": "تربیت بدنی",
+          "topic": "مهارت‌های حرکتی پایه",
+          "title": "۳ بسته فعالیت حرکتی ایمن پایه اول",
+          "status": "draft_needs_official_program_review",
+          "official_match": false,
+          "lesson_count": 3,
+          "examples": 6,
+          "exercises": 9,
+          "quiz_questions": 6
         }
       ],
-      "authored_package_count": 3,
+      "authored_package_count": 10,
       "curriculum_domains": [
         "آموزش قرآن",
-        "فارسی",
+        "فارسی و سواد خواندن",
         "ریاضی",
         "تربیت بدنی",
         "هنر و خلاقیت",
@@ -443,5 +470,6 @@
       "academic_review"
     ],
     "never_infer_chapter_titles": true
-  }
+  },
+  "official_source_alternate": "https://chap.sch.ir/"
 }
