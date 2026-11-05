@@ -630,6 +630,421 @@
         "kind": "original_practice",
         "verified": false
       }
+    },
+    {
+      "id": "YY-G1-MATH-MG-001",
+      "grade": 1,
+      "subject": "ریاضی",
+      "lesson": "اعداد و شمارش",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "۲ سیب و ۱ سیب روی هم چند سیب می‌شود؟",
+      "options": [
+        "۲",
+        "۳",
+        "۴",
+        "۱"
+      ],
+      "correct_answer": "۳",
+      "explanation_steps": [
+        "دو سیب داریم.",
+        "یک سیب دیگر اضافه می‌کنیم: ۲ + ۱ = ۳."
+      ],
+      "learning_tip": "جمع یعنی کنار هم گذاشتن مقدارها.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G1-MATH-MG-002",
+      "grade": 1,
+      "subject": "ریاضی",
+      "lesson": "اعداد و شمارش",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "عدد ۳ قبل از کدام عدد می‌آید؟",
+      "options": [
+        "۱",
+        "۲",
+        "۴",
+        "۵"
+      ],
+      "correct_answer": "۴",
+      "explanation_steps": [
+        "پس از ۱ و ۲، عدد ۳ می‌آید.",
+        "عدد بعد از ۳، عدد ۴ است."
+      ],
+      "learning_tip": "در شمارش هر بار یک واحد جلو می‌رویم.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G2-MATH-MG-003",
+      "grade": 2,
+      "subject": "ریاضی",
+      "lesson": "اعداد و عملیات",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "حاصل ۷ + ۵ چند است؟",
+      "options": [
+        "۱۰",
+        "۱۱",
+        "۱۲",
+        "۱۳"
+      ],
+      "correct_answer": "۱۲",
+      "explanation_steps": [
+        "از ۷ شروع می‌کنیم.",
+        "۵ واحد جلو می‌رویم و به ۱۲ می‌رسیم."
+      ],
+      "learning_tip": "برای جمع می‌توان از عدد بزرگ‌تر شروع کرد.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G2-MATH-MG-004",
+      "grade": 2,
+      "subject": "ریاضی",
+      "lesson": "اعداد و عملیات",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "عدد ۴۲ چند ده‌تایی و چند یکی دارد؟",
+      "options": [
+        "۲ ده‌تایی و ۴ یکی",
+        "۴ ده‌تایی و ۲ یکی",
+        "۴ ده‌تایی و ۴ یکی",
+        "۲ ده‌تایی و ۲ یکی"
+      ],
+      "correct_answer": "۴ ده‌تایی و ۲ یکی",
+      "explanation_steps": [
+        "رقم ۴ در جایگاه دهگان است.",
+        "رقم ۲ در جایگاه یکان است."
+      ],
+      "learning_tip": "جایگاه رقم، ارزش آن را مشخص می‌کند.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G3-MATH-MG-005",
+      "grade": 3,
+      "subject": "ریاضی",
+      "lesson": "ضرب و هندسه",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "حاصل ۶ × ۴ چیست؟",
+      "options": [
+        "۱۸",
+        "۲۰",
+        "۲۴",
+        "۲۸"
+      ],
+      "correct_answer": "۲۴",
+      "explanation_steps": [
+        "۶ گروه ۴تایی داریم.",
+        "۴ + ۴ + ۴ + ۴ + ۴ + ۴ = ۲۴."
+      ],
+      "learning_tip": "ضرب، جمع تکراری گروه‌های مساوی است.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G3-MATH-MG-006",
+      "grade": 3,
+      "subject": "ریاضی",
+      "lesson": "هندسه",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "محیط مربعی با ضلع ۳ سانتی‌متر چند است؟",
+      "options": [
+        "۶",
+        "۹",
+        "۱۲",
+        "۱۵"
+      ],
+      "correct_answer": "۱۲",
+      "explanation_steps": [
+        "مربع ۴ ضلع مساوی دارد.",
+        "۴ × ۳ = ۱۲ سانتی‌متر."
+      ],
+      "learning_tip": "محیط یعنی اندازه دور شکل.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G4-MATH-MG-007",
+      "grade": 4,
+      "subject": "ریاضی",
+      "lesson": "اعداد و عملیات",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "حاصل ۳۶ ÷ ۴ چند است؟",
+      "options": [
+        "۸",
+        "۹",
+        "۱۰",
+        "۱۲"
+      ],
+      "correct_answer": "۹",
+      "explanation_steps": [
+        "۳۶ را به ۴ گروه مساوی تقسیم می‌کنیم.",
+        "۴ × ۹ = ۳۶، پس جواب ۹ است."
+      ],
+      "learning_tip": "تقسیم یعنی پخش کردن برابر.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G4-MATH-MG-008",
+      "grade": 4,
+      "subject": "ریاضی",
+      "lesson": "هندسه",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "مساحت مستطیل با طول ۵ و عرض ۲ چند است؟",
+      "options": [
+        "۷",
+        "۱۰",
+        "۱۲",
+        "۱۴"
+      ],
+      "correct_answer": "۱۰",
+      "explanation_steps": [
+        "مساحت مستطیل = طول × عرض.",
+        "۵ × ۲ = ۱۰."
+      ],
+      "learning_tip": "واحد مساحت، واحد مربع است.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G5-MATH-MG-009",
+      "grade": 5,
+      "subject": "ریاضی",
+      "lesson": "اعداد و عملیات",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "حاصل ۱۲۵ + ۲۷۵ چیست؟",
+      "options": [
+        "۳۰۰",
+        "۳۵۰",
+        "۴۰۰",
+        "۴۵۰"
+      ],
+      "correct_answer": "۴۰۰",
+      "explanation_steps": [
+        "۱۲۵ + ۲۷۵ را جمع می‌کنیم.",
+        "۱۰۰ + ۲۰۰ = ۳۰۰ و ۲۵ + ۷۵ = ۱۰۰؛ مجموع ۴۰۰."
+      ],
+      "learning_tip": "ارزش مکانی را هنگام جمع رعایت کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G5-MATH-MG-010",
+      "grade": 5,
+      "subject": "ریاضی",
+      "lesson": "کسرها",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "کدام کسر با ۱/۲ برابر است؟",
+      "options": [
+        "۲/۳",
+        "۲/۴",
+        "۱/۳",
+        "۳/۵"
+      ],
+      "correct_answer": "۲/۴",
+      "explanation_steps": [
+        "صورت و مخرج ۱/۲ را در ۲ ضرب می‌کنیم.",
+        "۱/۲ = ۲/۴."
+      ],
+      "learning_tip": "برای ساخت کسر مساوی، صورت و مخرج را در عددی یکسان ضرب کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G7-MATH-MG-011",
+      "grade": 7,
+      "subject": "ریاضی",
+      "lesson": "جبر و معادله",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "اگر x + ۵ = ۱۲ باشد، x چند است؟",
+      "options": [
+        "۵",
+        "۶",
+        "۷",
+        "۸"
+      ],
+      "correct_answer": "۷",
+      "explanation_steps": [
+        "از دو طرف معادله ۵ کم می‌کنیم.",
+        "x = ۱۲ − ۵ = ۷."
+      ],
+      "learning_tip": "عمل یک طرف معادله را با همان عمل روی طرف دیگر انجام بده.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G7-MATH-MG-012",
+      "grade": 7,
+      "subject": "ریاضی",
+      "lesson": "اعداد صحیح",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "عدد منفی ۳ روی محور اعداد در کدام سمت صفر است؟",
+      "options": [
+        "راست",
+        "چپ",
+        "روی صفر",
+        "بالای صفر"
+      ],
+      "correct_answer": "چپ",
+      "explanation_steps": [
+        "عددهای مثبت سمت راست صفرند.",
+        "عددهای منفی سمت چپ صفر قرار می‌گیرند."
+      ],
+      "learning_tip": "عددهای منفی در سمت چپ صفر هستند.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G8-MATH-MG-013",
+      "grade": 8,
+      "subject": "ریاضی",
+      "lesson": "جبر و عبارت‌ها",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "حاصل ۳x + ۲x کدام است؟",
+      "options": [
+        "۵",
+        "۵x",
+        "۶x",
+        "x"
+      ],
+      "correct_answer": "۵x",
+      "explanation_steps": [
+        "جمله‌های هم‌نوع را با جمع ضریب‌ها ساده می‌کنیم.",
+        "۳x + ۲x = ۵x."
+      ],
+      "learning_tip": "فقط جمله‌های هم‌نوع را مستقیم جمع کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G8-MATH-MG-014",
+      "grade": 8,
+      "subject": "ریاضی",
+      "lesson": "هندسه",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "مجموع زاویه‌های داخلی یک مثلث چند درجه است؟",
+      "options": [
+        "۹۰",
+        "۱۸۰",
+        "۲۷۰",
+        "۳۶۰"
+      ],
+      "correct_answer": "۱۸۰",
+      "explanation_steps": [
+        "در هر مثلث سه زاویه داخلی وجود دارد.",
+        "مجموع آن‌ها همیشه ۱۸۰ درجه است."
+      ],
+      "learning_tip": "مجموع زاویه‌های داخلی مثلث ثابت است.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G9-MATH-MG-015",
+      "grade": 9,
+      "subject": "ریاضی",
+      "lesson": "جبر و معادله",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "اگر ۲x = ۱۸ باشد، x چند است؟",
+      "options": [
+        "۶",
+        "۸",
+        "۹",
+        "۱۲"
+      ],
+      "correct_answer": "۹",
+      "explanation_steps": [
+        "دو طرف معادله را بر ۲ تقسیم می‌کنیم.",
+        "x = ۱۸ ÷ ۲ = ۹."
+      ],
+      "learning_tip": "برای حل معادله از عمل معکوس استفاده کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G9-MATH-MG-016",
+      "grade": 9,
+      "subject": "ریاضی",
+      "lesson": "هندسه",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "وتر مثلث قائم‌الزاویه با ضلع‌های قائم ۳ و ۴ چند است؟",
+      "options": [
+        "۵",
+        "۶",
+        "۷",
+        "۸"
+      ],
+      "correct_answer": "۵",
+      "explanation_steps": [
+        "طبق قضیه فیثاغورس: وتر² = ۳² + ۴².",
+        "وتر² = ۹ + ۱۶ = ۲۵، پس وتر = ۵."
+      ],
+      "learning_tip": "قضیه فیثاغورس برای مثلث قائم‌الزاویه است.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
     }
-  ]
+  ],
+  "coverage": {
+    "phase": "multi_grade_math_seed",
+    "grades_with_questions": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "note": "سؤال‌های جدید تألیفی و اولیه‌اند؛ محتوای رسمی کتاب درسی محسوب نمی‌شوند و باید پیش از انتشار آموزشی بازبینی شوند."
+  }
 }
