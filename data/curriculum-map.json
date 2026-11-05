@@ -184,7 +184,10 @@
                 "نماز"
               ]
             }
-          ]
+          ],
+          "authored_lessons": 7,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "note": "۷ بسته آموزشی تألیفی برای مهربانی‌ها، پیام‌ها، سوره حمد، سوره توحید، دعا، وضو و نماز به برنامه متصل شده‌اند؛ تمرین‌های رسمی هنوز با PDF صفحه‌به‌صفحه مقابله نشده‌اند."
         }
       ],
       "status": "grade1_book_shelf_linked_content_completion_in_progress",
@@ -233,6 +236,17 @@
           "examples": 350,
           "exercises": 525,
           "quiz_questions": 350
+        },
+        {
+          "subject": "قرآن و هدیه‌های آسمان",
+          "topic": "آموزش مفهومی پایه اول",
+          "title": "۷ بسته آموزشی تألیفی قرآن",
+          "status": "draft_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 7,
+          "examples": 14,
+          "exercises": 21,
+          "quiz_questions": 14
         }
       ],
       "authored_package_count": 3,
