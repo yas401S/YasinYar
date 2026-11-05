@@ -139,7 +139,7 @@
         },
         {
           "title": "آموزش قرآن بخش اول (اجرای آزمایشی)",
-          "subject": "آموزش قرآن",
+          "subject": "قرآن و هدیه‌های آسمان",
           "curriculum_year": "۱۴۰۵–۱۴۰۶",
           "official_source": "https://chap.oerp.ir/",
           "catalog_source": "https://www.daneshchi.ir/quran-az-1/",
@@ -167,7 +167,8 @@
           "authored_status": "draft_original_content_needs_official_page_review",
           "official_pdf_page_match": false,
           "note": "فهرست چاپ جاری ۴ فصل و ۲۳ درس/واحد شماره‌دار را نشان می‌دهد؛ درس‌نامه‌های تألیفی به عناوین مستقل تقسیم شده‌اند. متن و صوت تلاوت باید از منبع معتبر دنبال شود.",
-          "official_catalog_check": "catalog_list_found_pdf_page_review_pending"
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending",
+          "official_subject_title": "آموزش قرآن"
         },
         {
           "title": "کتاب کار هنر و خلاقیت",
