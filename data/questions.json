@@ -2,17 +2,634 @@
   "schema_version": "1.0",
   "app": "YasinYar",
   "language": "fa",
-  "grades": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  "question_types": ["multiple_choice", "short_answer", "true_false", "fill_blank", "problem_solving", "conceptual"],
-  "difficulty_levels": ["easy", "medium", "advanced"],
+  "grades": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "question_types": [
+    "multiple_choice",
+    "short_answer",
+    "true_false",
+    "fill_blank",
+    "problem_solving",
+    "conceptual"
+  ],
+  "difficulty_levels": [
+    "easy",
+    "medium",
+    "advanced"
+  ],
   "questions": [
-    {"id":"YY-G6-MATH-001","grade":6,"subject":"ریاضی","lesson":"کسرها","type":"multiple_choice","difficulty":"easy","question":"حاصل ۱/۲ + ۱/۴ کدام است؟","options":["۱/۶","۲/۶","۳/۴","۱/۸"],"correct_answer":"۳/۴","explanation_steps":["مخرج مشترک ۴ انتخاب می‌کنیم.","۱/۲ برابر ۲/۴ است.","۲/۴ + ۱/۴ = ۳/۴."],"learning_tip":"برای جمع کسرها ابتدا مخرج‌ها را یکسان کن.","source":{"kind":"original_practice","verified":false}},
-    {"id":"YY-G6-MATH-002","grade":6,"subject":"ریاضی","lesson":"کسرها","type":"multiple_choice","difficulty":"easy","question":"کدام کسر بزرگ‌تر است؟","options":["۱/۳","۱/۲","۱/۴","۱/۵"],"correct_answer":"۱/۲","explanation_steps":["وقتی صورت کسرها برابر ۱ است، هرچه مخرج کوچک‌تر باشد کسر بزرگ‌تر است.","پس ۱/۲ از بقیه بزرگ‌تر است."],"learning_tip":"کسرهای واحد را با توجه به مخرج مقایسه کن.","source":{"kind":"original_practice","verified":false}},
-    {"id":"YY-G6-MATH-003","grade":6,"subject":"ریاضی","lesson":"کسرها","type":"multiple_choice","difficulty":"easy","question":"حاصل ۳/۴ − ۱/۴ چند است؟","options":["۱/۲","۲/۸","۴/۸","۱"],"correct_answer":"۱/۲","explanation_steps":["مخرج‌ها برابرند؛ صورت‌ها را کم می‌کنیم.","۳/۴ − ۱/۴ = ۲/۴ = ۱/۲."],"learning_tip":"در تفریق کسرهای هم‌مخرج، مخرج ثابت می‌ماند.","source":{"kind":"original_practice","verified":false}},
-    {"id":"YY-G6-MATH-004","grade":6,"subject":"ریاضی","lesson":"کسرها","type":"multiple_choice","difficulty":"easy","question":"کدام عدد با ۲/۴ برابر است؟","options":["۱/۳","۳/۴","۱/۲","۲/۳"],"correct_answer":"۱/۲","explanation_steps":["صورت و مخرج ۲/۴ را بر ۲ تقسیم می‌کنیم.","۲/۴ = ۱/۲."],"learning_tip":"برای ساده‌کردن کسر، صورت و مخرج را بر یک عدد مشترک تقسیم کن.","source":{"kind":"original_practice","verified":false}},
-    {"id":"YY-G6-MATH-005","grade":6,"subject":"ریاضی","lesson":"عددهای اعشاری","type":"multiple_choice","difficulty":"easy","question":"حاصل ۲٫۵ + ۱٫۲ چند است؟","options":["۳٫۵","۳٫۷","۲٫۷","۴٫۲"],"correct_answer":"۳٫۷","explanation_steps":["ممیزها را زیر هم قرار می‌دهیم.","دهم‌ها: ۵ + ۲ = ۷ دهم.","عددهای صحیح: ۲ + ۱ = ۳؛ پاسخ ۳٫۷ است."],"learning_tip":"در جمع اعشاری، ممیزها باید زیر هم باشند.","source":{"kind":"original_practice","verified":false}},
-    {"id":"YY-G6-MATH-006","grade":6,"subject":"ریاضی","lesson":"عددهای اعشاری","type":"multiple_choice","difficulty":"easy","question":"کدام عدد کوچک‌تر است؟","options":["۰٫۸","۰٫۵","۰٫۹","۱٫۰"],"correct_answer":"۰٫۵","explanation_steps":["همه عددها را تا یک رقم اعشار می‌خوانیم.","۵ دهم از ۸ دهم و ۹ دهم کوچک‌تر است."],"learning_tip":"ارزش رقم‌های اعشاری را از چپ به راست مقایسه کن.","source":{"kind":"original_practice","verified":false}},
-    {"id":"YY-G6-MATH-007","grade":6,"subject":"ریاضی","lesson":"عددهای اعشاری","type":"multiple_choice","difficulty":"easy","question":"حاصل ۴٫۰ − ۱٫۵ چند است؟","options":["۲٫۵","۳٫۵","۲٫۰","۱٫۵"],"correct_answer":"۲٫۵","explanation_steps":["۴٫۰ را به صورت ۳٫۱۰ در نظر می‌گیریم.","۳٫۱۰ − ۱٫۵۰ = ۲٫۵۰.","پاسخ ۲٫۵ است."],"learning_tip":"برای تفریق اعشاری می‌توان صفر انتهای عدد اضافه کرد.","source":{"kind":"original_practice","verified":false}},
-    {"id":"YY-G6-MATH-008","grade":6,"subject":"ریاضی","lesson":"عددهای اعشاری","type":"multiple_choice","difficulty":"easy","question":"عدد ۰٫۳ برابر چند دهم است؟","options":["۳ دهم","۳ صدم","۳۰ دهم","۱ دهم"],"correct_answer":"۳ دهم","explanation_steps":["رقم اول بعد از ممیز، رقم دهم‌هاست.","پس ۰٫۳ یعنی سه دهم."],"learning_tip":"اولین رقم بعد از ممیز، دهم را نشان می‌دهد.","source":{"kind":"original_practice","verified":false}}
+    {
+      "id": "YY-G6-MATH-001",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "کسرها",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "حاصل ۱/۲ + ۱/۴ کدام است؟",
+      "options": [
+        "۱/۶",
+        "۲/۶",
+        "۳/۴",
+        "۱/۸"
+      ],
+      "correct_answer": "۳/۴",
+      "explanation_steps": [
+        "مخرج مشترک ۴ انتخاب می‌کنیم.",
+        "۱/۲ برابر ۲/۴ است.",
+        "۲/۴ + ۱/۴ = ۳/۴."
+      ],
+      "learning_tip": "برای جمع کسرها ابتدا مخرج‌ها را یکسان کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-002",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "کسرها",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "کدام کسر بزرگ‌تر است؟",
+      "options": [
+        "۱/۳",
+        "۱/۲",
+        "۱/۴",
+        "۱/۵"
+      ],
+      "correct_answer": "۱/۲",
+      "explanation_steps": [
+        "وقتی صورت کسرها برابر ۱ است، مخرج کوچک‌تر کسر بزرگ‌تری می‌سازد.",
+        "پس ۱/۲ بزرگ‌تر است."
+      ],
+      "learning_tip": "کسرهای واحد را با توجه به مخرج مقایسه کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-003",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "کسرها",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "حاصل ۳/۴ − ۱/۴ چند است؟",
+      "options": [
+        "۱/۲",
+        "۲/۸",
+        "۴/۸",
+        "۱"
+      ],
+      "correct_answer": "۱/۲",
+      "explanation_steps": [
+        "مخرج‌ها برابرند؛ صورت‌ها را کم می‌کنیم.",
+        "۳/۴ − ۱/۴ = ۲/۴ = ۱/۲."
+      ],
+      "learning_tip": "در تفریق کسرهای هم‌مخرج، مخرج ثابت می‌ماند.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-004",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "کسرها",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "کدام عدد با ۲/۴ برابر است؟",
+      "options": [
+        "۱/۳",
+        "۳/۴",
+        "۱/۲",
+        "۲/۳"
+      ],
+      "correct_answer": "۱/۲",
+      "explanation_steps": [
+        "صورت و مخرج ۲/۴ را بر ۲ تقسیم می‌کنیم.",
+        "۲/۴ = ۱/۲."
+      ],
+      "learning_tip": "برای ساده‌کردن کسر، صورت و مخرج را بر یک عدد مشترک تقسیم کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-005",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "کسرها",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "حاصل ۲/۳ + ۱/۳ چیست؟",
+      "options": [
+        "۱/۳",
+        "۳/۶",
+        "۱",
+        "۲/۹"
+      ],
+      "correct_answer": "۱",
+      "explanation_steps": [
+        "مخرج‌ها برابرند.",
+        "صورت‌ها را جمع می‌کنیم: ۲ + ۱ = ۳.",
+        "۳/۳ برابر ۱ است."
+      ],
+      "learning_tip": "کسر با صورت و مخرج برابر با ۱ مساوی است.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-006",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "کسرها",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "کدام کسر با ۳/۵ برابر است؟",
+      "options": [
+        "۶/۱۰",
+        "۳/۱۰",
+        "۵/۶",
+        "۹/۱۰"
+      ],
+      "correct_answer": "۶/۱۰",
+      "explanation_steps": [
+        "صورت و مخرج را در ۲ ضرب می‌کنیم.",
+        "۳/۵ = ۶/۱۰."
+      ],
+      "learning_tip": "برای ساختن کسر مساوی، صورت و مخرج را در یک عدد یکسان ضرب کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-007",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "کسرها",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "حاصل ۵/۶ − ۲/۶ چیست؟",
+      "options": [
+        "۲/۶",
+        "۳/۶",
+        "۷/۶",
+        "۱/۶"
+      ],
+      "correct_answer": "۳/۶",
+      "explanation_steps": [
+        "مخرج‌ها برابرند.",
+        "۵ منهای ۲ برابر ۳ است.",
+        "پاسخ ۳/۶ است که می‌توان آن را به ۱/۲ ساده کرد."
+      ],
+      "learning_tip": "پس از محاسبه، در صورت امکان کسر را ساده کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-008",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "کسرها",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "یک‌چهارمِ ۲۰ چند می‌شود؟",
+      "options": [
+        "۴",
+        "۵",
+        "۸",
+        "۱۰"
+      ],
+      "correct_answer": "۵",
+      "explanation_steps": [
+        "یک‌چهارم یعنی تقسیم بر ۴.",
+        "۲۰ ÷ ۴ = ۵."
+      ],
+      "learning_tip": "برای پیدا کردن یک کسر از یک عدد، عدد را در کسر ضرب کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-009",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "عددهای اعشاری",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "حاصل ۲٫۵ + ۱٫۲ چند است؟",
+      "options": [
+        "۳٫۵",
+        "۳٫۷",
+        "۲٫۷",
+        "۴٫۲"
+      ],
+      "correct_answer": "۳٫۷",
+      "explanation_steps": [
+        "ممیزها را زیر هم قرار می‌دهیم.",
+        "۵ دهم + ۲ دهم = ۷ دهم.",
+        "۲ + ۱ = ۳؛ پاسخ ۳٫۷ است."
+      ],
+      "learning_tip": "در جمع اعشاری، ممیزها باید زیر هم باشند.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-010",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "عددهای اعشاری",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "کدام عدد کوچک‌تر است؟",
+      "options": [
+        "۰٫۸",
+        "۰٫۵",
+        "۰٫۹",
+        "۱٫۰"
+      ],
+      "correct_answer": "۰٫۵",
+      "explanation_steps": [
+        "۵ دهم از ۸ دهم و ۹ دهم کوچک‌تر است."
+      ],
+      "learning_tip": "ارزش رقم‌های اعشاری را مقایسه کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-011",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "عددهای اعشاری",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "حاصل ۴٫۰ − ۱٫۵ چند است؟",
+      "options": [
+        "۲٫۵",
+        "۳٫۵",
+        "۲٫۰",
+        "۱٫۵"
+      ],
+      "correct_answer": "۲٫۵",
+      "explanation_steps": [
+        "۴٫۰ را به صورت ۳٫۱۰ در نظر می‌گیریم.",
+        "۳٫۱۰ − ۱٫۵۰ = ۲٫۵۰."
+      ],
+      "learning_tip": "برای تفریق اعشاری می‌توان صفر انتهای عدد اضافه کرد.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-012",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "عددهای اعشاری",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "عدد ۰٫۳ برابر چند دهم است؟",
+      "options": [
+        "۳ دهم",
+        "۳ صدم",
+        "۳۰ دهم",
+        "۱ دهم"
+      ],
+      "correct_answer": "۳ دهم",
+      "explanation_steps": [
+        "رقم اول بعد از ممیز، رقم دهم‌هاست.",
+        "پس ۰٫۳ یعنی سه دهم."
+      ],
+      "learning_tip": "اولین رقم بعد از ممیز، دهم را نشان می‌دهد.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-013",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "عددهای اعشاری",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "حاصل ۳٫۲ × ۲ چیست؟",
+      "options": [
+        "۵٫۲",
+        "۶٫۴",
+        "۶٫۲",
+        "۳٫۴"
+      ],
+      "correct_answer": "۶٫۴",
+      "explanation_steps": [
+        "۳۲ دهم را دو برابر می‌کنیم.",
+        "۶۴ دهم برابر ۶٫۴ است."
+      ],
+      "learning_tip": "برای ضرب عدد اعشاری در عدد طبیعی، می‌توان ابتدا بدون ممیز ضرب کرد.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-014",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "عددهای اعشاری",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "کدام عدد از ۲٫۰۵ بزرگ‌تر است؟",
+      "options": [
+        "۲٫۰۱",
+        "۲٫۰۴",
+        "۲٫۵",
+        "۱٫۹۹"
+      ],
+      "correct_answer": "۲٫۵",
+      "explanation_steps": [
+        "۲٫۵ را می‌توان ۲٫۵۰ نوشت.",
+        "۲٫۵۰ از ۲٫۰۵ بزرگ‌تر است."
+      ],
+      "learning_tip": "برای مقایسه اعشارها تعداد رقم‌های اعشار را با صفر برابر کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-015",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "عددهای اعشاری",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "حاصل ۰٫۷ + ۰٫۲ چیست؟",
+      "options": [
+        "۰٫۵",
+        "۰٫۹",
+        "۰٫۷۲",
+        "۱٫۲"
+      ],
+      "correct_answer": "۰٫۹",
+      "explanation_steps": [
+        "۷ دهم + ۲ دهم = ۹ دهم.",
+        "پاسخ ۰٫۹ است."
+      ],
+      "learning_tip": "دهم‌ها را با دهم‌ها جمع کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-016",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "عددهای اعشاری",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "عدد ۴۵ صدم به صورت اعشاری کدام است؟",
+      "options": [
+        "۴٫۵",
+        "۰٫۴۵",
+        "۰٫۰۴۵",
+        "۴۵٫۰"
+      ],
+      "correct_answer": "۰٫۴۵",
+      "explanation_steps": [
+        "صدم یعنی دو رقم بعد از ممیز.",
+        "۴۵ صدم برابر ۰٫۴۵ است."
+      ],
+      "learning_tip": "برای تبدیل صدم به اعشار، دو رقم پس از ممیز قرار می‌گیرد.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-017",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "هندسه",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "محیط مربعی با ضلع ۵ سانتی‌متر چند سانتی‌متر است؟",
+      "options": [
+        "۱۰",
+        "۱۵",
+        "۲۰",
+        "۲۵"
+      ],
+      "correct_answer": "۲۰",
+      "explanation_steps": [
+        "مربع چهار ضلع مساوی دارد.",
+        "محیط = ۴ × ۵ = ۲۰ سانتی‌متر."
+      ],
+      "learning_tip": "محیط مربع برابر چهار برابر اندازه یک ضلع است.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-018",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "هندسه",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "مساحت مستطیلی با طول ۶ و عرض ۳ سانتی‌متر چقدر است؟",
+      "options": [
+        "۹",
+        "۱۸",
+        "۱۲",
+        "۲۴"
+      ],
+      "correct_answer": "۱۸",
+      "explanation_steps": [
+        "مساحت مستطیل = طول × عرض.",
+        "۶ × ۳ = ۱۸ سانتی‌متر مربع."
+      ],
+      "learning_tip": "واحد مساحت با واحد طول فرق دارد و به صورت مربع نوشته می‌شود.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-019",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "هندسه",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "محیط مثلثی با ضلع‌های ۳، ۴ و ۵ سانتی‌متر چقدر است؟",
+      "options": [
+        "۷",
+        "۹",
+        "۱۲",
+        "۱۵"
+      ],
+      "correct_answer": "۱۲",
+      "explanation_steps": [
+        "برای محیط، طول همه ضلع‌ها را جمع می‌کنیم.",
+        "۳ + ۴ + ۵ = ۱۲ سانتی‌متر."
+      ],
+      "learning_tip": "محیط هر شکل از جمع طول ضلع‌های آن به دست می‌آید.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-020",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "هندسه",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "زاویه راست چند درجه است؟",
+      "options": [
+        "۴۵",
+        "۹۰",
+        "۱۸۰",
+        "۳۶۰"
+      ],
+      "correct_answer": "۹۰",
+      "explanation_steps": [
+        "زاویه راست برابر یک‌چهارم دور کامل است.",
+        "۳۶۰ ÷ ۴ = ۹۰ درجه."
+      ],
+      "learning_tip": "گوشه مربع و مستطیل زاویه راست دارد.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-021",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "نسبت و تناسب",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "اگر نسبت سیب به پرتقال ۲ به ۳ باشد، با ۴ سیب چند پرتقال لازم است؟",
+      "options": [
+        "۳",
+        "۴",
+        "۶",
+        "۸"
+      ],
+      "correct_answer": "۶",
+      "explanation_steps": [
+        "۲ سیب به ۳ پرتقال نسبت دارد.",
+        "۴ سیب دو برابر ۲ سیب است.",
+        "پس پرتقال‌ها هم دو برابر می‌شوند: ۳ × ۲ = ۶."
+      ],
+      "learning_tip": "در نسبت‌های مساوی، هر دو مقدار را در یک عدد یکسان ضرب کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-022",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "نسبت و تناسب",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "سه دفتر هرکدام ۲۰ هزار تومان هستند. قیمت ۵ دفتر چقدر است؟",
+      "options": [
+        "۶۰ هزار",
+        "۸۰ هزار",
+        "۱۰۰ هزار",
+        "۱۲۰ هزار"
+      ],
+      "correct_answer": "۱۰۰ هزار",
+      "explanation_steps": [
+        "قیمت هر دفتر ۲۰ هزار تومان است.",
+        "۵ × ۲۰ = ۱۰۰ هزار تومان."
+      ],
+      "learning_tip": "برای قیمت چند کالای هم‌قیمت، قیمت یکی را در تعداد ضرب کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-023",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "حجم",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "حجم مکعبی با ضلع ۲ سانتی‌متر چند سانتی‌متر مکعب است؟",
+      "options": [
+        "۴",
+        "۶",
+        "۸",
+        "۱۲"
+      ],
+      "correct_answer": "۸",
+      "explanation_steps": [
+        "حجم مکعب = ضلع × ضلع × ضلع.",
+        "۲ × ۲ × ۲ = ۸ سانتی‌متر مکعب."
+      ],
+      "learning_tip": "حجم مکعب با سه بار ضرب کردن اندازه ضلع به دست می‌آید.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    },
+    {
+      "id": "YY-G6-MATH-024",
+      "grade": 6,
+      "subject": "ریاضی",
+      "lesson": "حجم",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "حجم مکعب‌مستطیلی با ابعاد ۲، ۳ و ۴ سانتی‌متر چقدر است؟",
+      "options": [
+        "۹",
+        "۱۲",
+        "۱۸",
+        "۲۴"
+      ],
+      "correct_answer": "۲۴",
+      "explanation_steps": [
+        "حجم = طول × عرض × ارتفاع.",
+        "۲ × ۳ × ۴ = ۲۴ سانتی‌متر مکعب."
+      ],
+      "learning_tip": "برای حجم مکعب‌مستطیل، سه بُعد را در هم ضرب کن.",
+      "source": {
+        "kind": "original_practice",
+        "verified": false
+      }
+    }
   ]
 }
