@@ -179,17 +179,43 @@
         }
       ],
       "status": "grade1_book_shelf_linked_content_completion_in_progress",
-      "note": "کتابخانه پایه اول ساخته شده است. پیوند PDF و فهرست کتاب‌های جهان پیرامون، قرآن، نگارش و سایر منابع اضافه شده؛ حل صفحه‌به‌صفحه و فعالیت‌ها باید پس از استخراج و بررسی هر صفحه انجام شود.",
+      "note": "برای ریاضی پایه اول سه محور آموزشی تألیفی با مثال، تمرین سطح‌بندی‌شده و پاسخ تشریحی در برنامه بارگذاری شده‌اند؛ تطبیق با PDF رسمی ۱۴۰۵–۱۴۰۶ و بازبینی صفحه‌به‌صفحه همچنان لازم است. سایر کتاب‌ها نیز در حال تکمیل‌اند.",
       "authored_packages": [
         {
           "subject": "ریاضی",
           "topic": "شمارش و مقایسه عددها",
-          "title": "شمارش، شناخت عدد و مقایسه",
+          "title": "شمارش و مقایسه عددها — درس‌نامه و تمرین کامل تألیفی",
           "status": "authored_needs_review",
-          "official_match": false
+          "official_match": false,
+          "lesson_count": 1,
+          "examples": 3,
+          "exercises": 9,
+          "quiz": "از پنج تمرین نخست بسته"
+        },
+        {
+          "subject": "ریاضی",
+          "topic": "جمع و تفریق تصویری",
+          "title": "جمع و تفریق تصویری — درس‌نامه و تمرین کامل تألیفی",
+          "status": "authored_needs_review",
+          "official_match": false,
+          "lesson_count": 1,
+          "examples": 3,
+          "exercises": 9,
+          "quiz": "از پنج تمرین نخست بسته"
+        },
+        {
+          "subject": "ریاضی",
+          "topic": "شکل‌ها و الگوها",
+          "title": "شکل‌های هندسی و الگوهای ساده — درس‌نامه و تمرین کامل تألیفی",
+          "status": "authored_needs_review",
+          "official_match": false,
+          "lesson_count": 1,
+          "examples": 3,
+          "exercises": 9,
+          "quiz": "از پنج تمرین نخست بسته"
         }
       ],
-      "authored_package_count": 1,
+      "authored_package_count": 3,
       "curriculum_domains": [
         "آموزش قرآن",
         "فارسی",
