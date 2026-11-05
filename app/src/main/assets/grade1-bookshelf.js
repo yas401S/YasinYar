@@ -1,29 +1,26 @@
-/* YasinYar Grade 1 book shelf — 1405-1406
-   Official catalogue is primary. External PDFs are convenience copies and are not treated as verified editions. */
+/* کتابخانه پایه اول؛ فهرست چاپ ۱۴۰۵–۱۴۰۶ */
 (function(){
 'use strict';
-const OFFICIAL='https://chap.sch.ir/';
+const official='https://chap.oerp.ir/';
 const books=[
- {id:'farsi',title:'فارسی اول دبستان',area:'فارسی و سواد خواندن',icon:'📖',url:'https://dl.daneshchi.ir/file/chap-school/Farsi-1_Daneshchi.iR.pdf',source:'https://www.daneshchi.ir/farsi-1/',note:'نگاره‌ها و آموزش نشانه‌ها؛ آموزش و پاسخ هر صفحه تا تطبیق با چاپ رسمی در وضعیت نیازمند بررسی است.'},
- {id:'negarsh',title:'نگارش فارسی اول دبستان',area:'نوشتن و نگارش',icon:'✍️',url:'https://dl.daneshchi.ir/file/chap-school/Negaresh-1_Daneshchi.iR.pdf',source:'https://www.daneshchi.ir/negaresh-1/',note:'نگاره‌ها و آموزش نشانه‌ها؛ تمرین‌های نوشتاری باید صفحه‌به‌صفحه با نسخه رسمی بررسی شوند.'},
- {id:'math',title:'ریاضی اول دبستان',area:'ریاضی',icon:'🔢',url:'https://dl.daneshchi.ir/file/chap-school/Riazi-1_Daneshchi.iR.pdf',source:'https://www.daneshchi.ir/riazi-1/',note:'درس‌نامه، فعالیت، کاردرکلاس و تمرین هر صفحه باید با چاپ رسمی تطبیق داده شود.'},
- {id:'world',title:'جهان پیرامون اول دبستان',area:'علوم و شناخت محیط زندگی',icon:'🌍',url:'https://dl.daneshchi.ir/file/chap-school/JahaanPiramon-1_Daneshchi.iR.pdf',source:'https://www.daneshchi.ir/jahaan-piramoon-1/',note:'۷ فصل و ۱۸ درس در نقشه اولیه ثبت شده؛ پاسخ فعالیت‌ها هنوز نیازمند بازبینی صفحه‌ای است.'},
- {id:'quran',title:'آموزش قرآن اول دبستان (بخش اول)',area:'آموزش قرآن',icon:'☪️',url:'https://dl.daneshchi.ir/file/chap-school/Quran-Az-1_Daneshchi.iR.pdf',source:'https://www.daneshchi.ir/quran-az-1/',note:'فهرست اولیه ثبت شده؛ آموزش روخوانی و فعالیت‌ها باید با نسخه رسمی و راهنمای معلم تطبیق یابد.'}
+ {id:'read',title:'فارسی می‌خوانم',area:'خواندن و سواد فارسی',count:40,icon:'📖',url:'https://www.daneshchi.ir/readfarsi-1/',note:'پیش‌درآمد و باهم‌خوانی، نشانه‌های ۱ و نشانه‌های ۲؛ فهرست ۴۰ درس در منبع معرفی شده است.'},
+ {id:'write',title:'فارسی می‌نویسم',area:'نوشتن و نگارش',count:37,icon:'✍️',url:'https://www.daneshchi.ir/writefarsi-1/',note:'نقشه گنج، من، مدرسه، کلاس، زندگی در مدرسه و بخش‌های نشانه‌های ۱ و ۲.'},
+ {id:'math',title:'ریاضی دوست‌داشتنی',area:'ریاضی',count:11,icon:'🔢',url:'https://www.daneshchi.ir/lovelymath-1/',note:'کتاب اجرای آزمایشی با ۱۱ درس؛ عنوان جزئی درس‌ها در فهرست متنی منبع درج نشده است.'},
+ {id:'world',title:'جهان پیرامون',area:'شناخت جهان و محیط زندگی',count:18,icon:'🌍',url:'https://www.daneshchi.ir/jahaan-piramoon-1/',note:'۷ فصل و ۱۸ درس؛ کشف، گوناگونی، محافظت، وابستگی، استفاده، کاوش و تغییر.'},
+ {id:'quran',title:'آموزش قرآن بخش اول',area:'آموزش قرآن و رفتار نیک',count:23,icon:'☪️',url:'https://www.daneshchi.ir/quran-az-1/',note:'۴ فصل؛ مهربانی‌های خدا، پیام‌های خدا، سوره حمد و توحید، گفت‌وگو با خدای مهربان.'},
+ {id:'art',title:'کتاب کار هنر و خلاقیت',area:'هنر و خلاقیت',count:17,icon:'🎨',url:'https://www.daneshchi.ir/honar-kh-1/',note:'۱۷ درس از مشاهده طبیعت و نقطه‌وخط تا رنگ، خیال، ساختن و بازی گروهی.'},
+ {id:'move',title:'کتاب کار حرکت و بازی',area:'تربیت بدنی و مهارت حرکتی',count:12,icon:'🤸',url:'https://www.daneshchi.ir/move-game-1/',note:'۱۲ درس درباره حرکت، وضعیت بدنی، دویدن، تعادل، انعطاف، هماهنگی، پرتاب و بازی.'}
 ];
-const supporting=[{title:'راهنمای اولیا در زمینه برنامه درسی اول دبستان',url:'https://www.daneshchi.ir/rahnama-olia-1/',note:'راهنمای حوزه‌های قرآن، فارسی، ریاضی، تربیت‌بدنی، هنر و خلاقیت و جهان پیرامون.'}];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function render(){
  const host=document.getElementById('grade1BookShelf');if(!host)return;
- host.innerHTML='<div class="section-head"><h3>📚 کتاب‌های پایه اول · ۱۴۰۵–۱۴۰۶</h3><small>کتابخانه و مرور صفحه‌ای</small></div><div class="notice">مرجع اصلی نسخه جاری کتاب‌ها، پایگاه رسمی کتاب‌های درسی است. PDFهای بیرونی فقط پیوند کمکی‌اند و تا تطبیق چاپ، منبع پاسخ رسمی محسوب نمی‌شوند.</div><p class="muted"><a href="'+OFFICIAL+'" target="_blank" rel="noopener">ورود به پایگاه رسمی کتاب‌های درسی (chap.sch.ir)</a></p><div class="grid">'+books.map(b=>'<article class="card"><div class="course"><div class="course-icon">'+b.icon+'</div><div class="course-info"><b>'+esc(b.title)+'</b><small>'+esc(b.area)+'</small></div></div><p class="muted">'+esc(b.note)+'</p><div class="row"><button class="btn primary" type="button" data-book-open="'+b.id+'">مرور PDF کمکی</button><a class="btn" href="'+b.source+'" target="_blank" rel="noopener">فهرست و منبع</a></div></article>').join('')+'</div><div class="panel"><h4>🎨 حوزه‌های مکمل برنامه درسی</h4><p class="muted">هنر و خلاقیت و تربیت‌بدنی در برنامه درسی پایه اول حضور دارند، اما در این فهرست PDF مستقلِ کتاب دانش‌آموز برای آن‌ها تأیید نشده است. برایشان باید بسته فعالیت عملی و ایمنِ تألیفی ساخته شود، نه اینکه کتاب ساختگی معرفی شود.</p><p><a href="'+supporting[0].url+'" target="_blank" rel="noopener">مشاهده راهنمای اولیا</a></p></div><div id="grade1PdfViewer" class="panel hidden"><div class="row" style="justify-content:space-between"><b id="grade1PdfTitle">نمایش کتاب</b><button class="btn" type="button" id="grade1PdfClose">بستن</button></div><div class="row" style="margin:9px 0"><button class="btn" type="button" id="grade1Prev">صفحه قبل</button><label class="muted">صفحه <input id="grade1PdfPage" type="number" min="1" value="1" style="width:76px"></label><button class="btn" type="button" id="grade1Next">صفحه بعد</button><button class="btn primary" type="button" id="grade1Go">نمایش صفحه</button></div><iframe id="grade1PdfFrame" title="نمایش PDF کمکی کتاب پایه اول" style="width:100%;height:72vh;border:1px solid var(--border);border-radius:12px;background:#fff"></iframe><p class="muted">برای نسخه رسمی و کنترل سال چاپ، از پیوند پایگاه رسمی بالا استفاده کن. اگر PDF در گوشی باز نشد، از پیوند «فهرست و منبع» استفاده کن.</p></div>';
- let active=null,page=1;
- const viewer=document.getElementById('grade1PdfViewer'),frame=document.getElementById('grade1PdfFrame'),pageInput=document.getElementById('grade1PdfPage');
- function show(){if(!active)return;page=Math.max(1,Number(pageInput.value)||1);pageInput.value=page;frame.src=active.url+'#page='+page+'&view=FitH';viewer.classList.remove('hidden');viewer.scrollIntoView({behavior:'smooth',block:'start'});}
- host.querySelectorAll('[data-book-open]').forEach(btn=>btn.addEventListener('click',()=>{active=books.find(b=>b.id===btn.dataset.bookOpen);page=1;pageInput.value=1;document.getElementById('grade1PdfTitle').textContent=active.title+' · PDF کمکی';show();}));
- document.getElementById('grade1PdfClose').addEventListener('click',()=>{frame.src='about:blank';viewer.classList.add('hidden');});
- document.getElementById('grade1Go').addEventListener('click',show);
- document.getElementById('grade1Prev').addEventListener('click',()=>{pageInput.value=Math.max(1,(Number(pageInput.value)||1)-1);show();});
- document.getElementById('grade1Next').addEventListener('click',()=>{pageInput.value=(Number(pageInput.value)||1)+1;show();});
- pageInput.addEventListener('keydown',e=>{if(e.key==='Enter')show();});
+ const catalog=window.YASINYAR_GRADE1_CURRENT_CATALOG;
+ host.innerHTML='<div class="section-head"><h3>📚 کتابخانه پایه اول · سال تحصیلی ۱۴۰۵–۱۴۰۶</h3><small>فهرست به‌روزشده کتاب‌ها</small></div>'+
+ '<div class="notice"><b>۷ کتاب و بسته یادگیری پایه اول</b><p>عنوان‌ها و تعداد درس‌ها بر اساس فهرست‌های چاپ جاری ثبت شده‌اند. درس‌نامه‌های داخل یاسین‌یار تألیفی‌اند؛ پاسخ فعالیت‌های عین کتاب فقط پس از بررسی همان صفحه از PDF رسمی تأیید می‌شود.</p></div>'+
+ '<p><a class="btn primary" style="display:inline-block;text-decoration:none" href="'+official+'" target="_blank" rel="noopener">باز کردن پایگاه رسمی کتاب‌های درسی ↗</a></p>'+
+ '<div class="grid">'+books.map(b=>'<article class="card"><div class="course"><div class="course-icon">'+b.icon+'</div><div class="course-info"><b>'+esc(b.title)+'</b><small>'+esc(b.area)+'</small></div></div><p class="pill">'+fa(b.count)+' درس / واحد در فهرست</p><p class="muted">'+esc(b.note)+'</p><a class="btn" style="display:inline-block;text-decoration:none" href="'+b.url+'" target="_blank" rel="noopener">فهرست و پیوند PDF ↗</a></article>').join('')+'</div>'+
+ '<div class="panel"><h4>وضعیت محتوای آموزشی داخل برنامه</h4><p class="muted">بسته‌های مفهومی، مثال‌ها و تمرین‌های تألیفی در بخش «آموزش درس‌ها» قرار دارند. اگر یک عنوان هنوز محتوای کامل نداشته باشد، برنامه باید آن را با وضعیت نیازمند تکمیل نشان دهد؛ پاسخ ساختگی به‌عنوان پاسخ رسمی نمایش داده نمی‌شود.</p><p class="muted">برای مشاهده PDF رسمی هر کتاب، سال ۱۴۰۵–۱۴۰۶ و پایه اول را در پایگاه رسمی انتخاب کن.</p></div>';
 }
+function fa(n){return String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[+d]);}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
 })();
