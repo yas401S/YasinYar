@@ -172,3 +172,47 @@ themes.forEach((theme,t)=>{
 });
 window.YASINYAR_GRADE1_MATH_PAGES={themes,pages,total:Object.keys(pages).length};
 })();
+
+
+(function(){
+'use strict';
+function renderPageLesson(page){
+ const lesson=window.YASINYAR_GRADE1_MATH_PAGES&&window.YASINYAR_GRADE1_MATH_PAGES.pages['صفحه '+page];
+ const host=document.getElementById('grade1MathPageContent');
+ if(!host||!lesson)return;
+ if(typeof window.renderCuratedLesson==='function'){
+   host.innerHTML=window.renderCuratedLesson(1,'ریاضی','صفحه '+page);
+   const card=host.querySelector('.panel');
+   if(card){
+    card.querySelector('.muted')?.remove();
+    const note=document.createElement('p');note.className='muted';note.textContent='آموزش تألیفی صفحه‌محور؛ تمرین‌های رسمی کتاب جداگانه با تصویر همان صفحه کنترل می‌شوند.';
+    card.appendChild(note);
+   }
+ }else host.textContent=lesson.explanation.map(x=>x.head+'؛ '+x.body).join('\n');
+}
+function mount(){
+ if(window.__YASINYAR_MATH_PAGES_MOUNTED)return;
+ const root=document.getElementById('lessonContent');
+ if(!root)return;
+ window.__YASINYAR_MATH_PAGES_MOUNTED=true;
+ const box=document.createElement('section');box.className='panel';box.id='grade1MathPagesPanel';
+ box.innerHTML='<div class="section-head"><h3>🎒 کلاس ریاضی اول؛ درس به درس</h3><small>۱۷۵ صفحه آموزشی</small></div><p class="muted">صفحه کتاب را انتخاب کن تا آموزش کودکانه، مثال و تمرین همان صفحه را ببینی.</p><label for="grade1MathPageSelect">انتخاب صفحه کتاب</label><select id="grade1MathPageSelect" style="width:100%;margin:8px 0"></select><div id="grade1MathPageContent"></div>';
+ const sel=box.querySelector('#grade1MathPageSelect');
+ for(let p=1;p<=175;p++){const opt=document.createElement('option');opt.value=p;opt.textContent='صفحه '+String(p).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[+d]);sel.appendChild(opt);}
+ sel.addEventListener('change',()=>renderPageLesson(Number(sel.value)));
+ root.prepend(box);renderPageLesson(1);
+}
+function install(){
+ if(typeof window.loadLesson!=='function')return;
+ const original=window.loadLesson;
+ window.loadLesson=function(){
+  const result=original.apply(this,arguments);
+  const g=Number(document.getElementById('gradeSelect')?.value);
+  const subject=document.getElementById('subjectSelect')?.value;
+  const old=document.getElementById('grade1MathPagesPanel');if(old)old.remove();
+  if(g===1&&subject==='ریاضی')mount();
+  return result;
+ };
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
+})();
