@@ -168,7 +168,7 @@ const make=(theme,index,page)=>{
 };
 const pages={};
 themes.forEach((theme,t)=>{
- for(let j=0;j<7;j++){const page=t*7+j+1;pages['صفحه '+page]=make(theme,j,page);}
+ for(let j=0;j<7;j++){const page=t*7+j+1;const lesson=make(theme,j,page);pages['صفحه '+page]=lesson;window.YASINYAR_CURRICULUM=window.YASINYAR_CURRICULUM||{};window.YASINYAR_CURRICULUM['1']=window.YASINYAR_CURRICULUM['1']||{};window.YASINYAR_CURRICULUM['1']['ریاضی']=window.YASINYAR_CURRICULUM['1']['ریاضی']||{};window.YASINYAR_CURRICULUM['1']['ریاضی']['صفحه '+page]=lesson;}
 });
 window.YASINYAR_GRADE1_MATH_PAGES={themes,pages,total:Object.keys(pages).length};
 })();
