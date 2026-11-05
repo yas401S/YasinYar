@@ -119,6 +119,33 @@ input,select,textarea{border-radius:11px}
 @media(max-width:420px){.achievement-grid{grid-template-columns:1fr}.top{padding-left:2px;padding-right:2px}.brand h1{font-size:19px}.hero{border-radius:19px}.weekly-days{gap:4px}.weekly-day{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.page.active{animation:none}html{scroll-behavior:auto}}
 
+
+/* فضای شاد و کودکانه برای کلاس اول */
+body.grade1-mode{--bg:#fff8ed;--surface:#ffffff;--surface2:#fff0dc;--surface3:#fffaf3;--gold:#ffad45;--gold2:#f47f9b;--text:#493b61;--muted:#81758f;--green:#35b987;--red:#e87878;--blue:#55a9e8;--border:#f3d7bd;background:radial-gradient(circle at 8% 8%,#ffe0eb 0 7%,transparent 25%),radial-gradient(circle at 94% 17%,#dff5ff 0 9%,transparent 26%),linear-gradient(180deg,#fff8ed,#f5f4ff 62%,#fff2e5);color:var(--text)}
+body.grade1-mode .top{background:#ffffffdf;border:2px solid #ffe0c8;border-radius:23px;padding:10px 14px;box-shadow:0 6px 0 #f4dfcf;margin-bottom:14px}
+body.grade1-mode .logo{background:linear-gradient(145deg,#ffb4ca,#ffd16f);color:#74465b;border-radius:18px;box-shadow:0 5px 0 #edb5a0}
+body.grade1-mode .brand h1{color:#e47791}
+body.grade1-mode .brand small{color:#88758a}
+body.grade1-mode .hero{background:linear-gradient(125deg,#ffb9c9,#ffd78c 55%,#b9e8dc);border:3px solid #fff;box-shadow:0 8px 0 #edcfbd;color:#593d62;border-radius:28px}
+body.grade1-mode .hero h2,body.grade1-mode .hero p,body.grade1-mode .hero .eyebrow{color:#593d62}
+body.grade1-mode .hero .hero-btn{background:#fff;color:#d76e8d;border:2px solid #f8d4df;border-radius:18px}
+body.grade1-mode .stat,body.grade1-mode .card,body.grade1-mode .panel,body.grade1-mode .question,body.grade1-mode .course{background:#ffffffed;border:2px solid #f5dfce;border-radius:21px;box-shadow:0 4px 0 #f2e4d8;color:#493b61}
+body.grade1-mode .stat strong{color:#e77e9b}
+body.grade1-mode .feature .emoji,body.grade1-mode .course-icon{background:#fff0d8;border-radius:17px}
+body.grade1-mode .btn,body.grade1-mode button.btn{border:2px solid #f2d6c2;border-radius:17px;background:#fff;color:#76536f;box-shadow:0 3px 0 #f1dfd2;font-weight:700}
+body.grade1-mode .btn.primary{background:linear-gradient(135deg,#ffb3c5,#ffd17a);border-color:#f5c7c0;color:#673f5d}
+body.grade1-mode input,body.grade1-mode select,body.grade1-mode textarea{background:#fff;border:2px solid #f2d9c7;border-radius:15px;color:#493b61}
+body.grade1-mode .section-head h3,body.grade1-mode h3,body.grade1-mode h4{color:#d96f91}
+body.grade1-mode .pill{background:#fff0d9;border:1px solid #f4d2a9;color:#92623f;border-radius:999px}
+body.grade1-mode .notice,body.grade1-mode .step{background:#fff7e9;border:1px solid #f5dfbd;border-radius:16px;color:#69536c}
+body.grade1-mode .bottom-nav{background:#fffdf8;border-top:2px solid #f4dcc9}
+body.grade1-mode .bottom-nav button{color:#7d6681}
+body.grade1-mode .bottom-nav button.active{color:#df7694}
+body.grade1-mode .page.active{animation:grade1Pop .28s ease-out}
+@keyframes grade1Pop{from{opacity:.65;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+body.grade1-mode .menu-panel{background:#fffaf4;border:2px solid #f4d9c5;color:#493b61;border-radius:22px}
+@media(max-width:600px){body.grade1-mode .app{padding-left:11px;padding-right:11px}body.grade1-mode .hero{padding:18px}body.grade1-mode .grid{gap:9px}}
+
 </style><script src="curriculum-content.js"></script><script src="grade1-math-expansion.js"></script><script src="grade1-world-study.js"></script><script src="grade1-bookshelf.js"></script><script src="grade1-farsi-expansion.js"></script>
 <script src="grade1-farsi-practice.js"></script><script src="grade1-farsi-book.js"></script><script src="grade1-negarsh-expansion.js"></script><script src="grade1-negarsh-book.js"></script>
 </head>
