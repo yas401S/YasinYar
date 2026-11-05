@@ -48,6 +48,14 @@
 .bottom-nav button{font-size:8px;padding:3px 2px}
 .bottom-nav button span{font-size:16px}
 @media(max-width:380px){.app{padding-left:7px;padding-right:7px}.brand small{font-size:9px}.top-actions{gap:4px}.iconbtn{padding:6px 8px}.hero{padding:12px}.feature{min-height:61px}.menu-grid{gap:6px}.menu-grid button{min-height:49px;padding:7px;font-size:10px}.menu-grid button span{flex-basis:29px;width:29px;height:29px}}
+
+/* Offline Persian teacher voice */
+.voice-dock{position:fixed;z-index:9999;bottom:12px;left:12px;right:12px;max-width:650px;margin:auto;background:linear-gradient(135deg,#172b4b,#0d1b32);border:1px solid #496184;border-radius:18px;padding:10px 12px;box-shadow:0 10px 35px #0009;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.voice-dock .voice-status{font-size:12px;color:#c8d7ed;flex:1;min-width:130px}
+.voice-dock button{border:1px solid #52698b;border-radius:12px;padding:7px 11px;background:#243c60;color:#fff;font-size:13px}
+.voice-dock button.primary{background:linear-gradient(135deg,#ffe0a0,#d8a64e);color:#17233a;border:0;font-weight:bold}
+.voice-dock button:disabled{opacity:.45}
+body{padding-bottom:82px}
 </style></head>
 <body>
 <div class="app">
@@ -84,7 +92,14 @@
 <section id="page-tools" class="page"><div class="section-head"><h3>🧮 ابزارهای درسی</h3><small>ابزارهای آفلاین</small></div><div class="panel"><h3>ماشین‌حساب ساده</h3><div class="row"><input id="calcA" type="number" step="any" placeholder="عدد اول" class="field"><select id="calcOp" style="max-width:80px;flex:0"><option value="+">+</option><option value="-">−</option><option value="*">×</option><option value="/">÷</option></select><input id="calcB" type="number" step="any" placeholder="عدد دوم" class="field"><button class="btn primary" onclick="calculate()">=</button></div><h3 id="calcResult" class="goodtxt">نتیجه اینجا نمایش داده می‌شود.</h3></div><div class="panel"><h3>تبدیل واحدهای پرکاربرد</h3><div class="row"><input id="unitValue" type="number" value="1" class="field"><select id="unitType"><option value="km">کیلومتر به متر</option><option value="m">متر به سانتی‌متر</option><option value="kg">کیلوگرم به گرم</option><option value="l">لیتر به میلی‌لیتر</option></select><button class="btn primary" onclick="convertUnit()">تبدیل</button></div><p id="unitResult" class="goodtxt"></p></div></section>
 <section id="page-notes" class="page"><div class="section-head"><h3>📒 دفتر یادداشت من</h3><small>ذخیره روی دستگاه</small></div><div class="panel"><input id="noteTitle" class="field" placeholder="عنوان یادداشت"><textarea id="noteText" rows="5" style="width:100%;margin-top:9px" placeholder="نکته‌ها، فرمول‌ها یا پرسش‌هایت را بنویس..."></textarea><button class="btn primary" style="margin-top:8px" onclick="saveNote()">ذخیره یادداشت</button><div id="notesList" style="margin-top:12px"></div></div></section>
 <section id="page-progress" class="page"><div class="section-head"><h3>🏆 کارنامه و پیشرفت</h3><small>داشبورد هوشمند یادگیری</small></div><div class="panel"><div class="stats"><div class="stat"><strong id="statTotal">۰</strong><span>کل پاسخ‌ها</span></div><div class="stat"><strong id="statRight">۰</strong><span>پاسخ درست</span></div><div class="stat"><strong id="statPercent">۰٪</strong><span>موفقیت</span></div></div><h3 style="margin-top:17px">درصد موفقیت کلی</h3><div class="bar"><span id="progressBar"></span></div><p id="progressText" class="muted"></p><h3>عملکرد به تفکیک درس</h3><div id="subjectProgress"></div><h3 style="margin-top:18px">📕 دفتر اشتباهات</h3><p class="muted">پاسخ‌های نادرست اینجا می‌مانند تا دوباره تمرینشان کنی. با پاسخ درست در مرور بعدی، مورد به‌عنوان یادگرفته‌شده علامت می‌خورد.</p><div id="wrongAnswersList"></div><h3 style="margin-top:17px">راهنمای پیشرفت</h3><div id="progressAdvice" class="notice"></div><button class="btn danger" style="margin-top:12px" onclick="clearStats()">پاک کردن آمار و سابقه عملکرد</button></div></section>
-<section id="page-profile" class="page"><div class="section-head"><h3>👤 پروفایل دانش‌آموز</h3><small>تنظیمات شخصی</small></div><div class="panel"><label class="muted">نامی که دوست داری برنامه صدایت کند</label><input id="studentName" class="field" placeholder="نام دانش‌آموز" style="width:100%;margin:8px 0"><label class="muted">پایه تحصیلی</label><select id="profileGrade" style="width:100%;margin:8px 0"></select><button class="btn primary" onclick="saveProfile()">ذخیره پروفایل</button><p class="muted">اطلاعات فقط روی همین دستگاه ذخیره می‌شود.</p></div></section>
+<section id="page-profile" class="page"><div class="section-head"><h3>👤 پروفایل دانش‌آموز</h3><small>تنظیمات شخصی</small></div><div class="panel"><label class="muted">نامی که دوست داری برنامه صدایت کند</label><input id="studentName" class="field" placeholder="نام دانش‌آموز" style="width:100%;margin:8px 0"><label class="muted">پایه تحصیلی</label><select id="profileGrade" style="width:100%;margin:8px 0"></select><button class="btn primary" onclick="saveProfile()">ذخیره پروفایل</button><p class="muted">اطلاعات فقط روی همین دستگاه ذخیره می‌شو
+<div class="voice-dock" id="voiceDock" dir="rtl">
+  <span class="voice-status" id="voiceStatus">🎧 معلم فارسی آماده‌سازی می‌شود…</span>
+  <button class="primary" id="voiceReadBtn" onclick="voiceReadPage()">🔊 خواندن صفحه</button>
+  <button id="voicePauseBtn" onclick="voicePauseResume()" disabled>⏸ مکث</button>
+  <button id="voiceStopBtn" onclick="voiceStop()" disabled>⏹ توقف</button>
+</div>
+د.</p></div></section>
 <div class="footer">یاسین‌یار · کتاب‌های رسمی از پایگاه ناشر · درس‌نامه و تمرین تألیفی</div>
 </div>
 <nav class="bottom-nav"><div class="bottom-inner"><button class="active" data-page="home" onclick="openPage('home')"><span>⌂</span>خانه</button><button data-page="library" onclick="openPage('library')"><span>📚</span>درس‌ها</button><button data-page="practice" onclick="openPage('practice')"><span>✏️</span>تمرین</button><button data-page="planner" onclick="openPage('planner')"><span>🗓️</span>برنامه</button><button data-page="progress" onclick="openPage('progress')"><span>🏆</span>کارنامه</button></div></nav>
@@ -285,4 +300,53 @@ function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':
 function saveProfile(){let p={name:$('studentName').value.trim(),grade:+$('profileGrade').value};if(put('profile',p)){ $('practiceGrade').value=String(p.grade);$('examGrade').value=String(p.grade);renderHome();newPractice();alert('پروفایل ذخیره شد و پایه پیش‌فرض تمرین و آزمون به‌روزرسانی شد.')}}
 function init(){initGrades();renderLessonList();loadLesson();newPractice();drawFlash();renderHome();renderPlanner();timerDraw();checkAIService();let p=get('profile',{name:'',grade:6});$('studentName').value=p.name||'';$('profileGrade').value=p.grade||6}
 init();
+
+let yasinVoicePaused=false;
+function voiceSetStatus(message){const el=document.getElementById('voiceStatus');if(el)el.textContent='🎧 '+message}
+function voiceSetButtons(state){
+ const pause=document.getElementById('voicePauseBtn'),stop=document.getElementById('voiceStopBtn');
+ if(pause)pause.disabled=!(state==='playing'||state==='paused');
+ if(stop)stop.disabled=!(state==='playing'||state==='paused');
+ if(pause)pause.textContent=state==='paused'?'▶ ادامه':'⏸ مکث';
+}
+window.onYasinVoiceEvent=function(event,message){
+ if(event==='ready')voiceSetStatus(message);
+ else if(event==='playing'){yasinVoicePaused=false;voiceSetStatus(message);voiceSetButtons('playing')}
+ else if(event==='paused'){yasinVoicePaused=true;voiceSetStatus(message);voiceSetButtons('paused')}
+ else if(event==='done'||event==='stopped'){yasinVoicePaused=false;voiceSetStatus(message);voiceSetButtons('idle')}
+ else if(event==='unavailable'||event==='error'){voiceSetStatus(message);voiceSetButtons('idle')}
+};
+function voiceSpeakText(text){
+ const clean=String(text||'').replace(/\\s+/g,' ').trim();
+ if(!clean){voiceSetStatus('متنی برای خواندن پیدا نشد.');return}
+ if(window.YasinVoice&&typeof YasinVoice.speak==='function'){
+   YasinVoice.speak(clean);
+ }else if('speechSynthesis' in window){
+   window.speechSynthesis.cancel();
+   const utterance=new SpeechSynthesisUtterance(clean);utterance.lang='fa-IR';utterance.rate=.88;
+   utterance.onstart=()=>{voiceSetStatus('معلم در حال خواندن است.');voiceSetButtons('playing')};
+   utterance.onend=()=>{voiceSetStatus('خواندن متن تمام شد.');voiceSetButtons('idle')};
+   utterance.onerror=()=>{voiceSetStatus('صدای فارسی مرورگر در دسترس نیست.');voiceSetButtons('idle')};
+   window.speechSynthesis.speak(utterance);
+ }else voiceSetStatus('قابلیت گفتار روی این دستگاه در دسترس نیست.');
+}
+function voiceReadPage(){
+ const page=document.querySelector('.page.active')||document.body;
+ const clone=page.cloneNode(true);
+ clone.querySelectorAll('button,input,select,textarea,script,style,.voice-dock').forEach(el=>el.remove());
+ voiceSpeakText(clone.innerText||clone.textContent||'');
+}
+function voicePauseResume(){
+ if(window.YasinVoice&&typeof YasinVoice.pause==='function'){
+   if(yasinVoicePaused)YasinVoice.resume();else YasinVoice.pause();
+ }else if('speechSynthesis' in window){
+   if(window.speechSynthesis.paused){window.speechSynthesis.resume();yasinVoicePaused=false;voiceSetButtons('playing')}
+   else{window.speechSynthesis.pause();yasinVoicePaused=true;voiceSetButtons('paused')}
+ }
+}
+function voiceStop(){
+ if(window.YasinVoice&&typeof YasinVoice.stop==='function')YasinVoice.stop();
+ if('speechSynthesis' in window)window.speechSynthesis.cancel();
+ yasinVoicePaused=false;voiceSetStatus('پخش متوقف شد.');voiceSetButtons('idle');
+}
 </script></body></html>
