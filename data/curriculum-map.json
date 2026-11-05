@@ -40,7 +40,10 @@
               "lessons": 7,
               "status": "official_count_verified"
             }
-          ]
+          ],
+          "authored_lessons": 32,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "note": "بسته‌های تألیفی نگاره‌ها و آموزش نشانه‌ها به برنامه متصل‌اند؛ تمرین‌های تکمیلی عمومی‌اند و تا تطبیق با چاپ رسمی، پاسخ فعالیت‌های عین کتاب محسوب نمی‌شوند."
         },
         {
           "title": "نگارش فارسی اول دبستان",
@@ -275,6 +278,15 @@
           "examples": 36,
           "exercises": 54,
           "quiz_questions": 54
+        },
+        {
+          "subject": "فارسی",
+          "topic": "نگاره‌ها و آموزش نشانه‌ها",
+          "title": "بسته‌های آموزشی و تمرینی فارسی اول",
+          "status": "draft_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 32,
+          "practice_status": "supplementary_authored"
         }
       ],
       "authored_package_count": 3,
