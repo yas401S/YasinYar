@@ -3,8 +3,8 @@
   "curriculum_year": "۱۴۰۵–۱۴۰۶",
   "language": "fa",
   "official_source": "https://chap.oerp.ir/",
-  "source_status": "current_1405_1406_grade1_catalog_transcribed_pdf_page_review_pending",
-  "notice": "فهرست پایه اول با کتاب‌های چاپ ۱۴۰۵–۱۴۰۶ به‌روزرسانی شده است. عنوان‌ها و تعداد درس‌ها از صفحات فهرست کتاب‌ها استخراج شده‌اند؛ PDF رسمی برای تطبیق صفحه‌به‌صفحه هنوز بررسی نشده است.",
+  "source_status": "grade1_grade2_1405_1406_catalog_mapped_grade2_content_draft_pdf_review_pending",
+  "notice": "فهرست و بسته‌های آموزشی پایه اول و دوم بر اساس منابع فهرست چاپ ۱۴۰۵–۱۴۰۶ ثبت شده‌اند. محتوای آموزشی تألیفی است؛ تطبیق پاسخ‌های صفحه‌ای با PDF رسمی برای هر دو پایه همچنان لازم است.",
   "completion_rule": "یک فصل فقط وقتی complete است که درس‌نامه، مثال حل‌شده، تمرین سطح‌بندی‌شده، آزمون، پاسخ کوتاه حفظی، پاسخ تشریحی و بازبینی علمی داشته باشد.",
   "status_values": [
     "missing",
@@ -299,25 +299,239 @@
     },
     {
       "grade": 2,
-      "books": [],
-      "status": "missing",
-      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "books": [
+        {
+          "title": "جهان پیرامون (اجرای آزمایشی)",
+          "subject": "جهان پیرامون",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/jahan-piramoon-2/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 18,
+          "authored_lessons": 18,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "کشف کنیم",
+              "lessons": 4,
+              "lesson_titles": [
+                "آزمایش کنیم و یاد بگیریم",
+                "زندگی ما و آب",
+                "مشاهده کنیم و یاد بگیریم",
+                "صداها در دنیای ما"
+              ]
+            },
+            {
+              "title": "محافظت کنیم",
+              "lessons": 4,
+              "lesson_titles": [
+                "مراقب خودم هستم",
+                "درست استفاده کنیم، دوباره استفاده کنیم",
+                "زمین پاک، زندگی سالم",
+                "مراقب زمین باش"
+              ]
+            },
+            {
+              "title": "ارتباط‌ها را پیدا کنیم",
+              "lessons": 4,
+              "lesson_titles": [
+                "با هم بهتر زندگی کنیم",
+                "دنیای جانوران",
+                "بازی با سایه‌ها",
+                "راز شب و روز"
+              ]
+            },
+            {
+              "title": "جست‌وجو کنیم و بسازیم",
+              "lessons": 2,
+              "lesson_titles": [
+                "با هم کاوش کنیم",
+                "با هم بسازیم"
+              ]
+            },
+            {
+              "title": "گوناگونی‌ها را بشناسیم",
+              "lessons": 2,
+              "lesson_titles": [
+                "ایران رنگارنگ",
+                "ایران، خانه‌ی ما"
+              ]
+            },
+            {
+              "title": "تغییرها را پیدا کنیم",
+              "lessons": 2,
+              "lesson_titles": [
+                "تغییرها در زمین",
+                "ما و تغییر زمین"
+              ]
+            }
+          ],
+          "note": "عنوان فصل‌ها و درس‌ها از فهرست چاپ ۱۴۰۵–۱۴۰۶ رونویسی شده‌اند؛ بسته‌های آموزشی تألیفی‌اند و پاسخ فعالیت‌های صفحه‌ای هنوز با PDF رسمی مقابله نشده است."
+        },
+        {
+          "title": "ریاضی دوست‌داشتنی (اجرای آزمایشی)",
+          "subject": "ریاضی",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/lovely-math-2/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 13,
+          "authored_lessons": 13,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "۱۳ درس",
+              "lessons": 13,
+              "lesson_titles": [
+                "رقم و جدول ارزش مکانی",
+                "جمع تا ۲۰ و تفریق‌های مرتبط",
+                "مکان‌یابی",
+                "مقایسه و مرتب کردن عددهای دو رقمی",
+                "حل مسئله",
+                "بیان زمان با دقیقه",
+                "جمع و تفریق عددهای دو رقمی با عددهای یک رقمی",
+                "شمارش چند تا چند تا",
+                "اندازه‌گیری با واحد سانتی‌متر",
+                "جمع و تفریق عددهای دو رقمی بدون نیاز به انتقال یا قرض گرفتن",
+                "اجزا و ویژگی‌های شکل‌های هندسی",
+                "عددهای سه‌رقمی",
+                "جمع و تفریق عددهای دو رقمی با نیاز به انتقال یا قرض گرفتن"
+              ]
+            }
+          ],
+          "note": "فهرست ۱۳ درس از منبع فهرست عمومی سال ۱۴۰۵–۱۴۰۶؛ درس‌نامه‌ها، مثال‌ها و تمرین‌های برنامه تألیفی هستند."
+        },
+        {
+          "title": "فارسی می‌نویسم (اجرای آزمایشی)",
+          "subject": "فارسی می‌نویسم",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/write-farsi-2/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 11,
+          "authored_lessons": 11,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "شروع: یک، دو، سه، حرکت"
+            },
+            {
+              "title": "درس‌های اول تا یازدهم",
+              "lessons": 11
+            }
+          ],
+          "note": "فهرست عمومی ۱۱ درس را نشان می‌دهد؛ عنوان درس‌ها در برنامه به‌صورت شماره‌ای ثبت شده‌اند تا عنوان رسمی حدس زده نشود."
+        },
+        {
+          "title": "من و دوستم خدا (اجرای آزمایشی)",
+          "subject": "من و دوستم خدا",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/man-o-khoda-2/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "official_lesson_count": 10,
+          "authored_lessons": 10,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "sections": [
+            {
+              "title": "سرزمین قصه‌ها ۱",
+              "lessons": 2,
+              "lesson_titles": [
+                "راز صندوقچه",
+                "گردش در کوه"
+              ]
+            },
+            {
+              "title": "سرزمین قصه‌ها ۲",
+              "lessons": 2,
+              "lesson_titles": [
+                "راهی میان دریا",
+                "قهرمان واقعی"
+              ]
+            },
+            {
+              "title": "سرزمین قصه‌ها ۳",
+              "lessons": 2,
+              "lesson_titles": [
+                "آتش سرد",
+                "من تنها نیستم!"
+              ]
+            },
+            {
+              "title": "سرزمین قصه‌ها ۴",
+              "lessons": 2,
+              "lesson_titles": [
+                "پادشاه مغرور",
+                "املت شگفت‌انگیز"
+              ]
+            },
+            {
+              "title": "سرزمین قصه‌ها ۵",
+              "lessons": 2,
+              "lesson_titles": [
+                "سربازان کوچک",
+                "ماجرای یک باد"
+              ]
+            }
+          ],
+          "note": "عنوان پنج بخش و ده داستان از فهرست عمومی سال ۱۴۰۵–۱۴۰۶ ثبت شده‌اند؛ بسته‌های گفت‌وگو و تمرین تألیفی هستند و پاسخ رسمی صفحه‌ای محسوب نمی‌شوند."
+        }
+      ],
+      "status": "current_1405_1406_catalog_mapped_content_draft_pdf_review_pending",
+      "note": "چهار کتاب/بسته جاری پایه دوم و تعداد درس‌های آن‌ها از فهرست‌های عمومی چاپ ۱۴۰۵–۱۴۰۶ ثبت شده است. ۵۲ بسته آموزشی تألیفی آماده شده‌اند؛ PDF رسمی و پاسخ فعالیت‌های صفحه‌ای هنوز باید تطبیق داده شوند.",
       "authored_packages": [
         {
           "subject": "ریاضی",
-          "topic": "عددها و ارزش مکانی",
-          "title": "عددها و ارزش مکانی",
-          "status": "authored_needs_review",
-          "official_match": false
+          "topic": "ریاضی دوست‌داشتنی",
+          "title": "۱۳ درس ریاضی دوست‌داشتنی",
+          "status": "draft_original_content_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 13,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
+        },
+        {
+          "subject": "جهان پیرامون",
+          "topic": "جهان پیرامون",
+          "title": "۶ فصل و ۱۸ درس جهان پیرامون",
+          "status": "draft_original_content_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 18,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
+        },
+        {
+          "subject": "فارسی می‌نویسم",
+          "topic": "فارسی می‌نویسم",
+          "title": "۱۱ درس نگارش",
+          "status": "draft_original_content_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 11,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
+        },
+        {
+          "subject": "من و دوستم خدا",
+          "topic": "سرزمین قصه‌ها",
+          "title": "۵ بخش و ۱۰ داستان",
+          "status": "draft_original_content_needs_official_page_review",
+          "official_match": false,
+          "lesson_count": 10,
+          "examples_per_lesson": 2,
+          "exercises_per_lesson": 5
         }
       ],
-      "authored_package_count": 1
+      "authored_package_count": 4
     },
     {
       "grade": 3,
       "books": [],
-      "status": "missing",
-      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "status": "official_catalog_pending",
+      "note": "فهرست کتاب‌های این پایه از نسخه رسمی ۱۴۰۵–۱۴۰۶ هنوز در پروژه رونویسی و تطبیق نشده است. تا پیش از ثبت فهرست رسمی، عنوان فصل یا کتاب حدس زده نمی‌شود.",
       "authored_packages": [
         {
           "subject": "ریاضی",
@@ -327,13 +541,14 @@
           "official_match": false
         }
       ],
-      "authored_package_count": 1
+      "authored_package_count": 1,
+      "catalog_source": "https://chap.oerp.ir/"
     },
     {
       "grade": 4,
       "books": [],
-      "status": "missing",
-      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "status": "official_catalog_pending",
+      "note": "فهرست کتاب‌های این پایه از نسخه رسمی ۱۴۰۵–۱۴۰۶ هنوز در پروژه رونویسی و تطبیق نشده است. تا پیش از ثبت فهرست رسمی، عنوان فصل یا کتاب حدس زده نمی‌شود.",
       "authored_packages": [
         {
           "subject": "ریاضی",
@@ -343,13 +558,14 @@
           "official_match": false
         }
       ],
-      "authored_package_count": 1
+      "authored_package_count": 1,
+      "catalog_source": "https://chap.oerp.ir/"
     },
     {
       "grade": 5,
       "books": [],
-      "status": "missing",
-      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "status": "official_catalog_pending",
+      "note": "فهرست کتاب‌های این پایه از نسخه رسمی ۱۴۰۵–۱۴۰۶ هنوز در پروژه رونویسی و تطبیق نشده است. تا پیش از ثبت فهرست رسمی، عنوان فصل یا کتاب حدس زده نمی‌شود.",
       "authored_packages": [
         {
           "subject": "ریاضی",
@@ -359,13 +575,14 @@
           "official_match": false
         }
       ],
-      "authored_package_count": 1
+      "authored_package_count": 1,
+      "catalog_source": "https://chap.oerp.ir/"
     },
     {
       "grade": 6,
       "books": [],
-      "status": "missing",
-      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "status": "official_catalog_pending",
+      "note": "فهرست کتاب‌های این پایه از نسخه رسمی ۱۴۰۵–۱۴۰۶ هنوز در پروژه رونویسی و تطبیق نشده است. تا پیش از ثبت فهرست رسمی، عنوان فصل یا کتاب حدس زده نمی‌شود.",
       "authored_packages": [
         {
           "subject": "ریاضی",
@@ -375,13 +592,14 @@
           "official_match": false
         }
       ],
-      "authored_package_count": 1
+      "authored_package_count": 1,
+      "catalog_source": "https://chap.oerp.ir/"
     },
     {
       "grade": 7,
       "books": [],
-      "status": "missing",
-      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "status": "official_catalog_pending",
+      "note": "فهرست کتاب‌های این پایه از نسخه رسمی ۱۴۰۵–۱۴۰۶ هنوز در پروژه رونویسی و تطبیق نشده است. تا پیش از ثبت فهرست رسمی، عنوان فصل یا کتاب حدس زده نمی‌شود.",
       "authored_packages": [
         {
           "subject": "ریاضی",
@@ -391,13 +609,14 @@
           "official_match": false
         }
       ],
-      "authored_package_count": 1
+      "authored_package_count": 1,
+      "catalog_source": "https://chap.oerp.ir/"
     },
     {
       "grade": 8,
       "books": [],
-      "status": "missing",
-      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "status": "official_catalog_pending",
+      "note": "فهرست کتاب‌های این پایه از نسخه رسمی ۱۴۰۵–۱۴۰۶ هنوز در پروژه رونویسی و تطبیق نشده است. تا پیش از ثبت فهرست رسمی، عنوان فصل یا کتاب حدس زده نمی‌شود.",
       "authored_packages": [
         {
           "subject": "ریاضی",
@@ -407,13 +626,14 @@
           "official_match": false
         }
       ],
-      "authored_package_count": 1
+      "authored_package_count": 1,
+      "catalog_source": "https://chap.oerp.ir/"
     },
     {
       "grade": 9,
       "books": [],
-      "status": "missing",
-      "note": "این بسته‌ها محتوای تألیفی هستند؛ تا زمان تطبیق با PDF رسمی، فصل یا کتاب رسمی محسوب نمی‌شوند.",
+      "status": "official_catalog_pending",
+      "note": "فهرست کتاب‌های این پایه از نسخه رسمی ۱۴۰۵–۱۴۰۶ هنوز در پروژه رونویسی و تطبیق نشده است. تا پیش از ثبت فهرست رسمی، عنوان فصل یا کتاب حدس زده نمی‌شود.",
       "authored_packages": [
         {
           "subject": "ریاضی",
@@ -423,7 +643,8 @@
           "official_match": false
         }
       ],
-      "authored_package_count": 1
+      "authored_package_count": 1,
+      "catalog_source": "https://chap.oerp.ir/"
     }
   ],
   "coverage_policy": {
