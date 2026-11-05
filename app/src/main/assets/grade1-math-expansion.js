@@ -209,6 +209,7 @@ function install(){
   const result=original.apply(this,arguments);
   const g=Number(document.getElementById('gradeSelect')?.value);
   const subject=document.getElementById('subjectSelect')?.value;
+  document.body.classList.toggle('grade1-mode',g===1);
   const old=document.getElementById('grade1MathPagesPanel');if(old)old.remove();
   if(g===1&&subject==='ریاضی')mount();
   return result;
