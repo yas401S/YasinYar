@@ -4,3 +4,7 @@ compatibility_date = "2026-11-05"
 
 [vars]
 OPENAI_MODEL = "gpt-5.4-mini"
+
+[[r2_buckets]]
+binding = "GRADE1_BOOKS"
+bucket_name = "yasinyar-books"
