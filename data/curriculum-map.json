@@ -3,8 +3,8 @@
   "curriculum_year": "۱۴۰۵–۱۴۰۶",
   "language": "fa",
   "official_source": "https://chap.oerp.ir/",
-  "source_status": "grade1_grade2_grade3_1405_1406_catalog_mapped_grade2_grade3_content_draft_pdf_review_pending",
-  "notice": "فهرست و بسته‌های آموزشی پایه‌های اول تا سوم بر اساس منابع فهرست چاپ ۱۴۰۵–۱۴۰۶ ثبت شده‌اند. محتوای آموزشی تألیفی است؛ تطبیق پاسخ‌های صفحه‌ای با PDF رسمی برای هر پایه همچنان لازم است.",
+  "source_status": "grade1_grade2_grade3_grade4_1405_1406_catalog_mapped_content_draft_pdf_review_pending",
+  "notice": "فهرست کتاب‌های پایه‌های اول تا چهارم بر اساس نمایه‌های چاپ ۱۴۰۵–۱۴۰۶ ثبت شده‌اند. محتوای آموزشی تألیفی و پیش‌نویس است؛ تطبیق پاسخ‌های صفحه‌ای با PDF رسمی برای هر پایه همچنان لازم است.",
   "completion_rule": "یک فصل فقط وقتی complete است که درس‌نامه، مثال حل‌شده، تمرین سطح‌بندی‌شده، آزمون، پاسخ کوتاه حفظی، پاسخ تشریحی و بازبینی علمی داشته باشد.",
   "status_values": [
     "missing",
@@ -1149,9 +1149,531 @@
     },
     {
       "grade": 4,
-      "books": [],
-      "status": "official_catalog_pending",
-      "note": "فهرست کتاب‌های این پایه از نسخه رسمی ۱۴۰۵–۱۴۰۶ هنوز در پروژه رونویسی و تطبیق نشده است. تا پیش از ثبت فهرست رسمی، عنوان فصل یا کتاب حدس زده نمی‌شود.",
+      "books": [
+        {
+          "title": "ریاضی چهارم دبستان",
+          "subject": "ریاضی",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/riazi-4/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "sections": [
+            {
+              "title": "فصل ۱ تا ۸ (عنوان و ریزدرس‌ها نیازمند مقابله با PDF رسمی)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            }
+          ],
+          "official_lesson_count": 1,
+          "authored_lessons": 1,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "note": "کتاب ریاضی شامل ۸ فصل است؛ عنوان فصل‌ها و ریزدرس‌ها باید با PDF رسمی مقابله شوند. بسته مقدماتی برنامه فعلاً بر اساس فهرست کلی ثبت شده است.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending",
+          "book_type": "official"
+        },
+        {
+          "title": "علوم تجربی چهارم دبستان",
+          "subject": "علوم",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/oloom-4/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "sections": [
+            {
+              "title": "زنگ علوم",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "مخلوط‌ها در زندگی",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "انرژی، نیاز هر روز ما",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "انرژی الکتریکی",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "گرما و ماده",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "سنگ‌ها",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "آهن‌ربا در زندگی",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "آسمان در شب",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "بدن ما (۱)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "بدن ما (۲)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "بی‌مهره‌ها",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "گوناگونی گیاهان",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "زیستگاه",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            }
+          ],
+          "official_lesson_count": 13,
+          "authored_lessons": 13,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "note": "فهرست کتاب در نمایه عمومی چاپ ۱۴۰۵–۱۴۰۶ ثبت شده است؛ بسته‌های یاسین‌یار تألیفی و مقدماتی‌اند و پاسخ رسمی صفحه‌ای نیستند. تطبیق نهایی با PDF رسمی باقی است.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending",
+          "book_type": "official"
+        },
+        {
+          "title": "فارسی چهارم دبستان",
+          "subject": "فارسی",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/farsi-4/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "sections": [
+            {
+              "title": "آفریدگار زیبایی",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "کوچ پرستوها",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "راز نشانه‌ها",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "ارزش علم",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "رهایی از قفس",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "آرش کمان‌گیر",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "مهمان شهر ما",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس آزاد ۱",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس آزاد ۲",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "باغچه اطفال",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "فرمانده دل‌ها",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "اتفاق ساده",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "لطف حق",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "ادب از که آموختی؟",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "شیر و موش",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "پرسشگری",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "مدرسه هوشمند",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            }
+          ],
+          "official_lesson_count": 17,
+          "authored_lessons": 17,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "note": "فهرست کتاب در نمایه عمومی چاپ ۱۴۰۵–۱۴۰۶ ثبت شده است؛ بسته‌های یاسین‌یار تألیفی و مقدماتی‌اند و پاسخ رسمی صفحه‌ای نیستند. تطبیق نهایی با PDF رسمی باقی است.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending",
+          "book_type": "official"
+        },
+        {
+          "title": "نگارش فارسی چهارم دبستان",
+          "subject": "نگارش فارسی",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/negaresh-4/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "sections": [
+            {
+              "title": "آفریدگار زیبایی",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "کوچ پرستوها",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "راز نشانه‌ها",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "ارزش علم",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "رهایی از قفس",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "آرش کمان‌گیر",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "مهمان شهر ما",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس آزاد ۱",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس آزاد ۲",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "باغچه اطفال",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "فرمانده دل‌ها",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "اتفاق ساده",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "لطف حق",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "ادب از که آموختی؟",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "شیر و موش",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "پرسشگری",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "مدرسه هوشمند",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            }
+          ],
+          "official_lesson_count": 17,
+          "authored_lessons": 17,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "note": "فهرست کتاب در نمایه عمومی چاپ ۱۴۰۵–۱۴۰۶ ثبت شده است؛ بسته‌های یاسین‌یار تألیفی و مقدماتی‌اند و پاسخ رسمی صفحه‌ای نیستند. تطبیق نهایی با PDF رسمی باقی است.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending",
+          "book_type": "official"
+        },
+        {
+          "title": "آموزش قرآن چهارم دبستان",
+          "subject": "آموزش قرآن",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/quran-4/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "sections": [
+            {
+              "title": "فهرست بخش‌ها و درس‌ها نیازمند تطبیق با PDF رسمی",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            }
+          ],
+          "official_lesson_count": 1,
+          "authored_lessons": 1,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "note": "عنوان و تعداد بخش‌های آموزش قرآن تا زمان بررسی مستقیم PDF رسمی قطعی نشده است؛ عنوان حدسی وارد نشده است.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending",
+          "book_type": "official"
+        },
+        {
+          "title": "هدیه‌های آسمان چهارم دبستان",
+          "subject": "هدیه‌های آسمان",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/hediyeh-aseman-4/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "sections": [
+            {
+              "title": "دانه‌ای که نمی‌خواست بروید!",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "کودکی بر آب",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "ما به مسجد می‌رویم",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "یک نماز و ده رکوع!",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "سخنی که سه بار تکرار شد!",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "حرمی با دو گنبد",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "نماز در کوهستان",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "دیدار دوست",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "کودک شجاع",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "روشن‌ترین شب",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس یازدهم (عنوان در نمایه ناقص)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "روزی برای تمام بچه‌ها",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "خاله نرگس",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "اولین بانوی مسلمان",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "یک ماجرای زیبا",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "اسب طلایی",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "آقای بهاری، خانم بهاری",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "چشمان همیشه باز",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "خداجون از تو ممنونم",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            }
+          ],
+          "official_lesson_count": 19,
+          "authored_lessons": 19,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "note": "فهرست کتاب در نمایه عمومی چاپ ۱۴۰۵–۱۴۰۶ ثبت شده است؛ بسته‌های یاسین‌یار تألیفی و مقدماتی‌اند و پاسخ رسمی صفحه‌ای نیستند. تطبیق نهایی با PDF رسمی باقی است.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending",
+          "book_type": "official"
+        },
+        {
+          "title": "مطالعات اجتماعی چهارم دبستان",
+          "subject": "مطالعات اجتماعی",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/motaleat-4/",
+          "status": "catalog_index_transcribed_pdf_page_review_pending",
+          "sections": [
+            {
+              "title": "درس ۱ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۲ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۳ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۴ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۵ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۶ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۷ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۸ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۹ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۱۰ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۱۱ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۱۲ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۱۳ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۱۴ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۱۵ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۱۶ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۱۷ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۱۸ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۱۹ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۲۰ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۲۱ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            },
+            {
+              "title": "درس ۲۲ (عنوان نیازمند تطبیق با PDF)",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            }
+          ],
+          "official_lesson_count": 22,
+          "authored_lessons": 22,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "note": "نمایه کتاب، درس‌های ۲۱ و ۲۲ را با عنوان تقویم و روزهای مهم نشان می‌دهد؛ فهرست کامل هنوز باید از PDF رسمی مقابله شود.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending",
+          "book_type": "official"
+        },
+        {
+          "title": "کتاب کار آموزش خط تحریری چهارم",
+          "subject": "آموزش خط تحریری (کتاب کار تکمیلی)",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/tag/کتاب-های-درسی-چهارم-دبستان/",
+          "status": "supplementary_catalogued_content_draft",
+          "sections": [
+            {
+              "title": "تمرین تکمیلی و مرور مهارت‌های خط تحریری",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            }
+          ],
+          "official_lesson_count": 1,
+          "authored_lessons": 1,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "note": "کتاب کار تکمیلی است؛ عنوان تمرین‌ها و صفحه‌ها هنوز با PDF مقابله نشده‌اند.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending",
+          "book_type": "supplementary"
+        },
+        {
+          "title": "از ایرانمان دفاع می‌کنیم",
+          "subject": "از ایرانمان دفاع می‌کنیم (کتاب تکمیلی)",
+          "curriculum_year": "۱۴۰۵–۱۴۰۶",
+          "official_source": "https://chap.oerp.ir/",
+          "catalog_source": "https://www.daneshchi.ir/tag/کتاب-های-درسی-چهارم-دبستان/",
+          "status": "supplementary_catalogued_content_draft",
+          "sections": [
+            {
+              "title": "آشنایی و گفت‌وگو درباره موضوع کتاب",
+              "status": "titles_transcribed_or_pdf_review_pending"
+            }
+          ],
+          "official_lesson_count": 1,
+          "authored_lessons": 1,
+          "authored_status": "draft_original_content_needs_official_page_review",
+          "official_pdf_page_match": false,
+          "note": "عنوان تکمیلی در فهرست پایه چهارم آمده است؛ جزئیات درس‌ها و سال چاپ نیازمند بررسی PDF رسمی است.",
+          "official_catalog_check": "catalog_list_found_pdf_page_review_pending",
+          "book_type": "supplementary"
+        }
+      ],
+      "status": "grade4_1405_1406_catalog_added_content_draft_pdf_review_pending",
+      "note": "۹ عنوان ثبت شد: ۷ کتاب رسمی و ۲ کتاب تکمیلی. بسته‌های آموزشی داخل برنامه پیش‌نویس تألیفی‌اند؛ پاسخ رسمی صفحه‌ای نیستند و تطبیق PDF رسمی هنوز لازم است.",
       "authored_packages": [
         {
           "subject": "ریاضی",
@@ -1161,7 +1683,7 @@
           "official_match": false
         }
       ],
-      "authored_package_count": 1,
+      "authored_package_count": 92,
       "catalog_source": "https://chap.oerp.ir/"
     },
     {
