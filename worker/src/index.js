@@ -1,6 +1,6 @@
 const cors = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, HEAD, POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type",
   "Access-Control-Max-Age": "86400"
 };
@@ -16,7 +16,22 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
-    if (url.pathname === "/") return json({ service: "YasinYar AI Tutor", ready: Boolean(env.OPENAI_API_KEY), endpoint: "/solve" });
+    if (url.pathname === "/") return json({ service: "YasinYar AI Tutor", ready: Boolean(env.OPENAI_API_KEY), booksReady: Boolean(env.GRADE1_BOOKS), endpoint: "/solve" });
+    if (url.pathname.startsWith("/books/grade1/") && (request.method === "GET" || request.method === "HEAD")) {
+      if (!env.GRADE1_BOOKS) return json({ error: "مخزن PDF پایه اول هنوز متصل نشده است." }, 503);
+      const filename = decodeURIComponent(url.pathname.slice("/books/grade1/".length));
+      if (!filename || filename.includes("/") || filename.includes("..")) return json({ error: "نام فایل معتبر نیست." }, 400);
+      const object = await env.GRADE1_BOOKS.get("grade1/" + filename);
+      if (!object) return json({ error: "این PDF هنوز در مخزن بارگذاری نشده است." }, 404);
+      const headers = new Headers(cors);
+      object.writeHttpMetadata(headers);
+      headers.set("Content-Type", "application/pdf");
+      headers.set("Content-Disposition", 'inline; filename="' + filename.replace(/["\\\\]/g, "") + '"');
+      headers.set("Cache-Control", "public, max-age=3600");
+      headers.set("Accept-Ranges", "bytes");
+      headers.set("ETag", object.httpEtag);
+      return new Response(request.method === "HEAD" ? null : object.body, { status: 200, headers });
+    }
     if (!["/solve", "/lesson"].includes(url.pathname) || request.method !== "POST") return json({ error: "مسیر یا روش درخواست معتبر نیست." }, 404);
     if (!env.OPENAI_API_KEY) return json({ error: "کلید هوش مصنوعی روی سرور تنظیم نشده است." }, 503);
 
