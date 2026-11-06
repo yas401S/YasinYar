@@ -31,5 +31,12 @@ function render(){
  '<div class="grid">'+books.map((b,i)=>{const href=api+'/books/grade1/'+encodeURIComponent(b.file);return '<article class="card"><div class="course"><div class="course-icon">'+(['☪️','📖','📚','✍️','🧩','🔢','🧮','🧪','🌍','🎨','🤸'][i%11])+'</div><div class="course-info"><b>'+esc(b.title)+'</b><small>'+esc(b.subject)+' · '+esc(b.kind)+'</small></div></div><p class="pill">'+fa(b.pages)+' صفحه</p><div class="row" style="gap:8px;flex-wrap:wrap"><a class="btn primary" style="display:inline-block;text-decoration:none" href="'+href+'" target="_blank" rel="noopener">باز کردن کتاب ↗</a><a class="btn" style="display:inline-block;text-decoration:none" href="'+href+'" download>دریافت PDF</a></div></article>';}).join('')+'</div>'+
  '<div class="panel"><h4>وضعیت اتصال فایل‌ها</h4><p class="muted">'+(ready?'مخزن فایل پایه اول متصل است.':'فهرست کتاب‌ها در برنامه ثبت شده است؛ برای نمایش خود PDFها باید فایل‌ها در فضای ذخیره‌سازی R2 بارگذاری و اتصال آن فعال شود.')+'</p><p class="muted">آموزش درس‌ها و تمرین‌های موجود در بخش درس‌ها باقی می‌مانند؛ این کتابخانه مسیر مشاهده نسخه اصلی PDF را اضافه می‌کند.</p><a class="btn" style="display:inline-block;text-decoration:none" href="'+official+'" target="_blank" rel="noopener">پایگاه رسمی کتاب‌های درسی ↗</a></div>';
 }
+if(!window.__YASINYAR_GRADE1_PDF_CHECKED){
+ window.__YASINYAR_GRADE1_PDF_CHECKED=true;
+ fetch(api+'/',{cache:'no-store'}).then(r=>r.json()).then(data=>{
+  window.YASINYAR_GRADE1_PDF_READY=!!data.booksReady;
+  render();
+ }).catch(()=>{});
+}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
 })();
