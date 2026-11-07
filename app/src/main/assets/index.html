@@ -176,6 +176,35 @@ body.grade1-mode .menu-panel{background:#fffaf4;border:2px solid #f4d9c5;color:#
 
 </style><script src="curriculum-content.js"></script><!-- legacy 175-page draft retired; current 11-lesson catalog is loaded below --><script src="grade1-world-study.js"></script><script src="grade1-bookshelf.js"></script><script src="all-grades-book-links.js"></script><script src="grade1-arts-pe.js"></script><script src="grade1-farsi-expansion.js"></script><script src="grade1-quran-expansion.js"></script>
 <script src="grade1-farsi-practice.js"></script><script src="grade1-farsi-book.js"></script><script src="grade1-negarsh-expansion.js"></script><script src="grade1-negarsh-book.js"></script><script src="grade1-current-catalog.js"></script><script src="grade2-current-catalog.js"></script><script src="grade2-other-books.js"></script><script src="grade2-official-books.js"></script><script src="grade3-current-catalog.js"></script><script src="grade4-current-catalog.js"></script>
+
+<script>
+/* Route every external PDF/book link through Android's native browser handler. */
+(function(){
+  window.yasinOpenExternal = function(url){
+    var target = String(url || '');
+    if (!/^https?:\\/\\//i.test(target)) return false;
+    try {
+      if (window.YasinExternal && typeof window.YasinExternal.open === 'function') {
+        window.YasinExternal.open(target);
+        return false;
+      }
+    } catch (e) {}
+    window.location.href = target;
+    return false;
+  };
+  document.addEventListener('click', function(event){
+    var node = event.target;
+    var link = node && node.closest ? node.closest('a[href]') : null;
+    if (!link) return;
+    var href = link.href || '';
+    if (/^https?:\\/\\//i.test(href)) {
+      event.preventDefault();
+      event.stopPropagation();
+      window.yasinOpenExternal(href);
+    }
+  }, true);
+})();
+</script>
 </head>
 <body>
 <div class="app">
@@ -403,7 +432,7 @@ function openOfficialPdfCatalog(g){
  const subject=$('subjectSelect')&&$('subjectSelect').value||'';
  const note=$('officialPdfStatus');
  if(note)note.textContent='در پایگاه رسمی، سال ۱۴۰۵–۱۴۰۶، دوره '+(grade<=6?'ابتدایی':'متوسطه اول')+'، پایه '+gradeNames[grade-1]+' و عنوان کتاب '+(subject||'موردنظر')+' را انتخاب کن؛ سپس فایل PDF را دریافت کن.';
- window.location.href='https://chap.sch.ir/';
+ if(window.yasinOpenExternal)window.yasinOpenExternal('https://chap.sch.ir/');else window.location.href='https://chap.sch.ir/';
 }
 function renderLessonList(){
  const gradeCards=Array.from({length:9},(_,i)=>{
