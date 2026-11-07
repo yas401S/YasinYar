@@ -29,7 +29,7 @@ jobs:
             new vm.Script(fs.readFileSync(path.join(dir, name), 'utf8'), { filename: name });
           }
           const html = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
-          for (const match of html.matchAll(/<script(?![^>]*\\bsrc=)[^>]*>([\\s\\S]*?)<\\/script>/gi)) {
+          for (const match of html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi)) {
             if (match[1].trim()) new vm.Script(match[1], { filename: 'index.html inline script' });
           }
           console.log('All app JavaScript assets parsed successfully.');
