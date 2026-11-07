@@ -10,6 +10,7 @@ import android.util.Base64;
 import android.webkit.WebChromeClient;
 import android.webkit.ConsoleMessage;
 import android.util.Log;
+import android.widget.Toast;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -46,6 +47,24 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             Log.e("YasinYar-WebView", "Could not open external URL: " + url, e);
             return true;
+        }
+    }
+
+    private class ExternalLinkBridge {
+        @JavascriptInterface
+        public void open(String rawUrl) {
+            if (rawUrl == null) return;
+            Uri uri = Uri.parse(rawUrl);
+            String scheme = uri.getScheme();
+            if (!"http".equalsIgnoreCase(scheme) && !"https".equalsIgnoreCase(scheme)) return;
+            runOnUiThread(() -> {
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                } catch (Exception e) {
+                    Log.e("YasinYar-WebView", "No app can open URL: " + rawUrl, e);
+                    Toast.makeText(MainActivity.this, "برای باز کردن PDF مرورگر یا برنامه نمایش PDF در دسترس نیست.", Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
 
@@ -185,6 +204,7 @@ public class MainActivity extends Activity {
         settings.setDomStorageEnabled(true);
         settings.setAllowFileAccess(true);
         webView.addJavascriptInterface(new VoiceBridge(), "YasinVoice");
+        webView.addJavascriptInterface(new ExternalLinkBridge(), "YasinExternal");
         textToSpeech = new TextToSpeech(this, status -> {
             if (status == TextToSpeech.SUCCESS) {
                 int language = textToSpeech.setLanguage(new Locale("fa", "IR"));
