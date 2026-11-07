@@ -202,32 +202,18 @@ public class MainActivity extends Activity {
                 filePathCallback = callback;
                 if (params.isCaptureEnabled()) {
                     try {
-                        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        if (camera.resolveActivity(getPackageManager()) != null) {
-                            File cameraDir = new File(getCacheDir(), "camera");
-                            if (!cameraDir.exists() && !cameraDir.mkdirs()) throw new Exception("ساخت پوشه دوربین ناموفق بود");
-                            cameraOutputFile = File.createTempFile("yasinyar_full_", ".jpg", cameraDir);
-                            cameraOutputUri = FileProvider.getUriForFile(
-                                MainActivity.this,
-                                getPackageName() + ".fileprovider",
-                                cameraOutputFile
-                            );
-                            camera.putExtra(MediaStore.EXTRA_OUTPUT, cameraOutputUri);
-                            camera.setClipData(ClipData.newRawUri("YasinYar camera output", cameraOutputUri));
-                            camera.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                            startActivityForResult(camera, CAMERA_REQUEST);
-                            return true;
-                        }
-                        Toast.makeText(MainActivity.this, "برنامه دوربین روی گوشی پیدا نشد.", Toast.LENGTH_LONG).show();
+                        Intent camera = new Intent(MainActivity.this, CameraCaptureActivity.class);
+                        startActivityForResult(camera, CAMERA_REQUEST);
+                        return true;
                     } catch (Exception e) {
-                        Log.e("YasinYar-Camera", "Could not launch full-resolution camera", e);
+                        Log.e("YasinYar-Camera", "Could not launch in-app CameraX", e);
                         Toast.makeText(MainActivity.this, "باز کردن دوربین ناموفق بود: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        if (filePathCallback != null) {
+                            filePathCallback.onReceiveValue(null);
+                            filePathCallback = null;
+                        }
+                        return true;
                     }
-                    if (filePathCallback != null) {
-                        filePathCallback.onReceiveValue(null);
-                        filePathCallback = null;
-                    }
-                    return true;
                 }
                 Intent picker = new Intent(Intent.ACTION_GET_CONTENT);
                 picker.addCategory(Intent.CATEGORY_OPENABLE);
@@ -279,15 +265,13 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST) {
-            if (resultCode == RESULT_OK && cameraOutputFile != null && cameraOutputFile.exists() && cameraOutputFile.length() > 0) {
-                final File capturedFile = cameraOutputFile;
+            String path = data != null ? data.getStringExtra("camera_file_path") : null;
+            File capturedFile = path != null ? new File(path) : null;
+            if (resultCode == RESULT_OK && capturedFile != null && capturedFile.exists() && capturedFile.length() > 0) {
                 cameraExecutor.execute(() -> processFullResolutionPhoto(capturedFile));
             } else {
-                if (cameraOutputFile != null) cameraOutputFile.delete();
                 Toast.makeText(this, "عکسی ثبت نشد؛ دوباره امتحان کن.", Toast.LENGTH_SHORT).show();
             }
-            cameraOutputUri = null;
-            cameraOutputFile = null;
             if (filePathCallback != null) {
                 filePathCallback.onReceiveValue(null);
                 filePathCallback = null;
