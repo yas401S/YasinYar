@@ -182,7 +182,7 @@ body.grade1-mode .menu-panel{background:#fffaf4;border:2px solid #f4d9c5;color:#
 (function(){
   window.yasinOpenExternal = function(url){
     var target = String(url || '');
-    if (!/^https?:\\/\\//i.test(target)) return false;
+    if (!/^https?:\/\//i.test(target)) return false;
     try {
       if (window.YasinExternal && typeof window.YasinExternal.open === 'function') {
         window.YasinExternal.open(target);
@@ -197,7 +197,7 @@ body.grade1-mode .menu-panel{background:#fffaf4;border:2px solid #f4d9c5;color:#
     var link = node && node.closest ? node.closest('a[href]') : null;
     if (!link) return;
     var href = link.href || '';
-    if (/^https?:\\/\\//i.test(href)) {
+    if (/^https?:\/\//i.test(href)) {
       event.preventDefault();
       event.stopPropagation();
       window.yasinOpenExternal(href);
