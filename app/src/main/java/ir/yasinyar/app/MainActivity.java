@@ -4,6 +4,18 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.Rect;
+import android.content.ClipData;
+import android.webkit.MimeTypeMap;
+import androidx.core.content.FileProvider;
+import androidx.exifinterface.media.ExifInterface;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -28,6 +40,9 @@ public class MainActivity extends Activity {
     private WebView webView;
     private static final int FILE_CHOOSER_REQUEST = 1001;
     private static final int CAMERA_REQUEST = 1002;
+    private Uri cameraOutputUri;
+    private File cameraOutputFile;
+    private final ExecutorService cameraExecutor = Executors.newSingleThreadExecutor();
     private TextToSpeech textToSpeech;
     private boolean ttsReady = false;
     private boolean ttsPaused = false;
@@ -186,11 +201,33 @@ public class MainActivity extends Activity {
                 if (filePathCallback != null) filePathCallback.onReceiveValue(null);
                 filePathCallback = callback;
                 if (params.isCaptureEnabled()) {
-                    Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    if (camera.resolveActivity(getPackageManager()) != null) {
-                        startActivityForResult(camera, CAMERA_REQUEST);
-                        return true;
+                    try {
+                        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        if (camera.resolveActivity(getPackageManager()) != null) {
+                            File cameraDir = new File(getCacheDir(), "camera");
+                            if (!cameraDir.exists() && !cameraDir.mkdirs()) throw new Exception("ساخت پوشه دوربین ناموفق بود");
+                            cameraOutputFile = File.createTempFile("yasinyar_full_", ".jpg", cameraDir);
+                            cameraOutputUri = FileProvider.getUriForFile(
+                                MainActivity.this,
+                                getPackageName() + ".fileprovider",
+                                cameraOutputFile
+                            );
+                            camera.putExtra(MediaStore.EXTRA_OUTPUT, cameraOutputUri);
+                            camera.setClipData(ClipData.newRawUri("YasinYar camera output", cameraOutputUri));
+                            camera.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                            startActivityForResult(camera, CAMERA_REQUEST);
+                            return true;
+                        }
+                        Toast.makeText(MainActivity.this, "برنامه دوربین روی گوشی پیدا نشد.", Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Log.e("YasinYar-Camera", "Could not launch full-resolution camera", e);
+                        Toast.makeText(MainActivity.this, "باز کردن دوربین ناموفق بود: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
+                    if (filePathCallback != null) {
+                        filePathCallback.onReceiveValue(null);
+                        filePathCallback = null;
+                    }
+                    return true;
                 }
                 Intent picker = new Intent(Intent.ACTION_GET_CONTENT);
                 picker.addCategory(Intent.CATEGORY_OPENABLE);
@@ -242,15 +279,15 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST) {
-            if (resultCode == RESULT_OK && data != null && data.getExtras() != null) {
-                Object value = data.getExtras().get("data");
-                if (value instanceof Bitmap) {
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    ((Bitmap) value).compress(Bitmap.CompressFormat.JPEG, 92, stream);
-                    String encoded = Base64.encodeToString(stream.toByteArray(), Base64.NO_WRAP);
-                    webView.evaluateJavascript("window.receiveCameraPhoto('" + encoded + "')", null);
-                }
+            if (resultCode == RESULT_OK && cameraOutputFile != null && cameraOutputFile.exists() && cameraOutputFile.length() > 0) {
+                final File capturedFile = cameraOutputFile;
+                cameraExecutor.execute(() -> processFullResolutionPhoto(capturedFile));
+            } else {
+                if (cameraOutputFile != null) cameraOutputFile.delete();
+                Toast.makeText(this, "عکسی ثبت نشد؛ دوباره امتحان کن.", Toast.LENGTH_SHORT).show();
             }
+            cameraOutputUri = null;
+            cameraOutputFile = null;
             if (filePathCallback != null) {
                 filePathCallback.onReceiveValue(null);
                 filePathCallback = null;
@@ -263,12 +300,62 @@ public class MainActivity extends Activity {
         }
     }
 
+    private void processFullResolutionPhoto(File file) {
+        Bitmap bitmap = null;
+        try {
+            BitmapFactory.Options bounds = new BitmapFactory.Options();
+            bounds.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(file.getAbsolutePath(), bounds);
+            if (bounds.outWidth <= 0 || bounds.outHeight <= 0) throw new Exception("فایل عکس معتبر نیست");
+            int sample = 1;
+            while (Math.max(bounds.outWidth / sample, bounds.outHeight / sample) > 3200) sample *= 2;
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = sample;
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+            if (bitmap == null) throw new Exception("خواندن عکس دوربین ناموفق بود");
+
+            ExifInterface exif = new ExifInterface(file.getAbsolutePath());
+            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            Matrix matrix = new Matrix();
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90: matrix.postRotate(90); break;
+                case ExifInterface.ORIENTATION_ROTATE_180: matrix.postRotate(180); break;
+                case ExifInterface.ORIENTATION_ROTATE_270: matrix.postRotate(270); break;
+                case ExifInterface.ORIENTATION_FLIP_HORIZONTAL: matrix.postScale(-1, 1); break;
+                case ExifInterface.ORIENTATION_FLIP_VERTICAL: matrix.postScale(1, -1); break;
+                case ExifInterface.ORIENTATION_TRANSPOSE: matrix.postScale(-1, 1); matrix.postRotate(90); break;
+                case ExifInterface.ORIENTATION_TRANSVERSE: matrix.postScale(-1, 1); matrix.postRotate(270); break;
+                default: break;
+            }
+            if (!matrix.isIdentity()) {
+                Bitmap corrected = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+                if (corrected != bitmap) bitmap.recycle();
+                bitmap = corrected;
+            }
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            if (!bitmap.compress(Bitmap.CompressFormat.JPEG, 91, stream)) throw new Exception("فشرده‌سازی عکس ناموفق بود");
+            String encoded = Base64.encodeToString(stream.toByteArray(), Base64.NO_WRAP);
+            runOnUiThread(() -> {
+                if (webView != null) webView.evaluateJavascript("window.receiveCameraPhoto('" + encoded + "')", null);
+                Toast.makeText(MainActivity.this, "عکس اصلی با وضوح بالا آماده تحلیل است.", Toast.LENGTH_SHORT).show();
+            });
+        } catch (Exception e) {
+            Log.e("YasinYar-Camera", "Full-resolution photo processing failed", e);
+            runOnUiThread(() -> Toast.makeText(MainActivity.this, "پردازش عکس ناموفق بود: " + e.getMessage(), Toast.LENGTH_LONG).show());
+        } finally {
+            if (bitmap != null && !bitmap.isRecycled()) bitmap.recycle();
+            file.delete();
+        }
+    }
+
     @Override
     protected void onDestroy() {
         if (textToSpeech != null) {
             textToSpeech.stop();
             textToSpeech.shutdown();
         }
+        cameraExecutor.shutdown();
         if (webView != null) webView.destroy();
         super.onDestroy();
     }
