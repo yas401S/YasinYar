@@ -18,6 +18,22 @@ jobs:
       - name: Validate curriculum content and coverage map
         continue-on-error: true
         run: node scripts/validate-curriculum.cjs
+      - name: Validate JavaScript syntax in app assets
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const vm = require('vm');
+          const dir = 'app/src/main/assets';
+          for (const name of fs.readdirSync(dir).filter(x => x.endsWith('.js'))) {
+            new vm.Script(fs.readFileSync(path.join(dir, name), 'utf8'), { filename: name });
+          }
+          const html = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
+          for (const match of html.matchAll(/<script(?![^>]*\\bsrc=)[^>]*>([\\s\\S]*?)<\\/script>/gi)) {
+            if (match[1].trim()) new vm.Script(match[1], { filename: 'index.html inline script' });
+          }
+          console.log('All app JavaScript assets parsed successfully.');
+          NODE
       - name: Build debug APK
         run: gradle assembleDebug
       - uses: actions/upload-artifact@v4
