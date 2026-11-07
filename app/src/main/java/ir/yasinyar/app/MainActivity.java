@@ -34,6 +34,21 @@ public class MainActivity extends Activity {
     private ArrayList<String> speechParts = new ArrayList<>();
     private int speechIndex = 0;
 
+    private boolean openExternalPage(String url) {
+        if (url == null) return false;
+        Uri uri = Uri.parse(url);
+        String scheme = uri.getScheme();
+        if (!"http".equalsIgnoreCase(scheme) && !"https".equalsIgnoreCase(scheme)) return false;
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+            return true;
+        } catch (Exception e) {
+            Log.e("YasinYar-WebView", "Could not open external URL: " + url, e);
+            return true;
+        }
+    }
+
     private void sendVoiceEvent(String event, String message) {
         if (webView == null) return;
         String safe = message == null ? "" : message.replace("\\", "\\\\").replace("'", "\\'");
@@ -128,7 +143,17 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         webView = new WebView(this);
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return openExternalPage(url);
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, android.webkit.WebResourceRequest request) {
+                return openExternalPage(request.getUrl().toString());
+            }
+        });
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onConsoleMessage(ConsoleMessage message) {
