@@ -446,6 +446,7 @@ function openPracticeTopic(g,topic){$('practiceGrade').value=String(g);$('practi
 
 
 
+function receiveCameraPhotoError(){const status=document.getElementById('ocrStatus');if(status)status.textContent='پردازش عکس دوربین ناموفق بود؛ دوباره عکس بگیر یا از گالری انتخاب کن.';const button=document.getElementById('solveImageButton');if(button)button.disabled=!selectedQuestionImage;}
 function receiveCameraPhoto(base64){const raw=atob(base64),arr=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)arr[i]=raw.charCodeAt(i);const file=new File([new Blob([arr],{type:'image/jpeg'})],'question-camera.jpg',{type:'image/jpeg'});selectedQuestionImage=file;$('questionPreview').src='data:image/jpeg;base64,'+base64;$('questionPreview').classList.remove('hidden');$('ocrButton').disabled=false;$('solveImageButton').disabled=false;$('ocrStatus').textContent='عکس دوربین آماده تحلیل مستقیم است.';$('ocrText').value='';$('photoAnswer').innerHTML='';}
 
 let selectedQuestionImage=null;
@@ -512,7 +513,7 @@ async function rectifyYasinDocument(sourceCanvas){
    cv.approxPolyDP(contour,approx,.02*perimeter,true);
    if(approx.rows!==4||!cv.isContourConvex(approx))continue;
    const pts=[];
-   for(let j=0;j<4;j++)pts.push({x:approx.intAt(j,0),y:approx.intAt(j,1)});
+   const coordinates=approx.data32S;if(!coordinates||coordinates.length<8)continue;for(let j=0;j<4;j++){const x=coordinates[j*2],y=coordinates[j*2+1];if(!Number.isFinite(x)||!Number.isFinite(y))continue;pts.push({x,y});}if(pts.length!==4)continue;
    const sums=pts.map(p=>p.x+p.y),diffs=pts.map(p=>p.x-p.y);
    const tl=pts[sums.indexOf(Math.min(...sums))];
    const br=pts[sums.indexOf(Math.max(...sums))];
