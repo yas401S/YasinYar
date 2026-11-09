@@ -326,7 +326,10 @@ public class MainActivity extends Activity {
             });
         } catch (Exception e) {
             Log.e("YasinYar-Camera", "Full-resolution photo processing failed", e);
-            runOnUiThread(() -> Toast.makeText(MainActivity.this, "پردازش عکس ناموفق بود: " + e.getMessage(), Toast.LENGTH_LONG).show());
+            runOnUiThread(() -> {
+                if (webView != null) webView.evaluateJavascript("window.receiveCameraPhotoError && window.receiveCameraPhotoError()", null);
+                Toast.makeText(MainActivity.this, "پردازش عکس ناموفق بود؛ دوباره عکس بگیر.", Toast.LENGTH_LONG).show();
+            });
         } finally {
             if (bitmap != null && !bitmap.isRecycled()) bitmap.recycle();
             file.delete();
