@@ -158,10 +158,13 @@ export default {
       if (images.length) {
         model = "@cf/meta/llama-3.2-11b-vision-instruct";
         result = await env.AI.run(model, {
-          prompt: instructions + "\n\nتحلیل چندمرحله‌ای انجام بده. تصویر ارسالی نمای کامل صفحه است. همه سؤال‌ها را فهرست کن، سپس تک‌تک حل کن. متن کمکی: " + (question || "ندارد"),
+          messages: [
+            { role: "system", content: instructions + "\n\nقانون خروجی: فقط بر اساس تصویر واقعی پاسخ بده. اگر تصویر سؤال درسی دارد، متن سؤال‌ها را عیناً استخراج و حل کن. اگر تصویر واقعاً قابل‌خواندن نیست، فقط بخش ناخوانا را اعلام کن. هرگز توضیح عمومی درباره نوع سند، زبان خارجی یا محتوای فرضی تصویر تولید نکن." },
+            { role: "user", content: "این تصویر برگه یا سؤال دانش‌آموز است. آن را با دقت ببین، متن و نمادها را استخراج کن و همه سؤال‌های خوانا را به فارسی و متناسب با پایه حل کن. متن کمکی دانش‌آموز: " + (question || "ندارد") }
+          ],
           image: images[0],
           max_tokens: 4096,
-          temperature: 0.1
+          temperature: 0.05
         });
       } else {
         model = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
@@ -176,6 +179,9 @@ export default {
       }
       const answer = String(result?.response || "").trim();
       if (!answer) return json({ error: "مدل هوش مصنوعی پاسخ متنی تولید نکرد؛ دوباره تلاش کن." }, 502);
+      if (images.length && (!/[\\u0600-\\u06FF]/.test(answer) || /Step 1:\\s*Identify the image type|Transcribing the text in the image is not possible|foreign language/i.test(answer))) {
+        return json({ error: "مدل نتوانست متن واقعی سؤال را از تصویر استخراج کند؛ پاسخ عمومی و نامرتبط نمایش داده نشد. لطفاً عکس واضح‌تر و نزدیک‌تر بفرست." }, 422);
+      }
       return json({ answer, model });
     } catch (error) {
       const detail = String(error?.message || error || "");
