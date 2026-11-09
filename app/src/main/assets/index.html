@@ -405,7 +405,7 @@ function loadLesson(){
  let g=+$('gradeSelect').value,subject=$('subjectSelect').value,plans=lessonPlans[subject],topics=plans&&plans[g]?plans[g]:plans&&plans[lessonBand(g)]?plans[lessonBand(g)]:null;
  const curatedPack=window.YASINYAR_CURRICULUM&&window.YASINYAR_CURRICULUM[g]&&window.YASINYAR_CURRICULUM[g][subject];
  const curatedKeys=curatedPack?Object.keys(curatedPack):[];
- if(curatedKeys.length)topics=curatedKeys;
+ if(curatedKeys.length&&(g<=3||curatedKeys.length>1))topics=curatedKeys;
  let intro=g===1?'فهرست پایه اول بر اساس نمایه کتاب‌های ۱۴۰۵–۱۴۰۶ تنظیم شده است. آموزش‌ها و تمرین‌ها تألیفی‌اند و پاسخ رسمی صفحه‌ای هنوز نیازمند تطبیق است.':g===2?'فهرست پایه دوم بر اساس نمایه کتاب‌های ۱۴۰۵–۱۴۰۶ تنظیم شده است. آموزش‌ها و تمرین‌ها تألیفی‌اند و پاسخ رسمی صفحه‌ای هنوز نیازمند تطبیق است.':g===3?'فهرست پایه سوم بر اساس نمایه کتاب‌های ۱۴۰۵–۱۴۰۶ تنظیم شده است. آموزش‌ها و تمرین‌ها تألیفی‌اند و پاسخ رسمی صفحه‌ای هنوز نیازمند تطبیق است.':g===4?'نمایه ۹ کتاب پایه چهارم در برنامه ثبت شده است؛ بسته‌های آموزشی موجود پیش‌نویس تألیفی‌اند و هنوز پاسخ‌های صفحه‌ای با PDF رسمی تطبیق نهایی نشده‌اند.':'برای پایه‌های پنجم تا نهم، محورهای یادگیری عمومی و آموزش هوشمند در دسترس است؛ فهرست و محتوای کتاب‌های چاپ جاری هنوز به‌طور کامل راستی‌آزمایی و ثبت نشده‌اند. عنوان فصل یا پاسخ رسمی حدس زده نمی‌شود.';
  let details=topics?topics.map((t,i)=>'<div class="listitem"><b>مبحث '+fa(i+1)+' · '+escapeHtml(t)+'</b><p class="muted">'+lessonDescription(subject,t,g)+'</p><span class="pill">'+(g<=4?'نمایه کتاب ۱۴۰۵–۱۴۰۶؛ محتوای تألیفی و نیازمند بازبینی':'محور یادگیری عمومی؛ هنوز با کتاب رسمی تطبیق نشده')+'</span></div>').join(''):'<p class="muted">برای این درس هنوز فهرست مبحث ثبت نشده است.</p>';
  const curatedTopic=topics&&topics.length?topics[0]:'';
