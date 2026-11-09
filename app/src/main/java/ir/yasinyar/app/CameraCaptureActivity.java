@@ -14,11 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.util.Size;
 import androidx.activity.ComponentActivity;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.FocusMeteringAction;
+import androidx.camera.core.AspectRatio;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.MeteringPointFactory;
@@ -169,10 +169,13 @@ public class CameraCaptureActivity extends ComponentActivity {
                 ProcessCameraProvider provider = future.get();
                 Preview preview = new Preview.Builder().build();
                 preview.setSurfaceProvider(previewView.getSurfaceProvider());
+                // Let CameraX select a supported high-resolution 4:3 stream.
+                // A hard-coded 3000x4000 target can be unsupported on many phones
+                // and prevent the entire camera from binding.
                 imageCapture = new ImageCapture.Builder()
                     .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
-                    .setJpegQuality(96)
-                    .setTargetResolution(new Size(3000, 4000))
+                    .setJpegQuality(95)
+                    .setTargetAspectRatio(AspectRatio.RATIO_4_3)
                     .build();
                 provider.unbindAll();
                 camera = provider.bindToLifecycle(this, CameraSelector.DEFAULT_BACK_CAMERA, preview, imageCapture);
