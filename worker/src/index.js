@@ -156,24 +156,33 @@ export default {
       let result;
       let model;
       if (images.length) {
-        model = "@cf/meta/llama-3.2-11b-vision-instruct";
-        const parts = [];
+        const visionModel = "@cf/moondream/moondream3.1-9B-A2B";
+        const extracted = [];
         for (let index = 0; index < images.length; index++) {
           const viewName = index === 0 ? "نمای کامل صفحه" : "برش جزئی شماره " + index;
-          const resultPart = await env.AI.run(model, {
-            messages: [
-              { role: "system", content: instructions + "\n\nتو باید محتوای واقعی تصویر را بخوانی؛ از توصیف کلی سند خودداری کن. اگر این برش فقط بخشی از یک سؤال است، آن را به سؤال کامل صفحه مرتبط کن. متن فارسی و اعداد را دقیق نگه دار و در صورت ناخوانایی همان قسمت را مشخص کن." },
-              { role: "user", content: "این " + viewName + " از برگه دانش‌آموز است. پایه: " + grade + "؛ درس: " + subject + ". متن، عددها، فرمول‌ها و شکل‌های قابل مشاهده را دقیق استخراج کن. همه سؤال‌های قابل تشخیص را حل کن. اگر این تصویر برش صفحه است، فقط اطلاعات همین بخش را بخوان و از تکرار پاسخ سؤال‌های دیگر خودداری کن. متن کمکی: " + (question || "ندارد") }
-            ],
+          const vision = await env.AI.run(visionModel, {
+            task: "query",
             image: images[index],
-            max_tokens: 3000,
-            temperature: 0.05
+            question: "تو یک OCR دقیق فارسی برای برگه‌های درسی هستی. تمام نوشته‌ها، اعداد فارسی و لاتین، فرمول‌ها، کسرها، توان‌ها، جدول‌ها و شکل‌های قابل مشاهده را دقیقاً رونویسی کن. ترتیب سطرها و شماره سؤال‌ها را حفظ کن. هیچ چیزی را حدس نزن؛ بخش ناخوانا را [ناخوانا] بنویس. اگر تصویر برش است فقط محتوای همان برش را استخراج کن. خروجی فقط متن استخراج‌شده باشد، نه توصیف عکس. پایه " + grade + "، درس " + subject + ". " + (question || ""),
+            reasoning: true,
+            max_tokens: 1800,
+            temperature: 0.1
           });
-          const partText = String(resultPart?.response || "").trim();
-          if (partText) parts.push("【" + viewName + "】\n" + partText);
+          const textPart = String(vision?.answer || vision?.response || "").trim();
+          if (textPart) extracted.push("【" + viewName + "】\n" + textPart);
         }
-        result = { response: parts.join("\n\n") };
-      } else {
+        const extractedText = extracted.join("\n\n");
+        if (extractedText.length < 20) return json({ error: "موتور خواندن تصویر نتوانست متن سؤال را استخراج کند؛ لطفاً دوباره تلاش کن." }, 422);
+        model = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
+        result = await env.AI.run(model, {
+          messages: [
+            { role: "system", content: instructions + "\n\nمتن زیر با موتور خواندن تصویر استخراج شده است. آن را با دقت یکپارچه کن، تکرارهای ناشی از برش‌ها را حذف کن، ترتیب سؤال‌ها را حفظ کن و سپس همه سؤال‌های قابل‌حل را مرحله‌به‌مرحله حل کن. متن استخراج‌شده ممکن است خطای OCR داشته باشد؛ اگر عدد یا نماد مبهم است آن را حدس نزن و ابهام را مشخص کن. فقط به فارسی پاسخ بده." },
+            { role: "user", content: "متن استخراج‌شده از تصویرها:\n" + extractedText + "\n\nمتن تکمیلی کاربر: " + (question || "ندارد") }
+          ],
+          max_tokens: 5000,
+          temperature: 0.1
+        });
+      }else {
         model = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
         result = await env.AI.run(model, {
           messages: [
