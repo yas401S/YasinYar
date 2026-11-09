@@ -83,8 +83,8 @@ let grade2LessonCount = 0;
 let grade2ExerciseCount = 0;
 for (const [subject, count] of expectedGrade2) {
   const lessons = packs['2'] && packs['2'][subject];
-  const entries = Object.entries(lessons || {});
-  if (entries.length !== count) errors.push('Grade 2 ' + subject + ': expected ' + count + ' packs, found ' + entries.length);
+  const entries = Object.entries(lessons || {}).filter(([, lesson]) => lesson.catalogYear === '۱۴۰۵–۱۴۰۶');
+  if (entries.length !== count) errors.push('Grade 2 ' + subject + ': expected ' + count + ' current-year packs, found ' + entries.length);
   for (const [topic, lesson] of entries) {
     grade2LessonCount++;
     for (const key of ['title','goals','prerequisites','explanation','examples','mistakes','keyPoints','exercises','quiz','sourceNote']) {
