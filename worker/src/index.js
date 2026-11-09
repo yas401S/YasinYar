@@ -156,37 +156,29 @@ export default {
       let result;
       let model;
       if (images.length) {
-        const visionModel = "@cf/moondream/moondream3.1-9B-A2B";
-        // Start with the full-page image only: repeated concurrent vision calls can exceed Worker request time.
-        const vision = await env.AI.run(visionModel, {
-          task: "query",
-          image: images[0],
-          question: "این تصویر برگه تمرین درسی فارسی است. تمام سؤال‌ها، متن‌ها، اعداد، گزینه‌ها و عبارت‌های ریاضی را به ترتیب از بالا به پایین و راست به چپ دقیق رونویسی کن. کسرها و عددهای مخلوط را با صورت و مخرج مشخص بنویس. هیچ سؤال را حل نکن و هیچ توضیحی درباره نوع تصویر نده. اگر بخشی خوانا نیست فقط همان بخش را [ناخوانا] بنویس.",
-          reasoning: false,
-          max_tokens: 3000,
-          temperature: 0
-        });
-        const textPart = String(
-          vision?.answer ??
-          vision?.result?.answer ??
-          vision?.response ??
-          vision?.result?.response ??
-          vision?.output_text ??
-          ""
-        ).trim();
-        if (textPart.length < 10) {
-          const keys = vision && typeof vision === "object" ? Object.keys(vision).join(",") : typeof vision;
-          return json({ error: "پاسخ موتور بینایی خالی بود (ساختار خروجی: " + keys + ")." }, 502);
-        }
-        model = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
-        result = await env.AI.run(model, {
+        model = "@cf/meta/llama-3.2-11b-vision-instruct";
+        const vision = await env.AI.run(model, {
           messages: [
-            { role: "system", content: instructions + "\n\nمتن زیر از تصویر استخراج شده است. همه سؤال‌ها را به ترتیب حل کن؛ رونویسی را حفظ کن و فقط فارسی پاسخ بده. اگر نمادی مبهم است، آن را مشخص کن و حدس نزن." },
-            { role: "user", content: "متن استخراج‌شده از برگه:\n" + textPart + "\n\nدرخواست تکمیلی: " + (question || "همه سؤال‌های تصویر را حل کن.") }
+            { role: "system", content: "تو یک آموزگار فارسی‌زبان و متخصص خواندن برگه‌های درسی هستی. تمام سؤال‌های تصویر را دقیق بخوان و به ترتیب حل کن. فارسی و اعداد فارسی را حفظ کن. کسرها را با صورت و مخرج مشخص کن. همه مراحل حل را بنویس. اگر نمادی واقعاً ناخواناست فقط همان قسمت را مشخص کن و حدس نزن. پاسخ فقط فارسی باشد." },
+            { role: "user", content: "این تصویر برگه تمرین دانش‌آموز پایه " + grade + "، درس " + subject + " است. همه سؤال‌های قابل مشاهده را کامل حل کن. " + (question || "همه سؤال‌های عکس را حل کن.") }
           ],
+          image: images[0],
           max_tokens: 4096,
           temperature: 0.1
         });
+        const answerText = String(
+          vision?.response ??
+          vision?.result?.response ??
+          vision?.answer ??
+          vision?.result?.answer ??
+          vision?.output_text ??
+          ""
+        ).trim();
+        if (answerText.length < 10) {
+          const keys = vision && typeof vision === "object" ? Object.keys(vision).join(",") : String(vision);
+          return json({ error: "مدل بینایی پاسخ متنی نداد. مشخصات خروجی: " + keys }, 502);
+        }
+        return json({ answer: answerText, model });
       }else {
         model = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
         result = await env.AI.run(model, {
