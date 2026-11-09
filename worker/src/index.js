@@ -16,9 +16,9 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
-    if (url.pathname === "/") return json({ service: "YasinYar AI Tutor", ready: Boolean(env.OPENAI_API_KEY), books: "official-publisher-portal", endpoint: "/solve" });
+    if (url.pathname === "/") return json({ service: "YasinYar AI Tutor", ready: Boolean(env.AI), books: "official-publisher-portal", endpoint: "/solve" });
     if (!["/solve", "/lesson"].includes(url.pathname) || request.method !== "POST") return json({ error: "مسیر یا روش درخواست معتبر نیست." }, 404);
-    if (!env.OPENAI_API_KEY) return json({ error: "کلید هوش مصنوعی روی سرور تنظیم نشده است." }, 503);
+    if (!env.AI) return json({ error: "اتصال هوش مصنوعی Cloudflare روی سرور فعال نیست." }, 503);
 
     let body;
     try {
@@ -63,35 +63,23 @@ export default {
         ? "متن درس برای خلاصه و آموزش:\n" + sourceText
         : "لطفاً موضوع را به زبان ساده آموزش بده: " + topic;
       try {
-        const upstream = await fetch("https://api.openai.com/v1/responses", {
-          method: "POST",
-          headers: {
-            "Authorization": "Bearer " + env.OPENAI_API_KEY,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            model: env.OPENAI_MODEL || "gpt-5.4-mini",
-            instructions: lessonInstructions,
-            input: lessonInput,
-            max_output_tokens: 2200,
-            store: false
-          })
+        const result = await env.AI.run("@cf/meta/llama-3.1-8b-instruct-fp8-fast", {
+          messages: [
+            { role: "system", content: lessonInstructions },
+            { role: "user", content: lessonInput }
+          ],
+          max_tokens: 3000,
+          temperature: 0.2
         });
-        const result = await upstream.json();
-        if (!upstream.ok) {
-          const message = result?.error?.message || "ساخت درس‌نامه هوشمند ناموفق بود.";
-          return json({ error: message }, upstream.status === 429 ? 429 : 502);
+        const answer = String(result?.response || "").trim();
+        if (!answer) return json({ error: "مدل هوش مصنوعی پاسخ متنی تولید نکرد؛ دوباره تلاش کن." }, 502);
+        return json({ answer, model: "@cf/meta/llama-3.1-8b-instruct-fp8-fast" });
+      } catch (error) {
+        const detail = String(error?.message || error || "");
+        if (/quota|neurons|billing|limit/i.test(detail)) {
+          return json({ error: "سهمیه روزانه هوش مصنوعی Cloudflare تمام شده است؛ پس از بازنشانی سهمیه دوباره تلاش کن." }, 429);
         }
-        const answer = (result.output || [])
-          .filter(item => item.type === "message")
-          .flatMap(item => item.content || [])
-          .filter(item => item.type === "output_text")
-          .map(item => item.text)
-          .join("\n").trim();
-        if (!answer) return json({ error: "درس‌نامه متنی از سرویس دریافت نشد." }, 502);
-        return json({ answer, model: result.model || env.OPENAI_MODEL || "gpt-5.4-mini" });
-      } catch {
-        return json({ error: "اتصال سرور به سرویس هوشمند برقرار نشد." }, 502);
+        return json({ error: "ساخت درس‌نامه ناموفق بود: " + detail.slice(0, 350) }, 502);
       }
     }
 
@@ -165,38 +153,42 @@ export default {
     ].join("\\n");
 
     try {
-      const upstream = await fetch("https://api.openai.com/v1/responses", {
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer " + env.OPENAI_API_KEY,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          model: env.OPENAI_MODEL || "gpt-5.4-mini",
-          instructions,
-          input: images.length ? [{ role: "user", content: [
-            { type: "input_text", text: "تحلیل چندمرحله‌ای انجام بده. تصویر اول نمای کامل و تصاویر بعدی برش‌های بزرگ‌نمایی‌شده همان صفحه‌اند. ابتدا تمام سؤال‌ها را فهرست کن، سپس تک‌تک حل کن. متن کمکی: " + (question || "ندارد") },
-            ...images.map(url => ({ type: "input_image", image_url: url, detail: "high" }))
-          ] }] : question,
-          max_output_tokens: 8000,
-          store: false
-        })
-      });
-      const result = await upstream.json();
-      if (!upstream.ok) {
-        const message = result?.error?.message || "ارتباط با سرویس هوش مصنوعی ناموفق بود.";
-        return json({ error: message }, upstream.status === 429 ? 429 : 502);
+      let result;
+      let model;
+      if (images.length) {
+        model = "@cf/meta/llama-3.2-11b-vision-instruct";
+        result = await env.AI.run(model, {
+          messages: [
+            { role: "system", content: instructions },
+            {
+              role: "user",
+              content: "تحلیل چندمرحله‌ای انجام بده. تصویر ارسالی نمای کامل صفحه است. همه سؤال‌ها را فهرست کن، سپس تک‌تک حل کن. متن کمکی: " + (question || "ندارد")
+            }
+          ],
+          image: images[0],
+          max_tokens: 4096,
+          temperature: 0.1
+        });
+      } else {
+        model = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
+        result = await env.AI.run(model, {
+          messages: [
+            { role: "system", content: instructions },
+            { role: "user", content: question }
+          ],
+          max_tokens: 4096,
+          temperature: 0.1
+        });
       }
-      const answer = (result.output || [])
-        .filter(item => item.type === "message")
-        .flatMap(item => item.content || [])
-        .filter(item => item.type === "output_text")
-        .map(item => item.text)
-        .join("\n").trim();
-      if (!answer) return json({ error: "پاسخ متنی از سرویس دریافت نشد." }, 502);
-      return json({ answer, model: result.model || env.OPENAI_MODEL || "gpt-5.4-mini" });
-    } catch {
-      return json({ error: "اتصال سرور به سرویس هوش مصنوعی برقرار نشد." }, 502);
+      const answer = String(result?.response || "").trim();
+      if (!answer) return json({ error: "مدل هوش مصنوعی پاسخ متنی تولید نکرد؛ دوباره تلاش کن." }, 502);
+      return json({ answer, model });
+    } catch (error) {
+      const detail = String(error?.message || error || "");
+      if (/quota|neurons|billing|limit/i.test(detail)) {
+        return json({ error: "سهمیه روزانه هوش مصنوعی Cloudflare تمام شده است؛ پس از بازنشانی سهمیه دوباره تلاش کن." }, 429);
+      }
+      return json({ error: "تحلیل هوشمند ناموفق بود: " + detail.slice(0, 350) }, 502);
     }
   }
 };
