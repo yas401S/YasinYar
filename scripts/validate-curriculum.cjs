@@ -17,6 +17,7 @@ const files = [
   'grade1-current-catalog.js',
   'grade2-current-catalog.js',
   'grade2-other-books.js',
+  'grade2-official-books.js',
   'grade3-current-catalog.js'
 ];
 for (const file of files) {
@@ -76,6 +77,7 @@ if (!index.includes('const curatedKeys=curatedPack?Object.keys(curatedPack):[];'
 
 const grade2Catalog = sandbox.window.YASINYAR_GRADE2_CURRENT_CATALOG;
 if (!grade2Catalog || grade2Catalog.year !== '۱۴۰۵–۱۴۰۶') errors.push('Current grade 2 catalog metadata is missing');
+if (!sandbox.window.YASINYAR_GRADE2_OFFICIAL_BOOKS || sandbox.window.YASINYAR_GRADE2_OFFICIAL_BOOKS.length !== 6) errors.push('Grade 2 official-book catalog must load all six official subjects');
 const expectedGrade2 = [['ریاضی دوست‌داشتنی',13],['جهان پیرامون',18],['فارسی می‌نویسم',11],['من و دوستم خدا',10],['ریاضی',8],['علوم',14],['فارسی',17],['نگارش فارسی',17],['آموزش قرآن',14],['هدیه‌های آسمان',20]];
 let grade2LessonCount = 0;
 let grade2ExerciseCount = 0;
