@@ -18,7 +18,8 @@ const files = [
   'grade2-current-catalog.js',
   'grade2-other-books.js',
   'grade2-official-books.js',
-  'grade3-current-catalog.js'
+  'grade3-current-catalog.js',
+  'grade4-current-catalog.js'
 ];
 for (const file of files) {
   const full = path.join(root, 'app/src/main/assets', file);
@@ -127,10 +128,31 @@ for (const [subject, count] of expectedGrade3) {
 if (!index.includes('<script src="grade3-current-catalog.js"></script>')) errors.push('Grade 3 curriculum script is not loaded');
 if (!index.includes("3:['فارسی','نگارش فارسی','ریاضی','علوم','آموزش قرآن','هدیه‌های آسمان','مطالعات اجتماعی']")) errors.push('Grade 3 subject selector does not match the current book set');
 
+const grade4Catalog = sandbox.window.YASINYAR_GRADE4_CURRENT_CATALOG;
+if (!grade4Catalog || grade4Catalog.year !== '۱۴۰۵–۱۴۰۶') errors.push('Current grade 4 catalog metadata is missing');
+if (!Array.isArray(grade4Catalog && grade4Catalog.books) || grade4Catalog.books.length !== 9) errors.push('Grade 4 catalog must load its nine listed books');
+const grade4Map = map.grades && map.grades.find(x => x.grade === 4);
+if (!grade4Map || !Array.isArray(grade4Map.books) || grade4Map.books.length !== 9) errors.push('Grade 4 coverage map must contain nine listed books');
+let grade4LessonCount = 0;
+for (const [subject, lessons] of Object.entries(packs['4'] || {})) {
+  for (const [topic, lesson] of Object.entries(lessons || {})) {
+    grade4LessonCount++;
+    if (lesson.catalogYear !== '۱۴۰۵–۱۴۰۶') errors.push('Grade 4 ' + subject + '/' + topic + ': curriculum year mismatch');
+    if (lesson.status !== 'draft_original_content_needs_official_page_review') errors.push('Grade 4 ' + subject + '/' + topic + ': draft status must remain explicit');
+    if (!lesson.sourceNote || !lesson.explanation || !Array.isArray(lesson.exercises)) errors.push('Grade 4 ' + subject + '/' + topic + ': incomplete draft structure');
+  }
+}
+if (!index.includes('<script src="grade4-current-catalog.js"></script>')) errors.push('Grade 4 catalog script is not loaded');
+if (!index.includes("4:['ریاضی','علوم','فارسی','نگارش فارسی','آموزش قرآن','هدیه‌های آسمان','مطالعات اجتماعی','آموزش خط تحریری (کتاب کار تکمیلی)','از ایرانمان دفاع می‌کنیم (کتاب تکمیلی)']")) errors.push('Grade 4 subject selector does not match its nine-book catalog');
+for (let grade = 5; grade <= 9; grade++) {
+  const entry = map.grades && map.grades.find(x => x.grade === grade);
+  if (!entry || !Array.isArray(entry.books)) errors.push('Coverage map must explicitly represent grade ' + grade);
+}
+
 const bookshelf = fs.readFileSync(path.join(root, 'app/src/main/assets/grade1-bookshelf.js'), 'utf8');
 for (const id of ['read','write','math','world','quran','art','move']) if (!bookshelf.includes("id:'" + id + "'")) errors.push('Bookshelf missing current book: ' + id);
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
-console.log('Grade 1 curriculum validation passed: 7 books, ' + lessonCount + ' current lesson packs, ' + exerciseCount + ' exercises; grade 2: ' + grade2LessonCount + ' lesson packs and ' + grade2ExerciseCount + ' exercises. Official PDF page-by-page answer verification remains explicitly pending.');
+console.log('Curriculum validation passed: grade 1 = 7 books / ' + lessonCount + ' lesson packs / ' + exerciseCount + ' exercises; grade 2 = ' + grade2LessonCount + ' lesson packs / ' + grade2ExerciseCount + ' exercises; grade 3 = ' + grade3LessonCount + ' lesson packs / ' + grade3ExerciseCount + ' exercises; grade 4 = ' + grade4LessonCount + ' draft lesson packs. Grades 5–9 are represented in the coverage map but still need verified book catalogs and authored lesson content. Official PDF page-by-page answer verification remains pending.');
