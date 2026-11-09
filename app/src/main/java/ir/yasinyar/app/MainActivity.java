@@ -292,7 +292,7 @@ public class MainActivity extends Activity {
             BitmapFactory.decodeFile(file.getAbsolutePath(), bounds);
             if (bounds.outWidth <= 0 || bounds.outHeight <= 0) throw new Exception("فایل عکس معتبر نیست");
             int sample = 1;
-            while (Math.max(bounds.outWidth / sample, bounds.outHeight / sample) > 3200) sample *= 2;
+            while (Math.max(bounds.outWidth / sample, bounds.outHeight / sample) > 2000) sample *= 2;
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = sample;
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
@@ -318,7 +318,7 @@ public class MainActivity extends Activity {
                 bitmap = corrected;
             }
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            if (!bitmap.compress(Bitmap.CompressFormat.JPEG, 91, stream)) throw new Exception("فشرده‌سازی عکس ناموفق بود");
+            if (!bitmap.compress(Bitmap.CompressFormat.JPEG, 84, stream)) throw new Exception("فشرده‌سازی عکس ناموفق بود");
             String encoded = Base64.encodeToString(stream.toByteArray(), Base64.NO_WRAP);
             runOnUiThread(() -> {
                 if (webView != null) webView.evaluateJavascript("window.receiveCameraPhoto('" + encoded + "')", null);
