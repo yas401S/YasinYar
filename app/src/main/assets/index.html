@@ -554,56 +554,42 @@ async function rectifyYasinDocument(sourceCanvas){
 async function imageToDataUrls(file){
  if(!file||!/^image\/(jpeg|png|webp|heic|heif)$/i.test(file.type||''))throw new Error('فایل انتخاب‌شده تصویر پشتیبانی‌شده نیست.');
  if(file.size>24*1024*1024)throw new Error('حجم عکس بیشتر از ۲۴ مگابایت است؛ عکس را با کیفیت معمولی دوباره بگیر.');
+ if(!window.createImageBitmap)throw new Error('پردازش تصویر در این نسخه گوشی پشتیبانی نمی‌شود؛ از عکس JPG استفاده کن.');
  const img=await createImageBitmap(file,{imageOrientation:'from-image'});
  try{
-  const maxSide=2800,scale=Math.min(1,maxSide/Math.max(img.width,img.height));
-  const sourceCanvas=document.createElement('canvas');
-  sourceCanvas.width=Math.max(1,Math.round(img.width*scale));
-  sourceCanvas.height=Math.max(1,Math.round(img.height*scale));
-  const sourceContext=sourceCanvas.getContext('2d',{alpha:false});
-  if(!sourceContext)throw new Error('پردازش تصویر در گوشی در دسترس نیست.');
-  sourceContext.fillStyle='#fff';sourceContext.fillRect(0,0,sourceCanvas.width,sourceCanvas.height);
-  sourceContext.imageSmoothingEnabled=true;sourceContext.imageSmoothingQuality='high';
-  sourceContext.drawImage(img,0,0,sourceCanvas.width,sourceCanvas.height);
+  // Keep mobile memory use bounded: no OpenCV/WASM, contour scans, or base64 re-decoding.
+  const maxSide=1800,scale=Math.min(1,maxSide/Math.max(img.width,img.height));
+  const source=document.createElement('canvas');
+  source.width=Math.max(1,Math.round(img.width*scale));source.height=Math.max(1,Math.round(img.height*scale));
+  const baseCtx=source.getContext('2d',{alpha:false});
+  if(!baseCtx)throw new Error('پردازش تصویر در گوشی در دسترس نیست.');
+  baseCtx.fillStyle='#fff';baseCtx.fillRect(0,0,source.width,source.height);
+  baseCtx.imageSmoothingEnabled=true;baseCtx.imageSmoothingQuality='high';
+  baseCtx.drawImage(img,0,0,source.width,source.height);
   yasinLastPerspectiveCorrection=false;
-  let source=sourceCanvas;
-  const rectified=await rectifyYasinDocument(sourceCanvas);
-  if(rectified!==sourceCanvas){source=rectified;yasinLastPerspectiveCorrection=true;}
-  const width=source.width,height=source.height;
-  const make=(sx,sy,sw,sh,max=1600,quality=.87)=>{
+  const make=(sx,sy,sw,sh,max=1050,quality=.76)=>{
    const factor=Math.min(1,max/Math.max(sw,sh)),canvas=document.createElement('canvas');
    canvas.width=Math.max(1,Math.round(sw*factor));canvas.height=Math.max(1,Math.round(sh*factor));
    const ctx=canvas.getContext('2d',{alpha:false});
    if(!ctx)throw new Error('پردازش تصویر در گوشی در دسترس نیست.');
-   ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
    ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);
+   ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
    ctx.drawImage(source,sx,sy,sw,sh,0,0,canvas.width,canvas.height);
    return canvas.toDataURL('image/jpeg',quality);
   };
-  const images=[make(0,0,width,height,2400,.88)];
-  if(width>850&&height>850){
-   const overlapX=Math.round(width*.045),overlapY=Math.round(height*.045),mx=Math.round(width/2),my=Math.round(height/2);
+  const width=source.width,height=source.height;
+  const images=[make(0,0,width,height,1800,.80)];
+  if(width>700&&height>700){
+   const mx=Math.round(width/2),my=Math.round(height/2),ox=Math.round(width*.035),oy=Math.round(height*.035);
    const crops=[
-    [0,0,Math.min(width,mx+overlapX),Math.min(height,my+overlapY)],
-    [Math.max(0,mx-overlapX),0,width-Math.max(0,mx-overlapX),Math.min(height,my+overlapY)],
-    [0,Math.max(0,my-overlapY),Math.min(width,mx+overlapX),height-Math.max(0,my-overlapY)],
-    [Math.max(0,mx-overlapX),Math.max(0,my-overlapY),width-Math.max(0,mx-overlapX),height-Math.max(0,my-overlapY)]
+    [0,0,Math.min(width,mx+ox),Math.min(height,my+oy)],
+    [Math.max(0,mx-ox),0,width-Math.max(0,mx-ox),Math.min(height,my+oy)],
+    [0,Math.max(0,my-oy),Math.min(width,mx+ox),height-Math.max(0,my-oy)],
+    [Math.max(0,mx-ox),Math.max(0,my-oy),width-Math.max(0,mx-ox),height-Math.max(0,my-oy)]
    ];
-   crops.forEach(c=>images.push(make(...c,1700,.86)));
+   for(const c of crops)images.push(make(c[0],c[1],c[2],c[3],1050,.74));
   }
-  let total=images.reduce((n,x)=>n+x.length,0);
-  if(total>11500000){
-   for(let i=1;i<images.length;i++){
-    const raw=atob(images[i].split(',')[1]),bytes=new Uint8Array(raw.length);
-    for(let j=0;j<raw.length;j++)bytes[j]=raw.charCodeAt(j);
-    const smaller=await createImageBitmap(new Blob([bytes],{type:'image/jpeg'}));
-    const factor=Math.min(1,1350/Math.max(smaller.width,smaller.height));
-    const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(smaller.width*factor));canvas.height=Math.max(1,Math.round(smaller.height*factor));
-    const ctx=canvas.getContext('2d',{alpha:false});ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(smaller,0,0,canvas.width,canvas.height);smaller.close();
-    images[i]=canvas.toDataURL('image/jpeg',.78);
-   }
-   total=images.reduce((n,x)=>n+x.length,0);
-  }
+  const total=images.reduce((n,x)=>n+x.length,0);
   if(total>12400000)throw new Error('حجم تصویر هنوز زیاد است؛ لطفاً فقط یک صفحه را جداگانه عکس بگیر.');
   return images;
  }finally{img.close();}
@@ -611,16 +597,27 @@ async function imageToDataUrls(file){
 async function solveImageDirect(){
  if(!selectedQuestionImage)return;
  const button=$('solveImageButton'),status=$('ocrStatus'),box=$('photoAnswer');
- button.disabled=true;box.innerHTML='<div class="notice">در حال بهبود تصویر، بررسی صفحه کامل و چهار نمای نزدیک و تشخیص نوع درس...</div>';status.textContent='نسخه واضح صفحه و چهار برش جزئیات برای تشخیص متن، فرمول، جدول و شکل ارسال می‌شوند.';
+ button.disabled=true;
+ box.innerHTML='<div class="notice">عکس در حال آماده‌سازی سبک برای گوشی است؛ لطفاً برنامه را نبند.</div>';
+ status.textContent='در حال کم‌کردن حجم عکس و آماده‌سازی نمای کامل و جزئیات…';
  try{
   const images=await imageToDataUrls(selectedQuestionImage);
-  status.textContent=yasinLastPerspectiveCorrection?'گوشه‌های برگه تشخیص داده شد و پرسپکتیو عکس اصلاح شد؛ در حال تحلیل...':'اصلاح هندسی خودکار در دسترس نبود؛ عکس اصلی و برش‌های نزدیک بدون تغییر پرسپکتیو ارسال می‌شوند.';
-  const response=await fetch(YASINYAR_AI_WORKER+'/solve',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({images,grade:+$('aiGrade').value,subject:$('aiSubject').value})});
-  const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.error||('خطای سرور '+response.status));if(!data.answer)throw new Error('پاسخی دریافت نشد.');
+  status.textContent='عکس آماده شد؛ در حال ارسال '+images.length+' نمای تصویر برای تحلیل…';
+  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),90000);
+  let response;
+  try{
+   response=await fetch(YASINYAR_AI_WORKER+'/solve',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({images,grade:+$('aiGrade').value,subject:$('aiSubject').value}),signal:controller.signal});
+  }finally{clearTimeout(timeout);}
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok)throw new Error(data.error||('خطای سرور '+response.status));
+  if(!data.answer)throw new Error('پاسخی دریافت نشد.');
   box.innerHTML='<div class="question"><span class="pill">تحلیل مستقیم تصویر</span><div style="white-space:pre-wrap;line-height:2">'+escapeHtml(data.answer)+'</div></div>';
   status.textContent='تحلیل تصویر انجام شد؛ پاسخ همه سؤال‌های قابل‌خواندن نمایش داده شد.';
- }catch(e){box.innerHTML='<div class="notice">حل عکس ناموفق بود: '+escapeHtml(e.message)+'</div>';status.textContent='خطا در تحلیل تصویر.';}
- finally{button.disabled=false;}
+ }catch(e){
+  const message=e.name==='AbortError'?'زمان پاسخ‌گویی سرور تمام شد؛ اینترنت را بررسی کن و دوباره بزن.':e.message;
+  box.innerHTML='<div class="notice">حل عکس ناموفق بود: '+escapeHtml(message)+'</div>';
+  status.textContent='تحلیل متوقف شد؛ برنامه باید همچنان قابل استفاده باشد.';
+ }finally{button.disabled=false;}
 }
 async function readQuestionImage(){if(!selectedQuestionImage)return;$('ocrButton').disabled=true;$('ocrStatus').textContent='در حال خواندن متن فارسی...';try{if(!window.Tesseract)throw new Error('موتور OCR بارگذاری نشد؛ اینترنت را بررسی کن.');const r=await Tesseract.recognize(selectedQuestionImage,'fas+eng',{logger:m=>{if(m.status)$('ocrStatus').textContent=m.status;},workerPath:'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/worker.min.js',corePath:'https://cdn.jsdelivr.net/npm/tesseract.js-core@5/tesseract-core.wasm.js',langPath:'https://tessdata.projectnaptha.com/4.0.0'});$('ocrText').value=(r.data.text||'').trim();$('ocrStatus').textContent=$('ocrText').value?'متن خوانده شد؛ آن را بازبینی کن.':'متنی تشخیص داده نشد؛ عکس واضح‌تری بگیر.';}catch(e){$('ocrStatus').textContent='خطا: '+e.message;}finally{$('ocrButton').disabled=false;}}
 const YASINYAR_AI_WORKER='https://yasinyar-ai-tutor.yasinjon-401.workers.dev';
