@@ -558,7 +558,7 @@ async function imageToDataUrls(file){
  const img=await createImageBitmap(file,{imageOrientation:'from-image'});
  try{
   // Keep mobile memory use bounded: no OpenCV/WASM, contour scans, or base64 re-decoding.
-  const maxSide=1800,scale=Math.min(1,maxSide/Math.max(img.width,img.height));
+  const maxSide=1600,scale=Math.min(1,maxSide/Math.max(img.width,img.height));
   const source=document.createElement('canvas');
   source.width=Math.max(1,Math.round(img.width*scale));source.height=Math.max(1,Math.round(img.height*scale));
   const baseCtx=source.getContext('2d',{alpha:false});
@@ -578,7 +578,7 @@ async function imageToDataUrls(file){
    return canvas.toDataURL('image/jpeg',quality);
   };
   const width=source.width,height=source.height;
-  const images=[make(0,0,width,height,1800,.80)];
+  const images=[make(0,0,width,height,1600,.74)];
   if(width>700&&height>700){
    const mx=Math.round(width/2),my=Math.round(height/2),ox=Math.round(width*.035),oy=Math.round(height*.035);
    const crops=[
@@ -587,10 +587,10 @@ async function imageToDataUrls(file){
     [0,Math.max(0,my-oy),Math.min(width,mx+ox),height-Math.max(0,my-oy)],
     [Math.max(0,mx-ox),Math.max(0,my-oy),width-Math.max(0,mx-ox),height-Math.max(0,my-oy)]
    ];
-   for(const c of crops)images.push(make(c[0],c[1],c[2],c[3],1050,.74));
+   for(const c of crops)images.push(make(c[0],c[1],c[2],c[3],820,.66));
   }
   const total=images.reduce((n,x)=>n+x.length,0);
-  if(total>12400000)throw new Error('حجم تصویر هنوز زیاد است؛ لطفاً فقط یک صفحه را جداگانه عکس بگیر.');
+  if(total>7800000)throw new Error('حجم عکس برای ارسال زیاد است؛ لطفاً یک صفحه را جداگانه و با کیفیت معمولی انتخاب کن.');
   return images;
  }finally{img.close();}
 }
@@ -602,7 +602,7 @@ async function solveImageDirect(){
  status.textContent='در حال کم‌کردن حجم عکس و آماده‌سازی نمای کامل و جزئیات…';
  try{
   const images=await imageToDataUrls(selectedQuestionImage);
-  status.textContent='عکس آماده شد؛ در حال ارسال '+images.length+' نمای تصویر برای تحلیل…';
+  status.textContent='عکس آماده شد؛ در حال ارسال '+images.length+' تصویر سبک برای تحلیل…';
   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),90000);
   let response;
   try{
