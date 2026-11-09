@@ -157,32 +157,37 @@ export default {
       let model;
       if (images.length) {
         const visionModel = "@cf/moondream/moondream3.1-9B-A2B";
-        const selectedImages = images.slice(0, 5);
-        const extracted = await Promise.all(selectedImages.map(async (image, index) => {
-          const viewName = index === 0 ? "نمای کامل صفحه" : "برش جزئی شماره " + index;
-          const vision = await env.AI.run(visionModel, {
-            task: "query",
-            image,
-            question: "تمام متن‌ها، اعداد، فرمول‌ها و سؤال‌های این تصویر را دقیق رونویسی کن. فارسی را فارسی نگه دار. ترتیب را حفظ کن. چیزی را حدس نزن؛ ناخوانا را [ناخوانا] بنویس. خروجی فقط متن واقعی تصویر باشد، نه توصیف تصویر. پایه " + grade + "، درس " + subject + ". " + (question || ""),
-            reasoning: false,
-            max_tokens: 1000,
-            temperature: 0
-          });
-          const textPart = String(vision?.answer || "").trim();
-          return textPart ? "【" + viewName + "】\n" + textPart : "";
-        }));
-        const extractedText = extracted.filter(Boolean).join("\n\n");
-        if (extractedText.length < 10) return json({ error: "موتور خواندن تصویر نتوانست متن سؤال را استخراج کند." }, 422);
+        // Start with the full-page image only: repeated concurrent vision calls can exceed Worker request time.
+        const vision = await env.AI.run(visionModel, {
+          task: "query",
+          image: images[0],
+          question: "این تصویر برگه تمرین درسی فارسی است. تمام سؤال‌ها، متن‌ها، اعداد، گزینه‌ها و عبارت‌های ریاضی را به ترتیب از بالا به پایین و راست به چپ دقیق رونویسی کن. کسرها و عددهای مخلوط را با صورت و مخرج مشخص بنویس. هیچ سؤال را حل نکن و هیچ توضیحی درباره نوع تصویر نده. اگر بخشی خوانا نیست فقط همان بخش را [ناخوانا] بنویس.",
+          reasoning: false,
+          max_tokens: 3000,
+          temperature: 0
+        });
+        const textPart = String(
+          vision?.answer ??
+          vision?.result?.answer ??
+          vision?.response ??
+          vision?.result?.response ??
+          vision?.output_text ??
+          ""
+        ).trim();
+        if (textPart.length < 10) {
+          const keys = vision && typeof vision === "object" ? Object.keys(vision).join(",") : typeof vision;
+          return json({ error: "پاسخ موتور بینایی خالی بود (ساختار خروجی: " + keys + ")." }, 502);
+        }
         model = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
         result = await env.AI.run(model, {
           messages: [
-            { role: "system", content: instructions + "\n\nمتن زیر از تصویر استخراج شده است. تکرار برش‌ها را حذف کن، سؤال‌ها را به ترتیب حل کن و فقط فارسی پاسخ بده. متن OCR ممکن است خطا داشته باشد؛ اعداد و نمادهای مبهم را حدس نزن." },
-            { role: "user", content: "متن استخراج‌شده:\n" + extractedText + "\n\nمتن تکمیلی: " + (question || "ندارد") }
+            { role: "system", content: instructions + "\n\nمتن زیر از تصویر استخراج شده است. همه سؤال‌ها را به ترتیب حل کن؛ رونویسی را حفظ کن و فقط فارسی پاسخ بده. اگر نمادی مبهم است، آن را مشخص کن و حدس نزن." },
+            { role: "user", content: "متن استخراج‌شده از برگه:\n" + textPart + "\n\nدرخواست تکمیلی: " + (question || "همه سؤال‌های تصویر را حل کن.") }
           ],
           max_tokens: 4096,
           temperature: 0.1
         });
-      } else {
+      }else {
         model = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
         result = await env.AI.run(model, {
           messages: [
