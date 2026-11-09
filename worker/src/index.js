@@ -182,7 +182,7 @@ export default {
           max_tokens: 4096,
           temperature: 0.1
         });
-      }lse {
+      } else {
         model = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
         result = await env.AI.run(model, {
           messages: [
