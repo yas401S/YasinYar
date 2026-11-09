@@ -17,6 +17,8 @@ jobs:
           gradle-version: '8.9'
       - name: Validate curriculum content and coverage map
         run: node scripts/validate-curriculum.cjs
+      - name: Validate app UI and integration wiring
+        run: node scripts/validate-app-integration.cjs
       - name: Validate JavaScript syntax in app assets
         run: |
           node <<'NODE'
