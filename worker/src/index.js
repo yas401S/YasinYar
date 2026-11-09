@@ -157,15 +157,22 @@ export default {
       let model;
       if (images.length) {
         model = "@cf/meta/llama-3.2-11b-vision-instruct";
-        result = await env.AI.run(model, {
-          messages: [
-            { role: "system", content: instructions + "\n\nقانون خروجی: فقط بر اساس تصویر واقعی پاسخ بده. اگر تصویر سؤال درسی دارد، متن سؤال‌ها را عیناً استخراج و حل کن. اگر تصویر واقعاً قابل‌خواندن نیست، فقط بخش ناخوانا را اعلام کن. هرگز توضیح عمومی درباره نوع سند، زبان خارجی یا محتوای فرضی تصویر تولید نکن." },
-            { role: "user", content: "این تصویر برگه یا سؤال دانش‌آموز است. آن را با دقت ببین، متن و نمادها را استخراج کن و همه سؤال‌های خوانا را به فارسی و متناسب با پایه حل کن. متن کمکی دانش‌آموز: " + (question || "ندارد") }
-          ],
-          image: images[0],
-          max_tokens: 4096,
-          temperature: 0.05
-        });
+        const parts = [];
+        for (let index = 0; index < images.length; index++) {
+          const viewName = index === 0 ? "نمای کامل صفحه" : "برش جزئی شماره " + index;
+          const resultPart = await env.AI.run(model, {
+            messages: [
+              { role: "system", content: instructions + "\n\nتو باید محتوای واقعی تصویر را بخوانی؛ از توصیف کلی سند خودداری کن. اگر این برش فقط بخشی از یک سؤال است، آن را به سؤال کامل صفحه مرتبط کن. متن فارسی و اعداد را دقیق نگه دار و در صورت ناخوانایی همان قسمت را مشخص کن." },
+              { role: "user", content: "این " + viewName + " از برگه دانش‌آموز است. پایه: " + grade + "؛ درس: " + subject + ". متن، عددها، فرمول‌ها و شکل‌های قابل مشاهده را دقیق استخراج کن. همه سؤال‌های قابل تشخیص را حل کن. اگر این تصویر برش صفحه است، فقط اطلاعات همین بخش را بخوان و از تکرار پاسخ سؤال‌های دیگر خودداری کن. متن کمکی: " + (question || "ندارد") }
+            ],
+            image: images[index],
+            max_tokens: 3000,
+            temperature: 0.05
+          });
+          const partText = String(resultPart?.response || "").trim();
+          if (partText) parts.push("【" + viewName + "】\n" + partText);
+        }
+        result = { response: parts.join("\n\n") };
       } else {
         model = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
         result = await env.AI.run(model, {
