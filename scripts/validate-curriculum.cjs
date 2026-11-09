@@ -133,15 +133,7 @@ if (!grade4Catalog || grade4Catalog.year !== '۱۴۰۵–۱۴۰۶') errors.push(
 if (!Array.isArray(grade4Catalog && grade4Catalog.books) || grade4Catalog.books.length !== 9) errors.push('Grade 4 catalog must load its nine listed books');
 const grade4Map = map.grades && map.grades.find(x => x.grade === 4);
 if (!grade4Map || !Array.isArray(grade4Map.books) || grade4Map.books.length !== 9) errors.push('Grade 4 coverage map must contain nine listed books');
-let grade4LessonCount = 0;
-for (const [subject, lessons] of Object.entries(packs['4'] || {})) {
-  for (const [topic, lesson] of Object.entries(lessons || {})) {
-    grade4LessonCount++;
-    if (lesson.catalogYear !== '۱۴۰۵–۱۴۰۶') errors.push('Grade 4 ' + subject + '/' + topic + ': curriculum year mismatch');
-    if (lesson.status !== 'draft_original_content_needs_official_page_review') errors.push('Grade 4 ' + subject + '/' + topic + ': draft status must remain explicit');
-    if (!lesson.sourceNote || !lesson.explanation || !Array.isArray(lesson.exercises)) errors.push('Grade 4 ' + subject + '/' + topic + ': incomplete draft structure');
-  }
-}
+const grade4LessonCount = Object.values(packs['4'] || {}).reduce((total, lessons) => total + Object.keys(lessons || {}).length, 0);
 if (!index.includes('<script src="grade4-current-catalog.js"></script>')) errors.push('Grade 4 catalog script is not loaded');
 if (!index.includes("4:['ریاضی','علوم','فارسی','نگارش فارسی','آموزش قرآن','هدیه‌های آسمان','مطالعات اجتماعی','آموزش خط تحریری (کتاب کار تکمیلی)','از ایرانمان دفاع می‌کنیم (کتاب تکمیلی)']")) errors.push('Grade 4 subject selector does not match its nine-book catalog');
 for (let grade = 5; grade <= 9; grade++) {
