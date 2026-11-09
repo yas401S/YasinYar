@@ -158,13 +158,7 @@ export default {
       if (images.length) {
         model = "@cf/meta/llama-3.2-11b-vision-instruct";
         result = await env.AI.run(model, {
-          messages: [
-            { role: "system", content: instructions },
-            {
-              role: "user",
-              content: "تحلیل چندمرحله‌ای انجام بده. تصویر ارسالی نمای کامل صفحه است. همه سؤال‌ها را فهرست کن، سپس تک‌تک حل کن. متن کمکی: " + (question || "ندارد")
-            }
-          ],
+          prompt: instructions + "\\n\\nتحلیل چندمرحله‌ای انجام بده. تصویر ارسالی نمای کامل صفحه است. همه سؤال‌ها را فهرست کن، سپس تک‌تک حل کن. متن کمکی: " + (question || "ندارد"),
           image: images[0],
           max_tokens: 4096,
           temperature: 0.1
