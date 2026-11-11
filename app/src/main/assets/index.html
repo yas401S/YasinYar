@@ -256,6 +256,13 @@ body.grade1-mode .menu-panel{background:#fffaf4;border:2px solid #f4d9c5;color:#
 </div>
 <div class="row" style="margin-top:9px"><button class="btn primary" style="flex:1" onclick="runProCalc()">= محاسبه</button><button class="btn" onclick="calcBackspace()">⌫</button><button class="btn" onclick="calcClearHistory()">پاک‌کردن سابقه</button></div>
 <div id="proCalcAnswer" class="question" style="margin-top:10px;white-space:pre-wrap">عبارت را وارد کن تا پاسخ نمایش داده شود.</div>
+<div class="panel" style="margin-top:12px;background:#10223a">
+<h4>➗ تقسیم ستونی (مرحله‌به‌مرحله)</h4>
+<p class="muted">مقسوم و مقسوم‌علیه را وارد کن تا خارج‌قسمت، باقیمانده و مراحل تقسیم را ببینی.</p>
+<div class="row"><input id="longDividend" class="field" inputmode="decimal" placeholder="مقسوم؛ مثلاً ۱۲۵" aria-label="مقسوم"><span>÷</span><input id="longDivisor" class="field" inputmode="decimal" placeholder="مقسوم‌علیه؛ مثلاً ۶" aria-label="مقسوم علیه"></div>
+<div class="row" style="margin-top:8px"><button class="btn primary" style="flex:1" onclick="runLongDivision()">حل تقسیم ستونی</button><button class="btn" onclick="document.getElementById('longDividend').value='';document.getElementById('longDivisor').value='';document.getElementById('longDivisionAnswer').textContent='عددها را وارد کن.'">پاک‌کردن</button></div>
+<div id="longDivisionAnswer" class="question" style="white-space:pre-wrap;margin-top:9px">نمونه: ۱۲۵ ÷ ۶</div>
+</div>
 <div class="row" style="justify-content:space-between;margin-top:10px"><b>🕘 سابقه محاسبات</b><span class="muted">روی نتیجه بزن تا دوباره وارد شود</span></div><div id="proCalcHistory" class="muted">هنوز محاسبه‌ای انجام نشده است.</div>
 </div>
 <div class="panel"><h3>➕ ماشین‌حساب چهار عمل اصلی</h3><div class="row"><input id="calcA" type="number" step="any" placeholder="عدد اول" class="field"><select id="calcOp" style="max-width:80px;flex:0"><option value="+">+</option><option value="-">−</option><option value="*">×</option><option value="/">÷</option></select><input id="calcB" type="number" step="any" placeholder="عدد دوم" class="field"><button class="btn primary" onclick="calculate()">محاسبه</button></div><h3 id="calcResult" class="goodtxt">نتیجه اینجا نمایش داده می‌شود.</h3></div>
@@ -745,6 +752,29 @@ function parseProExpression(source){
  const add=()=>{let a=mul();while(peek()==='+'||peek()==='-'){let op=take(),b=mul();a=op==='+'?a+b:a-b}return a};
  const value=add();if(p!==t.length)throw Error('بخشی از عبارت قابل محاسبه نیست.');if(!Number.isFinite(value))throw Error('نتیجه خارج از محدوده محاسبه است.');return value
 }
+
+function calcAsciiDigits(v){return String(v).replace(/[۰-۹]/g,c=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(c)).replace(/[٠-٩]/g,c=>'٠١٢٣٤٥٦٧٨٩'.indexOf(c)).replace(/٫/g,'.').replace(/٬/g,'').replace(/,/g,'')}
+function runLongDivision(){
+ const aRaw=calcAsciiDigits($('longDividend').value.trim()),bRaw=calcAsciiDigits($('longDivisor').value.trim()),out=$('longDivisionAnswer');
+ if(!aRaw||!bRaw){out.textContent='لطفاً هر دو عدد را وارد کن.';return}
+ if(!/^\d+$/.test(aRaw)||!/^\d+$/.test(bRaw)){out.textContent='برای تقسیم ستونی، فعلاً عدد صحیح نامنفی وارد کن. مثال: ۱۲۵ و ۶';return}
+ const divisor=Number(bRaw);if(!divisor){out.textContent='تقسیم بر صفر تعریف نشده است.';return}
+ if(!Number.isSafeInteger(Number(aRaw))||!Number.isSafeInteger(divisor)){out.textContent='عددها بیش از محدوده امن محاسبه هستند.';return}
+ let rem=0,quotient='',steps=[],partial='';
+ for(let i=0;i<aRaw.length;i++){
+   partial+=aRaw[i];const current=rem*10+Number(aRaw[i]);const digit=Math.floor(current/divisor);rem=current%divisor;quotient+=String(digit);
+   const product=digit*divisor;
+   if(partial.replace(/^0+/,'')!=='')steps.push('مرحله '+(steps.length+1)+': '+partial+' ÷ '+bRaw+' = '+digit+'\\n'+partial+' − '+product+' = '+rem+'  (باقی‌مانده)');
+   partial=String(rem);
+ }
+ quotient=quotient.replace(/^0+(?=\d)/,'')||'0';
+ const exact=Number(aRaw)/divisor;
+ let text='تقسیم: '+fa(aRaw)+' ÷ '+fa(bRaw)+'\\nخارج‌قسمت صحیح: '+fa(quotient)+'\\nباقی‌مانده: '+fa(rem)+'\\nبررسی: ('+quotient+' × '+bRaw+') + '+rem+' = '+aRaw;
+ if(rem!==0)text+='\\nخارج‌قسمت اعشاری تقریبی: '+fa(Number(exact.toFixed(8)));
+ text+='\\n\\nمراحل تقسیم ستونی:\\n'+steps.join('\\n\\n')+'\\n\\nیادآوری: باقی‌مانده همیشه باید از مقسوم‌علیه کوچک‌تر باشد.';
+ out.textContent=text;
+}
+
 function runProCalc(){
  const expr=$('proCalcInput').value.trim();const box=$('proCalcAnswer');try{
  const value=parseProExpression(expr);const rounded=Number(value.toPrecision(12));let steps='نتیجه: '+fa(rounded);
