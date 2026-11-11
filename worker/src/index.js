@@ -155,53 +155,65 @@ export default {
     try {
       let result;
       let model;
+      let extractedText = "";
       if (images.length) {
         const visionModel = "@cf/meta/llama-3.2-11b-vision-instruct";
-        // Prefer the four zoomed page quadrants. The full-page image is only a fallback.
-        const views = images.length >= 5 ? images.slice(1, 5) : images;
+        // Read the complete page plus its zoomed regions. Keep OCR output short and literal.
+        const views = images.length >= 5 ? images : images.slice(0, 1);
         const extractedViews = await Promise.all(views.map(async (image, index) => {
           const vision = await env.AI.run(visionModel, {
             messages: [
-              { role: "system", content: "تو موتور OCR دقیق فارسی هستی. فقط محتوای واقعی این برش از برگه درسی را رونویسی کن. متن، اعداد، صورت و مخرج کسرها، عددهای مخلوط، علامت‌های عمل، گزینه‌ها و شماره سؤال‌ها را دقیق نگه دار. ترتیب را از بالا به پایین و راست به چپ رعایت کن. هیچ چیزی را حل نکن و چیزی نساز. بخش ناخوانا را [ناخوانا] بنویس." },
-              { role: "user", content: "این برش شماره " + (index + 1) + " از یک برگه تمرین فارسی پایه " + grade + " درس " + subject + " است. همه متن و عبارت‌های ریاضی قابل مشاهده را رونویسی کن." }
+              { role: "system", content: "تو فقط رونویس دقیق یک برگه درسی فارسی هستی، نه طراح سؤال. فقط نوشته‌ها و عبارت‌هایی را که واقعاً در همین تصویر دیده می‌شوند رونویسی کن. هیچ سؤال، شماره، جمله، عدد یا شکلی اضافه نکن. ترتیب راست به چپ و بالا به پایین را رعایت کن. کسرها را به شکل صورت/مخرج، عدد مخلوط را جداگانه و علامت عمل را دقیق بنویس. اگر بخشی واضح نیست [ناخوانا] بنویس. خروجی کوتاه و وفادار به تصویر باشد." },
+              { role: "user", content: "این نمای " + (index + 1) + " از برگه است. فقط متن واقعی قابل مشاهده و شماره سؤال‌های واقعاً چاپ‌شده را رونویسی کن. اگر متن سؤال وجود ندارد، چیزی نساز." }
             ],
             image,
-            max_tokens: 1800,
+            max_tokens: 1000,
             temperature: 0
           });
           const text = String(vision?.response ?? vision?.result?.response ?? vision?.answer ?? "").trim();
-          return text ? "【برش " + (index + 1) + "】\n" + text : "";
+          return text ? "【نمای " + (index + 1) + "】\n" + text : "";
         }));
-        const extractedText = extractedViews.filter(Boolean).join("\n\n");
-        if (extractedText.length < 20) {
-          return json({ error: "مدل بینایی نتوانست متن برش‌های بزرگ‌نمایی‌شده را بخواند. لطفاً یک عکس نزدیک‌تر از هر نیمه صفحه بفرست." }, 422);
+        extractedText = extractedViews.filter(Boolean).join("\n\n");
+        if (extractedText.length < 30) {
+          return json({ error: "مدل نتوانست متن واقعی سؤال‌های تصویر را بخواند؛ هیچ پاسخ حدسی نمایش داده نشد." }, 422);
         }
-        model = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
+        // Reject obvious OCR hallucinations before they reach the answer model.
+        const numberedLines = (extractedText.match(/(?:^|\\n)\\s*[۰-۹0-9]{1,3}\\s*[.)-]/g) || []).length;
+        if (extractedText.length > 6500 || numberedLines > 18 || /A تا Z|221\\s*\\./i.test(extractedText)) {
+          return json({ error: "خواندن تصویر قابل اعتماد نبود و متن استخراج‌شده با ساختار یک برگه واقعی سازگار نیست؛ پاسخ ساختگی نمایش داده نشد." }, 422);
+        }
+        model = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
         result = await env.AI.run(model, {
           messages: [
-            { role: "system", content: instructions + "\n\nمتن زیر از چهار برش بزرگ‌نمایی‌شده یک صفحه استخراج شده است. تکرارها را حذف کن، متن‌های ناقص را با هم تطبیق بده و تمام سؤال‌های قابل‌خواندن را به ترتیب حل کن. هرگز نماد یا عدد مبهم را حدس نزن. پاسخ فقط فارسی و مرحله‌به‌مرحله باشد." },
-            { role: "user", content: "متن استخراج‌شده از برش‌های تصویر:\n" + extractedText + "\n\nدرخواست: " + (question || "تمام سؤال‌های تصویر را حل کن.") }
+            { role: "system", content: instructions + "\n\nقانون قطعی: متن OCR زیر تنها منبع اطلاعات توست. فقط سؤال‌هایی را حل کن که متن یا عبارت ریاضی آن‌ها صریحاً در OCR دیده می‌شود. شماره سؤال، عبارت، عدد، شکل یا بخش تازه نساز. اگر بخشی ناقص است، فقط همان بخش را «ناخوانا» اعلام کن. اگر OCR برای حل کافی نیست، سؤال را حل‌نشده اعلام کن؛ از حدس و تکمیل خیالی خودداری کن. پاسخ را کوتاه، منظم و به ترتیب شماره‌های واقعاً موجود بنویس. حداکثر ۱۲ سؤال؛ هرگز فهرست‌های طولانی یا سؤال‌های تکراری تولید نکن." },
+            { role: "user", content: "متن استخراج‌شده از تصویر (ممکن است بخش‌هایی ناخوانا باشد):\n" + extractedText + "\n\nدرخواست: " + (question || "تمام سؤال‌های واقعاً موجود در این برگه را حل کن.") }
           ],
-          max_tokens: 4096,
-          temperature: 0.1
+          max_tokens: 2200,
+          temperature: 0
         });
-      }else {
-        model = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
+      } else {
+        model = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
         result = await env.AI.run(model, {
           messages: [
             { role: "system", content: instructions },
             { role: "user", content: question }
           ],
-          max_tokens: 4096,
+          max_tokens: 3000,
           temperature: 0.1
         });
       }
       const answer = String(result?.response || "").trim();
       if (!answer) return json({ error: "مدل هوش مصنوعی پاسخ متنی تولید نکرد؛ دوباره تلاش کن." }, 502);
-      if (images.length && (!/[\\u0600-\\u06FF]/.test(answer) || /Step 1:\\s*Identify the image type|Transcribing the text in the image is not possible|foreign language/i.test(answer))) {
-        return json({ error: "مدل نتوانست متن واقعی سؤال را از تصویر استخراج کند؛ پاسخ عمومی و نامرتبط نمایش داده نشد. لطفاً عکس واضح‌تر و نزدیک‌تر بفرست." }, 422);
+      if (images.length) {
+        const answerQuestionCount = (answer.match(/(?:سؤال|سوال)\\s*[۰-۹0-9]+/g) || []).length;
+        if (!/[\\u0600-\\u06FF]/.test(answer) ||
+            answer.length > 14000 ||
+            answerQuestionCount > 14 ||
+            /A تا Z|۲۲۱ سؤال|221 سؤال|رسم خطوط و قطع آنها/i.test(answer)) {
+          return json({ error: "پاسخ تولیدشده با متن واقعی تصویر سازگار نبود؛ برای جلوگیری از جواب خیالی، نتیجه نمایش داده نشد." }, 422);
+        }
       }
-      return json({ answer, model });
+      return json({ answer, model, ...(images.length ? { recognizedText: extractedText } : {}) });
     } catch (error) {
       const detail = String(error?.message || error || "");
       if (/quota|neurons|billing|limit/i.test(detail)) {
