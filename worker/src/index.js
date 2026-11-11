@@ -177,7 +177,6 @@ export default {
           max_tokens: 1800,
           temperature: 0
         });
-      }
       } else {
         model = "@cf/google/gemma-4-26b-a4b-it";
         result = await env.AI.run(model, {
