@@ -733,7 +733,7 @@ function parseProExpression(source){
  const raw=s.match(/(?:\d+(?:\.\d*)?|\.\d+)|(?:sqrt|sin|cos|tan|log|ln|pi|e)|[()+\-*/^%]/g)||[];
  if(raw.join('')!==s)throw Error('در عبارت، نویسه نامعتبر وجود دارد.');
  let t=[];
- for(let i=0;i<raw.length;i++){t.push(raw[i]);const a=raw[i],n=raw[i+1];if(n&&((/^(?:\d|\.|pi$|e$|sqrt$|sin$|cos$|tan$|log$|ln$)/.test(n)&&(/^(?:\d|\.|pi$|e$|\))/.test(a)))||(a===')'&&/^(?:\d|\.|pi$|e$|sqrt$|sin$|cos$|tan$|log$|ln$)/.test(n)))t.push('*')}
+ for(let i=0;i<raw.length;i++){t.push(raw[i]);const a=raw[i],n=raw[i+1];const starts=n&&/^(?:\d|\.|pi$|e$|sqrt$|sin$|cos$|tan$|log$|ln$)/.test(n);const ends=/^(?:\d|\.|pi$|e$|\))/.test(a);if(n&&((starts&&ends)||(a===')'&&starts)||(n==='('&&ends)))t.push('*')}
  let p=0;const peek=()=>t[p],take=()=>t[p++];
  const primary=()=>{let x=take();if(x===undefined)throw Error('بخشی از عبارت ناقص است.');if(x==='+')return unary();if(x==='-')return -unary();if(x==='('){let v=add();if(take()!==')')throw Error('پرانتز بسته نشده است.');return v}
  if(x==='pi')return Math.PI;if(x==='e')return Math.E;
