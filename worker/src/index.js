@@ -157,41 +157,27 @@ export default {
       let model;
       let extractedText = "";
       if (images.length) {
-        const visionModel = "@cf/meta/llama-3.2-11b-vision-instruct";
-        // Read the complete page plus its zoomed regions. Keep OCR output short and literal.
-        const views = images.length >= 5 ? images : images.slice(0, 1);
-        const extractedViews = await Promise.all(views.map(async (image, index) => {
-          const vision = await env.AI.run(visionModel, {
-            messages: [
-              { role: "system", content: "تو فقط رونویس دقیق یک برگه درسی فارسی هستی، نه طراح سؤال. فقط نوشته‌ها و عبارت‌هایی را که واقعاً در همین تصویر دیده می‌شوند رونویسی کن. هیچ سؤال، شماره، جمله، عدد یا شکلی اضافه نکن. ترتیب راست به چپ و بالا به پایین را رعایت کن. کسرها را به شکل صورت/مخرج، عدد مخلوط را جداگانه و علامت عمل را دقیق بنویس. اگر بخشی واضح نیست [ناخوانا] بنویس. خروجی کوتاه و وفادار به تصویر باشد." },
-              { role: "user", content: "این نمای " + (index + 1) + " از برگه است. فقط متن واقعی قابل مشاهده و شماره سؤال‌های واقعاً چاپ‌شده را رونویسی کن. اگر متن سؤال وجود ندارد، چیزی نساز." }
-            ],
-            image,
-            max_tokens: 1000,
-            temperature: 0
-          });
-          const text = String(vision?.response ?? vision?.result?.response ?? vision?.answer ?? "").trim();
-          return text ? "【نمای " + (index + 1) + "】\n" + text : "";
-        }));
-        extractedText = extractedViews.filter(Boolean).join("\n\n");
-        if (extractedText.length < 30) {
-          return json({ error: "مدل نتوانست متن واقعی سؤال‌های تصویر را بخواند؛ هیچ پاسخ حدسی نمایش داده نشد." }, 422);
-        }
-        // Reject obvious OCR hallucinations before they reach the answer model.
-        const numberedLines = (extractedText.match(/(?:^|\\n)\\s*[۰-۹0-9]{1,3}\\s*[.)-]/g) || []).length;
-        if (extractedText.length > 6500 || numberedLines > 18 || /A تا Z|221\\s*\\./i.test(extractedText)) {
-          return json({ error: "خواندن تصویر قابل اعتماد نبود و متن استخراج‌شده با ساختار یک برگه واقعی سازگار نیست؛ پاسخ ساختگی نمایش داده نشد." }, 422);
-        }
+        // Single multimodal inference: avoid five separate OCR calls plus a second solver call.
         model = "@cf/google/gemma-4-26b-a4b-it";
+        const imagePrompt = [
+          "این تصویر برگه درسی دانش‌آموز است. خود تصویر را مستقیماً بخوان و سؤال‌های واقعی قابل مشاهده را حل کن.",
+          "ابتدا فقط شماره‌ها و متن سؤال‌هایی را که واقعاً در تصویر می‌بینی تشخیص بده؛ هیچ سؤال یا عددی نساز.",
+          "سپس هر سؤال خوانا را به ترتیب، مرحله‌به‌مرحله و به زبان فارسی حل کن. سطح دانش‌آموز پایه " + grade + " و درس " + subject + " است.",
+          "اگر بخشی ناخواناست، فقط همان قسمت را مشخص کن و سؤال‌های خوانای دیگر را حل کن. اگر عدد یا علامتی را نمی‌توانی با اطمینان بخوانی، حدس نزن.",
+          "برای ریاضی، صورت و مخرج کسرها، عدد مخلوط و علامت‌های +، −، × و ÷ را دقیق تشخیص بده؛ محاسبه را دوباره بررسی کن.",
+          "حداکثر ۱۲ سؤال واقعی را پاسخ بده. از توضیح درباره نوع تصویر، فهرست‌های خیالی، رونویسی طولانی و متن عمومی خودداری کن.",
+          question ? "درخواست دانش‌آموز: " + question : "همه سؤال‌های واقعی و قابل مشاهده این صفحه را حل کن."
+        ].join("\\n");
         result = await env.AI.run(model, {
           messages: [
-            { role: "system", content: instructions + "\n\nقانون قطعی: متن OCR زیر تنها منبع اطلاعات توست. فقط سؤال‌هایی را حل کن که متن یا عبارت ریاضی آن‌ها صریحاً در OCR دیده می‌شود. شماره سؤال، عبارت، عدد، شکل یا بخش تازه نساز. اگر بخشی ناقص است، فقط همان بخش را «ناخوانا» اعلام کن. اگر OCR برای حل کافی نیست، سؤال را حل‌نشده اعلام کن؛ از حدس و تکمیل خیالی خودداری کن. پاسخ را کوتاه، منظم و به ترتیب شماره‌های واقعاً موجود بنویس. حداکثر ۱۲ سؤال؛ هرگز فهرست‌های طولانی یا سؤال‌های تکراری تولید نکن." },
-            { role: "user", content: "متن استخراج‌شده از تصویر (ممکن است بخش‌هایی ناخوانا باشد):\n" + extractedText + "\n\nدرخواست: " + (question || "تمام سؤال‌های واقعاً موجود در این برگه را حل کن.") }
+            { role: "system", content: "تو معلم دقیق فارسی‌زبان هستی. تصویر را ببین و حل کن؛ OCR خیالی، سؤال‌سازی و پاسخ عمومی ممنوع است. جواب‌ها باید دقیق و متناسب با پایه دانش‌آموز باشند." },
+            { role: "user", content: imagePrompt }
           ],
-          max_tokens: 2600,
-          temperature: 0,
-          chat_template_kwargs: { enable_thinking: true }
+          image: images[0],
+          max_tokens: 1800,
+          temperature: 0
         });
+      }
       } else {
         model = "@cf/google/gemma-4-26b-a4b-it";
         result = await env.AI.run(model, {
@@ -201,7 +187,6 @@ export default {
           ],
           max_tokens: 3000,
           temperature: 0.1,
-          chat_template_kwargs: { enable_thinking: true }
         });
       }
       const answer = String(result?.response || "").trim();
