@@ -557,8 +557,8 @@ async function imageToDataUrls(file){
  if(!window.createImageBitmap)throw new Error('پردازش تصویر در این نسخه گوشی پشتیبانی نمی‌شود؛ از عکس JPG استفاده کن.');
  const img=await createImageBitmap(file,{imageOrientation:'from-image'});
  try{
-  // Keep mobile memory use bounded: no OpenCV/WASM, contour scans, or base64 re-decoding.
-  const maxSide=1600,scale=Math.min(1,maxSide/Math.max(img.width,img.height));
+  // Keep enough source detail for textbook fractions while bounding mobile memory.
+  const maxSide=2600,scale=Math.min(1,maxSide/Math.max(img.width,img.height));
   const source=document.createElement('canvas');
   source.width=Math.max(1,Math.round(img.width*scale));source.height=Math.max(1,Math.round(img.height*scale));
   const baseCtx=source.getContext('2d',{alpha:false});
@@ -567,7 +567,7 @@ async function imageToDataUrls(file){
   baseCtx.imageSmoothingEnabled=true;baseCtx.imageSmoothingQuality='high';
   baseCtx.drawImage(img,0,0,source.width,source.height);
   yasinLastPerspectiveCorrection=false;
-  const make=(sx,sy,sw,sh,max=1050,quality=.76)=>{
+  const make=(sx,sy,sw,sh,max=2200,quality=.82)=>{
    const factor=Math.min(1,max/Math.max(sw,sh)),canvas=document.createElement('canvas');
    canvas.width=Math.max(1,Math.round(sw*factor));canvas.height=Math.max(1,Math.round(sh*factor));
    const ctx=canvas.getContext('2d',{alpha:false});
@@ -577,10 +577,16 @@ async function imageToDataUrls(file){
    ctx.drawImage(source,sx,sy,sw,sh,0,0,canvas.width,canvas.height);
    return canvas.toDataURL('image/jpeg',quality);
   };
-  // Send one optimized full-page image. The Worker currently runs one vision inference
-  // and only consumes images[0]; creating and uploading four unused crops wastes time/data.
-  const images=[make(0,0,source.width,source.height,1600,.78)];
-  if(images[0].length>6500000)throw new Error('حجم عکس برای ارسال زیاد است؛ لطفاً یک صفحه را جداگانه انتخاب کن.');
+  // Send a small overview plus two high-resolution column crops.
+  // Persian worksheets are read right-to-left; the first crop is the right column.
+  const w=source.width,h=source.height,overlap=Math.round(w*.025),mid=Math.round(w/2);
+  const images=[
+   make(0,0,w,h,1350,.70),
+   make(Math.max(0,mid-overlap),0,w-Math.max(0,mid-overlap),h,2200,.84),
+   make(0,0,Math.min(w,mid+overlap),h,2200,.84)
+  ];
+  if(images.some(x=>x.length>6500000)||images.reduce((n,x)=>n+x.length,0)>12500000)
+   throw new Error('حجم عکس برای ارسال زیاد است؛ لطفاً هر ستون صفحه را جداگانه عکس بگیر.');
   return images;
  }finally{img.close();}
 }
@@ -592,7 +598,7 @@ async function solveImageDirect(){
  status.textContent='در حال بهینه‌سازی عکس صفحه…';
  try{
   const images=await imageToDataUrls(selectedQuestionImage);
-  status.textContent='عکس بهینه شد؛ در حال ارسال یک تصویر برای تحلیل…';
+  status.textContent='عکس بهینه شد؛ در حال ارسال نمای کلی و دو ستون با وضوح بالا برای تحلیل…';
   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),90000);
   let response;
   try{
