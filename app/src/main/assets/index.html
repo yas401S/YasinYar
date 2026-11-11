@@ -583,44 +583,76 @@ async function rectifyYasinDocument(sourceCanvas){
   for(let i=mats.length-1;i>=0;i--){try{mats[i].delete();}catch(_){}}
  }
 }
-async function imageToDataUrls(file){
- if(!file||!/^image\/(jpeg|png|webp|heic|heif)$/i.test(file.type||''))throw new Error('فایل انتخاب‌شده تصویر پشتیبانی‌شده نیست.');
+async function imageToDataUrls(file,onProgress=()=>{}){
+ if(!file||!/^image\\/(jpeg|png|webp|heic|heif)$/i.test(file.type||''))throw new Error('فایل انتخاب‌شده تصویر پشتیبانی‌شده نیست؛ JPG یا PNG انتخاب کن.');
  if(file.size>24*1024*1024)throw new Error('حجم عکس بیشتر از ۲۴ مگابایت است؛ عکس را با کیفیت معمولی دوباره بگیر.');
- if(!window.createImageBitmap)throw new Error('پردازش تصویر در این نسخه گوشی پشتیبانی نمی‌شود؛ از عکس JPG استفاده کن.');
- const img=await createImageBitmap(file,{imageOrientation:'from-image'});
+ // Android WebView does not reliably support createImageBitmap; use the HTML image decoder.
+ onProgress('۱ از ۳: باز کردن عکس روی گوشی…');
+ const objectUrl=URL.createObjectURL(file),img=new Image();
  try{
-  // Keep enough source detail for textbook fractions while bounding mobile memory.
-  const maxSide=2600,scale=Math.min(1,maxSide/Math.max(img.width,img.height));
+  await new Promise((resolve,reject)=>{
+   let settled=false;
+   const timer=setTimeout(()=>finish(new Error('باز کردن عکس بیش از حد طول کشید؛ یک عکس JPG دیگر امتحان کن.')),18000);
+   const finish=err=>{if(settled)return;settled=true;clearTimeout(timer);err?reject(err):resolve();};
+   img.onload=()=>finish();
+   img.onerror=()=>finish(new Error('گوشی نتوانست این فرمت عکس را باز کند؛ آن را به JPG تبدیل یا دوباره عکس بگیر.'));
+   img.src=objectUrl;
+  });
+  if(!img.naturalWidth||!img.naturalHeight)throw new Error('ابعاد عکس قابل خواندن نیست.');
+  onProgress('۲ از ۳: کوچک‌سازی عکس برای جلوگیری از هنگ گوشی…');
+  const maxSide=2000,scale=Math.min(1,maxSide/Math.max(img.naturalWidth,img.naturalHeight));
   const source=document.createElement('canvas');
-  source.width=Math.max(1,Math.round(img.width*scale));source.height=Math.max(1,Math.round(img.height*scale));
+  source.width=Math.max(1,Math.round(img.naturalWidth*scale));
+  source.height=Math.max(1,Math.round(img.naturalHeight*scale));
   const baseCtx=source.getContext('2d',{alpha:false});
   if(!baseCtx)throw new Error('پردازش تصویر در گوشی در دسترس نیست.');
   baseCtx.fillStyle='#fff';baseCtx.fillRect(0,0,source.width,source.height);
   baseCtx.imageSmoothingEnabled=true;baseCtx.imageSmoothingQuality='high';
   baseCtx.drawImage(img,0,0,source.width,source.height);
   yasinLastPerspectiveCorrection=false;
-  const make=(sx,sy,sw,sh,max=2200,quality=.82)=>{
-   const factor=Math.min(1,max/Math.max(sw,sh)),canvas=document.createElement('canvas');
-   canvas.width=Math.max(1,Math.round(sw*factor));canvas.height=Math.max(1,Math.round(sh*factor));
+  const canvasToDataUrl=canvas=>new Promise((resolve,reject)=>{
+   if(!canvas.toBlob){try{resolve(canvas.toDataURL('image/jpeg',.78));}catch(e){reject(e);}return;}
+   let settled=false;
+   const timer=setTimeout(()=>finish(new Error('تبدیل عکس در گوشی طول کشید؛ لطفاً عکس کوچک‌تری انتخاب کن.')),15000);
+   const finish=(err,value)=>{if(settled)return;settled=true;clearTimeout(timer);err?reject(err):resolve(value);};
+   try{
+    canvas.toBlob(blob=>{
+     if(!blob){finish(new Error('فشرده‌سازی عکس ناموفق بود.'));return;}
+     const reader=new FileReader();
+     reader.onload=()=>finish(null,reader.result);
+     reader.onerror=()=>finish(new Error('خواندن عکس فشرده‌شده ناموفق بود.'));
+     reader.readAsDataURL(blob);
+    },'image/jpeg',.78);
+   }catch(e){finish(e);}
+  });
+  const make=async(sx,sw,max)=>{
+   const factor=Math.min(1,max/sw),canvas=document.createElement('canvas');
+   canvas.width=Math.max(1,Math.round(sw*factor));
+   canvas.height=Math.max(1,Math.round(source.height*factor));
    const ctx=canvas.getContext('2d',{alpha:false});
    if(!ctx)throw new Error('پردازش تصویر در گوشی در دسترس نیست.');
    ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);
    ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
-   ctx.drawImage(source,sx,sy,sw,sh,0,0,canvas.width,canvas.height);
-   return canvas.toDataURL('image/jpeg',quality);
+   ctx.drawImage(source,sx,0,sw,source.height,0,0,canvas.width,canvas.height);
+   const data=await canvasToDataUrl(canvas);
+   canvas.width=canvas.height=1;
+   return data;
   };
-  // Send a small overview plus two high-resolution column crops.
-  // Persian worksheets are read right-to-left; the first crop is the right column.
-  const w=source.width,h=source.height,overlap=Math.round(w*.025),mid=Math.round(w/2);
+  // Overview plus two overlapping high-resolution columns, in reading order.
+  const w=source.width,overlap=Math.round(w*.025),mid=Math.round(w/2);
+  onProgress('۳ از ۳: آماده‌سازی نمای کلی و دو بخش خوانا…');
   const images=[
-   make(0,0,w,h,1350,.70),
-   make(Math.max(0,mid-overlap),0,w-Math.max(0,mid-overlap),h,2200,.84),
-   make(0,0,Math.min(w,mid+overlap),h,2200,.84)
+   await make(0,w,1100),
+   await make(Math.max(0,mid-overlap),w-Math.max(0,mid-overlap),1700),
+   await make(0,Math.min(w,mid+overlap),1700)
   ];
-  if(images.some(x=>x.length>6500000)||images.reduce((n,x)=>n+x.length,0)>12500000)
-   throw new Error('حجم عکس برای ارسال زیاد است؛ لطفاً هر ستون صفحه را جداگانه عکس بگیر.');
+  if(images.some(x=>x.length>5500000)||images.reduce((n,x)=>n+x.length,0)>10500000)
+   throw new Error('حجم عکس هنوز زیاد است؛ لطفاً هر نیمه صفحه را جداگانه عکس بگیر.');
   return images;
- }finally{img.close();}
+ }finally{
+  URL.revokeObjectURL(objectUrl);
+  img.src='';
+ }
 }
 async function solveImageDirect(){
  if(!selectedQuestionImage)return;
@@ -629,7 +661,7 @@ async function solveImageDirect(){
  box.innerHTML='<div class="notice">عکس در حال آماده‌سازی سبک برای گوشی است؛ لطفاً برنامه را نبند.</div>';
  status.textContent='در حال بهینه‌سازی عکس صفحه…';
  try{
-  const images=await imageToDataUrls(selectedQuestionImage);
+  const images=await imageToDataUrls(selectedQuestionImage,message=>{status.textContent=message;});
   status.textContent='عکس بهینه شد؛ در حال ارسال نمای کلی و دو ستون با وضوح بالا برای تحلیل…';
   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),90000);
   let response;
