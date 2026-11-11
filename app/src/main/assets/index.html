@@ -263,6 +263,14 @@ body.grade1-mode .menu-panel{background:#fffaf4;border:2px solid #f4d9c5;color:#
 <div class="row" style="margin-top:8px"><button class="btn primary" style="flex:1" onclick="runLongDivision()">حل تقسیم ستونی</button><button class="btn" onclick="document.getElementById('longDividend').value='';document.getElementById('longDivisor').value='';document.getElementById('longDivisionAnswer').textContent='عددها را وارد کن.'">پاک‌کردن</button></div>
 <div id="longDivisionAnswer" class="question" style="white-space:pre-wrap;margin-top:9px">نمونه: ۱۲۵ ÷ ۶</div>
 </div>
+<div class="panel" style="margin-top:12px;background:#10223a">
+<h4>🧮 حل معادله با مجهول (x)</h4>
+<p class="muted">معادله‌های خطی و درجه‌دو را با مراحل حل می‌کند. نمونه: ۲x + ۵ = ۱۵ یا x^2 - ۵x + ۶ = ۰</p>
+<input id="equationInput" class="field" style="width:100%;direction:ltr;text-align:left;font-size:20px;margin:6px 0" placeholder="مثلاً 2x + 5 = 15" onkeydown="if(event.key==='Enter')solveEquation()">
+<div class="row"><button class="btn primary" style="flex:1" onclick="solveEquation()">حل مرحله‌به‌مرحله معادله</button><button class="btn" onclick="document.getElementById('equationInput').value='';document.getElementById('equationAnswer').textContent='معادله را وارد کن.'">پاک‌کردن</button></div>
+<div id="equationAnswer" class="question" style="white-space:pre-wrap;margin-top:9px">نمونه: 2x + 5 = 15</div>
+<p class="muted">پشتیبانی: جمع، تفریق، ضرب، تقسیم بر عدد ثابت، پرانتز و توان‌های x تا درجهٔ ۲. جواب‌های مختلط در این نسخه نمایش داده نمی‌شوند.</p>
+</div>
 <div class="row" style="justify-content:space-between;margin-top:10px"><b>🕘 سابقه محاسبات</b><span class="muted">روی نتیجه بزن تا دوباره وارد شود</span></div><div id="proCalcHistory" class="muted">هنوز محاسبه‌ای انجام نشده است.</div>
 </div>
 <div class="panel"><h3>➕ ماشین‌حساب چهار عمل اصلی</h3><div class="row"><input id="calcA" type="number" step="any" placeholder="عدد اول" class="field"><select id="calcOp" style="max-width:80px;flex:0"><option value="+">+</option><option value="-">−</option><option value="*">×</option><option value="/">÷</option></select><input id="calcB" type="number" step="any" placeholder="عدد دوم" class="field"><button class="btn primary" onclick="calculate()">محاسبه</button></div><h3 id="calcResult" class="goodtxt">نتیجه اینجا نمایش داده می‌شود.</h3></div>
@@ -754,6 +762,49 @@ function parseProExpression(source){
 }
 
 function calcAsciiDigits(v){return String(v).replace(/[۰-۹]/g,c=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(c)).replace(/[٠-٩]/g,c=>'٠١٢٣٤٥٦٧٨٩'.indexOf(c)).replace(/٫/g,'.').replace(/٬/g,'').replace(/,/g,'')}
+function solveEquation(){
+ const out=$('equationAnswer'),raw=String($('equationInput').value||'').trim();
+ if(!raw){out.textContent='لطفاً یک معادله وارد کن.';return}
+ try{
+  const eq=raw.replace(/[０-９]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0)).replace(/[۰-۹]/g,c=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(c)).replace(/[٠-٩]/g,c=>'٠١٢٣٤٥٦٧٨٩'.indexOf(c)).replace(/[×]/g,'*').replace(/[÷]/g,'/').replace(/[−–]/g,'-').replace(/٫/g,'.').replace(/²/g,'^2').replace(/³/g,'^3').replace(/\s+/g,'').toLowerCase();
+  if((eq.match(/=/g)||[]).length!==1)throw Error('معادله باید دقیقاً یک علامت مساوی (=) داشته باشد.');
+  const sides=eq.split('=');
+  const left=parseEquationPolynomial(sides[0]),right=parseEquationPolynomial(sides[1]);
+  const p=left.map((v,i)=>v-right[i]),a=p[2],b=p[1],c=p[0],fmt=n=>fa(Number(n.toPrecision(10)));
+  let lines=['معادله: '+raw,'همه عبارت‌ها را به یک طرف منتقل می‌کنیم: '+fmt(a)+'x² + '+fmt(b)+'x + '+fmt(c)+' = 0'];
+  if(Math.abs(a)<1e-10){
+   if(Math.abs(b)<1e-10){out.textContent=Math.abs(c)<1e-10?'این تساوی برای هر مقدار x درست است؛ بی‌نهایت جواب دارد.':'این تساوی نادرست است؛ معادله جواب ندارد.';return}
+   const x=-c/b;lines.push('جملهٔ ثابت را به طرف دیگر می‌بریم: '+fmt(b)+'x = '+fmt(-c),'دو طرف را بر ضریب x تقسیم می‌کنیم: x = '+fmt(-c)+' ÷ '+fmt(b),'پاسخ نهایی: x = '+fmt(x));
+  }else{
+   const d=b*b-4*a*c;lines.push('ضرایب: a = '+fmt(a)+' ، b = '+fmt(b)+' ، c = '+fmt(c),'ممیّز: Δ = b² − ۴ac = '+fmt(d));
+   if(d< -1e-10){out.textContent=lines.join('\n')+'\nچون Δ منفی است، معادله جواب حقیقی ندارد. (جواب مختلط در این نسخه ارائه نمی‌شود.)';return}
+   if(Math.abs(d)<1e-10){const x=-b/(2*a);lines.push('چون Δ = ۰ است، یک ریشهٔ تکراری داریم.','x = −b ÷ (۲a) = '+fmt(x),'پاسخ نهایی: x₁ = x₂ = '+fmt(x))}
+   else{const root=Math.sqrt(d),x1=(-b-root)/(2*a),x2=(-b+root)/(2*a);lines.push('ریشهٔ دوم Δ: √Δ = '+fmt(root),'فرمول: x = (−b ± √Δ) ÷ (۲a)','x₁ = '+fmt(x1),'x₂ = '+fmt(x2),'پاسخ نهایی: x₁ = '+fmt(x1)+' و x₂ = '+fmt(x2))}
+  }
+  out.textContent=lines.join('\n');
+ }catch(e){out.textContent='نتوانستم معادله را حل کنم: '+e.message+'\nنمونهٔ مجاز: 2x+5=15 یا x^2-5x+6=0'}
+}
+function parseEquationPolynomial(source){
+ const text=source.replace(/π/g,'pi');
+ const tokens=text.match(/(?:\d+(?:\.\d*)?|\.\d+)|[x()+*/^\-]/g)||[];
+ if(tokens.join('')!==text)throw Error('از نویسه یا تابع پشتیبانی‌نشده استفاده شده است.');
+ const t=[];
+ for(let i=0;i<tokens.length;i++){
+  const cur=tokens[i],prev=t[t.length-1];
+  if(prev&&(/^(?:\d+(?:\.\d*)?|\.\d+|x|\))$/.test(prev))&&(/^(?:\d+(?:\.\d*)?|\.\d+|x|\()$/.test(cur)))t.push('*');
+  t.push(cur);
+ }
+ let pos=0;const zero=()=>[0,0,0],peek=()=>t[pos],take=()=>t[pos++];
+ const add=(a,b,sign=1)=>a.map((v,i)=>v+sign*b[i]);
+ const mul=(a,b)=>{const z=zero();for(let i=0;i<3;i++)for(let j=0;j<3;j++){if(Math.abs(a[i]*b[j])>1e-12&&i+j>2)throw Error('این حل‌کننده فعلاً معادله‌های بالاتر از درجهٔ دو را پشتیبانی نمی‌کند.');if(i+j<=2)z[i+j]+=a[i]*b[j]}return z};
+ const expr=()=>{let v=term();while(peek()==='+'||peek()==='-'){const op=take(),w=term();v=add(v,w,op==='+'?1:-1)}return v};
+ const term=()=>{let v=unary();while(peek()==='*'||peek()==='/'){const op=take(),w=unary();if(op==='/'){if(Math.abs(w[1])+Math.abs(w[2])>1e-12||Math.abs(w[0])<1e-12)throw Error('تقسیم فقط بر عدد ثابتِ غیرصفر مجاز است.');v=v.map(x=>x/w[0])}else v=mul(v,w)}return v};
+ const unary=()=>{if(peek()==='+'){take();return unary()}if(peek()==='-'){take();return unary().map(x=>-x)}let v=primary();if(peek()==='^'){take();const n=Number(take());if(!Number.isInteger(n)||n<0||n>2)throw Error('توان x باید یکی از ۰، ۱ یا ۲ باشد.');let z=[1,0,0];for(let i=0;i<n;i++)z=mul(z,v);v=z}return v};
+ const primary=()=>{const q=take();if(q==='('){const v=expr();if(take()!==')')throw Error('پرانتز بسته نشده است.');return v}if(q==='x')return [0,1,0];if(q!==undefined&&/^(?:\d+(?:\.\d*)?|\.\d+)$/.test(q))return [Number(q),0,0];throw Error('عبارت ناقص یا نامعتبر است.')};
+ if(!t.length)throw Error('سمت معادله خالی است.');
+ const result=expr();if(pos!==t.length)throw Error('بخشی از عبارت قابل تشخیص نیست.');return result;
+}
+
 function runLongDivision(){
  const aRaw=calcAsciiDigits($('longDividend').value.trim()),bRaw=calcAsciiDigits($('longDivisor').value.trim()),out=$('longDivisionAnswer');
  if(!aRaw||!bRaw){out.textContent='لطفاً هر دو عدد را وارد کن.';return}
