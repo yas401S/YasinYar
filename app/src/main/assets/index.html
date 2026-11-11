@@ -584,7 +584,7 @@ async function rectifyYasinDocument(sourceCanvas){
  }
 }
 async function imageToDataUrls(file,onProgress=()=>{}){
- if(!file||!/^image\\/(jpeg|png|webp|heic|heif)$/i.test(file.type||''))throw new Error('فایل انتخاب‌شده تصویر پشتیبانی‌شده نیست؛ JPG یا PNG انتخاب کن.');
+ if(!file||!/^image\/(jpeg|png|webp|heic|heif)$/i.test(file.type||''))throw new Error('فایل انتخاب‌شده تصویر پشتیبانی‌شده نیست؛ JPG یا PNG انتخاب کن.');
  if(file.size>24*1024*1024)throw new Error('حجم عکس بیشتر از ۲۴ مگابایت است؛ عکس را با کیفیت معمولی دوباره بگیر.');
  // Android WebView does not reliably support createImageBitmap; use the HTML image decoder.
  onProgress('۱ از ۳: باز کردن عکس روی گوشی…');
