@@ -12,6 +12,27 @@ function json(data, status = 200) {
   });
 }
 
+function extractText(result) {
+  const candidates = [
+    result?.response,
+    result?.choices?.[0]?.message?.content,
+    result?.result?.response,
+    result?.output_text
+  ];
+  for (const candidate of candidates) {
+    if (typeof candidate === "string" && candidate.trim()) return candidate.trim();
+    if (Array.isArray(candidate)) {
+      const joined = candidate
+        .filter(part => part && (part.type === "text" || typeof part.text === "string"))
+        .map(part => String(part.text || ""))
+        .join("\\n")
+        .trim();
+      if (joined) return joined;
+    }
+  }
+  return "";
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -71,7 +92,7 @@ export default {
           max_tokens: 3000,
           temperature: 0.2
         });
-        const answer = String(result?.response || "").trim();
+        const answer = extractText(result);
         if (!answer) return json({ error: "مدل هوش مصنوعی پاسخ متنی تولید نکرد؛ دوباره تلاش کن." }, 502);
         return json({ answer, model: "@cf/meta/llama-3.1-8b-instruct-fp8-fast" });
       } catch (error) {
@@ -171,10 +192,16 @@ export default {
         result = await env.AI.run(model, {
           messages: [
             { role: "system", content: "تو معلم دقیق فارسی‌زبان هستی. تصویر را ببین و حل کن؛ OCR خیالی، سؤال‌سازی و پاسخ عمومی ممنوع است. جواب‌ها باید دقیق و متناسب با پایه دانش‌آموز باشند." },
-            { role: "user", content: imagePrompt }
+            {
+              role: "user",
+              content: [
+                { type: "text", text: imagePrompt },
+                { type: "image_url", image_url: { url: images[0], detail: "high" } }
+              ]
+            }
           ],
-          image: images[0],
-          max_tokens: 1800,
+          chat_template_kwargs: { enable_thinking: false },
+          max_tokens: 2400,
           temperature: 0
         });
       } else {
