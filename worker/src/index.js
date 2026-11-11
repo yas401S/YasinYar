@@ -156,29 +156,35 @@ export default {
       let result;
       let model;
       if (images.length) {
-        model = "@cf/meta/llama-3.2-11b-vision-instruct";
-        const vision = await env.AI.run(model, {
+        const visionModel = "@cf/meta/llama-3.2-11b-vision-instruct";
+        // Prefer the four zoomed page quadrants. The full-page image is only a fallback.
+        const views = images.length >= 5 ? images.slice(1, 5) : images;
+        const extractedViews = await Promise.all(views.map(async (image, index) => {
+          const vision = await env.AI.run(visionModel, {
+            messages: [
+              { role: "system", content: "تو موتور OCR دقیق فارسی هستی. فقط محتوای واقعی این برش از برگه درسی را رونویسی کن. متن، اعداد، صورت و مخرج کسرها، عددهای مخلوط، علامت‌های عمل، گزینه‌ها و شماره سؤال‌ها را دقیق نگه دار. ترتیب را از بالا به پایین و راست به چپ رعایت کن. هیچ چیزی را حل نکن و چیزی نساز. بخش ناخوانا را [ناخوانا] بنویس." },
+              { role: "user", content: "این برش شماره " + (index + 1) + " از یک برگه تمرین فارسی پایه " + grade + " درس " + subject + " است. همه متن و عبارت‌های ریاضی قابل مشاهده را رونویسی کن." }
+            ],
+            image,
+            max_tokens: 1800,
+            temperature: 0
+          });
+          const text = String(vision?.response ?? vision?.result?.response ?? vision?.answer ?? "").trim();
+          return text ? "【برش " + (index + 1) + "】\n" + text : "";
+        }));
+        const extractedText = extractedViews.filter(Boolean).join("\n\n");
+        if (extractedText.length < 20) {
+          return json({ error: "مدل بینایی نتوانست متن برش‌های بزرگ‌نمایی‌شده را بخواند. لطفاً یک عکس نزدیک‌تر از هر نیمه صفحه بفرست." }, 422);
+        }
+        model = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
+        result = await env.AI.run(model, {
           messages: [
-            { role: "system", content: "تو یک آموزگار فارسی‌زبان و متخصص خواندن برگه‌های درسی هستی. تمام سؤال‌های تصویر را دقیق بخوان و به ترتیب حل کن. فارسی و اعداد فارسی را حفظ کن. کسرها را با صورت و مخرج مشخص کن. همه مراحل حل را بنویس. اگر نمادی واقعاً ناخواناست فقط همان قسمت را مشخص کن و حدس نزن. پاسخ فقط فارسی باشد." },
-            { role: "user", content: "این تصویر برگه تمرین دانش‌آموز پایه " + grade + "، درس " + subject + " است. همه سؤال‌های قابل مشاهده را کامل حل کن. " + (question || "همه سؤال‌های عکس را حل کن.") }
+            { role: "system", content: instructions + "\n\nمتن زیر از چهار برش بزرگ‌نمایی‌شده یک صفحه استخراج شده است. تکرارها را حذف کن، متن‌های ناقص را با هم تطبیق بده و تمام سؤال‌های قابل‌خواندن را به ترتیب حل کن. هرگز نماد یا عدد مبهم را حدس نزن. پاسخ فقط فارسی و مرحله‌به‌مرحله باشد." },
+            { role: "user", content: "متن استخراج‌شده از برش‌های تصویر:\n" + extractedText + "\n\nدرخواست: " + (question || "تمام سؤال‌های تصویر را حل کن.") }
           ],
-          image: images[0],
           max_tokens: 4096,
           temperature: 0.1
         });
-        const answerText = String(
-          vision?.response ??
-          vision?.result?.response ??
-          vision?.answer ??
-          vision?.result?.answer ??
-          vision?.output_text ??
-          ""
-        ).trim();
-        if (answerText.length < 10) {
-          const keys = vision && typeof vision === "object" ? Object.keys(vision).join(",") : String(vision);
-          return json({ error: "مدل بینایی پاسخ متنی نداد. مشخصات خروجی: " + keys }, 502);
-        }
-        return json({ answer: answerText, model });
       }else {
         model = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
         result = await env.AI.run(model, {
