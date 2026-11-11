@@ -182,24 +182,26 @@ export default {
         if (extractedText.length > 6500 || numberedLines > 18 || /A تا Z|221\\s*\\./i.test(extractedText)) {
           return json({ error: "خواندن تصویر قابل اعتماد نبود و متن استخراج‌شده با ساختار یک برگه واقعی سازگار نیست؛ پاسخ ساختگی نمایش داده نشد." }, 422);
         }
-        model = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
+        model = "@cf/google/gemma-4-26b-a4b-it";
         result = await env.AI.run(model, {
           messages: [
             { role: "system", content: instructions + "\n\nقانون قطعی: متن OCR زیر تنها منبع اطلاعات توست. فقط سؤال‌هایی را حل کن که متن یا عبارت ریاضی آن‌ها صریحاً در OCR دیده می‌شود. شماره سؤال، عبارت، عدد، شکل یا بخش تازه نساز. اگر بخشی ناقص است، فقط همان بخش را «ناخوانا» اعلام کن. اگر OCR برای حل کافی نیست، سؤال را حل‌نشده اعلام کن؛ از حدس و تکمیل خیالی خودداری کن. پاسخ را کوتاه، منظم و به ترتیب شماره‌های واقعاً موجود بنویس. حداکثر ۱۲ سؤال؛ هرگز فهرست‌های طولانی یا سؤال‌های تکراری تولید نکن." },
             { role: "user", content: "متن استخراج‌شده از تصویر (ممکن است بخش‌هایی ناخوانا باشد):\n" + extractedText + "\n\nدرخواست: " + (question || "تمام سؤال‌های واقعاً موجود در این برگه را حل کن.") }
           ],
-          max_tokens: 2200,
-          temperature: 0
+          max_tokens: 2600,
+          temperature: 0,
+          chat_template_kwargs: { enable_thinking: true }
         });
       } else {
-        model = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
+        model = "@cf/google/gemma-4-26b-a4b-it";
         result = await env.AI.run(model, {
           messages: [
             { role: "system", content: instructions },
             { role: "user", content: question }
           ],
           max_tokens: 3000,
-          temperature: 0.1
+          temperature: 0.1,
+          chat_template_kwargs: { enable_thinking: true }
         });
       }
       const answer = String(result?.response || "").trim();
