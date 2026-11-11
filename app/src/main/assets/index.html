@@ -241,6 +241,23 @@ body.grade1-mode .menu-panel{background:#fffaf4;border:2px solid #f4d9c5;color:#
 <section id="page-poetry" class="page"><div class="section-head"><h3>📜 مربی حفظ شعر فارسی</h3><small>حفظ مرحله‌ای · مرور هوشمند</small></div><div class="notice">شعرهای کتاب را از روی کتاب یا منبع مجاز خودت وارد کن. برنامه متن رسمی شعرها را حدس نمی‌زند؛ شعرهای واردشده فقط روی همین دستگاه ذخیره می‌شوند.</div><div class="panel"><h3>➕ افزودن شعر برای حفظ</h3><div class="row"><input id="poemTitle" class="field" placeholder="نام شعر یا عنوان درس"><select id="poemGrade" class="field"><option value="1">پایه اول</option><option value="2">پایه دوم</option><option value="3">پایه سوم</option><option value="4">پایه چهارم</option><option value="5">پایه پنجم</option><option value="6" selected>پایه ششم</option><option value="7">پایه هفتم</option><option value="8">پایه هشتم</option><option value="9">پایه نهم</option></select></div><textarea id="poemText" rows="5" style="width:100%;margin-top:9px" placeholder="هر مصرع یا سطر را در یک خط بنویس..."></textarea><button class="btn primary" style="margin-top:8px" onclick="savePoem()">ذخیره شعر</button><p class="muted">پیشنهاد: هر مصرع را در یک خط جداگانه وارد کن تا حفظ مرحله‌ای دقیق‌تر شود.</p></div><div class="panel"><div class="row" style="justify-content:space-between"><h3>📚 شعرهای من</h3><span class="pill" id="poemDueCount">۰ مرور امروز</span></div><div id="poemLibrary"></div></div><div class="panel" id="poemPracticePanel"><h3>🎧 تمرین حفظ شعر</h3><div id="poemPracticeArea" class="empty">از فهرست شعرها یک شعر را برای تمرین انتخاب کن.</div></div></section>
 <section id="page-tools" class="page"><div class="section-head"><h3>🧮 جعبه‌ابزار هوشمند درسی</h3><small>۱۰ ابزار کاربردی · بدون اینترنت</small></div>
 <div class="notice">همه محاسبات روی گوشی انجام می‌شوند. عددها را وارد کن و دکمه محاسبه را بزن.</div>
+<div class="panel" id="proCalculator" style="border:1px solid #5276a7;background:linear-gradient(145deg,#172b48,#0b1729)">
+<div class="row" style="justify-content:space-between;align-items:center"><div><h3>🧠 محاسبه‌گر حرفه‌ای ریاضی</h3><p class="muted">از پایه‌های ابتدایی تا محاسبات علمی · کاملاً آفلاین</p></div><span class="pill">PRO</span></div>
+<div class="row"><select id="proCalcGrade" class="field" aria-label="سطح آموزشی"><option value="basic">ابتدایی (۱ تا ۶)</option><option value="middle" selected>متوسطه (۷ تا ۹)</option><option value="science">علمی</option></select><select id="proCalcAngle" class="field" aria-label="واحد زاویه"><option value="deg">درجه</option><option value="rad">رادیان</option></select></div>
+<label class="muted" for="proCalcInput">عبارت ریاضی</label>
+<input id="proCalcInput" class="field" style="width:100%;font-size:22px;text-align:left;direction:ltr;margin:7px 0" inputmode="decimal" placeholder="مثلاً (3/4 + 1/2) × 8" onkeydown="if(event.key==='Enter')runProCalc()">
+<div class="grid" style="grid-template-columns:repeat(4,minmax(0,1fr));gap:7px">
+<button class="btn" onclick="calcKey('(')">(</button><button class="btn" onclick="calcKey(')')">)</button><button class="btn" onclick="calcKey('%')">%</button><button class="btn danger" onclick="calcClear()">پاک‌کردن</button>
+<button class="btn" onclick="calcKey('7')">۷</button><button class="btn" onclick="calcKey('8')">۸</button><button class="btn" onclick="calcKey('9')">۹</button><button class="btn" onclick="calcKey('÷')">÷</button>
+<button class="btn" onclick="calcKey('4')">۴</button><button class="btn" onclick="calcKey('5')">۵</button><button class="btn" onclick="calcKey('6')">۶</button><button class="btn" onclick="calcKey('×')">×</button>
+<button class="btn" onclick="calcKey('1')">۱</button><button class="btn" onclick="calcKey('2')">۲</button><button class="btn" onclick="calcKey('3')">۳</button><button class="btn" onclick="calcKey('−')">−</button>
+<button class="btn" onclick="calcKey('0')">۰</button><button class="btn" onclick="calcKey('.')">.</button><button class="btn" onclick="calcKey('^')">xʸ</button><button class="btn" onclick="calcKey('+')">+</button>
+<button class="btn" onclick="calcKey('sqrt(')">√</button><button class="btn" onclick="calcKey('pi')">π</button><button class="btn" onclick="calcKey('sin(')">sin</button><button class="btn" onclick="calcKey('cos(')">cos</button>
+</div>
+<div class="row" style="margin-top:9px"><button class="btn primary" style="flex:1" onclick="runProCalc()">= محاسبه</button><button class="btn" onclick="calcBackspace()">⌫</button><button class="btn" onclick="calcClearHistory()">پاک‌کردن سابقه</button></div>
+<div id="proCalcAnswer" class="question" style="margin-top:10px;white-space:pre-wrap">عبارت را وارد کن تا پاسخ نمایش داده شود.</div>
+<div class="row" style="justify-content:space-between;margin-top:10px"><b>🕘 سابقه محاسبات</b><span class="muted">روی نتیجه بزن تا دوباره وارد شود</span></div><div id="proCalcHistory" class="muted">هنوز محاسبه‌ای انجام نشده است.</div>
+</div>
 <div class="panel"><h3>➕ ماشین‌حساب چهار عمل اصلی</h3><div class="row"><input id="calcA" type="number" step="any" placeholder="عدد اول" class="field"><select id="calcOp" style="max-width:80px;flex:0"><option value="+">+</option><option value="-">−</option><option value="*">×</option><option value="/">÷</option></select><input id="calcB" type="number" step="any" placeholder="عدد دوم" class="field"><button class="btn primary" onclick="calculate()">محاسبه</button></div><h3 id="calcResult" class="goodtxt">نتیجه اینجا نمایش داده می‌شود.</h3></div>
 <div class="panel"><h3>📊 محاسبه درصد</h3><p class="muted">مثلاً ۲۰ درصدِ ۱۵۰ چقدر می‌شود؟</p><div class="row"><input id="percentValue" type="number" step="any" class="field" placeholder="عدد اصلی"><input id="percentRate" type="number" step="any" class="field" placeholder="درصد"><button class="btn primary" onclick="calculatePercent()">محاسبه</button></div><p id="percentResult" class="goodtxt"></p></div>
 <div class="panel"><h3>➗ ساده‌کردن کسر</h3><div class="row"><input id="fractionNum" type="number" step="1" class="field" placeholder="صورت کسر"><span>/</span><input id="fractionDen" type="number" step="1" class="field" placeholder="مخرج کسر"><button class="btn primary" onclick="simplifyFraction()">ساده کن</button></div><p id="fractionResult" class="goodtxt"></p></div>
@@ -701,6 +718,47 @@ let timerSeconds=1500,timerInterval=null;
 function timerDraw(){$('studyTimer').textContent=fa(Math.floor(timerSeconds/60)).padStart(2,'۰')+':'+fa(timerSeconds%60).padStart(2,'۰')}
 function timerStart(){if(timerInterval)return;timerInterval=setInterval(()=>{if(timerSeconds>0){timerSeconds--;timerDraw()}else{clearInterval(timerInterval);timerInterval=null;let d=get('daily_'+todayKey(),{goal:30,minutes:0,tasks:[]});d.minutes+=25;put('daily_'+todayKey(),d);const sp=get('smartPlan_'+todayKey(),null);if(sp){const task=sp.tasks.find(t=>t.type==='focus'&&!t.done);if(task){task.done=true;task.started=false;put('smartPlan_'+todayKey(),sp);renderSmartPlan()}}awardStudyXP(15,'پایان یک نوبت مطالعه');renderPlanner();renderHome();alert('آفرین! یک نوبت مطالعه ۲۵ دقیقه‌ای تمام شد.')}},1000)}
 function timerPause(){clearInterval(timerInterval);timerInterval=null}function timerReset(){timerPause();timerSeconds=1500;timerDraw()}
+
+const proCalcHistory=[];
+function calcNormalize(s){return String(s).replace(/[۰-۹]/g,c=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(c)).replace(/[٠-٩]/g,c=>'٠١٢٣٤٥٦٧٨٩'.indexOf(c)).replace(/٫/g,'.').replace(/[،]/g,',').replace(/×/g,'*').replace(/[÷]/g,'/').replace(/[−–]/g,'-').replace(/\s+/g,'').toLowerCase()}
+function calcKey(v){const el=$('proCalcInput');el.value+=v;el.focus()}
+function calcClear(){$('proCalcInput').value='';$('proCalcAnswer').textContent='عبارت پاک شد.';$('proCalcInput').focus()}
+function calcBackspace(){const el=$('proCalcInput');el.value=el.value.slice(0,-1);el.focus()}
+function calcClearHistory(){proCalcHistory.length=0;renderProCalcHistory()}
+function renderProCalcHistory(){$('proCalcHistory').innerHTML=proCalcHistory.length?proCalcHistory.slice(0,8).map((h,i)=>'<button class="btn" style="display:block;width:100%;text-align:right;margin:5px 0" onclick="useProCalcHistory('+i+')"><span dir="ltr">'+h.expr.replace(/</g,'&lt;')+'</span> = <b>'+fa(h.value)+'</b></button>').join(''):'هنوز محاسبه‌ای انجام نشده است.'}
+function useProCalcHistory(i){$('proCalcInput').value=proCalcHistory[i].expr;$('proCalcInput').focus()}
+function parseProExpression(source){
+ let s=calcNormalize(source).replace(/π/g,'pi').replace(/√/g,'sqrt');
+ if(!s)throw Error('عبارت ریاضی را وارد کن.');
+ const raw=s.match(/(?:\d+(?:\.\d*)?|\.\d+)|(?:sqrt|sin|cos|tan|log|ln|pi|e)|[()+\-*/^%]/g)||[];
+ if(raw.join('')!==s)throw Error('در عبارت، نویسه نامعتبر وجود دارد.');
+ let t=[];
+ for(let i=0;i<raw.length;i++){t.push(raw[i]);const a=raw[i],n=raw[i+1];if(n&&((/^(?:\d|\.|pi$|e$|sqrt$|sin$|cos$|tan$|log$|ln$)/.test(n)&&(/^(?:\d|\.|pi$|e$|\))/.test(a)))||(a===')'&&/^(?:\d|\.|pi$|e$|sqrt$|sin$|cos$|tan$|log$|ln$)/.test(n)))t.push('*')}
+ let p=0;const peek=()=>t[p],take=()=>t[p++];
+ const primary=()=>{let x=take();if(x===undefined)throw Error('بخشی از عبارت ناقص است.');if(x==='+')return unary();if(x==='-')return -unary();if(x==='('){let v=add();if(take()!==')')throw Error('پرانتز بسته نشده است.');return v}
+ if(x==='pi')return Math.PI;if(x==='e')return Math.E;
+ if(['sqrt','sin','cos','tan','log','ln'].includes(x)){if(take()!=='(')throw Error('بعد از تابع باید پرانتز باز بیاید.');let v=add();if(take()!==')')throw Error('پرانتز تابع بسته نشده است.');if(x==='sqrt'){if(v<0)throw Error('ریشه دوم عدد منفی در اعداد حقیقی تعریف نشده است.');return Math.sqrt(v)}if(x==='log'||x==='ln'){if(v<=0)throw Error('ورودی لگاریتم باید مثبت باشد.');return x==='log'?Math.log10(v):Math.log(v)}let a=$('proCalcAngle').value==='deg'?v*Math.PI/180:v;return x==='sin'?Math.sin(a):x==='cos'?Math.cos(a):Math.tan(a)}
+ if(!/^(?:\d+(?:\.\d*)?|\.\d+)$/.test(x))throw Error('عدد یا عملگر نامعتبر است: '+x);return Number(x)};
+ const unary=()=>{let v=primary();while(peek()==='%'){take();v/=100}return v};
+ const power=()=>{let a=unary();if(peek()==='^'){take();a=Math.pow(a,power())}return a};
+ const mul=()=>{let a=power();while(peek()==='*'||peek()==='/'){let op=take(),b=power();if(op==='/'&&b===0)throw Error('تقسیم بر صفر تعریف نشده است.');a=op==='*'?a*b:a/b}return a};
+ const add=()=>{let a=mul();while(peek()==='+'||peek()==='-'){let op=take(),b=mul();a=op==='+'?a+b:a-b}return a};
+ const value=add();if(p!==t.length)throw Error('بخشی از عبارت قابل محاسبه نیست.');if(!Number.isFinite(value))throw Error('نتیجه خارج از محدوده محاسبه است.');return value
+}
+function runProCalc(){
+ const expr=$('proCalcInput').value.trim();const box=$('proCalcAnswer');try{
+ const value=parseProExpression(expr);const rounded=Number(value.toPrecision(12));let steps='نتیجه: '+fa(rounded);
+ const normalized=calcNormalize(expr);
+ if(normalized.includes('/'))steps+='\n\nراهنما: تقسیم با علامت ÷ یا / انجام می‌شود. برای کسرها از پرانتز استفاده کن؛ مانند (1/3)+(1/6).';
+ if(normalized.includes('%'))steps+='\n\nراهنما: علامت ٪ یعنی تقسیم بر ۱۰۰.';
+ if(normalized.includes('^'))steps+='\n\nراهنما: توان یعنی عدد پایه را به تعداد توان در خودش ضرب کنیم.';
+ if($('proCalcGrade').value==='basic')steps+='\n\nترتیب حل ساده: ابتدا پرانتزها، سپس ضرب و تقسیم، و در پایان جمع و تفریق.';
+ else steps+='\n\nترتیب انجام عملیات: پرانتزها ← توان و ریشه ← ضرب و تقسیم ← جمع و تفریق.';
+ if(Math.abs(value)<1e12&&Math.abs(value-Math.round(value))>1e-10)steps+='\n\nعدد اعشاری نمایش‌داده‌شده تقریبی است.';
+ box.textContent=steps;proCalcHistory.unshift({expr,value:rounded});proCalcHistory.splice(8);renderProCalcHistory();
+ }catch(e){box.textContent='امکان محاسبه وجود ندارد: '+e.message}
+}
+
 function calculate(){let a=+$('calcA').value,b=+$('calcB').value,op=$('calcOp').value;if($('calcA').value===''||$('calcB').value===''){ $('calcResult').textContent='هر دو عدد را وارد کن.';return}if(op==='/'&&b===0){$('calcResult').textContent='تقسیم بر صفر تعریف نشده است.';return}let r=op==='+'?a+b:op==='-'?a-b:op==='*'?a*b:a/b;$('calcResult').textContent='نتیجه: '+fa(Number(r.toFixed(8)))}
 function convertUnit(){if($('unitValue').value.trim()===''){$('unitResult').textContent='ابتدا مقدار را وارد کن.';return}let n=+$('unitValue').value,t=$('unitType').value,m={km:[1000,'متر'],m:[100,'سانتی‌متر'],cm:[10,'میلی‌متر'],kg:[1000,'گرم'],g:[1000,'میلی‌گرم'],l:[1000,'میلی‌لیتر'],ml:[1,'سانتی‌متر مکعب'],h:[60,'دقیقه'],min:[60,'ثانیه']}[t];$('unitResult').textContent=fa(n)+' × '+fa(m[0])+' = '+fa(n*m[0])+' '+m[1]}
 function calculatePercent(){const v=$('percentValue').value,p=$('percentRate').value;if(v===''||p===''){$('percentResult').textContent='عدد اصلی و درصد را وارد کن.';return}const result=Number(v)*Number(p)/100;$('percentResult').textContent=fa(p)+'٪ از '+fa(v)+' = '+fa(Number(result.toFixed(8)))}
