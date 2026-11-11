@@ -189,19 +189,20 @@ export default {
           "حداکثر ۱۲ سؤال واقعی را پاسخ بده. از توضیح درباره نوع تصویر، فهرست‌های خیالی، رونویسی طولانی و متن عمومی خودداری کن.",
           question ? "درخواست دانش‌آموز: " + question : "همه سؤال‌های واقعی و قابل مشاهده این صفحه را حل کن."
         ].join("\\n");
+        const imageContent = [
+          { type: "text", text: imagePrompt },
+          ...images.map(image => ({
+            type: "image_url",
+            image_url: { url: image, detail: "high" }
+          }))
+        ];
         result = await env.AI.run(model, {
           messages: [
-            { role: "system", content: "تو معلم دقیق فارسی‌زبان هستی. تصویر را ببین و حل کن؛ OCR خیالی، سؤال‌سازی و پاسخ عمومی ممنوع است. جواب‌ها باید دقیق و متناسب با پایه دانش‌آموز باشند." },
-            {
-              role: "user",
-              content: [
-                { type: "text", text: imagePrompt },
-                { type: "image_url", image_url: { url: images[0], detail: "high" } }
-              ]
-            }
+            { role: "system", content: "تو معلم دقیق فارسی‌زبان هستی. تصویرها را مستقیماً ببین و حل کن؛ OCR خیالی، سؤال‌سازی و پاسخ عمومی ممنوع است. جواب‌ها باید دقیق و متناسب با پایه دانش‌آموز باشند. اگر چند تصویر فرستاده شده، همه را به ترتیب بررسی کن." },
+            { role: "user", content: imageContent }
           ],
           chat_template_kwargs: { enable_thinking: false },
-          max_tokens: 2400,
+          max_tokens: 3600,
           temperature: 0
         });
       } else {
@@ -215,7 +216,7 @@ export default {
           temperature: 0.1,
         });
       }
-      const answer = String(result?.response || "").trim();
+      const answer = extractText(result);
       if (!answer) return json({ error: "مدل هوش مصنوعی پاسخ متنی تولید نکرد؛ دوباره تلاش کن." }, 502);
       if (images.length) {
         const answerQuestionCount = (answer.match(/(?:سؤال|سوال)\\s*[۰-۹0-9]+/g) || []).length;
