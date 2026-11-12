@@ -38,7 +38,7 @@ export default {
     const url = new URL(request.url);
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
     if (url.pathname === "/") return json({ service: "YasinYar AI Tutor", ready: Boolean(env.AI), books: "official-publisher-portal", endpoint: "/solve" });
-    if (!["/solve", "/lesson"].includes(url.pathname) || request.method !== "POST") return json({ error: "مسیر یا روش درخواست معتبر نیست." }, 404);
+    if (!["/solve", "/lesson", "/chat"].includes(url.pathname) || request.method !== "POST") return json({ error: "مسیر یا روش درخواست معتبر نیست." }, 404);
     if (!env.AI) return json({ error: "اتصال هوش مصنوعی Cloudflare روی سرور فعال نیست." }, 503);
 
     let body;
@@ -48,6 +48,53 @@ export default {
       body = JSON.parse(raw);
     } catch {
       return json({ error: "داده ارسالی معتبر نیست." }, 400);
+    }
+
+    if (url.pathname === "/chat") {
+      const grade = Math.max(1, Math.min(9, Number(body.grade) || 6));
+      const subject = String(body.subject || "تشخیص خودکار").slice(0, 60);
+      const studentName = String(body.studentName || "").slice(0, 40);
+      const incoming = Array.isArray(body.messages) ? body.messages.slice(-12) : [];
+      const messages = [];
+      let totalChars = 0;
+      for (const item of incoming) {
+        if (!item || !["user", "assistant"].includes(item.role) || typeof item.content !== "string") continue;
+        const content = item.content.trim().slice(0, 5000);
+        if (!content) continue;
+        totalChars += content.length;
+        messages.push({ role: item.role, content });
+      }
+      if (!messages.length || messages[messages.length - 1].role !== "user") {
+        return json({ error: "اول سؤال خودت را بنویس." }, 400);
+      }
+      if (totalChars > 12000) return json({ error: "گفت‌وگو طولانی شده است؛ یک گفت‌وگوی تازه شروع کن." }, 413);
+      const system = [
+        "تو معلم خصوصی و دستیار آموزشی مهربان، دقیق و توانمند برای دانش‌آموزان فارسی‌زبان ایران هستی؛ مانند یک گفت‌وگوی طبیعی و مفید با ChatGPT پاسخ بده.",
+        "پایه دانش‌آموز: " + grade + "؛ درس مورد علاقه/انتخاب‌شده: " + subject + "؛ نام: " + (studentName || "دانش‌آموز") + ".",
+        "به فارسی روان و متناسب با سن پایه پاسخ بده؛ اگر دانش‌آموز زبان دیگری خواست، به همان زبان پاسخ بده. لحن صبور، دوستانه و روشن داشته باش.",
+        "گفت‌وگو را پیوسته دنبال کن و پیام‌های قبلی را در نظر بگیر. اگر دانش‌آموز گفت «بیشتر توضیح بده»، «مثال بزن» یا پرسش پیگیری کرد، منظورش را از زمینه همین گفت‌وگو بفهم.",
+        "در ریاضی محاسبات را مرحله‌به‌مرحله بنویس و جواب را با روش معکوس یا روش دوم بررسی کن. در علوم علت و معلول را توضیح بده. در زبان‌ها ترجمه و دلیل دستور را بیان کن. در سایر درس‌ها پاسخ را با متن سؤال تطبیق بده.",
+        "سطح پایه سقف روش آموزشی است: برای پایه‌های ۱ تا ۳ از جمله‌های کوتاه، شمارش و مثال ملموس استفاده کن؛ برای ۴ تا ۶ از روش‌های ابتدایی؛ برای ۷ تا ۹ از مفاهیم متوسطه اول. از روش پایه‌های بالاتر استفاده نکن مگر با برچسب دانش تکمیلی.",
+        "اگر اطلاعات کافی نیست، یک سؤال روشن‌کننده بپرس. اگر پاسخ را نمی‌دانی یا به اطلاعات روز نیاز داری، صادقانه بگو؛ وانمود نکن اینترنت را جست‌وجو کرده‌ای یا کتاب رسمی را دیده‌ای.",
+        "پاسخ را کاربردی و قابل فهم نگه دار؛ در صورت مناسب بودن در پایان یک سؤال کوتاه برای سنجش یادگیری بپرس، اما هر بار مجبور به پرسش اضافه نباش.",
+        "زنجیره فکر پنهان را ارائه نکن؛ فقط راه‌حل آموزشی، دلیل‌های لازم و محاسبات قابل بررسی را نشان بده. اطلاعات شخصی حساس کودک را درخواست نکن."
+      ].join("\n");
+      try {
+        const result = await env.AI.run("@cf/google/gemma-4-26b-a4b-it", {
+          messages: [{ role: "system", content: system }, ...messages],
+          max_tokens: 2200,
+          temperature: 0.25
+        });
+        const answer = extractText(result);
+        if (!answer) return json({ error: "معلم هوشمند این بار پاسخ متنی تولید نکرد؛ دوباره تلاش کن." }, 502);
+        return json({ answer, model: "@cf/google/gemma-4-26b-a4b-it" });
+      } catch (error) {
+        const detail = String(error?.message || error || "");
+        if (/quota|neurons|billing|limit/i.test(detail)) {
+          return json({ error: "سهمیه هوش مصنوعی Cloudflare موقتاً تمام شده است؛ بعداً دوباره تلاش کن." }, 429);
+        }
+        return json({ error: "گفت‌وگو ناموفق بود: " + detail.slice(0, 300) }, 502);
+      }
     }
 
     if (url.pathname === "/lesson") {
