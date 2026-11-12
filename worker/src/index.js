@@ -79,11 +79,11 @@ export default {
             if (text) { totalChars += text.length; parts.push({ type: "text", text }); }
           } else if (part?.type === "image_url" && typeof part.image_url?.url === "string") {
             const dataUrl = part.image_url.url;
-            if (!/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/i.test(dataUrl) || dataUrl.length > 5600000) {
+            if (!/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/i.test(dataUrl) || dataUrl.length > 8200000) {
               return json({ error: "فرمت یا اندازه عکس معتبر نیست؛ عکس JPG یا PNG کوچک‌تری بفرست." }, 413);
             }
             imageBytes += dataUrl.length;
-            if (imageBytes > 10800000 || parts.filter(p => p.type === "image_url").length >= 1) {
+            if (imageBytes > 12500000 || parts.filter(p => p.type === "image_url").length >= 3) {
               return json({ error: "حجم یا تعداد بخش‌های عکس زیاد است؛ لطفاً یک عکس یا بخش کوچک‌تری بفرست." }, 413);
             }
             parts.push({ type: "image_url", image_url: { url: dataUrl, detail: "auto" } });
