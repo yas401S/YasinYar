@@ -54,7 +54,7 @@ export default {
       const grade = Math.max(1, Math.min(9, Number(body.grade) || 6));
       const subject = String(body.subject || "تشخیص خودکار").slice(0, 60);
       const studentName = String(body.studentName || "").slice(0, 40);
-      const incoming = Array.isArray(body.messages) ? body.messages.slice(-12) : [];
+      const incoming = Array.isArray(body.messages) ? body.messages.slice(-6) : [];
       const messages = [];
       let totalChars = 0;
       let imageBytes = 0;
@@ -83,10 +83,10 @@ export default {
               return json({ error: "فرمت یا اندازه عکس معتبر نیست؛ عکس JPG یا PNG کوچک‌تری بفرست." }, 413);
             }
             imageBytes += dataUrl.length;
-            if (imageBytes > 10800000 || parts.filter(p => p.type === "image_url").length >= 3) {
+            if (imageBytes > 10800000 || parts.filter(p => p.type === "image_url").length >= 1) {
               return json({ error: "حجم یا تعداد بخش‌های عکس زیاد است؛ لطفاً یک عکس یا بخش کوچک‌تری بفرست." }, 413);
             }
-            parts.push({ type: "image_url", image_url: { url: dataUrl, detail: "high" } });
+            parts.push({ type: "image_url", image_url: { url: dataUrl, detail: "auto" } });
           }
         }
         if (!parts.some(p => p.type === "image_url")) return json({ error: "عکس قابل خواندن نبود؛ دوباره انتخابش کن." }, 400);
@@ -136,8 +136,8 @@ export default {
       try {
         const result = await env.AI.run(model, {
           messages: [{ role: "system", content: system }, ...messages],
-          max_completion_tokens: isMath ? 5000 : (hasImage ? 3500 : 2200),
-          reasoning_effort: isMath ? "xhigh" : "medium",
+          max_completion_tokens: hasImage ? 2600 : (isMath ? 3200 : 1800),
+          reasoning_effort: "medium",
           temperature: 0.15
         });
         const answer = extractText(result);
