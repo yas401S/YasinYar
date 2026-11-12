@@ -999,13 +999,13 @@ async function chatSend(prefilled){
  const history=getChatHistory();history.push({role:'user',content:userText+(hasImage?' [عکس پیوست شد]':'')});put('chatHistory',history.slice(-24));input.value='';renderChatHistory();
  const button=$('chatSendButton'),status=$('chatStatus');chatBusy=true;button.disabled=true;button.textContent='...';status.textContent=hasImage?'در حال آماده‌سازی و ارسال عکس برای معلم...':'معلم هوشمند در حال فکر کردن است...';
  const typing=document.createElement('div');typing.className='chat-typing';typing.textContent='در حال بررسی پیام…';$('chatMessages').appendChild(typing);$('chatMessages').scrollTop=$('chatMessages').scrollHeight;
- const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),100000);
+ const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),180000);
  try{
   const profile=get('profile',{name:'',grade:6}),grade=Number($('chatGrade').value)||Number(profile.grade)||6,subject=$('chatSubject').value||'تشخیص خودکار';
   const outgoing=history.slice(-6).map((m,i)=>({role:m.role,content:m.content}));
   if(hasImage){
-   const images=await imageToDataUrls(selectedChatImage,msg=>{status.textContent=msg;});
-   outgoing[outgoing.length-1].content=[{type:'text',text:userText},...images.map(url=>({type:'image_url',image_url:{url,detail:'high'}}))];
+   const image=await prepareSmartTeacherImage(selectedChatImage,msg=>{status.textContent=msg;});
+   outgoing[outgoing.length-1].content=[{type:'text',text:userText}, {type:'image_url',image_url:{url:image,detail:'auto'}}];
   }
   const response=await fetch(YASINYAR_AI_WORKER+'/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({grade,subject,studentName:profile.name||'',messages:outgoing}),signal:controller.signal});
   const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.error||('خطای سرور '+response.status));if(!data.answer)throw new Error('پاسخ خالی دریافت شد.');
