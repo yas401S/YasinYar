@@ -101,8 +101,11 @@ export default {
       const latestUserText = hasImage
         ? lastContent.filter(part => part.type === "text").map(part => part.text).join(" ")
         : String(lastContent || "");
+      const conversationText = messages.map(item => Array.isArray(item.content)
+        ? item.content.filter(part => part.type === "text").map(part => part.text).join(" ")
+        : String(item.content || "")).join(" ");
       const mathPattern = /ریاضی|مسئله|معادله|کسر|تقسیم|ضرب|جمع|تفریق|درصد|نسبت|تناسب|محیط|مساحت|حجم|توان|ریشه|مجهول|چندضلعی|زاویه|مقسوم|مخرج|صورت کسر|حاصل|محاسبه|عدد مخلوط|اعشاری|\b(math|solve|equation|fraction|algebra|geometry|calculate)\b|[=÷×√^]/i;
-      const isMath = subject.toLowerCase().includes("ریاضی") || mathPattern.test(latestUserText);
+      const isMath = subject.toLowerCase().includes("ریاضی") || mathPattern.test(conversationText);
       const model = (isMath || hasImage) ? "@cf/qwen/qwen3.8-27b" : "@cf/google/gemma-4-26b-a4b-it";
       const system = [
         "تو معلم خصوصی و دستیار آموزشی مهربان، دقیق و توانمند برای دانش‌آموزان فارسی‌زبان ایران هستی؛ مانند یک گفت‌وگوی طبیعی و مفید با ChatGPT پاسخ بده.",
