@@ -4,6 +4,16 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b1428"><title>یاسین‌یار | مدرسه هوشمند من</title>
 <script>
+/* Global navigation fallback: inline Android WebView onclick handlers must always see this. */
+window.openPage = window.openPage || function(name){
+  var page=document.getElementById('page-'+name);
+  if(!page)return;
+  document.querySelectorAll('.page').forEach(function(x){x.classList.remove('active');});
+  page.classList.add('active');
+  document.querySelectorAll('.bottom-nav button').forEach(function(x){x.classList.toggle('active',x.dataset.page===name);});
+  var menu=document.getElementById('appMenu');if(menu)menu.classList.add('hidden');
+  window.scrollTo(0,0);
+};
 /* YasinYar temporary runtime diagnostics: visible only when JavaScript fails. */
 (function(){
   if(window.__YASIN_DIAG__) return;
@@ -307,7 +317,7 @@ body.grade1-mode .menu-panel{background:#fffaf4;border:2px solid #f4d9c5;color:#
 <div class="footer">یاسین‌یار · کتاب‌های رسمی از پایگاه ناشر · درس‌نامه و تمرین تألیفی</div>
 </div>
 <nav class="bottom-nav"><div class="bottom-inner"><button class="active" data-page="home" onclick="openPage('home')"><span>⌂</span>خانه</button><button data-page="library" onclick="openPage('library')"><span>📚</span>درس‌ها</button><button data-page="practice" onclick="openPage('practice')"><span>✏️</span>تمرین</button><button data-page="planner" onclick="openPage('planner')"><span>🗓️</span>برنامه</button><button data-page="progress" onclick="openPage('progress')"><span>🏆</span>کارنامه</button></div></nav>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
 <script>
 const subjects={1:['فارسی','نگارش فارسی','ریاضی','جهان پیرامون','قرآن و هدیه‌های آسمان','هنر و خلاقیت','تربیت بدنی'],2:['ریاضی','علوم','فارسی','نگارش فارسی','آموزش قرآن','هدیه‌های آسمان','ریاضی دوست‌داشتنی','جهان پیرامون','فارسی می‌نویسم','من و دوستم خدا'],3:['فارسی','نگارش فارسی','ریاضی','علوم','آموزش قرآن','هدیه‌های آسمان','مطالعات اجتماعی'],4:['ریاضی','علوم','فارسی','نگارش فارسی','آموزش قرآن','هدیه‌های آسمان','مطالعات اجتماعی','آموزش خط تحریری (کتاب کار تکمیلی)','از ایرانمان دفاع می‌کنیم (کتاب تکمیلی)'],5:['فارسی','ریاضی','علوم','مطالعات اجتماعی'],6:['فارسی','ریاضی','علوم','مطالعات اجتماعی'],7:['فارسی','ریاضی','علوم','مطالعات اجتماعی','عربی','زبان انگلیسی'],8:['فارسی','ریاضی','علوم','مطالعات اجتماعی','عربی','زبان انگلیسی'],9:['فارسی','ریاضی','علوم','مطالعات اجتماعی','عربی','زبان انگلیسی']};
 const gradeNames=['اول','دوم','سوم','چهارم','پنجم','ششم','هفتم','هشتم','نهم'];
@@ -683,7 +693,8 @@ async function solveImageDirect(){
   status.textContent='تحلیل متوقف شد؛ برنامه باید همچنان قابل استفاده باشد.';
  }finally{button.disabled=false;}
 }
-async function readQuestionImage(){if(!selectedQuestionImage)return;$('ocrButton').disabled=true;$('ocrStatus').textContent='در حال خواندن متن فارسی...';try{if(!window.Tesseract)throw new Error('موتور OCR بارگذاری نشد؛ اینترنت را بررسی کن.');const r=await Tesseract.recognize(selectedQuestionImage,'fas+eng',{logger:m=>{if(m.status)$('ocrStatus').textContent=m.status;},workerPath:'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/worker.min.js',corePath:'https://cdn.jsdelivr.net/npm/tesseract.js-core@5/tesseract-core.wasm.js',langPath:'https://tessdata.projectnaptha.com/4.0.0'});$('ocrText').value=(r.data.text||'').trim();$('ocrStatus').textContent=$('ocrText').value?'متن خوانده شد؛ آن را بازبینی کن.':'متنی تشخیص داده نشد؛ عکس واضح‌تری بگیر.';}catch(e){$('ocrStatus').textContent='خطا: '+e.message;}finally{$('ocrButton').disabled=false;}}
+function loadTesseract(){if(window.Tesseract)return Promise.resolve(window.Tesseract);if(window.__yyTessPromise)return window.__yyTessPromise;window.__yyTessPromise=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';script.onload=()=>window.Tesseract?resolve(window.Tesseract):reject(new Error('موتور خواندن عکس راه‌اندازی نشد.'));script.onerror=()=>reject(new Error('برای خواندن متن عکس، اتصال اینترنت لازم است.'));document.head.appendChild(script);});return window.__yyTessPromise;}
+async function readQuestionImage(){if(!selectedQuestionImage)return;$('ocrButton').disabled=true;$('ocrStatus').textContent='در حال خواندن متن فارسی...';try{await loadTesseract();const r=await Tesseract.recognize(selectedQuestionImage,'fas+eng',{logger:m=>{if(m.status)$('ocrStatus').textContent=m.status;},workerPath:'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/worker.min.js',corePath:'https://cdn.jsdelivr.net/npm/tesseract.js-core@5/tesseract-core.wasm.js',langPath:'https://tessdata.projectnaptha.com/4.0.0'});$('ocrText').value=(r.data.text||'').trim();$('ocrStatus').textContent=$('ocrText').value?'متن خوانده شد؛ آن را بازبینی کن.':'متنی تشخیص داده نشد؛ عکس واضح‌تری بگیر.';}catch(e){$('ocrStatus').textContent='خطا: '+e.message;}finally{$('ocrButton').disabled=false;}}
 const YASINYAR_AI_WORKER='https://yasinyar-ai-tutor.yasinjon-401.workers.dev';
 async function explainLessonWithAI(grade){
  const subject=$('subjectSelect').value,customTopic=$('customLessonTopic')&&$('customLessonTopic').value.trim(),topic=customTopic||$('lessonTopicSelect').value,sourceText=$('lessonSourceText').value.trim();
