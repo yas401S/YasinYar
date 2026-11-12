@@ -673,7 +673,6 @@ async function solveImageDirect(){
   if(!data.answer)throw new Error('پاسخی دریافت نشد.');
    const directNote='<div class="notice">تصویر مستقیماً با مدل بینایی تحلیل شد؛ مرحله جداگانه و زمان‌بر رونویسی حذف شده است. صورت سؤال‌ها را در پاسخ بررسی کن.</div>';
    box.innerHTML=directNote+'<div class="question"><span class="pill">حل تشریحی بر اساس تحلیل مستقیم تصویر</span><div style="white-space:pre-wrap;line-height:2">'+escapeHtml(data.answer)+'</div></div>';
-  box.innerHTML=recognized+'<div class="question"><span class="pill">حل تشریحی بر اساس رونویسی تصویر</span><div style="white-space:pre-wrap;line-height:2">'+escapeHtml(data.answer)+'</div></div>';
   status.textContent='تحلیل تصویر انجام شد؛ پاسخ همه سؤال‌های قابل‌خواندن نمایش داده شد.';
  }catch(e){
   const message=e.name==='AbortError'?'زمان پاسخ‌گویی سرور تمام شد؛ اینترنت را بررسی کن و دوباره بزن.':e.message;
