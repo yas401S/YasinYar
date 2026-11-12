@@ -183,7 +183,6 @@ export default {
     try {
       let result;
       let model;
-      let extractedText = "";
       if (images.length) {
         // Single-pass vision pipeline: send the actual image(s) and solve in one model call.
         model = "@cf/google/gemma-4-26b-a4b-it";
@@ -198,7 +197,7 @@ export default {
           "محاسبات را مستقل دوباره بررسی کن. برای تقسیم، حاصل را در مقسوم‌علیه ضرب کن؛ برای مسئله‌های طول و برش، باقی‌مانده را به واحد طول گزارش کن و تعداد برش را با روش جداکردن قطعات توضیح بده.",
           "در پایان به‌جای آمار حدسی، شناسه‌های حل‌شده و نیازمند تأیید را فهرست کن. اگر تعداد را دقیق نمی‌توانی بشماری، عدد کلی ننویس.",
           "اگر بخشی از تصویر ناخواناست، سؤال‌های واضح دیگر را همچنان حل کن و فقط برای همان بخش عکس نزدیک‌تر درخواست کن."
-        ].join("\\n");
+        ].join("\n");
         const imageContent = [
           { type: "text", text: directImagePrompt },
           ...images.map(image => ({
@@ -229,8 +228,8 @@ export default {
       const answer = extractText(result);
       if (!answer) return json({ error: "مدل هوش مصنوعی پاسخ متنی تولید نکرد؛ دوباره تلاش کن." }, 502);
       if (images.length) {
-        const answerQuestionCount = (answer.match(/(?:سؤال|سوال)\\s*[۰-۹0-9]+/g) || []).length;
-        if (!/[\\u0600-\\u06FF]/.test(answer) ||
+        const answerQuestionCount = (answer.match(/(?:سؤال|سوال)\s*[۰-۹0-9]+/g) || []).length;
+        if (!/[\u0600-\u06FF]/.test(answer) ||
             answer.length > 14000 ||
             answerQuestionCount > 14 ||
             /A تا Z|۲۲۱ سؤال|221 سؤال|رسم خطوط و قطع آنها/i.test(answer)) {
