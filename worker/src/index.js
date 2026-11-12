@@ -57,22 +57,52 @@ export default {
       const incoming = Array.isArray(body.messages) ? body.messages.slice(-12) : [];
       const messages = [];
       let totalChars = 0;
-      for (const item of incoming) {
-        if (!item || !["user", "assistant"].includes(item.role) || typeof item.content !== "string") continue;
-        const content = item.content.trim().slice(0, 5000);
-        if (!content) continue;
-        totalChars += content.length;
-        messages.push({ role: item.role, content });
+      let imageBytes = 0;
+      for (let index = 0; index < incoming.length; index++) {
+        const item = incoming[index];
+        if (!item || !["user", "assistant"].includes(item.role)) continue;
+        if (typeof item.content === "string") {
+          const content = item.content.trim().slice(0, 5000);
+          if (!content) continue;
+          totalChars += content.length;
+          messages.push({ role: item.role, content });
+          continue;
+        }
+        // Images are accepted only in the newest user message; older turns stay text-only.
+        if (index !== incoming.length - 1 || item.role !== "user" || !Array.isArray(item.content)) {
+          return json({ error: "عکس فقط باید همراه آخرین پیام شما ارسال شود." }, 400);
+        }
+        const parts = [];
+        for (const part of item.content) {
+          if (part?.type === "text" && typeof part.text === "string") {
+            const text = part.text.trim().slice(0, 4000);
+            if (text) { totalChars += text.length; parts.push({ type: "text", text }); }
+          } else if (part?.type === "image_url" && typeof part.image_url?.url === "string") {
+            const dataUrl = part.image_url.url;
+            if (!/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/i.test(dataUrl) || dataUrl.length > 5600000) {
+              return json({ error: "فرمت یا اندازه عکس معتبر نیست؛ عکس JPG یا PNG کوچک‌تری بفرست." }, 413);
+            }
+            imageBytes += dataUrl.length;
+            if (imageBytes > 10800000 || parts.filter(p => p.type === "image_url").length >= 3) {
+              return json({ error: "حجم یا تعداد بخش‌های عکس زیاد است؛ لطفاً یک عکس یا بخش کوچک‌تری بفرست." }, 413);
+            }
+            parts.push({ type: "image_url", image_url: { url: dataUrl, detail: "high" } });
+          }
+        }
+        if (!parts.some(p => p.type === "image_url")) return json({ error: "عکس قابل خواندن نبود؛ دوباره انتخابش کن." }, 400);
+        messages.push({ role: "user", content: parts });
       }
       if (!messages.length || messages[messages.length - 1].role !== "user") {
-        return json({ error: "اول سؤال خودت را بنویس." }, 400);
+        return json({ error: "اول سؤال خودت را بنویس یا عکس بفرست." }, 400);
       }
       if (totalChars > 12000) return json({ error: "گفت‌وگو طولانی شده است؛ یک گفت‌وگوی تازه شروع کن." }, 413);
+      const hasImage = Array.isArray(messages[messages.length - 1].content);
       const system = [
         "تو معلم خصوصی و دستیار آموزشی مهربان، دقیق و توانمند برای دانش‌آموزان فارسی‌زبان ایران هستی؛ مانند یک گفت‌وگوی طبیعی و مفید با ChatGPT پاسخ بده.",
         "پایه دانش‌آموز: " + grade + "؛ درس مورد علاقه/انتخاب‌شده: " + subject + "؛ نام: " + (studentName || "دانش‌آموز") + ".",
         "به فارسی روان و متناسب با سن پایه پاسخ بده؛ اگر دانش‌آموز زبان دیگری خواست، به همان زبان پاسخ بده. لحن صبور، دوستانه و روشن داشته باش.",
         "گفت‌وگو را پیوسته دنبال کن و پیام‌های قبلی را در نظر بگیر. اگر دانش‌آموز گفت «بیشتر توضیح بده»، «مثال بزن» یا پرسش پیگیری کرد، منظورش را از زمینه همین گفت‌وگو بفهم.",
+        "اگر پیام آخر شامل تصویر است، خود تصویر را با دقت بررسی کن؛ متن، عدد، نمودار و شکل را حدس نزن. ابتدا بگو چه چیزی را با اطمینان می‌بینی، سپس سؤال را حل یا توضیح بده. اگر قسمتی ناخواناست، دقیقاً همان قسمت را مشخص کن و پاسخ ساختگی نده.",
         "در ریاضی محاسبات را مرحله‌به‌مرحله بنویس و جواب را با روش معکوس یا روش دوم بررسی کن. در علوم علت و معلول را توضیح بده. در زبان‌ها ترجمه و دلیل دستور را بیان کن. در سایر درس‌ها پاسخ را با متن سؤال تطبیق بده.",
         "سطح پایه سقف روش آموزشی است: برای پایه‌های ۱ تا ۳ از جمله‌های کوتاه، شمارش و مثال ملموس استفاده کن؛ برای ۴ تا ۶ از روش‌های ابتدایی؛ برای ۷ تا ۹ از مفاهیم متوسطه اول. از روش پایه‌های بالاتر استفاده نکن مگر با برچسب دانش تکمیلی.",
         "اگر اطلاعات کافی نیست، یک سؤال روشن‌کننده بپرس. اگر پاسخ را نمی‌دانی یا به اطلاعات روز نیاز داری، صادقانه بگو؛ وانمود نکن اینترنت را جست‌وجو کرده‌ای یا کتاب رسمی را دیده‌ای.",
@@ -82,12 +112,12 @@ export default {
       try {
         const result = await env.AI.run("@cf/google/gemma-4-26b-a4b-it", {
           messages: [{ role: "system", content: system }, ...messages],
-          max_tokens: 2200,
-          temperature: 0.25
+          max_tokens: hasImage ? 3000 : 2200,
+          temperature: hasImage ? 0.15 : 0.25
         });
         const answer = extractText(result);
         if (!answer) return json({ error: "معلم هوشمند این بار پاسخ متنی تولید نکرد؛ دوباره تلاش کن." }, 502);
-        return json({ answer, model: "@cf/google/gemma-4-26b-a4b-it" });
+        return json({ answer, model: "@cf/google/gemma-4-26b-a4b-it", ...(hasImage ? { imageMode: "chat-vision" } : {}) });
       } catch (error) {
         const detail = String(error?.message || error || "");
         if (/quota|neurons|billing|limit/i.test(detail)) {
@@ -96,7 +126,6 @@ export default {
         return json({ error: "گفت‌وگو ناموفق بود: " + detail.slice(0, 300) }, 502);
       }
     }
-
     if (url.pathname === "/lesson") {
       const grade = Math.max(1, Math.min(9, Number(body.grade) || 6));
       const subject = String(body.subject || "سایر").slice(0, 60);
