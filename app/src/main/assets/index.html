@@ -953,36 +953,8 @@ function saveProfile(){let p={name:$('studentName').value.trim(),grade:+$('profi
 let chatBusy=false,selectedChatImage=null;
 async function prepareSmartTeacherImage(file,onProgress=()=>{}){
  if(!file)throw new Error('عکسی انتخاب نشده است.');
- onProgress('در حال آماده‌سازی یک نسخه سبک از عکس…');
- const objectUrl=URL.createObjectURL(file),img=new Image();
- try{
-  await new Promise((resolve,reject)=>{
-   const timer=setTimeout(()=>reject(new Error('باز کردن عکس طول کشید؛ دوباره عکس بگیر.')),15000);
-   img.onload=()=>{clearTimeout(timer);resolve();};
-   img.onerror=()=>{clearTimeout(timer);reject(new Error('باز کردن عکس ناموفق بود؛ JPG یا PNG انتخاب کن.'));};
-   img.src=objectUrl;
-  });
-  const scale=Math.min(1,1600/Math.max(img.naturalWidth,img.naturalHeight));
-  const canvas=document.createElement('canvas');
-  canvas.width=Math.max(1,Math.round(img.naturalWidth*scale));
-  canvas.height=Math.max(1,Math.round(img.naturalHeight*scale));
-  const ctx=canvas.getContext('2d',{alpha:false});
-  if(!ctx)throw new Error('آماده‌سازی عکس در گوشی ممکن نشد.');
-  ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
-  ctx.drawImage(img,0,0,canvas.width,canvas.height);
-  const data=await new Promise((resolve,reject)=>{
-   canvas.toBlob(blob=>{
-    if(!blob){reject(new Error('فشرده‌سازی عکس ناموفق بود.'));return;}
-    const reader=new FileReader();
-    reader.onload=()=>resolve(reader.result);
-    reader.onerror=()=>reject(new Error('خواندن عکس فشرده‌شده ناموفق بود.'));
-    reader.readAsDataURL(blob);
-   },'image/jpeg',.72);
-  });
-  canvas.width=canvas.height=1;
-  return data;
- }finally{URL.revokeObjectURL(objectUrl);img.src='';}
+ // Use the same high-resolution overview + four overlapping page crops as the dedicated photo solver.
+ return imageToDataUrls(file,message=>onProgress('معلم هوشمند: '+message));
 }
 function selectChatImage(input){const file=input.files&&input.files[0];if(!file)return;if(!String(file.type||'').startsWith('image/')){$('chatImageStatus').textContent='لطفاً یک فایل تصویری انتخاب کن.';input.value='';return;}if(file.size>24*1024*1024){$('chatImageStatus').textContent='حجم عکس بیشتر از ۲۴ مگابایت است؛ عکس کوچک‌تری انتخاب کن.';input.value='';return;}selectedChatImage=file;$('chatImagePreview').src=URL.createObjectURL(file);$('chatImagePreviewWrap').classList.remove('hidden');$('chatImageStatus').textContent='عکس آماده ارسال است.';}
 window.selectChatImage=selectChatImage;
@@ -1000,15 +972,18 @@ async function chatSend(prefilled){
  if(message.length>4000){$('chatStatus').textContent='پیامت خیلی طولانی است؛ آن را کوتاه‌تر یا در چند پیام بفرست.';return}
  const userText=message||(hasImage?'لطفاً این تصویر را بررسی کن و متناسب با پایه من توضیح بده.':'');
  const history=getChatHistory();history.push({role:'user',content:userText+(hasImage?' [عکس پیوست شد]':'')});put('chatHistory',history.slice(-24));input.value='';renderChatHistory();
- const button=$('chatSendButton'),status=$('chatStatus');chatBusy=true;button.disabled=true;button.textContent='...';status.textContent=hasImage?'در حال آماده‌سازی و ارسال عکس برای معلم...':'معلم هوشمند در حال فکر کردن است...';
+ const button=$('chatSendButton'),status=$('chatStatus');chatBusy=true;button.disabled=true;button.textContent='...';status.textContent=hasImage?'در حال آماده‌سازی عکس و بخش‌های بزرگ‌نمایی‌شده برای معلم...':'معلم هوشمند در حال فکر کردن است...';
  const typing=document.createElement('div');typing.className='chat-typing';typing.textContent='در حال بررسی پیام…';$('chatMessages').appendChild(typing);$('chatMessages').scrollTop=$('chatMessages').scrollHeight;
  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),180000);
  try{
   const profile=get('profile',{name:'',grade:6}),grade=Number($('chatGrade').value)||Number(profile.grade)||6,subject=$('chatSubject').value||'تشخیص خودکار';
   const outgoing=history.slice(-6).map((m,i)=>({role:m.role,content:m.content}));
   if(hasImage){
-   const image=await prepareSmartTeacherImage(selectedChatImage,msg=>{status.textContent=msg;});
-   outgoing[outgoing.length-1].content=[{type:'text',text:userText}, {type:'image_url',image_url:{url:image,detail:'auto'}}];
+   const images=await prepareSmartTeacherImage(selectedChatImage,msg=>{status.textContent=msg;});
+   outgoing[outgoing.length-1].content=[
+    {type:'text',text:userText},
+    ...images.map(url=>({type:'image_url',image_url:{url,detail:'high'}}))
+   ];
   }
   const response=await fetch(YASINYAR_AI_WORKER+'/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({grade,subject,studentName:profile.name||'',messages:outgoing}),signal:controller.signal});
   const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.error||('خطای سرور '+response.status));if(!data.answer)throw new Error('پاسخ خالی دریافت شد.');
