@@ -638,29 +638,32 @@ async function imageToDataUrls(file,onProgress=()=>{}){
     },'image/jpeg',.78);
    }catch(e){finish(e);}
   });
-  const make=async(sx,sw,max)=>{
-   const factor=Math.min(1,max/sw),canvas=document.createElement('canvas');
+  const make=async(sx,sy,sw,sh,maxSide)=>{
+   const factor=Math.min(1,maxSide/Math.max(sw,sh)),canvas=document.createElement('canvas');
    canvas.width=Math.max(1,Math.round(sw*factor));
-   canvas.height=Math.max(1,Math.round(source.height*factor));
+   canvas.height=Math.max(1,Math.round(sh*factor));
    const ctx=canvas.getContext('2d',{alpha:false});
    if(!ctx)throw new Error('پردازش تصویر در گوشی در دسترس نیست.');
    ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);
    ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
-   ctx.drawImage(source,sx,0,sw,source.height,0,0,canvas.width,canvas.height);
+   ctx.drawImage(source,sx,sy,sw,sh,0,0,canvas.width,canvas.height);
    const data=await canvasToDataUrl(canvas);
    canvas.width=canvas.height=1;
    return data;
   };
-  // Overview plus two overlapping high-resolution columns, in reading order.
-  const w=source.width,overlap=Math.round(w*.025),mid=Math.round(w/2);
-  onProgress('۳ از ۳: آماده‌سازی نمای کلی و دو بخش خوانا…');
+  // One overview plus four overlapping quadrants: preserve page structure and make small print readable.
+  const w=source.width,h=source.height,ox=Math.max(8,Math.round(w*.018)),oy=Math.max(8,Math.round(h*.018));
+  const midX=Math.round(w/2),midY=Math.round(h/2);
+  onProgress('۳ از ۳: آماده‌سازی نمای کلی و چهار بخش بزرگ‌نمایی‌شده…');
   const images=[
-   await make(0,w,1100),
-   await make(Math.max(0,mid-overlap),w-Math.max(0,mid-overlap),1700),
-   await make(0,Math.min(w,mid+overlap),1700)
+   await make(0,0,w,h,950),
+   await make(Math.max(0,midX-ox),0,w-Math.max(0,midX-ox),Math.min(h,midY+oy),1350),
+   await make(0,0,Math.min(w,midX+ox),Math.min(h,midY+oy),1350),
+   await make(Math.max(0,midX-ox),Math.max(0,midY-oy),w-Math.max(0,midX-ox),h-Math.max(0,midY-oy),1350),
+   await make(0,Math.max(0,midY-oy),Math.min(w,midX+ox),h-Math.max(0,midY-oy),1350)
   ];
   if(images.some(x=>x.length>5500000)||images.reduce((n,x)=>n+x.length,0)>10500000)
-   throw new Error('حجم عکس هنوز زیاد است؛ لطفاً هر نیمه صفحه را جداگانه عکس بگیر.');
+   throw new Error('حجم عکس هنوز زیاد است؛ لطفاً صفحه را در دو عکس نیم‌صفحه‌ای بفرست.');
   return images;
  }finally{
   URL.revokeObjectURL(objectUrl);
@@ -676,7 +679,7 @@ async function solveImageDirect(){
  try{
   const images=await imageToDataUrls(selectedQuestionImage,message=>{status.textContent=message;});
   status.textContent='عکس بهینه شد؛ در حال ارسال نمای کلی و دو ستون با وضوح بالا برای تحلیل…';
-  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),90000);
+  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),180000);
   let response;
   try{
    response=await fetch(YASINYAR_AI_WORKER+'/solve',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({images,grade:+$('aiGrade').value,subject:$('aiSubject').value}),signal:controller.signal});
