@@ -106,7 +106,7 @@ export default {
         : String(item.content || "")).join(" ");
       const mathPattern = /ریاضی|مسئله|معادله|کسر|تقسیم|ضرب|جمع|تفریق|درصد|نسبت|تناسب|محیط|مساحت|حجم|توان|ریشه|مجهول|چندضلعی|زاویه|مقسوم|مخرج|صورت کسر|حاصل|محاسبه|عدد مخلوط|اعشاری|\b(math|solve|equation|fraction|algebra|geometry|calculate)\b|[=÷×√^]/i;
       const isMath = subject.toLowerCase().includes("ریاضی") || mathPattern.test(conversationText);
-      const model = (isMath || hasImage) ? "@cf/qwen/qwen3.8-27b" : "@cf/google/gemma-4-26b-a4b-it";
+      const model = hasImage || isMath ? "@cf/qwen/qwen3.8-27b" : "@cf/zai-org/glm-4.7-flash";
       const system = [
         "تو معلم خصوصی و دستیار آموزشی مهربان، دقیق و توانمند برای دانش‌آموزان فارسی‌زبان ایران هستی؛ مانند یک گفت‌وگوی طبیعی و مفید با ChatGPT پاسخ بده.",
         "پایه دانش‌آموز: " + grade + "؛ درس مورد علاقه/انتخاب‌شده: " + subject + "؛ نام: " + (studentName || "دانش‌آموز") + ".",
@@ -136,12 +136,25 @@ export default {
         "زنجیره فکر پنهان را ارائه نکن؛ فقط راه‌حل آموزشی، دلیل‌های لازم و محاسبات قابل بررسی را نشان بده. اطلاعات شخصی حساس کودک را درخواست نکن."
       ].join("\n");
       try {
-        const result = await env.AI.run(model, {
+        const modelInput = {
           messages: [{ role: "system", content: system }, ...messages],
-          max_completion_tokens: hasImage ? 6000 : (isMath ? 3200 : 1800),
-          reasoning_effort: "medium",
+          max_completion_tokens: hasImage ? 6000 : (isMath ? 2800 : 1200),
           temperature: 0.15
-        });
+        };
+        if (!hasImage) {
+          // Stream text replies so the student sees the answer as it is generated.
+          const stream = await env.AI.run(model, { ...modelInput, stream: true });
+          return new Response(stream, {
+            status: 200,
+            headers: {
+              ...cors,
+              "Content-Type": "text/event-stream; charset=utf-8",
+              "Cache-Control": "no-cache, no-transform",
+              "X-Accel-Buffering": "no"
+            }
+          });
+        }
+        const result = await env.AI.run(model, modelInput);
         const answer = extractText(result);
         if (!answer) return json({ error: "معلم هوشمند این بار پاسخ متنی تولید نکرد؛ دوباره تلاش کن." }, 502);
         return json({ answer, model, ...(hasImage ? { imageMode: "chat-vision" } : {}), ...(isMath ? { mathMode: true } : {}) });
