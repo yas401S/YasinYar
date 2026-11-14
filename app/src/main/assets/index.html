@@ -1010,7 +1010,7 @@ async function chatSend(prefilled){
    while(true){
     const part=await reader.read();if(part.done)break;
     buffer+=decoder.decode(part.value,{stream:true});
-    const lines=buffer.split(/\\r?\\n/);buffer=lines.pop()||'';
+    const lines=buffer.split(/\r?\n/);buffer=lines.pop()||'';
     for(const line of lines)appendEvent(line);
    }
    buffer+=decoder.decode();
